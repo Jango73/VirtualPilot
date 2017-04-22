@@ -1,0 +1,4 @@
+[submodule "Quick3D"]
+	path = Quick3D
+	url = https://github.com/Jango73/Quick3D.git
+	branch = dev
