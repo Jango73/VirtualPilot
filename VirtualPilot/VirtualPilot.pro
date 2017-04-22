@@ -12,7 +12,7 @@ TARGET = VirtualPilot
 TEMPLATE = app
 INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
 DEPENDPATH += $$PWD/../Quick3D/Quick3D
-DESTDIR = ../VirtualPilot/Binary/Plugins
+DESTDIR = ../Binary
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof

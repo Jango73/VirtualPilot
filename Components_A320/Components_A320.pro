@@ -13,7 +13,7 @@ TEMPLATE = lib
 DEFINES += COMPONENTS_A320_LIB
 INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
 DEPENDPATH += $$PWD/../Quick3D/Quick3D
-DESTDIR = ../VirtualPilot/Binary/Plugins
+DESTDIR = ../Binary/Plugins
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
@@ -75,3 +75,9 @@ SOURCES += \
 
 RESOURCES += \
     A320.qrc
+
+# Copy Quick3D to Binary
+copyfile = ../Quick3D/Quick3D/debug/*.dll
+copydest = ../Binary
+
+QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)

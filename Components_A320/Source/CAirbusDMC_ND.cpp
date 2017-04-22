@@ -295,6 +295,9 @@ void CAirbusDMC::drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDe
                 pPainter->drawLine(dX1, dY1, dX2, dY2);
                 pPainter->drawLine(dX1, dY2, dX2, dY1);
                 break;
+
+            default:
+                break;
         }
     }
 
