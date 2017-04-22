@@ -26,52 +26,52 @@ else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/debug/
 
 # Code
 HEADERS += \
-    CAirbusADIRU.h \
-    CAirbusAOASensor.h \
-    CAirbusComponent.h \
-    CAirbusController.h \
-    CAirbusData.h \
-    CAirbusDataSupplier.h \
-    CAirbusDMC.h \
-    CAirbusELAC.h \
-    CAirbusEngineGenerator.h \
-    CAirbusFAC.h \
-    CAirbusFADEC.h \
-    CAirbusFCU.h \
-    CAirbusFlightComputer.h \
-    CAirbusFlightPlan.h \
-    CAirbusFMGC.h \
-    CAirbusPitotPort.h \
-    CAirbusSEC.h \
-    CAirbusStaticPort.h \
-    Components_A320.h \
-    components_a320_global.h \
-    Constants.h
+    Source/CAirbusADIRU.h \
+    Source/CAirbusAOASensor.h \
+    Source/CAirbusComponent.h \
+    Source/CAirbusController.h \
+    Source/CAirbusData.h \
+    Source/CAirbusDataSupplier.h \
+    Source/CAirbusDMC.h \
+    Source/CAirbusELAC.h \
+    Source/CAirbusEngineGenerator.h \
+    Source/CAirbusFAC.h \
+    Source/CAirbusFADEC.h \
+    Source/CAirbusFCU.h \
+    Source/CAirbusFlightComputer.h \
+    Source/CAirbusFlightPlan.h \
+    Source/CAirbusFMGC.h \
+    Source/CAirbusPitotPort.h \
+    Source/CAirbusSEC.h \
+    Source/CAirbusStaticPort.h \
+    Source/Components_A320.h \
+    Source/components_a320_global.h \
+    Source/Constants.h
 
 SOURCES += \
-    CAirbusADIRU.cpp \
-    CAirbusAOASensor.cpp \
-    CAirbusComponent.cpp \
-    CAirbusController.cpp \
-    CAirbusData.cpp \
-    CAirbusDataSupplier.cpp \
-    CAirbusDMC.cpp \
-    CAirbusDMC_EWD.cpp \
-    CAirbusDMC_ND.cpp \
-    CAirbusDMC_PFD.cpp \
-    CAirbusDMC_SD.cpp \
-    CAirbusELAC.cpp \
-    CAirbusEngineGenerator.cpp \
-    CAirbusFAC.cpp \
-    CAirbusFADEC.cpp \
-    CAirbusFCU.cpp \
-    CAirbusFlightComputer.cpp \
-    CAirbusFlightPlan.cpp \
-    CAirbusFMGC.cpp \
-    CAirbusPitotPort.cpp \
-    CAirbusSEC.cpp \
-    CAirbusStaticPort.cpp \
-    Components_A320.cpp
+    Source/CAirbusADIRU.cpp \
+    Source/CAirbusAOASensor.cpp \
+    Source/CAirbusComponent.cpp \
+    Source/CAirbusController.cpp \
+    Source/CAirbusData.cpp \
+    Source/CAirbusDataSupplier.cpp \
+    Source/CAirbusDMC.cpp \
+    Source/CAirbusDMC_EWD.cpp \
+    Source/CAirbusDMC_ND.cpp \
+    Source/CAirbusDMC_PFD.cpp \
+    Source/CAirbusDMC_SD.cpp \
+    Source/CAirbusELAC.cpp \
+    Source/CAirbusEngineGenerator.cpp \
+    Source/CAirbusFAC.cpp \
+    Source/CAirbusFADEC.cpp \
+    Source/CAirbusFCU.cpp \
+    Source/CAirbusFlightComputer.cpp \
+    Source/CAirbusFlightPlan.cpp \
+    Source/CAirbusFMGC.cpp \
+    Source/CAirbusPitotPort.cpp \
+    Source/CAirbusSEC.cpp \
+    Source/CAirbusStaticPort.cpp \
+    Source/Components_A320.cpp
 
 RESOURCES += \
     A320.qrc

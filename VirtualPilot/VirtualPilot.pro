@@ -25,16 +25,13 @@ else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/debug/
 
 # Code
 SOURCES += \
-    VirtualPilot.cpp \
-    main.cpp
+    Source/VirtualPilot.cpp \
+    Source/main.cpp
 
 HEADERS  += \
-    VirtualPilot.h
+    Source/VirtualPilot.h
 
 DISTFILES +=
 
-RESOURCES += \
-    VirtualPilot.qrc
-
 FORMS += \
-    VirtualPilot.ui
+    Source/VirtualPilot.ui
