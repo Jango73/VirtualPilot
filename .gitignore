@@ -1,0 +1,46 @@
+# C++ objects and libs
+
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
+
+# Qt-es
+
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+Makefile*
+*build-*
+*.Debug
+*.Release
+
+# QtCreator
+
+*.autosave
+
+#QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# Project specific
+Quick3D/help
+Quick3DTest/debug/Logs
+Quick3DTest/debug/Tiles
+*.log
+*.exe
+*.blend1
+*.0
+*.1
