@@ -309,7 +309,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     // Calcul poussée automatique
     // Compute thrust command
 
-    m_dCommandedVelocity_ms = 200.0 * FAC_KNOTS_TO_MS;
+    m_dCommandedVelocity_ms = 250.0 * FAC_KNOTS_TO_MS;
 
     m_dCommandedAcceleration_ms = (m_dCommandedVelocity_ms - dIndicatedAirspeed_ms) * 0.5;
     m_dCommandedAcceleration_ms = Math::Angles::clipDouble(m_dCommandedAcceleration_ms, -2.0, 2.0);
