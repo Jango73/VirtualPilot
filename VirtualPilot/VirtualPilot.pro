@@ -10,8 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = VirtualPilot
 TEMPLATE = app
-INCLUDEPATH += $$PWD/../Quick3D/Source
-DEPENDPATH += $$PWD/../Quick3D
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
+DEPENDPATH += $$PWD/../Quick3D/Quick3D
+DESTDIR = ../VirtualPilot/Binary/Plugins
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
@@ -19,8 +20,8 @@ QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CXXFLAGS += -Wno-reorder
 
 # Libraries
-CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/release/ -lQuick3D
-else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/debug/ -lQuick3D
+CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/release/ -lQuick3D
+else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/debug/ -lQuick3D
 
 # Code
 SOURCES += \

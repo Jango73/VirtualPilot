@@ -11,10 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Components_A320
 TEMPLATE = lib
 DEFINES += COMPONENTS_A320_LIB
-INCLUDEPATH += $$PWD/../Quick3D/Source
-DEPENDPATH += $$PWD/../Quick3D
-CONFIG(debug, debug|release): DESTDIR = ../VirtualPilot/debug/Plugins
-CONFIG(release, debug|release): DESTDIR = ../VirtualPilot/release/Plugins
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
+DEPENDPATH += $$PWD/../Quick3D/Quick3D
+DESTDIR = ../VirtualPilot/Binary/Plugins
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
@@ -22,9 +21,8 @@ QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CXXFLAGS += -Wno-reorder
 
 # Libraries
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/release/ -lQuick3D
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/debug/ -lQuick3D
-else:unix: LIBS += -L$$OUT_PWD/../Quick3D/ -lQuick3D
+CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/release/ -lQuick3D
+else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/debug/ -lQuick3D
 
 # Code
 HEADERS += \
