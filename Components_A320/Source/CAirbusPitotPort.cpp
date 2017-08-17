@@ -1,6 +1,8 @@
 
+// qt-plus
+#include "CLogger.h"
+
 // Quick3D
-#include "CLogManager.h"
 #include "C3DScene.h"
 
 #include "CAirbusPitotPort.h"

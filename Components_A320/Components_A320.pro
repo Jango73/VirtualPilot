@@ -8,21 +8,38 @@ QT += core gui network opengl xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Components_A320
 TEMPLATE = lib
 DEFINES += COMPONENTS_A320_LIB
 INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
+INCLUDEPATH += $$PWD/../Quick3D/qt-plus/source/cpp
+INCLUDEPATH += $$PWD/../Quick3D/qt-plus/source/cpp/Web
 DEPENDPATH += $$PWD/../Quick3D/Quick3D
-DESTDIR = ../Binary/Plugins
+DESTDIR = ../bin/Plugins
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CXXFLAGS += -Wno-reorder
 
+# Target
+CONFIG(debug, debug|release) {
+    TARGET = Components_A320d
+} else {
+    TARGET = Components_A320
+}
+
 # Libraries
-CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/release/ -lQuick3D
-else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/debug/ -lQuick3D
+CONFIG(debug, debug|release) {
+    LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/bin/ -lQuick3Dd
+} else {
+    LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/bin/ -lQuick3D
+}
+
+CONFIG(debug, debug|release) {
+    LIBS += -L$$OUT_PWD/../Quick3D/qt-plus/bin/ -lqt-plusd
+} else {
+    LIBS += -L$$OUT_PWD/../Quick3D/qt-plus/bin/ -lqt-plus
+}
 
 # Code
 HEADERS += \
@@ -76,8 +93,14 @@ SOURCES += \
 RESOURCES += \
     A320.qrc
 
+# Copy qt-plus to bin
+copyfile = ../Quick3D/qt-plus/bin/*.dll
+copydest = ../bin
+
+QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
+
 # Copy Quick3D to Binary
-copyfile = ../Quick3D/Quick3D/debug/*.dll
-copydest = ../Binary
+copyfile = ../Quick3D/Quick3D/bin/*.dll
+copydest = ../bin
 
 QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)

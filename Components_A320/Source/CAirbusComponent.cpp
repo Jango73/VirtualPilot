@@ -1,7 +1,8 @@
 
-// Quick3D
-#include "CLogManager.h"
+// qt-plus
+#include "CLogger.h"
 
+// Application
 #include "CAirbusComponent.h"
 
 using namespace Math;

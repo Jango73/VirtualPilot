@@ -2,8 +2,10 @@
 // Qt
 #include <QFileDialog>
 
+// qt-plus
+#include "CLogger.h"
+
 // Quick3D
-#include "CLogManager.h"
 #include "CConsoleBoard.h"
 #include "CPreferencesManager.h"
 #include "CComponentFactory.h"
@@ -326,7 +328,7 @@ void VirtualPilot::onDumpSceneClicked()
 {
     // Dump de la scène
 
-    QString sPath = CLogManager::getInstance()->getPathName();
+    QString sPath = CLogger::getInstance()->pathName();
     QFile dump(sPath + "/Scene.dump.txt");
 
     if (dump.open(QIODevice::WriteOnly))
