@@ -63,7 +63,7 @@ void CAirbusDataSupplier::solveLinks(C3DScene* pScene, CComponent* pCaller)
             {
                 CAirbusDataSupplier* pInput = dynamic_cast<CAirbusDataSupplier*>(pFound.data());
 
-                if (pInput != NULL)
+                if (pInput != nullptr)
                 {
                     m_vDataInputs.append(pInput);
                     pInput->m_vDataOutputs.append(this);
@@ -139,5 +139,5 @@ CAirbusData* CAirbusDataSupplier::getData(EAirbusData eID)
         }
     }
 
-    return NULL;
+    return nullptr;
 }

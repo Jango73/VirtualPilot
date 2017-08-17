@@ -39,13 +39,13 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     double dAirspeed_VMax1_kts = 0.0;
     double dAirspeed_VMax2_kts = 0.0;
 
-    if (pAirspeed_ms != NULL)
+    if (pAirspeed_ms != nullptr)
     {
         dAirspeed_ms = pAirspeed_ms->getData().toDouble();
         dAirspeed_kts = dAirspeed_ms * FAC_MS_TO_KNOTS;
     }
 
-    if (pAirspeedVMax_ms != NULL)
+    if (pAirspeedVMax_ms != nullptr)
     {
         dAirspeed_VMax_ms = pAirspeedVMax_ms->getData().toDouble();
         dAirspeed_VMax1_kts = dAirspeed_VMax_ms * FAC_MS_TO_KNOTS;
@@ -168,12 +168,12 @@ void CAirbusDMC::drawArtificialHorizon(QPainter* pPainter, CTexture* pTexture, d
     double dAircraftPitch = 0.0;
     double dAircraftRoll = 0.0;
 
-    if (pPitch_deg != NULL)
+    if (pPitch_deg != nullptr)
     {
         dAircraftPitch = pPitch_deg->getData().toDouble();
     }
 
-    if (pRoll_deg != NULL)
+    if (pRoll_deg != nullptr)
     {
         dAircraftRoll = pRoll_deg->getData().toDouble();
     }
@@ -254,13 +254,13 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
     double dAircraftAltitude_f = 0.0;
     double dAircraftVerticalSpeed_ms = 0.0;
 
-    if (pAltitude_m != NULL)
+    if (pAltitude_m != nullptr)
     {
         dAircraftAltitude_m = pAltitude_m->getData().toDouble();
         dAircraftAltitude_f = dAircraftAltitude_m * FAC_METERS_TO_FEET;
     }
 
-    if (pVerticalSpeed_ms != NULL)
+    if (pVerticalSpeed_ms != nullptr)
     {
         dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
     }
@@ -404,27 +404,27 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
     EAirbusLateralMode eFG_LateralMode_alm = almNone;
     EAirbusVerticalMode eFG_VerticalMode_avm = avmNone;
 
-    if (pFCU_AutoPilot1_Engaged != NULL)
+    if (pFCU_AutoPilot1_Engaged != nullptr)
     {
         bFCU_AutoPilot1_Engaged = pFCU_AutoPilot1_Engaged->getData().toBool();
     }
 
-    if (pFCU_AutoPilot2_Engaged != NULL)
+    if (pFCU_AutoPilot2_Engaged != nullptr)
     {
         bFCU_AutoPilot2_Engaged = pFCU_AutoPilot2_Engaged->getData().toBool();
     }
 
-    if (pFCU_AutoThrust_Engaged != NULL)
+    if (pFCU_AutoThrust_Engaged != nullptr)
     {
         bFCU_AutoThrust_Engaged = pFCU_AutoThrust_Engaged->getData().toBool();
     }
 
-    if (pFG_LateralMode_alm != NULL)
+    if (pFG_LateralMode_alm != nullptr)
     {
         eFG_LateralMode_alm = (EAirbusLateralMode) pFG_LateralMode_alm->getData().toInt();
     }
 
-    if (pFG_VerticalMode_avm != NULL)
+    if (pFG_VerticalMode_avm != nullptr)
     {
         eFG_VerticalMode_avm = (EAirbusVerticalMode) pFG_VerticalMode_avm->getData().toInt();
     }

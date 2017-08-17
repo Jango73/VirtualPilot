@@ -91,7 +91,7 @@ void CAirbusFMGC::work_FM(double dDeltaTime)
 
     double dFCU_VerticalSpeed_fs = 0.0;
 
-    if (pFCU_VerticalSpeed_fs != NULL)
+    if (pFCU_VerticalSpeed_fs != nullptr)
     {
         dFCU_VerticalSpeed_fs = pFCU_VerticalSpeed_fs->getData().toDouble();
     }
@@ -143,62 +143,62 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     double dAircraftRoll_deg = 0.0;
     double dAircraftPitch_deg = 0.0;
 
-    if (pFCU_Heading_deg != NULL)
+    if (pFCU_Heading_deg != nullptr)
     {
         dFCU_Heading_deg = pFCU_Heading_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_Latitude_deg != NULL)
+    if (pGeoLoc_Latitude_deg != nullptr)
     {
         dGeoLoc_Latitude_deg = pGeoLoc_Latitude_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_Longitude_deg != NULL)
+    if (pGeoLoc_Longitude_deg != nullptr)
     {
         dGeoLoc_Longitude_deg = pGeoLoc_Longitude_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_TrueHeading_deg != NULL)
+    if (pGeoLoc_TrueHeading_deg != nullptr)
     {
         dGeoLoc_TrueHeading_deg = pGeoLoc_TrueHeading_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_TrueTrack_deg != NULL)
+    if (pGeoLoc_TrueTrack_deg != nullptr)
     {
         dGeoLoc_TrueTrack_deg = pGeoLoc_TrueTrack_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_GroundSpeed_ms != NULL)
+    if (pGeoLoc_GroundSpeed_ms != nullptr)
     {
         dGeoLoc_GroundSpeed_ms = pGeoLoc_GroundSpeed_ms->getData().toDouble();
     }
 
-    if (pAltitude_m != NULL)
+    if (pAltitude_m != nullptr)
     {
         dAircraftAltitude_m = pAltitude_m->getData().toDouble();
     }
 
-    if (pVerticalSpeed_ms != NULL)
+    if (pVerticalSpeed_ms != nullptr)
     {
         dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
     }
 
-    if (pIndicatedAirspeed_ms != NULL)
+    if (pIndicatedAirspeed_ms != nullptr)
     {
         dIndicatedAirspeed_ms = pIndicatedAirspeed_ms->getData().toDouble();
     }
 
-    if (pIndicatedAcceleration_ms != NULL)
+    if (pIndicatedAcceleration_ms != nullptr)
     {
         dIndicatedAcceleration_ms = pIndicatedAcceleration_ms->getData().toDouble();
     }
 
-    if (pRoll_deg != NULL)
+    if (pRoll_deg != nullptr)
     {
         dAircraftRoll_deg = pRoll_deg->getData().toDouble();
     }
 
-    if (pPitch_deg != NULL)
+    if (pPitch_deg != nullptr)
     {
         dAircraftPitch_deg = pPitch_deg->getData().toDouble();
     }

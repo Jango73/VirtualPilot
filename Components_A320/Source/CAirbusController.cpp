@@ -60,7 +60,7 @@ void CAirbusController::update(double dDeltaTime)
 {
     CController::update(dDeltaTime);
 
-    if (m_pJoystick != NULL && m_pJoystick->connected())
+    if (m_pJoystick != nullptr && m_pJoystick->connected())
     {
         LOG_VALUE(QString("JOY X / Y / Z / R"),
                   QString("%1 / %2 / %3 / %4")
@@ -272,12 +272,12 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
             double dThrottle_1_norm = 0.0;
             double dThrottle_2_norm = 0.0;
 
-            if (pThrottle_1_norm != NULL)
+            if (pThrottle_1_norm != nullptr)
             {
                 dThrottle_1_norm = pThrottle_1_norm->getData().toDouble();
             }
 
-            if (pThrottle_2_norm != NULL)
+            if (pThrottle_2_norm != nullptr)
             {
                 dThrottle_2_norm = pThrottle_2_norm->getData().toDouble();
             }
@@ -299,12 +299,12 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
             double dThrottle_1_norm = 0.0;
             double dThrottle_2_norm = 0.0;
 
-            if (pThrottle_1_norm != NULL)
+            if (pThrottle_1_norm != nullptr)
             {
                 dThrottle_1_norm = pThrottle_1_norm->getData().toDouble();
             }
 
-            if (pThrottle_2_norm != NULL)
+            if (pThrottle_2_norm != nullptr)
             {
                 dThrottle_2_norm = pThrottle_2_norm->getData().toDouble();
             }

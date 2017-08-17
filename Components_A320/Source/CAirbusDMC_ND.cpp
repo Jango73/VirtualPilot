@@ -39,34 +39,34 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
     double dGeoLoc_TrueHeading_deg = 0.0;
     double dGeoLoc_TrueTrack_deg = 0.0;
     double dFCU_Heading_deg = 0.0;
-    CAirbusFlightPlan* pFG_FlightPlan = NULL;
+    CAirbusFlightPlan* pFG_FlightPlan = nullptr;
 
-    if (pGeoLoc_Latitude_deg != NULL)
+    if (pGeoLoc_Latitude_deg != nullptr)
     {
         dGeoLoc_Latitude_deg = pGeoLoc_Latitude_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_Longitude_deg != NULL)
+    if (pGeoLoc_Longitude_deg != nullptr)
     {
         dGeoLoc_Longitude_deg = pGeoLoc_Longitude_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_TrueHeading_deg != NULL)
+    if (pGeoLoc_TrueHeading_deg != nullptr)
     {
         dGeoLoc_TrueHeading_deg = pGeoLoc_TrueHeading_deg->getData().toDouble();
     }
 
-    if (pGeoLoc_TrueTrack_deg != NULL)
+    if (pGeoLoc_TrueTrack_deg != nullptr)
     {
         dGeoLoc_TrueTrack_deg = pGeoLoc_TrueTrack_deg->getData().toDouble();
     }
 
-    if (pFCU_Heading_deg != NULL)
+    if (pFCU_Heading_deg != nullptr)
     {
         dFCU_Heading_deg = pFCU_Heading_deg->getData().toDouble();
     }
 
-    if (pFG_FlightPlan_ptr != NULL)
+    if (pFG_FlightPlan_ptr != nullptr)
     {
         pFG_FlightPlan = (CAirbusFlightPlan*) pFG_FlightPlan_ptr->getData().toULongLong();
     }
@@ -143,7 +143,7 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
     pPainter->translate(rWholePart.center());
 
     // Flight plan
-    if (pFG_FlightPlan != NULL)
+    if (pFG_FlightPlan != nullptr)
     {
         CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
         CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);

@@ -178,7 +178,7 @@ void VirtualPilot::resizeEvent(QResizeEvent *event)
 
 void VirtualPilot::onResize()
 {
-    if (m_pScene != NULL)
+    if (m_pScene != nullptr)
     {
         m_pView->setGeometry(0, 0, ui.Render1->width(), ui.Render1->height());
         m_pScene->setGeometry(0, 0, m_pView->width(), m_pView->height());
@@ -193,7 +193,7 @@ void VirtualPilot::onTimer()
 {
     m_tTimer.stop();
 
-    if (m_pScene != NULL && m_bRun == true)
+    if (m_pScene != nullptr && m_bRun == true)
     {
         QDateTime tCurrentTime = QDateTime::currentDateTime();
         double dDeltaTime = (double) m_tPreviousTime.msecsTo(tCurrentTime) / 1000.0;
@@ -217,7 +217,7 @@ void VirtualPilot::onTimer()
         CVector3 TorqueAcceleration;
         double dSpeedMS = 0.0;
 
-        if (m_pScene->controller() != NULL && m_pScene->controller()->getPositionTarget())
+        if (m_pScene->controller() != nullptr && m_pScene->controller()->getPositionTarget())
         {
             QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getPositionTarget()->getRoot());
 
@@ -230,7 +230,7 @@ void VirtualPilot::onTimer()
             }
         }
 
-        if (m_pScene->controller() != NULL && m_pScene->controller()->getRotationTarget())
+        if (m_pScene->controller() != nullptr && m_pScene->controller()->getRotationTarget())
         {
             QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getRotationTarget()->getRoot());
 

@@ -96,22 +96,22 @@ void CAirbusFADEC::work(double dDeltaTime)
         double dThrottle_1_norm = 0.0;
         double dThrottle_2_norm = 0.0;
 
-        if (pFG_CommandedThrust_norm != NULL)
+        if (pFG_CommandedThrust_norm != nullptr)
         {
             dFG_CommandedThrust_norm = pFG_CommandedThrust_norm->getData().toDouble();
         }
 
-        if (pFCU_AutoThrust_Engaged != NULL)
+        if (pFCU_AutoThrust_Engaged != nullptr)
         {
             bFCU_AutoThrust_Engaged = pFCU_AutoThrust_Engaged->getData().toBool();
         }
 
-        if (pThrottle_1_norm != NULL)
+        if (pThrottle_1_norm != nullptr)
         {
             dThrottle_1_norm = pThrottle_1_norm->getData().toDouble();
         }
 
-        if (pThrottle_2_norm != NULL)
+        if (pThrottle_2_norm != nullptr)
         {
             dThrottle_2_norm = pThrottle_2_norm->getData().toDouble();
         }

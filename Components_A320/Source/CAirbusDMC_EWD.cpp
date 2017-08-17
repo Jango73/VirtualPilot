@@ -25,12 +25,12 @@ void CAirbusDMC::updateTexture_EWD(QPainter* pPainter, CTexture* pTexture, doubl
     double dFADEC_Engine1_N1_norm = 0.0;
     double dFADEC_Engine2_N1_norm = 0.0;
 
-    if (pFADEC_Engine1_N1_norm != NULL)
+    if (pFADEC_Engine1_N1_norm != nullptr)
     {
         dFADEC_Engine1_N1_norm = pFADEC_Engine1_N1_norm->getData().toDouble();
     }
 
-    if (pFADEC_Engine2_N1_norm != NULL)
+    if (pFADEC_Engine2_N1_norm != nullptr)
     {
         dFADEC_Engine2_N1_norm = pFADEC_Engine2_N1_norm->getData().toDouble();
     }

@@ -114,57 +114,57 @@ void CAirbusELAC::work(double dDeltaTime)
         bool bFCU_AutoPilot1_Engaged = false;
         bool bFCU_AutoPilot2_Engaged = false;
 
-        if (pInertial_Roll_deg != NULL)
+        if (pInertial_Roll_deg != nullptr)
         {
             dInertial_Roll_deg = pInertial_Roll_deg->getData().toDouble();
         }
 
-        if (pInertial_Pitch_deg != NULL)
+        if (pInertial_Pitch_deg != nullptr)
         {
             dInertial_Pitch_deg = pInertial_Pitch_deg->getData().toDouble();
         }
 
-        if (pInertial_PitchVelocity_ds != NULL)
+        if (pInertial_PitchVelocity_ds != nullptr)
         {
             dInertial_PitchVelocity_ds = pInertial_PitchVelocity_ds->getData().toDouble();
         }
 
-        if (pInertial_RollVelocity_ds != NULL)
+        if (pInertial_RollVelocity_ds != nullptr)
         {
             dInertial_RollVelocity_ds = pInertial_RollVelocity_ds->getData().toDouble();
         }
 
-        if (pInertial_PitchVelocity_ds != NULL)
+        if (pInertial_PitchVelocity_ds != nullptr)
         {
             dInertial_PitchVelocity_ds = pInertial_PitchVelocity_ds->getData().toDouble();
         }
 
-        if (pFG_CommandedRollVelocity_ds != NULL)
+        if (pFG_CommandedRollVelocity_ds != nullptr)
         {
             dFG_CommandedRollVelocity_ds = pFG_CommandedRollVelocity_ds->getData().toDouble();
         }
 
-        if (pFG_CommandedPitchVelocity_ds != NULL)
+        if (pFG_CommandedPitchVelocity_ds != nullptr)
         {
             dFG_CommandedPitchVelocity_ds = pFG_CommandedPitchVelocity_ds->getData().toDouble();
         }
 
-        if (pStick_CAPT_x != NULL)
+        if (pStick_CAPT_x != nullptr)
         {
             m_vStick.X = pStick_CAPT_x->getData().toDouble();
         }
 
-        if (pStick_CAPT_y != NULL)
+        if (pStick_CAPT_y != nullptr)
         {
             m_vStick.Y = pStick_CAPT_y->getData().toDouble();
         }
 
-        if (pFCU_AutoPilot1_Engaged != NULL)
+        if (pFCU_AutoPilot1_Engaged != nullptr)
         {
             bFCU_AutoPilot1_Engaged = pFCU_AutoPilot1_Engaged->getData().toBool();
         }
 
-        if (pFCU_AutoPilot2_Engaged != NULL)
+        if (pFCU_AutoPilot2_Engaged != nullptr)
         {
             bFCU_AutoPilot2_Engaged = pFCU_AutoPilot2_Engaged->getData().toBool();
         }
