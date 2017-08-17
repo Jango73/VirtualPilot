@@ -9,8 +9,6 @@
 // Application
 #include "CAirbusFMGC.h"
 
-//-------------------------------------------------------------------------------------------------
-
 using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
@@ -98,11 +96,9 @@ void CAirbusFMGC::work_FM(double dDeltaTime)
         dFCU_VerticalSpeed_fs = pFCU_VerticalSpeed_fs->getData().toDouble();
     }
 
-    // Calcul des prédictions
     // Predictions computing
     work_FM_doPredictions(dDeltaTime);
 
-    // Envoi plan de vol
     // Send flight plan
     pushData(CAirbusData(m_sName, adFG_FlightPlan_ptr, (quint64) &m_tFlightPlan));
 }
@@ -209,13 +205,11 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
 
-    // Envoi modes
     // Send modes
 
     pushData(CAirbusData(m_sName, adFG_LateralMode_alm, m_eLateralMode));
     pushData(CAirbusData(m_sName, adFG_VerticalMode_avm, m_eVerticalMode));
 
-    // Calcul cap automatique
     // Compute auto heading
 
     if (m_eLateralMode == almNav)
@@ -225,7 +219,6 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
         if (iCurrentWaypoint > 0 && iCurrentWaypoint < m_tFlightPlan.getWaypoints().count())
         {
-            // Récupération des deux points du segment courant
             // Get two points of current segment
             CGeoloc gSegmentStart = m_tFlightPlan.getWaypoints()[iCurrentWaypoint - 1].getGeoloc();
             CGeoloc gSegmentEnd = m_tFlightPlan.getWaypoints()[iCurrentWaypoint + 0].getGeoloc();
@@ -233,31 +226,26 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
             CVector3 vSegmentStart = gSegmentStart.toVector3(gGeoloc);
             CVector3 vSegmentEnd = gSegmentEnd.toVector3(gGeoloc);
 
-            // Calcul de la distance au waypoint
             // Compute distance to waypoint
             double dDistanceToSegmentEnd = vSegmentEnd.getMagnitude();
 
-            // Calcul de l'angle entre le point de début et le point de fin
             // Compute angle between start point and end point
             double dSegmentStartSegmentEndAngle_rad = (vSegmentEnd - vSegmentStart).AngleY();
             double dAircraftSegmentEndAngle_rad = vSegmentEnd.AngleY();
 
-            // Création d'une matrice de rotation avec l'angle inverse entre le point de début et le point de fin
+            // Create a rotation matrix using the inverse angle between start and end points
             CMatrix4 mSegmentAngle = CMatrix4::MakeRotation(CVector3(0.0, -dSegmentStartSegmentEndAngle_rad, 0.0));
 
-            // Rotation des deux points du segment
             // Rotate the two segment points
             vSegmentStart = mSegmentAngle * vSegmentStart;
             vSegmentEnd = mSegmentAngle * vSegmentEnd;
 
-            // Calcul de la déviation
             // Compute deviation
             double dDeviation_rad = vSegmentEnd.AngleY();
             double dHeading_rad = dAircraftSegmentEndAngle_rad + dDeviation_rad * 2.0;
 
             m_dCommandedHeading_deg = Angles::toDeg(dHeading_rad);
 
-            // Vérification du passage sur le waypoint
             // Check if aircraft has reached waypoint
             if (dDistanceToSegmentEnd < dGeoLoc_GroundSpeed_ms * 20.0)
             {
@@ -281,12 +269,10 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedRollVelocity_ds = m_dCommandedRoll_deg - dAircraftRoll_deg;
     m_dCommandedRollVelocity_ds = Math::Angles::clipDouble(m_dCommandedRollVelocity_ds, -10.0, 10.0);
 
-    // Envoi commande cap automatique
     // Send auto heading command
 
     pushData(CAirbusData(m_sName, adFG_CommandedRollVelocity_ds, m_dCommandedRollVelocity_ds));
 
-    // Calcul altitude automatique
     // Compute altitude command
 
     m_dCommandedAltitude_m = 5200.0;
@@ -303,12 +289,10 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedPitchVelocity_ds = (m_dCommandedPitch_deg - dAircraftPitch_deg) * 0.5;
     m_dCommandedPitchVelocity_ds = Math::Angles::clipDouble(m_dCommandedPitchVelocity_ds, -5.0, 5.0);
 
-    // Envoi commande altitude automatique
     // Send altitude command
 
     pushData(CAirbusData(m_sName, adFG_CommandedPitchVelocity_ds, m_dCommandedPitchVelocity_ds));
 
-    // Calcul poussée automatique
     // Compute thrust command
 
     m_dCommandedVelocity_ms = 250.0 * FAC_KNOTS_TO_MS;
@@ -331,12 +315,10 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
         m_dCommandedThrust_norm = m_pidDeceleration.getOutput();
     }
 
-    // Envoi commande poussée automatique
     // Send thrust command
 
     pushData(CAirbusData(m_sName, adFG_CommandedThrust_norm, m_dCommandedThrust_norm));
 
-    // Infos de debug
     // Debug information
 
     LOG_VALUE(QString("%1 HDG / ROLL / ROLL VEL").arg(m_sName),

@@ -1,13 +1,14 @@
 
 #pragma once
 
+// Quick3D
+#include "CElectricalComponent.h"
+
+// Application
 #include "components_a320_global.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
-
-// Quick3D
-#include "CElectricalComponent.h"
 
 class C3DScene;
 

@@ -1,14 +1,11 @@
 
 #pragma once
 
-#include "components_a320_global.h"
-
-//-------------------------------------------------------------------------------------------------
-
 // Quick3D
 #include "CWaypoint.h"
 
 // Application
+#include "components_a320_global.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------

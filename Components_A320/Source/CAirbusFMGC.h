@@ -1,17 +1,14 @@
 
 #pragma once
 
-#include "components_a320_global.h"
-
-//-------------------------------------------------------------------------------------------------
-
 // Quick3D
 #include "CPIDController.h"
 
 // Application
-#include "Constants.h"
+#include "components_a320_global.h"
 #include "CAirbusFlightComputer.h"
 #include "CAirbusFlightPlan.h"
+#include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
 

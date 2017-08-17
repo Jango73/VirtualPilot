@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include "components_a320_global.h"
-
 // Qt
 #include <QKeyEvent>
 #include <QMouseEvent>
@@ -12,6 +10,7 @@
 #include "CComponentReference.h"
 
 // Application
+#include "components_a320_global.h"
 #include "Constants.h"
 #include "CAirbusDataSupplier.h"
 #include "CAirbusFCU.h"

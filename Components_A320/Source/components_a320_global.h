@@ -1,6 +1,5 @@
 
-#ifndef COMPONENTS_A320_GLOBAL_H
-#define COMPONENTS_A320_GLOBAL_H
+#pragma once
 
 #include <QtCore/qglobal.h>
 #include <QtCore/qstring.h>
@@ -15,5 +14,3 @@
 #else
 # define COMPONENTS_A320_EXPORT Q_DECL_IMPORT
 #endif
-
-#endif // COMPONENTS_A320_GLOBAL_H

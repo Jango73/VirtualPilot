@@ -3,9 +3,9 @@
 
 // Application
 #include "components_a320_global.h"
-#include "Constants.h"
 #include "CAirbusComponent.h"
 #include "CAirbusDataSupplier.h"
+#include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
 

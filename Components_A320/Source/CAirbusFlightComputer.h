@@ -1,16 +1,16 @@
 
 #pragma once
 
-//-------------------------------------------------------------------------------------------------
-
 // Quick3D
 #include "CElectricalConsumer.h"
 
 // Application
 #include "components_a320_global.h"
-#include "Constants.h"
 #include "CAirbusComponent.h"
 #include "CAirbusDataSupplier.h"
+#include "Constants.h"
+
+//-------------------------------------------------------------------------------------------------
 
 class C3DScene;
 

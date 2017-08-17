@@ -1,19 +1,14 @@
 
 #pragma once
 
-#include "components_a320_global.h"
-
-//-------------------------------------------------------------------------------------------------
-
 // Application
-#include "Constants.h"
+#include "components_a320_global.h"
 #include "CAirbusFlightComputer.h"
+#include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
 
 class C3DScene;
-
-//-------------------------------------------------------------------------------------------------
 
 class COMPONENTS_A320_EXPORT CAirbusFCU : public CAirbusFlightComputer
 {

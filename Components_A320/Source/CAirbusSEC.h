@@ -1,13 +1,12 @@
 
 #pragma once
 
+// Application
 #include "components_a320_global.h"
+#include "CAirbusFlightComputer.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
-
-// Quick3D
-#include "CAirbusFlightComputer.h"
 
 class C3DScene;
 
