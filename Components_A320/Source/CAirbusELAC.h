@@ -1,8 +1,10 @@
 
 #pragma once
 
-// Quick3D
+// qt-plus
 #include "CPIDController.h"
+
+// Quick3D
 #include "CComponentReference.h"
 #include "CWing.h"
 #include "CElevator.h"

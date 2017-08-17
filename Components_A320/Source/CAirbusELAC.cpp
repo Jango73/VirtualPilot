@@ -211,7 +211,7 @@ void CAirbusELAC::work(double dDeltaTime)
         m_pidRoll.setSetPoint(dFG_CommandedRollVelocity_ds);
         m_pidRoll.update(dInertial_RollVelocity_ds, dDeltaTime * 1000.0);
 
-        double dRollOutput = m_pidRoll.getOutput();
+        double dRollOutput = m_pidRoll.output();
 
         if (pLeftWing && pRightWing)
         {
@@ -224,7 +224,7 @@ void CAirbusELAC::work(double dDeltaTime)
         m_pidPitch.setSetPoint(dFG_CommandedPitchVelocity_ds);
         m_pidPitch.update(dInertial_PitchVelocity_ds, dDeltaTime * 1000.0);
 
-        double dPitchOutput = m_pidPitch.getOutput();
+        double dPitchOutput = m_pidPitch.output();
 
         if (pElevator != nullptr)
         {

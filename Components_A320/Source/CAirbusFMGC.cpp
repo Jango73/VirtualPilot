@@ -283,7 +283,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_pidVerticalSpeed.setSetPoint(m_dCommandedVerticalSpeed_ms);
     m_pidVerticalSpeed.update(dAircraftVerticalSpeed_ms, m_dDeltaTime * 1000.0);
 
-    m_dCommandedPitch_deg = -m_pidVerticalSpeed.getOutput();
+    m_dCommandedPitch_deg = -m_pidVerticalSpeed.output();
     m_dCommandedPitch_deg = Math::Angles::clipDouble(m_dCommandedPitch_deg, -20.0, 10.0);
 
     m_dCommandedPitchVelocity_ds = (m_dCommandedPitch_deg - dAircraftPitch_deg) * 0.5;
@@ -308,11 +308,11 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     if (m_dCommandedAcceleration_ms > dIndicatedAcceleration_ms)
     {
-        m_dCommandedThrust_norm = m_pidAcceleration.getOutput();
+        m_dCommandedThrust_norm = m_pidAcceleration.output();
     }
     else
     {
-        m_dCommandedThrust_norm = m_pidDeceleration.getOutput();
+        m_dCommandedThrust_norm = m_pidDeceleration.output();
     }
 
     // Send thrust command
