@@ -179,7 +179,7 @@ void CAirbusController::wheelEvent(QWheelEvent *event)
     {
         QSP<CCamera> pCamera = QSP_CAST(CCamera, m_rLookTarget.component());
 
-        if (pCamera)
+        if (pCamera != nullptr)
         {
             double dFOV = Math::Angles::clipDouble(pCamera->getFOV() + dDelta, 5.0, 120.0);
 
@@ -200,11 +200,11 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         QSP<CComponent> pRoot = getRoot();
 
-        if (pRoot)
+        if (pRoot != nullptr)
         {
             QSP<CPhysicalComponent> pPhysicalRoot = QSP_CAST(CPhysicalComponent, pRoot);
 
-            if (pPhysicalRoot)
+            if (pPhysicalRoot != nullptr)
             {
                 CGeoloc gGeoloc = pPhysicalRoot->getGeoloc();
                 gGeoloc.Altitude += 500.0;
@@ -216,7 +216,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            if (pFCU)
+            if (pFCU != nullptr)
             {
                 pFCU->toggle_AutoPilot1_Engaged();
             }
@@ -226,7 +226,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            if (pFCU)
+            if (pFCU != nullptr)
             {
                 pFCU->toggle_AutoPilot2_Engaged();
             }
@@ -236,7 +236,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            if (pFCU)
+            if (pFCU != nullptr)
             {
                 pFCU->toggle_AutoThrust_Engaged();
             }
@@ -246,7 +246,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            if (pFCU)
+            if (pFCU != nullptr)
             {
                 pFCU->increment_SelectedHeading(false);
             }
@@ -256,7 +256,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            if (pFCU)
+            if (pFCU != nullptr)
             {
                 pFCU->decrement_SelectedHeading(false);
             }

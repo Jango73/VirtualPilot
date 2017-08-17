@@ -40,7 +40,7 @@ void CAirbusAOASensor::update(double dDeltaTime)
 {
     QSP<CAircraft> pAircraft = QSP_CAST(CAircraft, getRoot());
 
-    if (pAircraft)
+    if (pAircraft != nullptr)
     {
         double dAngleOfAttack = pAircraft->angleOfAttack_rad();
 

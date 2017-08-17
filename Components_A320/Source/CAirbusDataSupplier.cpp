@@ -59,7 +59,7 @@ void CAirbusDataSupplier::solveLinks(C3DScene* pScene, CComponent* pCaller)
         {
             QSP<CComponent> pFound = pComponent->findComponent(sName, QSP<CComponent>(pCaller));
 
-            if (pFound)
+            if (pFound != nullptr)
             {
                 CAirbusDataSupplier* pInput = dynamic_cast<CAirbusDataSupplier*>(pFound.data());
 

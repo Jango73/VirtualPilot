@@ -226,7 +226,7 @@ void CAirbusELAC::work(double dDeltaTime)
 
         double dPitchOutput = m_pidPitch.getOutput();
 
-        if (pElevator)
+        if (pElevator != nullptr)
         {
             pElevator->setAileronAngle_norm(-dPitchOutput);
         }

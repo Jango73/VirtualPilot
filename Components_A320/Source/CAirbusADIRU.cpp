@@ -50,7 +50,7 @@ void CAirbusADIRU::work(double dDeltaTime)
 
     QSP<CAircraft> pAircraft = QSP_CAST(CAircraft, getRoot());
 
-    if (pAircraft)
+    if (pAircraft != nullptr)
     {
         // Compute pitch
         double dPitch_deg = pAircraft->pitch_deg();

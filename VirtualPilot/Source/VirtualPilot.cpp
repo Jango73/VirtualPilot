@@ -126,7 +126,7 @@ void VirtualPilot::loadVehicle(QString sFileName)
 
     QSP<CComponent> pComponent(CComponentLoader::getInstance()->loadComponent(sFileName, m_pScene));
 
-    if (pComponent)
+    if (pComponent != nullptr)
     {
         QVector<QSP<CComponent> > vComponents = m_pScene->componentsByTag("PLAYER");
 
@@ -152,7 +152,7 @@ void VirtualPilot::loadVehicle(QString sFileName)
 
         QSP<CComponent> pCamera = pComponent->findComponent(".Pilot", pComponent);
 
-        if (pCamera)
+        if (pCamera != nullptr)
         {
             m_pScene->viewports()[0]->setCamera(QSP_CAST(CCamera, pCamera));
         }
@@ -221,7 +221,7 @@ void VirtualPilot::onTimer()
         {
             QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getPositionTarget()->getRoot());
 
-            if (pPhysical)
+            if (pPhysical != nullptr)
             {
                 ViewGeoloc = pPhysical->getGeoloc();
                 ControledVelocity = pPhysical->velocity_ms();
@@ -234,7 +234,7 @@ void VirtualPilot::onTimer()
         {
             QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getRotationTarget()->getRoot());
 
-            if (pPhysical)
+            if (pPhysical != nullptr)
             {
                 ViewRotation = pPhysical->getOriginRotation();
             }
