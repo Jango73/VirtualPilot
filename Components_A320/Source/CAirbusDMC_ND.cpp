@@ -145,7 +145,7 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
     // Flight plan
     if (pFG_FlightPlan != nullptr)
     {
-        CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
+        CMatrix4 mHeading = CMatrix4::makeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
         CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
         CVector3 vPreviousPosition;
 

@@ -234,7 +234,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
             double dAircraftSegmentEndAngle_rad = vSegmentEnd.eulerYAngle();
 
             // Create a rotation matrix using the inverse angle between start and end points
-            CMatrix4 mSegmentAngle = CMatrix4::MakeRotation(CVector3(0.0, -dSegmentStartSegmentEndAngle_rad, 0.0));
+            CMatrix4 mSegmentAngle = CMatrix4::makeRotation(CVector3(0.0, -dSegmentStartSegmentEndAngle_rad, 0.0));
 
             // Rotate the two segment points
             vSegmentStart = mSegmentAngle * vSegmentStart;
