@@ -291,7 +291,7 @@
 		<DataInput Name=".ADIRU_2"/>
 	</Component>
 
-	<!-- Elevator Aileron Computer -->
+        <!-- Elevator and Aileron Computer -->
 	<Component Name="CONT_ELAC_1" Class="CElectricalContactor">
 		<PowerInput Name=".AC_ESS_BUS"/>
 		<General Closed="1"/>
@@ -328,7 +328,7 @@
 		/>
 	</Component>
 
-	<!-- Spoilers Elevator Computer -->
+        <!-- Spoilers and Elevator Computer -->
 	<Component Name="CONT_SEC_1" Class="CElectricalContactor">
 		<PowerInput Name=".AC_ESS_BUS"/>
 		<General Closed="1"/>
@@ -380,7 +380,7 @@
 		/>
 	</Component>
 
-	<!-- Flight Management Guidance Computer -->
+        <!-- Flight Management and Guidance Computer -->
 	<Component Name="CONT_FMGC_1" Class="CElectricalContactor">
 		<PowerInput Name=".DC_ESS_BUS"/>
 		<General Closed="1"/>
