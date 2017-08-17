@@ -227,11 +227,11 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
             CVector3 vSegmentEnd = gSegmentEnd.toVector3(gGeoloc);
 
             // Compute distance to waypoint
-            double dDistanceToSegmentEnd = vSegmentEnd.getMagnitude();
+            double dDistanceToSegmentEnd = vSegmentEnd.magnitude();
 
             // Compute angle between start point and end point
-            double dSegmentStartSegmentEndAngle_rad = (vSegmentEnd - vSegmentStart).AngleY();
-            double dAircraftSegmentEndAngle_rad = vSegmentEnd.AngleY();
+            double dSegmentStartSegmentEndAngle_rad = (vSegmentEnd - vSegmentStart).eulerYAngle();
+            double dAircraftSegmentEndAngle_rad = vSegmentEnd.eulerYAngle();
 
             // Create a rotation matrix using the inverse angle between start and end points
             CMatrix4 mSegmentAngle = CMatrix4::MakeRotation(CVector3(0.0, -dSegmentStartSegmentEndAngle_rad, 0.0));
@@ -241,7 +241,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
             vSegmentEnd = mSegmentAngle * vSegmentEnd;
 
             // Compute deviation
-            double dDeviation_rad = vSegmentEnd.AngleY();
+            double dDeviation_rad = vSegmentEnd.eulerYAngle();
             double dHeading_rad = dAircraftSegmentEndAngle_rad + dDeviation_rad * 2.0;
 
             m_dCommandedHeading_deg = Angles::toDeg(dHeading_rad);
