@@ -1,8 +1,10 @@
 
 #pragma once
 
+// qt-plus
+#include "CInterpolator.h"
+
 // Quick3D
-#include "Interpolator.h"
 #include "CGeoloc.h"
 
 // Application
@@ -98,20 +100,20 @@ public:
 
 protected:
 
-    QRectF						m_rVelocityBar;
-    QRectF						m_rArtificialHorizon;
-    QRectF						m_rAltitudeBar;
-    QRectF						m_rFMA;
-    Math::Interpolator<double>	m_iVerticalSpeedMarker;
+    QRectF                      m_rVelocityBar;
+    QRectF                      m_rArtificialHorizon;
+    QRectF                      m_rAltitudeBar;
+    QRectF                      m_rFMA;
+    CInterpolator<double>       m_iVerticalSpeedMarker;
 
-    QRectF						m_rRosace;
+    QRectF                      m_rRosace;
 
-    QRectF						m_rEWD_Engines;
-    QRectF						m_rEWD_Flaps;
-    QRectF						m_rEWD_Checklist;
+    QRectF                      m_rEWD_Engines;
+    QRectF                      m_rEWD_Flaps;
+    QRectF                      m_rEWD_Checklist;
 
-    QFont						m_fMainFont;
-    QPen						m_pGreenBold;
-    QPen						m_pYellowBold;
-    QPen						m_pWhiteDashed;
+    QFont                       m_fMainFont;
+    QPen                        m_pGreenBold;
+    QPen                        m_pYellowBold;
+    QPen                        m_pWhiteDashed;
 };
