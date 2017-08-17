@@ -1,7 +1,7 @@
 
 #pragma once
 
-// Quick3D
+// qt-plus
 #include "CPIDController.h"
 
 // Application
