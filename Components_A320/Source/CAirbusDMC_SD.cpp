@@ -19,10 +19,10 @@ using namespace Math;
 
 void CAirbusDMC::updateTexture_SD(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
-    double X = 0.0 * pTexture->getImage().width();
-    double Y = 0.0 * pTexture->getImage().height();
-    double W = 1.0 * pTexture->getImage().width();
-    double H = 1.0 * pTexture->getImage().height();
+    double X = 0.0 * pTexture->image().width();
+    double Y = 0.0 * pTexture->image().height();
+    double W = 1.0 * pTexture->image().width();
+    double H = 1.0 * pTexture->image().height();
 
     QRectF rWholePart(X, Y, W, H);
 

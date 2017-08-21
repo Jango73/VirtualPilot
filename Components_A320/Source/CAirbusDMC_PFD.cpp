@@ -56,10 +56,10 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     int iNearestTenKnots = ( ((int) (dAirspeed_kts / 10.0) ) * 10);
 
     // Compute coordinates
-    double X = m_rVelocityBar.left() * pTexture->getImage().width();
-    double Y = m_rVelocityBar.top() * pTexture->getImage().height();
-    double W = m_rVelocityBar.width() * pTexture->getImage().width();
-    double H = m_rVelocityBar.height() * pTexture->getImage().height();
+    double X = m_rVelocityBar.left() * pTexture->image().width();
+    double Y = m_rVelocityBar.top() * pTexture->image().height();
+    double W = m_rVelocityBar.width() * pTexture->image().width();
+    double H = m_rVelocityBar.height() * pTexture->image().height();
     double W2 = W / 2.0;
     double W4 = W / 4.0;
     double W10 = W / 10.0;
@@ -179,10 +179,10 @@ void CAirbusDMC::drawArtificialHorizon(QPainter* pPainter, CTexture* pTexture, d
     }
 
     // Compute coordinates
-    double X = m_rArtificialHorizon.left() * pTexture->getImage().width();
-    double Y = m_rArtificialHorizon.top() * pTexture->getImage().height();
-    double W = m_rArtificialHorizon.width() * pTexture->getImage().width();
-    double H = m_rArtificialHorizon.height() * pTexture->getImage().height();
+    double X = m_rArtificialHorizon.left() * pTexture->image().width();
+    double Y = m_rArtificialHorizon.top() * pTexture->image().height();
+    double W = m_rArtificialHorizon.width() * pTexture->image().width();
+    double H = m_rArtificialHorizon.height() * pTexture->image().height();
     double W2 = W * 0.50;
     double W3 = W * 0.30;
     double H2 = H * 0.50;
@@ -269,10 +269,10 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
     int iNearestFlightLevel = ( ((int) (dAircraftAltitude_f / 100.0) ) * 100);
 
     // Compute coordinates
-    double X = m_rAltitudeBar.left() * pTexture->getImage().width();
-    double Y = m_rAltitudeBar.top() * pTexture->getImage().height();
-    double W = m_rAltitudeBar.width() * pTexture->getImage().width();
-    double H = m_rAltitudeBar.height() * pTexture->getImage().height();
+    double X = m_rAltitudeBar.left() * pTexture->image().width();
+    double Y = m_rAltitudeBar.top() * pTexture->image().height();
+    double W = m_rAltitudeBar.width() * pTexture->image().width();
+    double H = m_rAltitudeBar.height() * pTexture->image().height();
     double W2 = W / 2.00;
     // double W3 = W / 3.00;
     // double W4 = W / 4.00;
@@ -430,10 +430,10 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
     }
 
     // Compute coordinates
-    double X = m_rFMA.left() * pTexture->getImage().width();
-    double Y = m_rFMA.top() * pTexture->getImage().height();
-    double W = m_rFMA.width() * pTexture->getImage().width();
-    double H = m_rFMA.height() * pTexture->getImage().height();
+    double X = m_rFMA.left() * pTexture->image().width();
+    double Y = m_rFMA.top() * pTexture->image().height();
+    double W = m_rFMA.width() * pTexture->image().width();
+    double H = m_rFMA.height() * pTexture->image().height();
     double W5 = W / 5.0;
     double H3 = H / 3.0;
 

@@ -76,10 +76,10 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
     double dRange_m = 40 * FAC_NM_TO_M;
 
     // Compute coordinates
-    double X = m_rRosace.left() * pTexture->getImage().width();
-    double Y = m_rRosace.top() * pTexture->getImage().height();
-    double W = m_rRosace.width() * pTexture->getImage().width();
-    double H = m_rRosace.height() * pTexture->getImage().height();
+    double X = m_rRosace.left() * pTexture->image().width();
+    double Y = m_rRosace.top() * pTexture->image().height();
+    double W = m_rRosace.width() * pTexture->image().width();
+    double H = m_rRosace.height() * pTexture->image().height();
 
     double W8 = W / 8.0;
     double W10 = W / 10.0;
@@ -92,10 +92,10 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
 
     if (bArc)
     {
-        X = (m_rRosace.center().x() - m_rRosace.width()) * pTexture->getImage().width();
-        Y = m_rRosace.top() * pTexture->getImage().height();
-        W = (m_rRosace.width() * 2.0) * pTexture->getImage().width();
-        H = (m_rRosace.height() * 2.0) * pTexture->getImage().height();
+        X = (m_rRosace.center().x() - m_rRosace.width()) * pTexture->image().width();
+        Y = m_rRosace.top() * pTexture->image().height();
+        W = (m_rRosace.width() * 2.0) * pTexture->image().width();
+        H = (m_rRosace.height() * 2.0) * pTexture->image().height();
 
         W8 = W / 16.0;
         W20 = W / 40.0;

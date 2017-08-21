@@ -85,25 +85,25 @@ void CAirbusDMC::updateTexture(CTexture* pTexture, double dDeltaTime)
 {
     QPainter painter;
 
-    if (painter.begin(&(pTexture->getImage())))
+    if (painter.begin(&(pTexture->image())))
     {
-        painter.fillRect(0, 0, pTexture->getImage().width(), pTexture->getImage().height(), QColor(0, 0, 0));
+        painter.fillRect(0, 0, pTexture->image().width(), pTexture->image().height(), QColor(0, 0, 0));
 
         if (m_bPowered)
         {
-            if (pTexture->getName().contains("_PFD"))
+            if (pTexture->name().contains("_PFD"))
             {
                 updateTexture_PFD(&painter, pTexture, dDeltaTime);
             }
-            else if (pTexture->getName().contains("_ND"))
+            else if (pTexture->name().contains("_ND"))
             {
                 updateTexture_ND(&painter, pTexture, dDeltaTime);
             }
-            else if (pTexture->getName().contains("_EWD"))
+            else if (pTexture->name().contains("_EWD"))
             {
                 updateTexture_EWD(&painter, pTexture, dDeltaTime);
             }
-            else if (pTexture->getName().contains("_SD"))
+            else if (pTexture->name().contains("_SD"))
             {
                 updateTexture_SD(&painter, pTexture, dDeltaTime);
             }

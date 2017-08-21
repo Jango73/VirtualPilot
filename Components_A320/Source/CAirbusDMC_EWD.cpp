@@ -36,9 +36,9 @@ void CAirbusDMC::updateTexture_EWD(QPainter* pPainter, CTexture* pTexture, doubl
     }
 
     // Compute coordinates
-    double X = m_rEWD_Engines.left() * pTexture->getImage().width();
-    double Y = m_rEWD_Engines.top() * pTexture->getImage().height();
-    double W = m_rEWD_Engines.width() * pTexture->getImage().width();
+    double X = m_rEWD_Engines.left() * pTexture->image().width();
+    double Y = m_rEWD_Engines.top() * pTexture->image().height();
+    double W = m_rEWD_Engines.width() * pTexture->image().width();
     // double H = m_rEWD_Engines.height() * pTexture->getImage().height();
     double W25 = W / 2.50;
     // double W4 = W / 4.00;
