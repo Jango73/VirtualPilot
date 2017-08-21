@@ -84,7 +84,7 @@ void CAirbusFADEC::work(double dDeltaTime)
     QSP<CJetEngine> pEngine1 = QSP_CAST(CJetEngine, m_rEngine1Target.component());
     QSP<CJetEngine> pEngine2 = QSP_CAST(CJetEngine, m_rEngine2Target.component());
 
-    if (pEngine1 && pEngine2)
+    if (pEngine1 != nullptr && pEngine2 != nullptr )
     {
         CAirbusData* pFG_CommandedThrust_norm = getData(adFG_CommandedThrust_norm);
         CAirbusData* pFCU_AutoThrust_Engaged = getData(adFCU_AutoThrust_Engaged);
