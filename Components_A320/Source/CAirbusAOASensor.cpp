@@ -38,7 +38,7 @@ CAirbusAOASensor::~CAirbusAOASensor()
 
 void CAirbusAOASensor::update(double dDeltaTime)
 {
-    QSP<CAircraft> pAircraft = QSP_CAST(CAircraft, getRoot());
+    QSP<CAircraft> pAircraft = QSP_CAST(CAircraft, root());
 
     if (pAircraft != nullptr)
     {

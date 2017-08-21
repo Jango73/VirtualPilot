@@ -132,22 +132,22 @@ void VirtualPilot::loadVehicle(QString sFileName)
 
         if (vComponents.count() > 0)
         {
-            playerGeoloc = vComponents[0]->getGeoloc();
-            playerRotation = vComponents[0]->getOriginRotation();
+            playerGeoloc = vComponents[0]->geoloc();
+            playerRotation = vComponents[0]->rotation();
         }
 
         LOG_DEBUG("VirtualPilot::loadVehicle() : adding component to scene...");
 
         m_pScene->deleteComponentsByTag("PLAYER");
         m_pScene->addComponent(pComponent);
-        m_pScene->setController(pComponent->getController());
+        m_pScene->setController(pComponent->controller());
 
         pComponent->setTag("PLAYER");
 
         if (playerGeoloc.valid())
         {
             pComponent->setGeoloc(playerGeoloc);
-            pComponent->setOriginRotation(playerRotation);
+            pComponent->setRotation(playerRotation);
         }
 
         QSP<CComponent> pCamera = pComponent->findComponent(".Pilot", pComponent);
@@ -219,11 +219,11 @@ void VirtualPilot::onTimer()
 
         if (m_pScene->controller() != nullptr && m_pScene->controller()->getPositionTarget())
         {
-            QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getPositionTarget()->getRoot());
+            QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getPositionTarget()->root());
 
             if (pPhysical != nullptr)
             {
-                ViewGeoloc = pPhysical->getGeoloc();
+                ViewGeoloc = pPhysical->geoloc();
                 ControledVelocity = pPhysical->velocity_ms();
                 ControledTorque = pPhysical->angularVelocity_rs();
                 dSpeedMS = ControledVelocity.magnitude();
@@ -232,11 +232,11 @@ void VirtualPilot::onTimer()
 
         if (m_pScene->controller() != nullptr && m_pScene->controller()->getRotationTarget())
         {
-            QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getRotationTarget()->getRoot());
+            QSP<CPhysicalComponent> pPhysical = QSP_CAST(CPhysicalComponent, m_pScene->controller()->getRotationTarget()->root());
 
             if (pPhysical != nullptr)
             {
-                ViewRotation = pPhysical->getOriginRotation();
+                ViewRotation = pPhysical->rotation();
             }
         }
 

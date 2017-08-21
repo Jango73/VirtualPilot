@@ -48,7 +48,7 @@ void CAirbusADIRU::work(double dDeltaTime)
 {
     CAirbusFlightComputer::work(dDeltaTime);
 
-    QSP<CAircraft> pAircraft = QSP_CAST(CAircraft, getRoot());
+    QSP<CAircraft> pAircraft = QSP_CAST(CAircraft, root());
 
     if (pAircraft != nullptr)
     {
@@ -105,11 +105,11 @@ void CAirbusADIRU::work(double dDeltaTime)
         pushData(CAirbusData(m_sName, adAir_VerticalSpeed_ms, dVerticalSpeed_ms));
 
         // Compute latitude
-        double dLatitude_deg = Angles::toDeg(pAircraft->getGeoloc().Latitude);
+        double dLatitude_deg = Angles::toDeg(pAircraft->geoloc().Latitude);
         pushData(CAirbusData(m_sName, adGeoLoc_Latitude_deg, dLatitude_deg));
 
         // Compute longitude
-        double dLongitude_deg = Angles::toDeg(pAircraft->getGeoloc().Longitude);
+        double dLongitude_deg = Angles::toDeg(pAircraft->geoloc().Longitude);
         pushData(CAirbusData(m_sName, adGeoLoc_Longitude_deg, dLongitude_deg));
 
         // Compute altitude

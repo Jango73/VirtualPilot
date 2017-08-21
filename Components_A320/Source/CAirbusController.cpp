@@ -198,7 +198,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
 
     if (event->getName() == EventName_Jump500)
     {
-        QSP<CComponent> pRoot = getRoot();
+        QSP<CComponent> pRoot = root();
 
         if (pRoot != nullptr)
         {
@@ -206,7 +206,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
 
             if (pPhysicalRoot != nullptr)
             {
-                CGeoloc gGeoloc = pPhysicalRoot->getGeoloc();
+                CGeoloc gGeoloc = pPhysicalRoot->geoloc();
                 gGeoloc.Altitude += 500.0;
                 pPhysicalRoot->setGeoloc(gGeoloc);
             }
