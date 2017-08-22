@@ -151,7 +151,7 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
 
         for (int iIndex = 0; iIndex < pFG_FlightPlan->getWaypoints().count(); iIndex++)
         {
-            CVector3 vCurrentPosition = pFG_FlightPlan->getWaypoints()[iIndex].getGeoloc().toVector3(gGeoloc);
+            CVector3 vCurrentPosition = pFG_FlightPlan->getWaypoints()[iIndex].geoloc().toVector3(gGeoloc);
             vCurrentPosition = mHeading * vCurrentPosition;
             vCurrentPosition.Z *= -1.0;
             vCurrentPosition *= dRangeFactor;

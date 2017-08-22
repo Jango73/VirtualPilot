@@ -220,8 +220,8 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
         if (iCurrentWaypoint > 0 && iCurrentWaypoint < m_tFlightPlan.getWaypoints().count())
         {
             // Get two points of current segment
-            CGeoloc gSegmentStart = m_tFlightPlan.getWaypoints()[iCurrentWaypoint - 1].getGeoloc();
-            CGeoloc gSegmentEnd = m_tFlightPlan.getWaypoints()[iCurrentWaypoint + 0].getGeoloc();
+            CGeoloc gSegmentStart = m_tFlightPlan.getWaypoints()[iCurrentWaypoint - 1].geoloc();
+            CGeoloc gSegmentEnd = m_tFlightPlan.getWaypoints()[iCurrentWaypoint + 0].geoloc();
 
             CVector3 vSegmentStart = gSegmentStart.toVector3(gGeoloc);
             CVector3 vSegmentEnd = gSegmentEnd.toVector3(gGeoloc);
