@@ -14,7 +14,7 @@ INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
 INCLUDEPATH += $$PWD/../Quick3D/qt-plus/source/cpp
 INCLUDEPATH += $$PWD/../Quick3D/qt-plus/source/cpp/Web
 DEPENDPATH += $$PWD/../Quick3D/Quick3D
-DESTDIR = ../bin/Plugins
+DESTDIR = $$PWD/../bin/Plugins
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
@@ -30,15 +30,15 @@ CONFIG(debug, debug|release) {
 
 # Libraries
 CONFIG(debug, debug|release) {
-    LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/bin/ -lQuick3Dd
+    LIBS += -L$$PWD/../Quick3D/Quick3D/bin/ -lQuick3Dd
 } else {
-    LIBS += -L$$OUT_PWD/../Quick3D/Quick3D/bin/ -lQuick3D
+    LIBS += -L$$PWD/../Quick3D/Quick3D/bin/ -lQuick3D
 }
 
 CONFIG(debug, debug|release) {
-    LIBS += -L$$OUT_PWD/../Quick3D/qt-plus/bin/ -lqt-plusd
+    LIBS += -L$$PWD/../Quick3D/qt-plus/bin/ -lqt-plusd
 } else {
-    LIBS += -L$$OUT_PWD/../Quick3D/qt-plus/bin/ -lqt-plus
+    LIBS += -L$$PWD/../Quick3D/qt-plus/bin/ -lqt-plus
 }
 
 # Code
@@ -94,13 +94,13 @@ RESOURCES += \
     A320.qrc
 
 # Copy qt-plus to bin
-copyfile = ../Quick3D/qt-plus/bin/*.dll
-copydest = ../bin
+copyfile = $$PWD/../Quick3D/qt-plus/bin/*.dll
+copydest = $$PWD/../bin
 
 QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
 
 # Copy Quick3D to Binary
-copyfile = ../Quick3D/Quick3D/bin/*.dll
-copydest = ../bin
+copyfile = $$PWD/../Quick3D/Quick3D/bin/*.dll
+copydest = $$PWD/../bin
 
 QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
