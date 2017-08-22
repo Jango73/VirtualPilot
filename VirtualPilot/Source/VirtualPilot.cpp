@@ -58,6 +58,11 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     connect(ui.actionQuit, SIGNAL(triggered()), this, SLOT(onQuitClicked()));
     connect(ui.actionDump_scene, SIGNAL(triggered()), this, SLOT(onDumpSceneClicked()));
 
+    connect(ui.m_sTime, SIGNAL(valueChanged(int)), this, SLOT(onTimeChanged(int)));
+    connect(ui.m_sFogLevel, SIGNAL(valueChanged(int)), this, SLOT(onFogLevelChanged(int)));
+    connect(ui.m_sWindLevel, SIGNAL(valueChanged(int)), this, SLOT(onWindLevelChanged(int)));
+    connect(ui.m_sShaderQuality, SIGNAL(valueChanged(int)), this, SLOT(onShaderQualityChanged(int)));
+
     loadScene(QCoreApplication::applicationDirPath() + "/" + sSceneFileName);
 
     readPreferences();
@@ -337,4 +342,32 @@ void VirtualPilot::onDumpSceneClicked()
         m_pScene->dump(stream, 0);
         dump.close();
     }
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onTimeChanged(int iValue)
+{
+    m_pScene->setTimeOfDay(QTime(iValue, 0, 0));
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onFogLevelChanged(int iValue)
+{
+    m_pScene->setFogLevel((double) iValue / 100.0);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onWindLevelChanged(int iValue)
+{
+    m_pScene->setWindLevel((double) iValue / 100.0);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onShaderQualityChanged(int iValue)
+{
+    m_pScene->setShaderQuality((double) iValue / 100.0);
 }

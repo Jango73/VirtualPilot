@@ -78,6 +78,11 @@ private slots:
     void onDumpSceneClicked();
     void onResize();
 
+    void onTimeChanged(int iValue);
+    void onFogLevelChanged(int iValue);
+    void onWindLevelChanged(int iValue);
+    void onShaderQualityChanged(int iValue);
+
     //-------------------------------------------------------------------------------------------------
     // Properties
     //-------------------------------------------------------------------------------------------------
