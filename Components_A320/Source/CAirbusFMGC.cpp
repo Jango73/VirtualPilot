@@ -275,7 +275,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     // Compute altitude command
 
-    m_dCommandedAltitude_m = 5200.0;
+    m_dCommandedAltitude_m = 33000.0 * FAC_FEET_TO_METERS;
 
     m_dCommandedVerticalSpeed_ms = (m_dCommandedAltitude_m - dAircraftAltitude_m) * 0.25;
     m_dCommandedVerticalSpeed_ms = Math::Angles::clipDouble(m_dCommandedVerticalSpeed_ms, -8.0, 8.0);
@@ -287,7 +287,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedPitch_deg = Math::Angles::clipDouble(m_dCommandedPitch_deg, -20.0, 10.0);
 
     m_dCommandedPitchVelocity_ds = (m_dCommandedPitch_deg - dAircraftPitch_deg) * 0.5;
-    m_dCommandedPitchVelocity_ds = Math::Angles::clipDouble(m_dCommandedPitchVelocity_ds, -5.0, 5.0);
+    m_dCommandedPitchVelocity_ds = Math::Angles::clipDouble(m_dCommandedPitchVelocity_ds, -3.0, 3.0);
 
     // Send altitude command
 
