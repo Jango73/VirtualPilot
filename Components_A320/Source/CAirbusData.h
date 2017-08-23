@@ -7,31 +7,31 @@
 //-------------------------------------------------------------------------------------------------
 // Facteurs de conversion
 
-// Mètres <-> pieds
+// Meters <-> Feet
 #define FAC_METERS_TO_FEET	3.280840
 #define FAC_FEET_TO_METERS	(1.0 / FAC_METERS_TO_FEET)
 
-// Mètres/seconde <-> kilomètres/heure
+// Meters per second <-> Kilometers per hour
 #define FAC_MS_TO_KMH		3.600000
 #define FAC_KMH_TO_MS		(1.0 / FAC_MS_TO_KMH)
 
-// Mètres/seconde <-> noeuds
+// Meters per second <-> Knots
 #define FAC_MS_TO_KNOTS		1.943840
 #define FAC_KNOTS_TO_MS		(1.0 / FAC_MS_TO_KNOTS)
 
-// Mètres/secondes <-> pieds/minute
+// Meters per second <-> Feet per minute
 #define FAC_MS_TO_FPM		(FAC_METERS_TO_FEET * 60.0)
 #define FAC_FPM_TO_MS		(1.0 / FAC_MS_TO_FPM)
 
-// Kilomètres/heure <-> noeuds
+// Kilometers per hour <-> Knots
 #define FAC_KMH_TO_KNOTS	0.539957
 #define FAC_KNOTS_TO_KMH	(1.0 / FAC_KMH_TO_KNOTS)
 
-// Mètres <-> milles marins
+// Meters <-> Nautical miles
 #define FAC_M_TO_NM			0.000539957
 #define FAC_NM_TO_M			(1.0 / FAC_M_TO_NM)
 
-// Kilomètres <-> milles marins
+// Kilometers <-> Nautical miles
 #define FAC_KM_TO_NM		0.539957
 #define FAC_NM_TO_KM		(1.0 / FAC_KM_TO_NM)
 
@@ -84,6 +84,7 @@ enum EAirbusData
     adFADEC_Engine2_N2_norm,
 
     // Data coming from FMGS
+    adFG_FlightPhase_fp,
     adFG_LateralMode_alm,
     adFG_VerticalMode_avm,
     adFG_CommandedRollVelocity_ds,
@@ -105,6 +106,32 @@ enum EAirbusData
 };
 
 //-------------------------------------------------------------------------------------------------
+// Flight laws
+
+enum EFlightLaw
+{
+    flNormal
+};
+
+//-------------------------------------------------------------------------------------------------
+// Flight phases
+
+enum EFlightPhase
+{
+    fpPark,
+    fpTaxi,
+    fpTakeoff,
+    fpClimb,
+    fpCruise,
+    fpDescent,
+    fpApproach,
+    fpLand,
+    fpGoAround,
+    fpTaxiToGate
+};
+
+//-------------------------------------------------------------------------------------------------
+// Lateral navigation modes
 
 enum EAirbusLateralMode
 {
@@ -114,6 +141,7 @@ enum EAirbusLateralMode
 };
 
 //-------------------------------------------------------------------------------------------------
+// Vertical navigation modes
 
 enum EAirbusVerticalMode
 {
@@ -186,7 +214,7 @@ public:
 
 protected:
 
-    QString				m_sSource;
-    EAirbusData			m_eID;
-    QVariant			m_vData;
+    QString             m_sSource;
+    EAirbusData         m_eID;
+    QVariant            m_vData;
 };

@@ -22,9 +22,11 @@ CComponent* CAirbusFMGC::instanciator(C3DScene* pScene)
 
 CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
+    , m_eFlightPhase(fpPark)
     // , m_eLateralMode(almHeading)
     , m_eLateralMode(almNav)
-    , m_eVerticalMode(avmAltitudeHold)
+    // , m_eVerticalMode(avmAltitudeHold)
+    , m_eVerticalMode(avmNav)
     , m_pidVerticalSpeed(5.0, 0.0, 0.1)
     , m_pidAcceleration(0.5, 0.0, 0.001)
     , m_pidDeceleration(0.02, 0.0, 0.001)
@@ -55,10 +57,21 @@ CAirbusFMGC::~CAirbusFMGC()
 
 void CAirbusFMGC::loadFlightPlan()
 {
-    m_tFlightPlan.getWaypoints().append(CWaypoint(wtAirport, "WP1", CGeoloc(19.2, 10.8, 0.0), 0.0));
-    m_tFlightPlan.getWaypoints().append(CWaypoint(wtFix, "WP2", CGeoloc(19.4, 10.8, 0.0), 0.0));
-    m_tFlightPlan.getWaypoints().append(CWaypoint(wtFix, "WP3", CGeoloc(19.5, 10.9, 0.0), 0.0));
-    m_tFlightPlan.getWaypoints().append(CWaypoint(wtFix, "WP4", CGeoloc(19.5, 11.0, 0.0), 0.0));
+    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(19.2, 10.8, 0.0), 0.0);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(19.4, 10.8, 0.0), 0.0);
+    m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(19.5, 10.9, 0.0), 0.0);
+    m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(19.5, 11.0, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(19.6, 11.2, 0.0), 0.0);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(19.6, 12.0, 0.0), 0.0);
+    m_tFlightPlan.lastWaypoint().setSelectedAltitude_m(2500.0 * FAC_FEET_TO_METERS);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(19.6, 12.1, 0.0), 0.0);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -107,9 +120,93 @@ void CAirbusFMGC::work_FM(double dDeltaTime)
 
 void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
 {
+    // Compute very 2 seconds
     if (m_tLastUpdate.secsTo(QDateTime::currentDateTime()) > 2)
     {
         m_tLastUpdate = QDateTime::currentDateTime();
+
+        // Get flight data
+        CAirbusData* pAltitude_m = getData(adAir_Altitude_m);
+        CAirbusData* pVerticalSpeed_ms = getData(adAir_VerticalSpeed_ms);
+
+        double dAircraftAltitude_m = 0.0;
+        double dAircraftVerticalSpeed_ms = 0.0;
+
+        if (pAltitude_m != nullptr)
+            dAircraftAltitude_m = pAltitude_m->getData().toDouble();
+
+        if (pVerticalSpeed_ms != nullptr)
+            dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
+
+        // Clear generated data
+        m_tFlightPlan.clearAllGeneratedWaypoints();
+
+        if (m_tFlightPlan.waypoints().count() > 1)
+        {
+            // Set markers
+            bool bClimbDone = false;
+            bool bDescentDone = false;
+
+            if (m_eFlightPhase > fpClimb)
+            {
+                bClimbDone = true;
+            }
+
+            if (m_eFlightPhase > fpDescent)
+            {
+                bDescentDone = true;
+            }
+
+            // Set computed altitude for each waypoint
+            for (int index = 0; index < m_tFlightPlan.waypoints().count(); index++)
+            {
+                double dComputedAltitude = 0.0;
+
+                if (index == 0)
+                {
+                    dComputedAltitude = dAircraftAltitude_m;
+                }
+                else
+                {
+                    if (m_tFlightPlan.waypoints()[index].selectedAltitude_m() != 0.0)
+                    {
+                        // Check if selected altitude passes constraints
+                        if (m_tFlightPlan.waypoints()[index].maximumAltitude_m() != 0.0)
+                        {
+                            if (m_tFlightPlan.waypoints()[index].selectedAltitude_m() <= m_tFlightPlan.waypoints()[index].maximumAltitude_m())
+                            {
+                                dComputedAltitude = m_tFlightPlan.waypoints()[index].selectedAltitude_m();
+                            }
+                        }
+                        else if (m_tFlightPlan.waypoints()[index].minimumAltitude_m() != 0.0)
+                        {
+                            if (m_tFlightPlan.waypoints()[index].selectedAltitude_m() >= m_tFlightPlan.waypoints()[index].minimumAltitude_m())
+                            {
+                                dComputedAltitude = m_tFlightPlan.waypoints()[index].selectedAltitude_m();
+                            }
+                        }
+                        else
+                        {
+                            dComputedAltitude = m_tFlightPlan.waypoints()[index].selectedAltitude_m();
+                        }
+                    }
+                    else
+                    {
+                        dComputedAltitude = m_tFlightPlan.cruiseAltitude_m();
+                    }
+
+                    m_tFlightPlan.waypoints()[index].setComputedAltitude_m(dComputedAltitude);
+                }
+            }
+
+            // Compute effective altitude at each waypoint
+            for (int index = 0; index < m_tFlightPlan.waypoints().count(); index++)
+            {
+                if (bClimbDone == false)
+                {
+                }
+            }
+        }
     }
 }
 
@@ -144,69 +241,46 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     double dAircraftPitch_deg = 0.0;
 
     if (pFCU_Heading_deg != nullptr)
-    {
         dFCU_Heading_deg = pFCU_Heading_deg->getData().toDouble();
-    }
 
     if (pGeoLoc_Latitude_deg != nullptr)
-    {
         dGeoLoc_Latitude_deg = pGeoLoc_Latitude_deg->getData().toDouble();
-    }
 
     if (pGeoLoc_Longitude_deg != nullptr)
-    {
         dGeoLoc_Longitude_deg = pGeoLoc_Longitude_deg->getData().toDouble();
-    }
 
     if (pGeoLoc_TrueHeading_deg != nullptr)
-    {
         dGeoLoc_TrueHeading_deg = pGeoLoc_TrueHeading_deg->getData().toDouble();
-    }
 
     if (pGeoLoc_TrueTrack_deg != nullptr)
-    {
         dGeoLoc_TrueTrack_deg = pGeoLoc_TrueTrack_deg->getData().toDouble();
-    }
 
     if (pGeoLoc_GroundSpeed_ms != nullptr)
-    {
         dGeoLoc_GroundSpeed_ms = pGeoLoc_GroundSpeed_ms->getData().toDouble();
-    }
 
     if (pAltitude_m != nullptr)
-    {
         dAircraftAltitude_m = pAltitude_m->getData().toDouble();
-    }
 
     if (pVerticalSpeed_ms != nullptr)
-    {
         dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
-    }
 
     if (pIndicatedAirspeed_ms != nullptr)
-    {
         dIndicatedAirspeed_ms = pIndicatedAirspeed_ms->getData().toDouble();
-    }
 
     if (pIndicatedAcceleration_ms != nullptr)
-    {
         dIndicatedAcceleration_ms = pIndicatedAcceleration_ms->getData().toDouble();
-    }
 
     if (pRoll_deg != nullptr)
-    {
         dAircraftRoll_deg = pRoll_deg->getData().toDouble();
-    }
 
     if (pPitch_deg != nullptr)
-    {
         dAircraftPitch_deg = pPitch_deg->getData().toDouble();
-    }
 
     CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
 
-    // Send modes
+    // Send flight pahse and modes
 
+    pushData(CAirbusData(m_sName, adFG_FlightPhase_fp, m_eFlightPhase));
     pushData(CAirbusData(m_sName, adFG_LateralMode_alm, m_eLateralMode));
     pushData(CAirbusData(m_sName, adFG_VerticalMode_avm, m_eVerticalMode));
 
@@ -214,14 +288,13 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     if (m_eLateralMode == almNav)
     {
-        // CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
-        int iCurrentWaypoint = m_tFlightPlan.getCurrentWaypoint();
-
-        if (iCurrentWaypoint > 0 && iCurrentWaypoint < m_tFlightPlan.getWaypoints().count())
+        if (m_tFlightPlan.waypoints().count() > 1)
         {
+            // CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
+
             // Get two points of current segment
-            CGeoloc gSegmentStart = m_tFlightPlan.getWaypoints()[iCurrentWaypoint - 1].geoloc();
-            CGeoloc gSegmentEnd = m_tFlightPlan.getWaypoints()[iCurrentWaypoint + 0].geoloc();
+            CGeoloc gSegmentStart = m_tFlightPlan.waypoints()[WAYPOINT_TO - 1].geoloc();
+            CGeoloc gSegmentEnd = m_tFlightPlan.waypoints()[WAYPOINT_TO + 0].geoloc();
 
             CVector3 vSegmentStart = gSegmentStart.toVector3(gGeoloc);
             CVector3 vSegmentEnd = gSegmentEnd.toVector3(gGeoloc);
@@ -251,10 +324,6 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
             {
                 m_tFlightPlan.nextWaypoint();
             }
-        }
-        else
-        {
-            m_dCommandedHeading_deg = dGeoLoc_TrueHeading_deg;
         }
     }
     else

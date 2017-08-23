@@ -76,32 +76,33 @@ public:
 
 protected:
 
-    EAirbusLateralMode	m_eLateralMode;
-    EAirbusVerticalMode	m_eVerticalMode;
-    CAirbusFlightPlan	m_tFlightPlan;
-    double				m_dDeltaTime;
-    double				m_dPreviousAircraftVerticalSpeed_ms;
+    EFlightPhase            m_eFlightPhase;
+    EAirbusLateralMode      m_eLateralMode;
+    EAirbusVerticalMode     m_eVerticalMode;
+    CAirbusFlightPlan       m_tFlightPlan;
+    double                  m_dDeltaTime;
+    double                  m_dPreviousAircraftVerticalSpeed_ms;
 
     // Commandes latérales
-    double				m_dCommandedHeading_deg;		// Commande de cap en degrés
-    double				m_dCommandedRoll_deg;			// Commande de roulis en degrés
-    double				m_dCommandedRollVelocity_ds;
+    double                  m_dCommandedHeading_deg;        // Commande de cap en degrés
+    double                  m_dCommandedRoll_deg;           // Commande de roulis en degrés
+    double                  m_dCommandedRollVelocity_ds;
 
     // Commandes verticales
-    double				m_dCommandedVerticalSpeed_ms;
-    double				m_dCommandedAltitude_m;
-    double				m_dCommandedPitch_deg;
-    double				m_dCommandedPitchVelocity_ds;
+    double                  m_dCommandedVerticalSpeed_ms;
+    double                  m_dCommandedAltitude_m;
+    double                  m_dCommandedPitch_deg;
+    double                  m_dCommandedPitchVelocity_ds;
 
-    CPIDController		m_pidVerticalSpeed;
+    CPIDController          m_pidVerticalSpeed;
 
     // Commandes de poussée
-    double				m_dCommandedVelocity_ms;
-    double				m_dCommandedAcceleration_ms;
-    double				m_dCommandedThrust_norm;
+    double                  m_dCommandedVelocity_ms;
+    double                  m_dCommandedAcceleration_ms;
+    double                  m_dCommandedThrust_norm;
 
-    CPIDController		m_pidAcceleration;
-    CPIDController		m_pidDeceleration;
+    CPIDController          m_pidAcceleration;
+    CPIDController          m_pidDeceleration;
 
-    QDateTime			m_tLastUpdate;
+    QDateTime               m_tLastUpdate;
 };

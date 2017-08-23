@@ -17,6 +17,7 @@
 #define ClassName_CAirbusFADEC              "CAirbusFADEC"
 #define ClassName_CAirbusFCU                "CAirbusFCU"
 #define ClassName_CAirbusFMGC               "CAirbusFMGC"
+#define ClassName_CAirbusFWC                "CAirbusFWC"
 #define ClassName_CAirbusSEC                "CAirbusSEC"
 
 //-------------------------------------------------------------------------------------------------
@@ -45,6 +46,7 @@
 #define EquipName_FMA                       "Flight Mode Annunciator"
 #define EquipName_FMGC                      "Flight Management Guidance Computer"
 #define EquipName_FMGS                      "Flight Management Guidance System"
+#define EquipName_FWC                       "Flight Warning Computer"
 #define EquipName_GPS                       "Global Positioning System"
 #define EquipName_GPWS                      "Ground Proximity Warning System"
 #define EquipName_MCDU                      "Multipurpose Control and Display Unit"

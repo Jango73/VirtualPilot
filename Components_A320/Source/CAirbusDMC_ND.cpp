@@ -149,9 +149,9 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
         CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
         CVector3 vPreviousPosition;
 
-        for (int iIndex = 0; iIndex < pFG_FlightPlan->getWaypoints().count(); iIndex++)
+        for (int iIndex = 0; iIndex < pFG_FlightPlan->waypoints().count(); iIndex++)
         {
-            CVector3 vCurrentPosition = pFG_FlightPlan->getWaypoints()[iIndex].geoloc().toVector3(gGeoloc);
+            CVector3 vCurrentPosition = pFG_FlightPlan->waypoints()[iIndex].geoloc().toVector3(gGeoloc);
             vCurrentPosition = mHeading * vCurrentPosition;
             vCurrentPosition.Z *= -1.0;
             vCurrentPosition *= dRangeFactor;
@@ -163,7 +163,7 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
                 pPainter->drawLine(vPreviousPosition.X, vPreviousPosition.Z, vCurrentPosition.X, vCurrentPosition.Z);
             }
 
-            drawWaypoint(pPainter, pTexture, dDeltaTime, pFG_FlightPlan->getWaypoints()[iIndex], wpt, true);
+            drawWaypoint(pPainter, pTexture, dDeltaTime, pFG_FlightPlan->waypoints()[iIndex], wpt, true);
 
             vPreviousPosition = vCurrentPosition;
         }
@@ -287,7 +287,7 @@ void CAirbusDMC::drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDe
     }
     else
     {
-        switch (wWaypoint.getType())
+        switch (wWaypoint.type())
         {
             case wtAirport:
                 pPainter->setPen(A320_Color_Purple);
@@ -304,5 +304,5 @@ void CAirbusDMC::drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDe
     }
 
     QRectF rText(dX2, dYC, rect.width() * 4.0, rect.height());
-    pPainter->drawText(rText, Qt::AlignLeft, wWaypoint.getName());
+    pPainter->drawText(rText, Qt::AlignLeft, wWaypoint.name());
 }

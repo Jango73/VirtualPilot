@@ -6,9 +6,12 @@
 
 // Application
 #include "components_a320_global.h"
+#include "CAirbusData.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
+
+#define WAYPOINT_TO 1
 
 class COMPONENTS_A320_EXPORT CAirbusFlightPlan
 {
@@ -29,20 +32,35 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    void setCurrentWaypoint (int value) { m_iCurrentWaypoint = value; }
+    void setCruiseAltitude_m(double dValue);
+
+    //!
+    void setCruiseSpeed_ms(double dValue);
 
     //-------------------------------------------------------------------------------------------------
     // Getters
     //-------------------------------------------------------------------------------------------------
 
     //!
-    QVector<CWaypoint>& getWaypoints() { return m_vWaypoints; }
+    QVector<CWaypoint>& waypoints() { return m_vWaypoints; }
 
     //!
-    int getCurrentWaypoint() const { return m_iCurrentWaypoint; }
+    CWaypoint& lastWaypoint() { return m_vWaypoints.last(); }
+
+    //!
+    double climbVerticalSpeed_ms() { return m_dClimbVerticalSpeed_ms; }
+
+    //!
+    double descentVerticalSpeed_ms() { return m_dDescentVerticalSpeed_ms; }
+
+    //!
+    double cruiseAltitude_m() { return m_dCruiseAltitude_m; }
+
+    //!
+    double cruiseSpeed_ms() { return m_dCruiseSpeed_ms; }
 
     //-------------------------------------------------------------------------------------------------
-    // Inherited methods
+    // Control methods
     //-------------------------------------------------------------------------------------------------
 
     //!
@@ -51,9 +69,8 @@ public:
     //!
     void nextWaypoint();
 
-    //-------------------------------------------------------------------------------------------------
-    // Control methods
-    //-------------------------------------------------------------------------------------------------
+    //!
+    void clearAllGeneratedWaypoints();
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -61,6 +78,9 @@ public:
 
 protected:
 
-    QVector<CWaypoint>	m_vWaypoints;
-    int					m_iCurrentWaypoint;
+    QVector<CWaypoint>      m_vWaypoints;
+    double                  m_dClimbVerticalSpeed_ms;
+    double                  m_dDescentVerticalSpeed_ms;
+    double                  m_dCruiseAltitude_m;
+    double                  m_dCruiseSpeed_ms;
 };
