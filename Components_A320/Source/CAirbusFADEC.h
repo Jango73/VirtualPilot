@@ -14,8 +14,11 @@
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
+// Forward declarations
 
 class C3DScene;
+
+//-------------------------------------------------------------------------------------------------
 
 class COMPONENTS_A320_EXPORT CAirbusFADEC : public CAirbusFlightComputer
 {
@@ -46,7 +49,7 @@ public:
     // Inherited methods
     //-------------------------------------------------------------------------------------------------
 
-    //!
+    //! Returns this object's class name
     virtual QString getClassName() const { return ClassName_CAirbusFADEC; }
 
     //! Loads this object's parameters

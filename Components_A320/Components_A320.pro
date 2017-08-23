@@ -51,7 +51,6 @@ HEADERS += \
     Source/CAirbusDataSupplier.h \
     Source/CAirbusDMC.h \
     Source/CAirbusELAC.h \
-    Source/CAirbusEngineGenerator.h \
     Source/CAirbusFAC.h \
     Source/CAirbusFADEC.h \
     Source/CAirbusFCU.h \
@@ -79,7 +78,6 @@ SOURCES += \
     Source/CAirbusDMC_PFD.cpp \
     Source/CAirbusDMC_SD.cpp \
     Source/CAirbusELAC.cpp \
-    Source/CAirbusEngineGenerator.cpp \
     Source/CAirbusFAC.cpp \
     Source/CAirbusFADEC.cpp \
     Source/CAirbusFCU.cpp \

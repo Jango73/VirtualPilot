@@ -44,8 +44,8 @@ void CAirbusFADEC::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
 
     CXMLNode xNode = xComponent.getNodeByTagName(ParamName_Engines);
 
-    m_rEngine1Target.setName(xNode.attributes()["Engine1Target"]);
-    m_rEngine2Target.setName(xNode.attributes()["Engine2Target"]);
+    m_rEngine1Target.setName(xNode.attributes()[ParamName_Engine1Target]);
+    m_rEngine2Target.setName(xNode.attributes()[ParamName_Engine2Target]);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -97,24 +97,16 @@ void CAirbusFADEC::work(double dDeltaTime)
         double dThrottle_2_norm = 0.0;
 
         if (pFG_CommandedThrust_norm != nullptr)
-        {
             dFG_CommandedThrust_norm = pFG_CommandedThrust_norm->getData().toDouble();
-        }
 
         if (pFCU_AutoThrust_Engaged != nullptr)
-        {
             bFCU_AutoThrust_Engaged = pFCU_AutoThrust_Engaged->getData().toBool();
-        }
 
         if (pThrottle_1_norm != nullptr)
-        {
             dThrottle_1_norm = pThrottle_1_norm->getData().toDouble();
-        }
 
         if (pThrottle_2_norm != nullptr)
-        {
             dThrottle_2_norm = pThrottle_2_norm->getData().toDouble();
-        }
 
         if (bFCU_AutoThrust_Engaged == true)
         {
