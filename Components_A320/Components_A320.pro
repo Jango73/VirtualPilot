@@ -58,6 +58,7 @@ HEADERS += \
     Source/CAirbusFlightComputer.h \
     Source/CAirbusFlightPlan.h \
     Source/CAirbusFMGC.h \
+    Source/CAirbusFWC.h \
     Source/CAirbusPitotPort.h \
     Source/CAirbusSEC.h \
     Source/CAirbusStaticPort.h \
@@ -85,6 +86,7 @@ SOURCES += \
     Source/CAirbusFlightComputer.cpp \
     Source/CAirbusFlightPlan.cpp \
     Source/CAirbusFMGC.cpp \
+    Source/CAirbusFWC.cpp \
     Source/CAirbusPitotPort.cpp \
     Source/CAirbusSEC.cpp \
     Source/CAirbusStaticPort.cpp \

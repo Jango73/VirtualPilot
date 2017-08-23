@@ -12,6 +12,8 @@
 
 class C3DScene;
 
+//! Flight Augmentation Computer
+//! Control surface driver
 class COMPONENTS_A320_EXPORT CAirbusFAC : public CAirbusFlightComputer
 {
 public:
