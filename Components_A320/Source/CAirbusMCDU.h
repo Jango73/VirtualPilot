@@ -20,6 +20,26 @@ class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
 
+enum EMCDUPage
+{
+    mpMenu,
+    mpInit,
+    mpInitB,
+    mpRouteSelection,
+    mpClimbWind,
+    mpHistoryWind,
+    mpCruiseWind,
+    mpDescentWind,
+    mpFuelPred,
+    mpFlightPlanA,
+    mpFlightPlanB,
+    mpLateralRevision,
+    mpDeparture
+};
+
+#define MCDU_W  24
+#define MCDU_H  14
+
 //! Multipurpose Control and Display Unit
 //! HMI for FMGC
 class COMPONENTS_A320_EXPORT CAirbusMCDU : public CAirbusFlightComputer
@@ -64,14 +84,50 @@ public:
     // Control methods
     //-------------------------------------------------------------------------------------------------
 
+    //!
+    void printAt(QPoint pWhere, const QString& sText, QColor cColor, bool bLarge = false);
+
+    //!
+    void printCenteredAt(QPoint pWhere, const QString& sText, QColor cColor, bool bLarge = false);
+
+    //!
+    void printTitle(const QString& sText);
+
+    //!
+    void printData(int iLine, bool bLeft, const QString& sText);
+
+    //!
+    void printCurrentPage();
+
+    //!
+    void printPage_Menu();
+
+    //-------------------------------------------------------------------------------------------------
+    // Inner classes
+    //-------------------------------------------------------------------------------------------------
+
+    class MCDUChar
+    {
+    public:
+
+        MCDUChar()
+            : m_cChar(' ')
+            , m_cColor(A320_Color_Black)
+            , m_bLarge(false)
+        {
+        }
+
+        QChar   m_cChar;
+        QColor  m_cColor;
+        bool    m_bLarge;
+    };
+
     //-------------------------------------------------------------------------------------------------
     // Properties
     //-------------------------------------------------------------------------------------------------
 
 protected:
 
-    QFont   m_fMainFont;
-    QPen    m_pGreenBold;
-    QPen    m_pYellowBold;
-    QPen    m_pWhiteDashed;
+    EMCDUPage   m_ePage;
+    MCDUChar    m_aScreen[MCDU_W][MCDU_H];
 };

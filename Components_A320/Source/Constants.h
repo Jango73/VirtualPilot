@@ -79,6 +79,7 @@
 //-------------------------------------------------------------------------------------------------
 // MCDU colors
 
+#define A320_Color_Black                    QColor(  0,   0,   0)
 #define A320_Color_White                    QColor(255, 255, 255)
 #define A320_Color_Red                      QColor(255,   0,   0)
 #define A320_Color_Green                    QColor(  0, 255,   0)
