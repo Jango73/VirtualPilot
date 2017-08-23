@@ -12,6 +12,7 @@
 #define ClassName_CAirbusFlightComputer     "CAirbusFlightComputer"
 #define ClassName_CAirbusADIRU              "CAirbusADIRU"
 #define ClassName_CAirbusDMC                "CAirbusDMC"
+#define ClassName_CAirbusMCDU               "CAirbusMCDU"
 #define ClassName_CAirbusELAC               "CAirbusELAC"
 #define ClassName_CAirbusFAC                "CAirbusFAC"
 #define ClassName_CAirbusFADEC              "CAirbusFADEC"

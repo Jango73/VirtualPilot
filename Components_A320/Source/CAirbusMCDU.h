@@ -9,18 +9,20 @@
 
 // Application
 #include "components_a320_global.h"
-#include "Constants.h"
 #include "CAirbusFlightComputer.h"
 #include "CAirbusFlightPlan.h"
+#include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
+// Forward declarations
 
 class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
 
-//! Data Monitoring Computer
-class COMPONENTS_A320_EXPORT CAirbusDMC : public CAirbusFlightComputer
+//! Multipurpose Control and Display Unit
+//! HMI for FMGC
+class COMPONENTS_A320_EXPORT CAirbusMCDU : public CAirbusFlightComputer
 {
 public:
 
@@ -32,10 +34,10 @@ public:
     static CComponent* instanciator(C3DScene* pScene);
 
     //!
-    CAirbusDMC(C3DScene* pScene);
+    CAirbusMCDU(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusDMC();
+    virtual ~CAirbusMCDU();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -50,46 +52,13 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusDMC; }
+    virtual QString getClassName() const { return ClassName_CAirbusMCDU; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //!
     virtual void updateTexture(CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void updateTexture_PFD(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void updateTexture_ND(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void updateTexture_EWD(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void updateTexture_SD(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void drawArtificialHorizon(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //!
-    void drawRosace(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc);
-
-    //!
-    void drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CWaypoint& wWaypoint, const QRectF& rect, bool bIsFlight);
-
-    //!
-    void drawEngineN1Gauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, double dN1);
 
     //-------------------------------------------------------------------------------------------------
     // Control methods
@@ -101,20 +70,8 @@ public:
 
 protected:
 
-    QRectF                      m_rVelocityBar;
-    QRectF                      m_rArtificialHorizon;
-    QRectF                      m_rAltitudeBar;
-    QRectF                      m_rFMA;
-    CInterpolator<double>       m_iVerticalSpeedMarker;
-
-    QRectF                      m_rRosace;
-
-    QRectF                      m_rEWD_Engines;
-    QRectF                      m_rEWD_Flaps;
-    QRectF                      m_rEWD_Checklist;
-
-    QFont                       m_fMainFont;
-    QPen                        m_pGreenBold;
-    QPen                        m_pYellowBold;
-    QPen                        m_pWhiteDashed;
+    QFont   m_fMainFont;
+    QPen    m_pGreenBold;
+    QPen    m_pYellowBold;
+    QPen    m_pWhiteDashed;
 };

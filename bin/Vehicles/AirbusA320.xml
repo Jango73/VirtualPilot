@@ -7,6 +7,7 @@
     <DynamicTexture Name="DynTex_ND_CAPT" Updater=".DMC_1"/>
     <DynamicTexture Name="DynTex_EWD" Updater=".DMC_3"/>
     <DynamicTexture Name="DynTex_SD" Updater=".DMC_3"/>
+    <DynamicTexture Name="DynTex_MCDU_CAPT" Updater=".MCDU_1"/>
     <Physics MassKG="50000.0" Friction="0.1" Drag="0.0001" AngularDrag="0.75"/>
     <CenterOfMass x="0.0" y="0.0" z="4.0"/>
 
@@ -280,6 +281,25 @@
         <DataInput Name=".ADIRU_3"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
+    </Component>
+
+    <!-- MCDU - Multipurpose Control and Display Unit -->
+    <Component Name="CONT_MCDU_1" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="MCDU_1" Class="CAirbusMCDU">
+        <PowerInput Name=".CONT_MCDU_1"/>
+        <DataInput Name=".FMGC_1"/>
+    </Component>
+
+    <Component Name="CONT_MCDU_2" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="MCDU_2" Class="CAirbusMCDU">
+        <PowerInput Name=".CONT_MCDU_2"/>
+        <DataInput Name=".FMGC_2"/>
     </Component>
 
     <!-- FAC - Flight Augmentation Computer -->
