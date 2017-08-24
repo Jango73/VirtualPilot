@@ -9,10 +9,11 @@ Open .pro file in Qt Creator and build **without** shadow build option.
 
 ## Things it does
 
-* Simulate basic flight dynamics (not real aerodynamics but something that looks like it)
+* Basic flight dynamics (not real aerodynamics but something that looks like it)
 * Load procedural terrain
-* Load an A320 cockpit
-* Simulate the electrical system
-* Simulate part of the PFD, ND and SD displays
-* Follow a basic flight plan (some test waypoints)
-* Fly-by-wire
+* Load an A320 with 3D cockpit
+    * Electrical system
+    * FMGC
+    * PFD, ND and MCDU displays
+    * Basic flight plan (some test waypoints)
+    * Fly-by-wire
