@@ -214,6 +214,7 @@ void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
 
 void CAirbusFMGC::work_FG(double dDeltaTime)
 {
+    CAirbusData* pFCU_Altitude_f = getData(adFCU_Altitude_f);
     CAirbusData* pFCU_Heading_deg = getData(adFCU_Heading_deg);
     CAirbusData* pGeoLoc_Latitude_deg = getData(adGeoLoc_Latitude_deg);
     CAirbusData* pGeoLoc_Longitude_deg = getData(adGeoLoc_Longitude_deg);
@@ -227,6 +228,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     CAirbusData* pRoll_deg = getData(adInertial_Roll_deg);
     CAirbusData* pPitch_deg = getData(adInertial_Pitch_deg);
 
+    double dFCU_Altitude_f = 0.0;
     double dFCU_Heading_deg = 0.0;
     double dGeoLoc_Latitude_deg = 0.0;
     double dGeoLoc_Longitude_deg = 0.0;
@@ -239,6 +241,9 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     double dIndicatedAcceleration_ms = 0.0;
     double dAircraftRoll_deg = 0.0;
     double dAircraftPitch_deg = 0.0;
+
+    if (pFCU_Altitude_f != nullptr)
+        dFCU_Altitude_f = pFCU_Altitude_f->getData().toDouble();
 
     if (pFCU_Heading_deg != nullptr)
         dFCU_Heading_deg = pFCU_Heading_deg->getData().toDouble();
@@ -286,44 +291,41 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     // Compute auto heading
 
-    if (m_eLateralMode == almNav)
+    if (m_eLateralMode == almNav && m_tFlightPlan.waypoints().count() > 1)
     {
-        if (m_tFlightPlan.waypoints().count() > 1)
+        // CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
+
+        // Get two points of current segment
+        CGeoloc gSegmentStart = m_tFlightPlan.waypoints()[WAYPOINT_TO - 1].geoloc();
+        CGeoloc gSegmentEnd = m_tFlightPlan.waypoints()[WAYPOINT_TO + 0].geoloc();
+
+        CVector3 vSegmentStart = gSegmentStart.toVector3(gGeoloc);
+        CVector3 vSegmentEnd = gSegmentEnd.toVector3(gGeoloc);
+
+        // Compute distance to waypoint
+        double dDistanceToSegmentEnd = vSegmentEnd.magnitude();
+
+        // Compute angle between start point and end point
+        double dSegmentStartSegmentEndAngle_rad = (vSegmentEnd - vSegmentStart).eulerYAngle();
+        double dAircraftSegmentEndAngle_rad = vSegmentEnd.eulerYAngle();
+
+        // Create a rotation matrix using the inverse angle between start and end points
+        CMatrix4 mSegmentAngle = CMatrix4::makeRotation(CVector3(0.0, -dSegmentStartSegmentEndAngle_rad, 0.0));
+
+        // Rotate the two segment points
+        vSegmentStart = mSegmentAngle * vSegmentStart;
+        vSegmentEnd = mSegmentAngle * vSegmentEnd;
+
+        // Compute deviation
+        double dDeviation_rad = vSegmentEnd.eulerYAngle();
+        double dHeading_rad = dAircraftSegmentEndAngle_rad + dDeviation_rad * 2.0;
+
+        m_dCommandedHeading_deg = Angles::toDeg(dHeading_rad);
+
+        // Check if aircraft has reached waypoint
+        if (dDistanceToSegmentEnd < dGeoLoc_GroundSpeed_ms * 20.0)
         {
-            // CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
-
-            // Get two points of current segment
-            CGeoloc gSegmentStart = m_tFlightPlan.waypoints()[WAYPOINT_TO - 1].geoloc();
-            CGeoloc gSegmentEnd = m_tFlightPlan.waypoints()[WAYPOINT_TO + 0].geoloc();
-
-            CVector3 vSegmentStart = gSegmentStart.toVector3(gGeoloc);
-            CVector3 vSegmentEnd = gSegmentEnd.toVector3(gGeoloc);
-
-            // Compute distance to waypoint
-            double dDistanceToSegmentEnd = vSegmentEnd.magnitude();
-
-            // Compute angle between start point and end point
-            double dSegmentStartSegmentEndAngle_rad = (vSegmentEnd - vSegmentStart).eulerYAngle();
-            double dAircraftSegmentEndAngle_rad = vSegmentEnd.eulerYAngle();
-
-            // Create a rotation matrix using the inverse angle between start and end points
-            CMatrix4 mSegmentAngle = CMatrix4::makeRotation(CVector3(0.0, -dSegmentStartSegmentEndAngle_rad, 0.0));
-
-            // Rotate the two segment points
-            vSegmentStart = mSegmentAngle * vSegmentStart;
-            vSegmentEnd = mSegmentAngle * vSegmentEnd;
-
-            // Compute deviation
-            double dDeviation_rad = vSegmentEnd.eulerYAngle();
-            double dHeading_rad = dAircraftSegmentEndAngle_rad + dDeviation_rad * 2.0;
-
-            m_dCommandedHeading_deg = Angles::toDeg(dHeading_rad);
-
-            // Check if aircraft has reached waypoint
-            if (dDistanceToSegmentEnd < dGeoLoc_GroundSpeed_ms * 20.0)
-            {
-                m_tFlightPlan.nextWaypoint();
-            }
+            m_tFlightPlan.nextWaypoint();
         }
     }
     else
@@ -344,7 +346,18 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     // Compute altitude command
 
-    m_dCommandedAltitude_m = 33000.0 * FAC_FEET_TO_METERS;
+    if (
+            m_eLateralMode == avmNav &&
+            m_tFlightPlan.waypoints().count() > 1 &&
+            m_tFlightPlan.waypoints()[WAYPOINT_TO].selectedAltitude_m() != 0.0
+            )
+    {
+        m_dCommandedAltitude_m = m_tFlightPlan.waypoints()[WAYPOINT_TO].selectedAltitude_m();
+    }
+    else
+    {
+        m_dCommandedAltitude_m = dFCU_Altitude_f;
+    }
 
     m_dCommandedVerticalSpeed_ms = (m_dCommandedAltitude_m - dAircraftAltitude_m) * 0.25;
     m_dCommandedVerticalSpeed_ms = Math::Angles::clipDouble(m_dCommandedVerticalSpeed_ms, -8.0, 8.0);

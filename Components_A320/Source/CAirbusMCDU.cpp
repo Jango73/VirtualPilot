@@ -147,12 +147,25 @@ void CAirbusMCDU::handleEvent(CQ3DEvent* event)
 
 void CAirbusMCDU::handleKey(EMCDUKey eKey)
 {
-    if (eKey >= mk0 && eKey <= mkZ)
+    if (eKey >= mkSpace && eKey <= mkZ)
     {
         if (m_sScratchPad.count() < MCDU_W)
         {
             m_sScratchPad += QString(QChar(eKey));
         }
+    }
+    else if (eKey >= mk1L && eKey <= mk6R)
+    {
+        switch (m_ePage)
+        {
+        case mpMenu: handleKey_Menu(eKey); break;
+//        case mpInitA: printPage_InitA(); break;
+//        case mpInitB: printPage_InitB(); break;
+//        case mpRouteSelection: printPage_RouteSelection(); break;
+        }
+    }
+    else if (eKey == mkMenu)
+    {
     }
 
     m_bNeedScreenRefresh = true;
@@ -258,6 +271,12 @@ void CAirbusMCDU::printPage_Menu()
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusMCDU::handleKey_Menu(EMCDUKey eKey)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusMCDU::printPage_InitA()
 {
     printTitle("INIT");
@@ -282,9 +301,21 @@ void CAirbusMCDU::printPage_InitA()
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusMCDU::handleKey_InitA(EMCDUKey eKey)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusMCDU::printPage_InitB()
 {
     printTitle("INIT B");
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::handleKey_InitB(EMCDUKey eKey)
+{
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -75,4 +75,5 @@ protected:
     bool	m_bAutoThrust_Engaged;
 
     double	m_dSelectedHeading;
+    double  m_dSelectedAltitude;
 };

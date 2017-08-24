@@ -25,6 +25,7 @@ CAirbusFCU::CAirbusFCU(C3DScene* pScene)
     , m_bAutoPilot2_Engaged(false)
     , m_bAutoThrust_Engaged(false)
     , m_dSelectedHeading(0.0)
+    , m_dSelectedAltitude(33000.0 * FAC_FEET_TO_METERS)
 {
     LOG_DEBUG("CAirbusFCU::CAirbusFCU()");
 }

@@ -41,14 +41,19 @@ enum EMCDUPage
 
 enum EMCDUKey
 {
-    mk1L, mk2L, mk3L, mk4L, mk5L, mk6L,
-    mk1R, mk2R, mk3R, mk4R, mk5R, mk6R,
-    mkSlash = 47,
+    mkSpace = 20, mkNot, mkQuote, mkHash, mkDollar, mkPercent, mkAnd,
+    mkSingleQuote, mkOpenParent, mkCloseParen, mkStar, mkPlus, mkComma,
+    mkMinus, mkDot, mkSlash,
     mk0 = 48, mk1, mk2, mk3, mk4, mk5, mk6, mk7, mk8, mk9,
     mkA = 65, mkB, mkC, mkD, mkE, mkF, mkG, mkH, mkI, mkJ, mkK, mkL, mkM,
     mkN, mkO, mkP, mkQ, mkR, mkS, mkT, mkU, mkV, mkW, mkX, mkY, mkZ,
+    mk1L = 300, mk2L, mk3L, mk4L, mk5L, mk6L,
+    mk1R, mk2R, mk3R, mk4R, mk5R, mk6R,
     mkUp, mkDown, mkLeft, mkRight,
-    mkMenu
+    mkDep, mkProg, mkPerf, mkInit, mkData,
+    mkFPln, mkRadNav, mkFuelPred, mkSecFPln, mkATCCOM, mkMenu,
+    mkAirport,
+    mkOverFly, mkClear
 };
 
 //-------------------------------------------------------------------------------------------------
@@ -131,8 +136,14 @@ public:
 
     //!
     void printPage_Menu();
+    void handleKey_Menu(EMCDUKey eKey);
+
     void printPage_InitA();
+    void handleKey_InitA(EMCDUKey eKey);
+
     void printPage_InitB();
+    void handleKey_InitB(EMCDUKey eKey);
+
     void printPage_RouteSelection();
 
     //-------------------------------------------------------------------------------------------------
