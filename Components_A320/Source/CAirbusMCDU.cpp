@@ -100,6 +100,12 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusMCDU::handleEvent(CQ3DEvent* event)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusMCDU::printAt(QPoint pWhere, const QString& sText, QColor cColor, bool bLarge)
 {
     for (int index = 0; index < sText.length(); index++)
@@ -134,6 +140,20 @@ void CAirbusMCDU::printTitle(const QString& sText)
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusMCDU::printLabel(int iLine, bool bLeft, const QString& sText)
+{
+    QPoint pWhere(0, 1 + iLine * 2);
+
+    if (bLeft == false)
+    {
+        pWhere.setX(MCDU_W - sText.length());
+    }
+
+    printAt(pWhere, sText, A320_Color_White, false);
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusMCDU::printData(int iLine, bool bLeft, const QString& sText)
 {
     QPoint pWhere(0, 2 + iLine * 2);
@@ -152,7 +172,10 @@ void CAirbusMCDU::printCurrentPage()
 {
     switch (m_ePage)
     {
-        case mpMenu: printPage_Menu(); break;
+    case mpMenu: printPage_Menu(); break;
+    case mpInitA: printPage_InitA(); break;
+    case mpInitB: printPage_InitB(); break;
+    case mpRouteSelection: printPage_RouteSelection(); break;
     }
 }
 
@@ -161,9 +184,55 @@ void CAirbusMCDU::printCurrentPage()
 void CAirbusMCDU::printPage_Menu()
 {
     printTitle("MCDU MENU");
+
+    // Left data
     printData(0, true, "<FMGC");
     printData(1, true, "<DATA LINK");
     printData(2, true, "<AIDS");
     printData(3, true, "<CFDS [REQ]");
+
+    // Right data
     printData(5, false, "RETURN>");
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::printPage_InitA()
+{
+    printTitle("INIT");
+
+    // Left labels
+    printLabel(0, true, "CO RTE");
+    printLabel(1, true, "ALTN/CO RTE");
+    printLabel(2, true, "FLT NBR");
+    printLabel(3, true, "LAT");
+    printLabel(4, true, "COST INDEX");
+    printLabel(5, true, "CRZ FL/TEMP");
+
+    // Right labels
+    printLabel(0, false, "FROM/TO  ");
+    printLabel(1, false, "INIT ");
+    printLabel(3, false, "LONG");
+    printLabel(5, false, "TROPO");
+
+    // Right data
+    printData(4, false, "WIND>");
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::printPage_InitB()
+{
+    printTitle("INIT B");
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::printPage_RouteSelection()
+{
+    // Left data
+    printData(5, true, "<RETURN");
+
+    // Right data
+    printData(5, false, "INSERT*");
 }

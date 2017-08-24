@@ -14,6 +14,7 @@
 #include "Constants.h"
 #include "CAirbusDataSupplier.h"
 #include "CAirbusFCU.h"
+#include "CAirbusMCDU.h"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -71,16 +72,16 @@ public:
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //!
-    virtual void keyPressEvent(QKeyEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 
     //!
-    virtual void keyReleaseEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
     //!
-    virtual void wheelEvent(QWheelEvent *event);
+    virtual void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
 
     //!
-    virtual void q3dEvent(CQ3DEvent* event);
+    virtual void q3dEvent(CQ3DEvent* event) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -88,5 +89,10 @@ public:
 
 protected:
 
-    CComponentReference<CAirbusFCU>		m_rFCU;
+    CComponentReference<CAirbusFCU>     m_rFCU;
+    CComponentReference<CAirbusMCDU>    m_rMCDU_CAPT;
+    CComponentReference<CAirbusMCDU>    m_rMCDU_FO;
+
+    QStringList                         m_lEVENTS_MCDU_CAPT;
+    QStringList                         m_lEVENTS_MCDU_FO;
 };

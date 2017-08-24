@@ -6,6 +6,7 @@
 
 // Quick3D
 #include "CGeoloc.h"
+#include "CController.h"
 
 // Application
 #include "components_a320_global.h"
@@ -19,11 +20,12 @@
 class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
+// Enumerations
 
 enum EMCDUPage
 {
     mpMenu,
-    mpInit,
+    mpInitA,
     mpInitB,
     mpRouteSelection,
     mpClimbWind,
@@ -36,6 +38,10 @@ enum EMCDUPage
     mpLateralRevision,
     mpDeparture
 };
+
+//-------------------------------------------------------------------------------------------------
+
+#define CHAR_PH '\219'
 
 #define MCDU_W  24
 #define MCDU_H  14
@@ -85,6 +91,9 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
+    void handleEvent(CQ3DEvent* event);
+
+    //!
     void printAt(QPoint pWhere, const QString& sText, QColor cColor, bool bLarge = false);
 
     //!
@@ -94,6 +103,9 @@ public:
     void printTitle(const QString& sText);
 
     //!
+    void printLabel(int iLine, bool bLeft, const QString& sText);
+
+    //!
     void printData(int iLine, bool bLeft, const QString& sText);
 
     //!
@@ -101,6 +113,9 @@ public:
 
     //!
     void printPage_Menu();
+    void printPage_InitA();
+    void printPage_InitB();
+    void printPage_RouteSelection();
 
     //-------------------------------------------------------------------------------------------------
     // Inner classes
