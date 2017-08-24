@@ -43,6 +43,7 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_CAPT_4R] = mk4R;
     m_mEventToKey[EventName_MCDU_CAPT_5R] = mk5R;
     m_mEventToKey[EventName_MCDU_CAPT_6R] = mk6R;
+    m_mEventToKey[EventName_MCDU_CAPT_INIT] = mkInit;
     m_mEventToKey[EventName_MCDU_CAPT_MENU] = mkMenu;
     m_mEventToKey[EventName_MCDU_CAPT_0] = mk0;
     m_mEventToKey[EventName_MCDU_CAPT_1] = mk1;
@@ -67,6 +68,7 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_FO_4R] = mk4R;
     m_mEventToKey[EventName_MCDU_FO_5R] = mk5R;
     m_mEventToKey[EventName_MCDU_FO_6R] = mk6R;
+    m_mEventToKey[EventName_MCDU_FO_INIT] = mkInit;
     m_mEventToKey[EventName_MCDU_FO_MENU] = mkMenu;
     m_mEventToKey[EventName_MCDU_FO_0] = mk0;
     m_mEventToKey[EventName_MCDU_FO_1] = mk1;
@@ -116,28 +118,27 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
                 double xCellSize = W / (double) MCDU_W;
                 double yCellSize = H / (double) MCDU_H;
 
-                int iFontLargeSize = H / MCDU_H;
-                int iFontSmallSize = (iFontLargeSize * 5) / 4;
+                int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
+                int iFontSmallSize = (iFontLargeSize * 4) / 5;
 
                 QFont fFontLarge = QFont("Arial", iFontLargeSize);
                 QFont fFontSmall = QFont("Arial", iFontSmallSize);
 
                 painter.resetTransform();
 
-                // Set main font
-                painter.setPen(A320_Color_White);
-
                 printCurrentPage();
                 printScratchPad();
 
                 for (int y = 0; y < MCDU_H; y++)
                 {
-                    for (int x = 0; x < MCDU_H; x++)
+                    for (int x = 0; x < MCDU_W; x++)
                     {
                         if (m_aScreen[x][y].m_bLarge)
                             painter.setFont(fFontLarge);
                         else
                             painter.setFont(fFontSmall);
+
+                        painter.setPen(m_aScreen[x][y].m_cColor);
 
                         int screenX = x * xCellSize;
                         int screenY = y * yCellSize;
@@ -157,7 +158,7 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
 
 void CAirbusMCDU::handleEvent(CQ3DEvent* event)
 {
-    if (m_mEventToKey.contains(event->getName()))
+    if (m_mEventToKey.contains(event->getName()) && event->getAction() == CQ3DEvent::Press)
     {
         handleKey(m_mEventToKey[event->getName()]);
     }
@@ -250,7 +251,7 @@ void CAirbusMCDU::printLabel(int iLine, bool bLeft, const QString& sText)
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusMCDU::printData(int iLine, bool bLeft, const QString& sText)
+void CAirbusMCDU::printData(int iLine, bool bLeft, const QString& sText, QColor cColor)
 {
     QPoint pWhere(0, 2 + iLine * 2);
 
@@ -259,7 +260,7 @@ void CAirbusMCDU::printData(int iLine, bool bLeft, const QString& sText)
         pWhere.setX(MCDU_W - sText.length());
     }
 
-    printAt(pWhere, sText, A320_Color_White, true);
+    printAt(pWhere, sText, cColor, true);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -292,7 +293,7 @@ void CAirbusMCDU::printPage_Menu()
     printData(0, true, "<FMGC");
     printData(1, true, "<DATA LINK");
     printData(2, true, "<AIDS");
-    printData(3, true, "<CFDS [REQ]");
+    printData(3, true, "<CFDS");
 
     // Right data
     printData(5, false, "RETURN>");
@@ -326,16 +327,18 @@ void CAirbusMCDU::printPage_InitA()
 
     // Get data
     QString sFM_CompanyRoute = GETDATA_STRING(adFM_CompanyRoute);
+    QString sFM_FlightNumber = GETDATA_STRING(adFM_FlightNumber);
     QString sFM_ICAOFrom = GETDATA_STRING(adFM_ICAOFrom);
     QString sFM_ICAOTo = GETDATA_STRING(adFM_ICAOTo);
 
     QString sFromTo = QString("%1/%2").arg(sFM_ICAOFrom).arg(sFM_ICAOTo);
 
     // Left data
-    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : FORMAT_COMPANY_ROUTE);
+    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : FORMAT_COMPANY_ROUTE, A320_Color_Blue);
+    printData(2, true, sFM_FlightNumber.isEmpty() == false ? sFM_FlightNumber : FORMAT_COMPANY_ROUTE, A320_Color_Blue);
 
     // Right data
-    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : FORMAT_ICAO_FROM_TO);
+    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : FORMAT_ICAO_FROM_TO, A320_Color_Blue);
     printData(1, false, "REQUEST*");
     printData(2, false, "ALIGN IRS>");
     printData(4, false, "WIND>");

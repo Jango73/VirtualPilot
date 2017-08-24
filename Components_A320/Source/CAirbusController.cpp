@@ -19,6 +19,7 @@ CComponent* CAirbusController::instanciator(C3DScene* pScene)
 CAirbusController::CAirbusController(C3DScene* pScene)
     : CAircraftController(pScene)
 {
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_INIT;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_MENU;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1L;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2L;
@@ -33,6 +34,7 @@ CAirbusController::CAirbusController(C3DScene* pScene)
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5R;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6R;
 
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_INIT;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_MENU;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1L;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2L;
@@ -191,6 +193,18 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             break;
         case Qt::Key_PageDown:
             generateQ3DEvent(CQ3DEvent(EventName_THR_THROTTLE_DEC, CQ3DEvent::Press));
+            break;
+        case Qt::Key_I:
+            if (event->modifiers() & Qt::Key_Control)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_INIT, CQ3DEvent::Press));
+            }
+            break;
+        case Qt::Key_M:
+            if (event->modifiers() & Qt::Key_Control)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_MENU, CQ3DEvent::Press));
+            }
             break;
     }
 }

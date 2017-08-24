@@ -72,6 +72,9 @@ public:
     QString companyRoute() const { return m_sCompanyRoute; }
 
     //!
+    QString flightNumber() const { return m_sFlightNumber; }
+
+    //!
     QString ICAOFrom() const { return m_sICAOFrom; }
 
     //!
@@ -102,6 +105,7 @@ protected:
     double                  m_dCruiseAltitude_m;
     double                  m_dCruiseSpeed_ms;
     QString                 m_sCompanyRoute;
+    QString                 m_sFlightNumber;
     QString                 m_sICAOFrom;
     QString                 m_sICAOTo;
 };

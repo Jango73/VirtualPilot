@@ -100,6 +100,7 @@ enum EAirbusData
     adFG_FlightPlan_ptr,
 
     adFM_CompanyRoute,
+    adFM_FlightNumber,
     adFM_ICAOFrom,
     adFM_ICAOTo,
 

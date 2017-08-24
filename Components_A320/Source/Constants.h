@@ -97,6 +97,7 @@
 #define EventName_MCDU_CAPT_5R              "MCDU_CAPT_5R"
 #define EventName_MCDU_CAPT_6R              "MCDU_CAPT_6R"
 
+#define EventName_MCDU_CAPT_INIT            "MCDU_CAPT_INIT"
 #define EventName_MCDU_CAPT_MENU            "MCDU_CAPT_MENU"
 
 #define EventName_MCDU_CAPT_0               "MCDU_CAPT_0"
@@ -150,6 +151,7 @@
 #define EventName_MCDU_FO_5R                "MCDU_FO_5R"
 #define EventName_MCDU_FO_6R                "MCDU_FO_6R"
 
+#define EventName_MCDU_FO_INIT              "MCDU_FO_INIT"
 #define EventName_MCDU_FO_MENU              "MCDU_FO_MENU"
 
 #define EventName_MCDU_FO_0                 "MCDU_FO_0"
@@ -170,7 +172,7 @@
 #define A320_Color_White                    QColor(255, 255, 255)
 #define A320_Color_Red                      QColor(255,   0,   0)
 #define A320_Color_Green                    QColor(  0, 255,   0)
-#define A320_Color_Blue                     QColor(  0, 128, 255)
+#define A320_Color_Blue                     QColor(  0, 200, 255)
 #define A320_Color_Yellow                   QColor(255, 255,   0)
 #define A320_Color_Amber                    QColor(255, 128,   0)
 #define A320_Color_Purple                   QColor(255,   0, 128)

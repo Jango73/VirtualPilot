@@ -109,6 +109,7 @@ void CAirbusFMGC::work_FM(double dDeltaTime)
     // Send flight plan
     pushData(CAirbusData(m_sName, adFG_FlightPlan_ptr, (quint64) &m_tFlightPlan));
     pushData(CAirbusData(m_sName, adFM_CompanyRoute, m_tFlightPlan.companyRoute()));
+    pushData(CAirbusData(m_sName, adFM_FlightNumber, m_tFlightPlan.flightNumber()));
     pushData(CAirbusData(m_sName, adFM_ICAOFrom, m_tFlightPlan.ICAOFrom()));
     pushData(CAirbusData(m_sName, adFM_ICAOTo, m_tFlightPlan.ICAOTo()));
 }

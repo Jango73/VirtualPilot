@@ -18,6 +18,7 @@ CAirbusFlightPlan::CAirbusFlightPlan()
     , m_dCruiseAltitude_m(33000.0 * FAC_FEET_TO_METERS)
     , m_dCruiseSpeed_ms(250.0 * FAC_KNOTS_TO_MS)
     , m_sCompanyRoute("LFPG-EBBR-1")
+    , m_sFlightNumber("ARB001")
     , m_sICAOFrom("LFPG")
     , m_sICAOTo("EBBR")
 {

@@ -50,7 +50,7 @@ enum EMCDUKey
     mk1L = 300, mk2L, mk3L, mk4L, mk5L, mk6L,
     mk1R, mk2R, mk3R, mk4R, mk5R, mk6R,
     mkUp, mkDown, mkLeft, mkRight,
-    mkDep, mkProg, mkPerf, mkInit, mkData,
+    mkDir, mkProg, mkPerf, mkInit, mkData,
     mkFPln, mkRadNav, mkFuelPred, mkSecFPln, mkATCCOM, mkMenu,
     mkAirport,
     mkOverFly, mkClear
@@ -131,7 +131,7 @@ public:
     void printLabel(int iLine, bool bLeft, const QString& sText);
 
     //!
-    void printData(int iLine, bool bLeft, const QString& sText);
+    void printData(int iLine, bool bLeft, const QString& sText, QColor cColor = A320_Color_White);
 
     //!
     void printCurrentPage();
