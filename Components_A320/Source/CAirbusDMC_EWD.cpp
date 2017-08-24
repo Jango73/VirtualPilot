@@ -19,21 +19,8 @@ using namespace Math;
 
 void CAirbusDMC::updateTexture_EWD(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
-    CAirbusData* pFADEC_Engine1_N1_norm = getData(adFADEC_Engine1_N1_norm);
-    CAirbusData* pFADEC_Engine2_N1_norm = getData(adFADEC_Engine2_N1_norm);
-
-    double dFADEC_Engine1_N1_norm = 0.0;
-    double dFADEC_Engine2_N1_norm = 0.0;
-
-    if (pFADEC_Engine1_N1_norm != nullptr)
-    {
-        dFADEC_Engine1_N1_norm = pFADEC_Engine1_N1_norm->getData().toDouble();
-    }
-
-    if (pFADEC_Engine2_N1_norm != nullptr)
-    {
-        dFADEC_Engine2_N1_norm = pFADEC_Engine2_N1_norm->getData().toDouble();
-    }
+    double dFADEC_Engine1_N1_norm = GETDATA_DOUBLE(adFADEC_Engine1_N1_norm);
+    double dFADEC_Engine2_N1_norm = GETDATA_DOUBLE(adFADEC_Engine2_N1_norm);
 
     // Compute coordinates
     double X = m_rEWD_Engines.left() * pTexture->image().width();

@@ -37,6 +37,12 @@
 
 //-------------------------------------------------------------------------------------------------
 
+#define GETDATA_BOOL(d)     (getData(d) != nullptr ? getData(d)->getData().toBool() : false)
+#define GETDATA_INT(d)      (getData(d) != nullptr ? getData(d)->getData().toInt() : 0)
+#define GETDATA_DOUBLE(d)   (getData(d) != nullptr ? getData(d)->getData().toDouble() : 0.0)
+
+//-------------------------------------------------------------------------------------------------
+
 enum EAirbusData
 {
     adNone,

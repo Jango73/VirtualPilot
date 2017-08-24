@@ -27,44 +27,14 @@ void CAirbusDMC::updateTexture_ND(QPainter* pPainter, CTexture* pTexture, double
 void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc)
 {
     // Get flight data
-    CAirbusData* pGeoLoc_Latitude_deg = getData(adGeoLoc_Latitude_deg);
-    CAirbusData* pGeoLoc_Longitude_deg = getData(adGeoLoc_Longitude_deg);
-    CAirbusData* pGeoLoc_TrueHeading_deg = getData(adGeoLoc_TrueHeading_deg);
-    CAirbusData* pGeoLoc_TrueTrack_deg = getData(adGeoLoc_TrueTrack_deg);
-    CAirbusData* pFCU_Heading_deg = getData(adFCU_Heading_deg);
     CAirbusData* pFG_FlightPlan_ptr = getData(adFG_FlightPlan_ptr);
 
-    double dGeoLoc_Latitude_deg = 0.0;
-    double dGeoLoc_Longitude_deg = 0.0;
-    double dGeoLoc_TrueHeading_deg = 0.0;
-    double dGeoLoc_TrueTrack_deg = 0.0;
-    double dFCU_Heading_deg = 0.0;
+    double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);
+    double dGeoLoc_Longitude_deg = GETDATA_DOUBLE(adGeoLoc_Longitude_deg);
+    double dGeoLoc_TrueHeading_deg = GETDATA_DOUBLE(adGeoLoc_TrueHeading_deg);
+    double dGeoLoc_TrueTrack_deg = GETDATA_DOUBLE(adGeoLoc_TrueTrack_deg);
+    double dFCU_Heading_deg = GETDATA_DOUBLE(adFCU_Heading_deg);
     CAirbusFlightPlan* pFG_FlightPlan = nullptr;
-
-    if (pGeoLoc_Latitude_deg != nullptr)
-    {
-        dGeoLoc_Latitude_deg = pGeoLoc_Latitude_deg->getData().toDouble();
-    }
-
-    if (pGeoLoc_Longitude_deg != nullptr)
-    {
-        dGeoLoc_Longitude_deg = pGeoLoc_Longitude_deg->getData().toDouble();
-    }
-
-    if (pGeoLoc_TrueHeading_deg != nullptr)
-    {
-        dGeoLoc_TrueHeading_deg = pGeoLoc_TrueHeading_deg->getData().toDouble();
-    }
-
-    if (pGeoLoc_TrueTrack_deg != nullptr)
-    {
-        dGeoLoc_TrueTrack_deg = pGeoLoc_TrueTrack_deg->getData().toDouble();
-    }
-
-    if (pFCU_Heading_deg != nullptr)
-    {
-        dFCU_Heading_deg = pFCU_Heading_deg->getData().toDouble();
-    }
 
     if (pFG_FlightPlan_ptr != nullptr)
     {

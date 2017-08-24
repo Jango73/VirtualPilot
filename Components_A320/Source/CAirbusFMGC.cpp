@@ -214,76 +214,23 @@ void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
 
 void CAirbusFMGC::work_FG(double dDeltaTime)
 {
-    CAirbusData* pFCU_Altitude_f = getData(adFCU_Altitude_f);
-    CAirbusData* pFCU_Heading_deg = getData(adFCU_Heading_deg);
-    CAirbusData* pGeoLoc_Latitude_deg = getData(adGeoLoc_Latitude_deg);
-    CAirbusData* pGeoLoc_Longitude_deg = getData(adGeoLoc_Longitude_deg);
-    CAirbusData* pGeoLoc_TrueHeading_deg = getData(adGeoLoc_TrueHeading_deg);
-    CAirbusData* pGeoLoc_TrueTrack_deg = getData(adGeoLoc_TrueTrack_deg);
-    CAirbusData* pGeoLoc_GroundSpeed_ms = getData(adGeoLoc_GroundSpeed_ms);
-    CAirbusData* pAltitude_m = getData(adAir_Altitude_m);
-    CAirbusData* pVerticalSpeed_ms = getData(adAir_VerticalSpeed_ms);
-    CAirbusData* pIndicatedAirspeed_ms = getData(adAir_IndicatedAirspeed_ms);
-    CAirbusData* pIndicatedAcceleration_ms = getData(adAir_IndicatedAcceleration_ms);
-    CAirbusData* pRoll_deg = getData(adInertial_Roll_deg);
-    CAirbusData* pPitch_deg = getData(adInertial_Pitch_deg);
-
-    double dFCU_Altitude_f = 0.0;
-    double dFCU_Heading_deg = 0.0;
-    double dGeoLoc_Latitude_deg = 0.0;
-    double dGeoLoc_Longitude_deg = 0.0;
-    double dGeoLoc_TrueHeading_deg = 0.0;
-    double dGeoLoc_TrueTrack_deg = 0.0;
-    double dGeoLoc_GroundSpeed_ms = 0.0;
-    double dAircraftAltitude_m = 0.0;
-    double dAircraftVerticalSpeed_ms = 0.0;
-    double dIndicatedAirspeed_ms = 0.0;
-    double dIndicatedAcceleration_ms = 0.0;
-    double dAircraftRoll_deg = 0.0;
-    double dAircraftPitch_deg = 0.0;
-
-    if (pFCU_Altitude_f != nullptr)
-        dFCU_Altitude_f = pFCU_Altitude_f->getData().toDouble();
-
-    if (pFCU_Heading_deg != nullptr)
-        dFCU_Heading_deg = pFCU_Heading_deg->getData().toDouble();
-
-    if (pGeoLoc_Latitude_deg != nullptr)
-        dGeoLoc_Latitude_deg = pGeoLoc_Latitude_deg->getData().toDouble();
-
-    if (pGeoLoc_Longitude_deg != nullptr)
-        dGeoLoc_Longitude_deg = pGeoLoc_Longitude_deg->getData().toDouble();
-
-    if (pGeoLoc_TrueHeading_deg != nullptr)
-        dGeoLoc_TrueHeading_deg = pGeoLoc_TrueHeading_deg->getData().toDouble();
-
-    if (pGeoLoc_TrueTrack_deg != nullptr)
-        dGeoLoc_TrueTrack_deg = pGeoLoc_TrueTrack_deg->getData().toDouble();
-
-    if (pGeoLoc_GroundSpeed_ms != nullptr)
-        dGeoLoc_GroundSpeed_ms = pGeoLoc_GroundSpeed_ms->getData().toDouble();
-
-    if (pAltitude_m != nullptr)
-        dAircraftAltitude_m = pAltitude_m->getData().toDouble();
-
-    if (pVerticalSpeed_ms != nullptr)
-        dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
-
-    if (pIndicatedAirspeed_ms != nullptr)
-        dIndicatedAirspeed_ms = pIndicatedAirspeed_ms->getData().toDouble();
-
-    if (pIndicatedAcceleration_ms != nullptr)
-        dIndicatedAcceleration_ms = pIndicatedAcceleration_ms->getData().toDouble();
-
-    if (pRoll_deg != nullptr)
-        dAircraftRoll_deg = pRoll_deg->getData().toDouble();
-
-    if (pPitch_deg != nullptr)
-        dAircraftPitch_deg = pPitch_deg->getData().toDouble();
+    double dFCU_Altitude_f = GETDATA_DOUBLE(adFCU_Altitude_f);
+    double dFCU_Heading_deg = GETDATA_DOUBLE(adFCU_Heading_deg);
+    double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);
+    double dGeoLoc_Longitude_deg = GETDATA_DOUBLE(adGeoLoc_Longitude_deg);
+    double dGeoLoc_TrueHeading_deg = GETDATA_DOUBLE(adGeoLoc_TrueHeading_deg);
+    double dGeoLoc_TrueTrack_deg = GETDATA_DOUBLE(adGeoLoc_TrueTrack_deg);
+    double dGeoLoc_GroundSpeed_ms = GETDATA_DOUBLE(adGeoLoc_GroundSpeed_ms);
+    double dAircraftAltitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
+    double dAircraftVerticalSpeed_ms = GETDATA_DOUBLE(adAir_VerticalSpeed_ms);
+    double dIndicatedAirspeed_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeed_ms);
+    double dIndicatedAcceleration_ms = GETDATA_DOUBLE(adAir_IndicatedAcceleration_ms);
+    double dAircraftRoll_deg = GETDATA_DOUBLE(adInertial_Roll_deg);
+    double dAircraftPitch_deg = GETDATA_DOUBLE(adInertial_Pitch_deg);
 
     CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
 
-    // Send flight pahse and modes
+    // Send flight phase and modes
 
     pushData(CAirbusData(m_sName, adFG_FlightPhase_fp, m_eFlightPhase));
     pushData(CAirbusData(m_sName, adFG_LateralMode_alm, m_eLateralMode));

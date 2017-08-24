@@ -47,6 +47,7 @@ void CAirbusFCU::update(double dDeltaTime)
     pushData(CAirbusData(m_sName, adFCU_AutoPilot2_Engaged, m_bAutoPilot2_Engaged));
     pushData(CAirbusData(m_sName, adFCU_AutoThrust_Engaged, m_bAutoThrust_Engaged));
 
+    pushData(CAirbusData(m_sName, adFCU_Altitude_f, m_dSelectedAltitude));
     pushData(CAirbusData(m_sName, adFCU_Heading_deg, m_dSelectedHeading));
 }
 

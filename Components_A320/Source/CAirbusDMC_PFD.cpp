@@ -30,27 +30,12 @@ void CAirbusDMC::updateTexture_PFD(QPainter* pPainter, CTexture* pTexture, doubl
 void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
     // Get flight data
-    CAirbusData* pAirspeed_ms = getData(adAir_IndicatedAirspeed_ms);
-    CAirbusData* pAirspeedVMax_ms = getData(adAir_IndicatedAirspeedVMax_ms);
+    double dAirspeed_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeed_ms);
+    double dAirspeed_VMax_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeedVMax_ms);
 
-    double dAirspeed_ms = 0.0;
-    double dAirspeed_kts = 0.0;
-    double dAirspeed_VMax_ms = 0.0;
-    double dAirspeed_VMax1_kts = 0.0;
-    double dAirspeed_VMax2_kts = 0.0;
-
-    if (pAirspeed_ms != nullptr)
-    {
-        dAirspeed_ms = pAirspeed_ms->getData().toDouble();
-        dAirspeed_kts = dAirspeed_ms * FAC_MS_TO_KNOTS;
-    }
-
-    if (pAirspeedVMax_ms != nullptr)
-    {
-        dAirspeed_VMax_ms = pAirspeedVMax_ms->getData().toDouble();
-        dAirspeed_VMax1_kts = dAirspeed_VMax_ms * FAC_MS_TO_KNOTS;
-        dAirspeed_VMax2_kts = dAirspeed_VMax1_kts * 2.0;
-    }
+    double dAirspeed_kts = dAirspeed_ms * FAC_MS_TO_KNOTS;
+    double dAirspeed_VMax1_kts = dAirspeed_VMax_ms * FAC_MS_TO_KNOTS;
+    double dAirspeed_VMax2_kts = dAirspeed_VMax1_kts * 2.0;
 
     // Compute nearest 10th knots
     int iNearestTenKnots = ( ((int) (dAirspeed_kts / 10.0) ) * 10);
@@ -162,21 +147,8 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
 void CAirbusDMC::drawArtificialHorizon(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
     // Get flight data
-    CAirbusData* pPitch_deg = getData(adInertial_Pitch_deg);
-    CAirbusData* pRoll_deg = getData(adInertial_Roll_deg);
-
-    double dAircraftPitch = 0.0;
-    double dAircraftRoll = 0.0;
-
-    if (pPitch_deg != nullptr)
-    {
-        dAircraftPitch = pPitch_deg->getData().toDouble();
-    }
-
-    if (pRoll_deg != nullptr)
-    {
-        dAircraftRoll = pRoll_deg->getData().toDouble();
-    }
+    double dAircraftPitch = GETDATA_DOUBLE(adInertial_Pitch_deg);
+    double dAircraftRoll = GETDATA_DOUBLE(adInertial_Roll_deg);
 
     // Compute coordinates
     double X = m_rArtificialHorizon.left() * pTexture->image().width();
@@ -247,23 +219,9 @@ void CAirbusDMC::drawArtificialHorizon(QPainter* pPainter, CTexture* pTexture, d
 void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
     // Get flight data
-    CAirbusData* pAltitude_m = getData(adAir_Altitude_m);
-    CAirbusData* pVerticalSpeed_ms = getData(adAir_VerticalSpeed_ms);
-
-    double dAircraftAltitude_m = 0.0;
-    double dAircraftAltitude_f = 0.0;
-    double dAircraftVerticalSpeed_ms = 0.0;
-
-    if (pAltitude_m != nullptr)
-    {
-        dAircraftAltitude_m = pAltitude_m->getData().toDouble();
-        dAircraftAltitude_f = dAircraftAltitude_m * FAC_METERS_TO_FEET;
-    }
-
-    if (pVerticalSpeed_ms != nullptr)
-    {
-        dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
-    }
+    double dAircraftAltitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
+    double dAircraftAltitude_f = dAircraftAltitude_m * FAC_METERS_TO_FEET;
+    double dAircraftVerticalSpeed_ms = GETDATA_DOUBLE(adAir_VerticalSpeed_ms);
 
     // Compute nearest flight level
     int iNearestFlightLevel = ( ((int) (dAircraftAltitude_f / 100.0) ) * 100);
@@ -392,42 +350,11 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
 
 void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
-    CAirbusData* pFCU_AutoPilot1_Engaged = getData(adFCU_AutoPilot1_Engaged);
-    CAirbusData* pFCU_AutoPilot2_Engaged = getData(adFCU_AutoPilot2_Engaged);
-    CAirbusData* pFCU_AutoThrust_Engaged = getData(adFCU_AutoThrust_Engaged);
-    CAirbusData* pFG_LateralMode_alm = getData(adFG_LateralMode_alm);
-    CAirbusData* pFG_VerticalMode_avm = getData(adFG_VerticalMode_avm);
-
-    bool bFCU_AutoPilot1_Engaged = false;
-    bool bFCU_AutoPilot2_Engaged = false;
-    bool bFCU_AutoThrust_Engaged = false;
-    EAirbusLateralMode eFG_LateralMode_alm = almNone;
-    EAirbusVerticalMode eFG_VerticalMode_avm = avmNone;
-
-    if (pFCU_AutoPilot1_Engaged != nullptr)
-    {
-        bFCU_AutoPilot1_Engaged = pFCU_AutoPilot1_Engaged->getData().toBool();
-    }
-
-    if (pFCU_AutoPilot2_Engaged != nullptr)
-    {
-        bFCU_AutoPilot2_Engaged = pFCU_AutoPilot2_Engaged->getData().toBool();
-    }
-
-    if (pFCU_AutoThrust_Engaged != nullptr)
-    {
-        bFCU_AutoThrust_Engaged = pFCU_AutoThrust_Engaged->getData().toBool();
-    }
-
-    if (pFG_LateralMode_alm != nullptr)
-    {
-        eFG_LateralMode_alm = (EAirbusLateralMode) pFG_LateralMode_alm->getData().toInt();
-    }
-
-    if (pFG_VerticalMode_avm != nullptr)
-    {
-        eFG_VerticalMode_avm = (EAirbusVerticalMode) pFG_VerticalMode_avm->getData().toInt();
-    }
+    bool bFCU_AutoPilot1_Engaged = GETDATA_BOOL(adFCU_AutoPilot1_Engaged);
+    bool bFCU_AutoPilot2_Engaged = GETDATA_BOOL(adFCU_AutoPilot2_Engaged);
+    bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged);
+    EAirbusLateralMode eFG_LateralMode_alm = (EAirbusLateralMode) GETDATA_INT(adFG_LateralMode_alm);
+    EAirbusVerticalMode eFG_VerticalMode_avm = (EAirbusVerticalMode) GETDATA_INT(adFG_VerticalMode_avm);
 
     // Compute coordinates
     double X = m_rFMA.left() * pTexture->image().width();
