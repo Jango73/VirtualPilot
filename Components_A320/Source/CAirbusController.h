@@ -90,9 +90,9 @@ public:
 protected:
 
     CComponentReference<CAirbusFCU>     m_rFCU;
-    CComponentReference<CAirbusMCDU>    m_rMCDU_CAPT;
-    CComponentReference<CAirbusMCDU>    m_rMCDU_FO;
+    CComponentReference<CAirbusMCDU>    m_rMCDU_1;
+    CComponentReference<CAirbusMCDU>    m_rMCDU_2;
 
-    QStringList                         m_lEVENTS_MCDU_CAPT;
-    QStringList                         m_lEVENTS_MCDU_FO;
+    QStringList                         m_lEVENTS_MCDU_1;
+    QStringList                         m_lEVENTS_MCDU_2;
 };

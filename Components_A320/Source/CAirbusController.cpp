@@ -19,33 +19,33 @@ CComponent* CAirbusController::instanciator(C3DScene* pScene)
 CAirbusController::CAirbusController(C3DScene* pScene)
     : CAircraftController(pScene)
 {
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_MENU;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_LEFT_0;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_LEFT_1;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_LEFT_2;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_LEFT_3;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_LEFT_4;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_LEFT_5;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_RIGHT_0;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_RIGHT_1;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_RIGHT_2;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_RIGHT_3;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_RIGHT_4;
-    m_lEVENTS_MCDU_CAPT << EventName_MCDU_CAPT_RIGHT_5;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_MENU;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6R;
 
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_MENU;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_LEFT_0;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_LEFT_1;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_LEFT_2;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_LEFT_3;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_LEFT_4;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_LEFT_5;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_RIGHT_0;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_RIGHT_1;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_RIGHT_2;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_RIGHT_3;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_RIGHT_4;
-    m_lEVENTS_MCDU_FO << EventName_MCDU_FO_RIGHT_5;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_MENU;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6R;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -61,8 +61,8 @@ void CAirbusController::loadParameters(const QString& sBaseFile, CXMLNode xNode)
     CAircraftController::loadParameters(sBaseFile, xNode);
 
     m_rFCU.setName(xNode.attributes()["FCU"]);
-    m_rMCDU_CAPT.setName(xNode.attributes()["MCDU_CAPT"]);
-    m_rMCDU_FO.setName(xNode.attributes()["MCDU_FO"]);
+    m_rMCDU_1.setName(xNode.attributes()["MCDU_1"]);
+    m_rMCDU_2.setName(xNode.attributes()["MCDU_2"]);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -72,8 +72,8 @@ void CAirbusController::solveLinks(C3DScene* pScene)
     CAircraftController::solveLinks(pScene);
 
     m_rFCU.solve(pScene, QSP<CComponent>(this));
-    m_rMCDU_CAPT.solve(pScene, QSP<CComponent>(this));
-    m_rMCDU_FO.solve(pScene, QSP<CComponent>(this));
+    m_rMCDU_1.solve(pScene, QSP<CComponent>(this));
+    m_rMCDU_2.solve(pScene, QSP<CComponent>(this));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -83,8 +83,8 @@ void CAirbusController::clearLinks(C3DScene* pScene)
     CAircraftController::clearLinks(pScene);
 
     m_rFCU.clear();
-    m_rMCDU_CAPT.clear();
-    m_rMCDU_FO.clear();
+    m_rMCDU_1.clear();
+    m_rMCDU_2.clear();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -228,8 +228,8 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     CAircraftController::q3dEvent(event);
 
     QSP<CAirbusFCU> pFCU = QSP_CAST(CAirbusFCU, m_rFCU.component());
-    QSP<CAirbusMCDU> pMCDU_CAPT = QSP_CAST(CAirbusMCDU, m_rMCDU_CAPT.component());
-    QSP<CAirbusMCDU> pMCDU_FO = QSP_CAST(CAirbusMCDU, m_rMCDU_FO.component());
+    QSP<CAirbusMCDU> pMCDU_1 = QSP_CAST(CAirbusMCDU, m_rMCDU_1.component());
+    QSP<CAirbusMCDU> pMCDU_2 = QSP_CAST(CAirbusMCDU, m_rMCDU_2.component());
 
     if (event->getName() == EventName_Jump500)
     {
@@ -367,15 +367,15 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
         return;
     }
 
-    if (m_lEVENTS_MCDU_CAPT.contains(event->getName()) && pMCDU_CAPT != nullptr)
+    if (m_lEVENTS_MCDU_1.contains(event->getName()) && pMCDU_1 != nullptr)
     {
-        pMCDU_CAPT->handleEvent(event);
+        pMCDU_1->handleEvent(event);
         return;
     }
 
-    if (m_lEVENTS_MCDU_FO.contains(event->getName()) && pMCDU_FO != nullptr)
+    if (m_lEVENTS_MCDU_2.contains(event->getName()) && pMCDU_2 != nullptr)
     {
-        pMCDU_FO->handleEvent(event);
+        pMCDU_2->handleEvent(event);
         return;
     }
 }

@@ -39,6 +39,18 @@ enum EMCDUPage
     mpDeparture
 };
 
+enum EMCDUKey
+{
+    mk1L, mk2L, mk3L, mk4L, mk5L, mk6L,
+    mk1R, mk2R, mk3R, mk4R, mk5R, mk6R,
+    mkSlash = 47,
+    mk0 = 48, mk1, mk2, mk3, mk4, mk5, mk6, mk7, mk8, mk9,
+    mkA = 65, mkB, mkC, mkD, mkE, mkF, mkG, mkH, mkI, mkJ, mkK, mkL, mkM,
+    mkN, mkO, mkP, mkQ, mkR, mkS, mkT, mkU, mkV, mkW, mkX, mkY, mkZ,
+    mkUp, mkDown, mkLeft, mkRight,
+    mkMenu
+};
+
 //-------------------------------------------------------------------------------------------------
 
 #define CHAR_PH '\219'
@@ -94,6 +106,9 @@ public:
     void handleEvent(CQ3DEvent* event);
 
     //!
+    void handleKey(EMCDUKey eKey);
+
+    //!
     void printAt(QPoint pWhere, const QString& sText, QColor cColor, bool bLarge = false);
 
     //!
@@ -110,6 +125,9 @@ public:
 
     //!
     void printCurrentPage();
+
+    //!
+    void printScratchPad();
 
     //!
     void printPage_Menu();
@@ -143,6 +161,9 @@ public:
 
 protected:
 
-    EMCDUPage   m_ePage;
-    MCDUChar    m_aScreen[MCDU_W][MCDU_H];
+    EMCDUPage                   m_ePage;
+    MCDUChar                    m_aScreen[MCDU_W][MCDU_H];
+    QString                     m_sScratchPad;
+    QMap<QString, EMCDUKey>     m_mEventToKey;
+    bool                        m_bNeedScreenRefresh;
 };

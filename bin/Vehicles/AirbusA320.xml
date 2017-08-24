@@ -17,6 +17,8 @@
         RotationTarget=".Pilot"
         LookTarget=".Pilot"
         FCU=".FCU"
+        MCDU_1=".MCDU_1"
+        MCDU_2=".MCDU_2"
     />
 
     <Component Name="CockpitLight01" Class="CLight">
@@ -284,25 +286,6 @@
         <DataInput Name=".FADEC"/>
     </Component>
 
-    <!-- MCDU - Multipurpose Control and Display Unit -->
-    <Component Name="CONT_MCDU_1" Class="CElectricalContactor">
-        <PowerInput Name=".AC_ESS_BUS"/>
-        <General Closed="1"/>
-    </Component>
-    <Component Name="MCDU_1" Class="CAirbusMCDU">
-        <PowerInput Name=".CONT_MCDU_1"/>
-        <DataInput Name=".FMGC_1"/>
-    </Component>
-
-    <Component Name="CONT_MCDU_2" Class="CElectricalContactor">
-        <PowerInput Name=".AC_ESS_BUS"/>
-        <General Closed="1"/>
-    </Component>
-    <Component Name="MCDU_2" Class="CAirbusMCDU">
-        <PowerInput Name=".CONT_MCDU_2"/>
-        <DataInput Name=".FMGC_2"/>
-    </Component>
-
     <!-- FAC - Flight Augmentation Computer -->
     <Component Name="CONT_FAC_1" Class="CElectricalContactor">
         <PowerInput Name=".AC_ESS_BUS"/>
@@ -439,4 +422,22 @@
         <PowerInput Name=".DC_ESS_BUS"/>
     </Component>
 
+    <!-- MCDU - Multipurpose Control and Display Unit -->
+    <Component Name="CONT_MCDU_1" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="MCDU_1" Class="CAirbusMCDU">
+        <PowerInput Name=".CONT_MCDU_1"/>
+        <DataInput Name=".FMGC_1"/>
+    </Component>
+
+    <Component Name="CONT_MCDU_2" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="MCDU_2" Class="CAirbusMCDU">
+        <PowerInput Name=".CONT_MCDU_2"/>
+        <DataInput Name=".FMGC_2"/>
+    </Component>
 </Component>
