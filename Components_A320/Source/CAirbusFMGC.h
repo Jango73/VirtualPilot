@@ -65,6 +65,9 @@ public:
     void work_FM(double dDeltaTime);
 
     //!
+    void work_FM_ProcessMCDUData(double dDeltaTime);
+
+    //!
     void work_FM_doPredictions(double dDeltaTime);
 
     //!

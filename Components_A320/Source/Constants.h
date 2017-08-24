@@ -61,6 +61,11 @@
 #define EquipName_TCAS                      "Traffic Alert and Collision Avoidance System"
 
 //-------------------------------------------------------------------------------------------------
+// MCDU Strings
+
+#define MCDU_CLEAR                          "CLEAR"
+
+//-------------------------------------------------------------------------------------------------
 // Q3D events
 
 #define EventName_Jump500                   "JUMP_500"
@@ -79,7 +84,6 @@
 #define EventName_THR_THROTTLE_INC          "THR_THROTTLE_INC"
 #define EventName_THR_THROTTLE_DEC          "THR_THROTTLE_DEC"
 
-#define EventName_MCDU_CAPT_MENU            "MCDU_CAPT_MENU"
 #define EventName_MCDU_CAPT_1L              "MCDU_CAPT_1L"
 #define EventName_MCDU_CAPT_2L              "MCDU_CAPT_2L"
 #define EventName_MCDU_CAPT_3L              "MCDU_CAPT_3L"
@@ -93,7 +97,46 @@
 #define EventName_MCDU_CAPT_5R              "MCDU_CAPT_5R"
 #define EventName_MCDU_CAPT_6R              "MCDU_CAPT_6R"
 
-#define EventName_MCDU_FO_MENU              "MCDU_FO_MENU"
+#define EventName_MCDU_CAPT_MENU            "MCDU_CAPT_MENU"
+
+#define EventName_MCDU_CAPT_0               "MCDU_CAPT_0"
+#define EventName_MCDU_CAPT_1               "MCDU_CAPT_1"
+#define EventName_MCDU_CAPT_2               "MCDU_CAPT_2"
+#define EventName_MCDU_CAPT_3               "MCDU_CAPT_3"
+#define EventName_MCDU_CAPT_4               "MCDU_CAPT_4"
+#define EventName_MCDU_CAPT_5               "MCDU_CAPT_5"
+#define EventName_MCDU_CAPT_6               "MCDU_CAPT_6"
+#define EventName_MCDU_CAPT_7               "MCDU_CAPT_7"
+#define EventName_MCDU_CAPT_8               "MCDU_CAPT_8"
+#define EventName_MCDU_CAPT_9               "MCDU_CAPT_9"
+
+#define EventName_MCDU_CAPT_A               "MCDU_CAPT_A"
+#define EventName_MCDU_CAPT_B               "MCDU_CAPT_B"
+#define EventName_MCDU_CAPT_C               "MCDU_CAPT_C"
+#define EventName_MCDU_CAPT_D               "MCDU_CAPT_D"
+#define EventName_MCDU_CAPT_E               "MCDU_CAPT_E"
+#define EventName_MCDU_CAPT_F               "MCDU_CAPT_F"
+#define EventName_MCDU_CAPT_G               "MCDU_CAPT_G"
+#define EventName_MCDU_CAPT_H               "MCDU_CAPT_H"
+#define EventName_MCDU_CAPT_I               "MCDU_CAPT_I"
+#define EventName_MCDU_CAPT_J               "MCDU_CAPT_J"
+#define EventName_MCDU_CAPT_K               "MCDU_CAPT_K"
+#define EventName_MCDU_CAPT_L               "MCDU_CAPT_L"
+#define EventName_MCDU_CAPT_M               "MCDU_CAPT_M"
+#define EventName_MCDU_CAPT_N               "MCDU_CAPT_N"
+#define EventName_MCDU_CAPT_O               "MCDU_CAPT_O"
+#define EventName_MCDU_CAPT_P               "MCDU_CAPT_P"
+#define EventName_MCDU_CAPT_Q               "MCDU_CAPT_Q"
+#define EventName_MCDU_CAPT_R               "MCDU_CAPT_R"
+#define EventName_MCDU_CAPT_S               "MCDU_CAPT_S"
+#define EventName_MCDU_CAPT_T               "MCDU_CAPT_T"
+#define EventName_MCDU_CAPT_U               "MCDU_CAPT_U"
+#define EventName_MCDU_CAPT_V               "MCDU_CAPT_V"
+#define EventName_MCDU_CAPT_W               "MCDU_CAPT_W"
+#define EventName_MCDU_CAPT_X               "MCDU_CAPT_X"
+#define EventName_MCDU_CAPT_Y               "MCDU_CAPT_Y"
+#define EventName_MCDU_CAPT_Z               "MCDU_CAPT_Z"
+
 #define EventName_MCDU_FO_1L                "MCDU_FO_1L"
 #define EventName_MCDU_FO_2L                "MCDU_FO_2L"
 #define EventName_MCDU_FO_3L                "MCDU_FO_3L"
@@ -106,6 +149,19 @@
 #define EventName_MCDU_FO_4R                "MCDU_FO_4R"
 #define EventName_MCDU_FO_5R                "MCDU_FO_5R"
 #define EventName_MCDU_FO_6R                "MCDU_FO_6R"
+
+#define EventName_MCDU_FO_MENU              "MCDU_FO_MENU"
+
+#define EventName_MCDU_FO_0                 "MCDU_FO_0"
+#define EventName_MCDU_FO_1                 "MCDU_FO_1"
+#define EventName_MCDU_FO_2                 "MCDU_FO_2"
+#define EventName_MCDU_FO_3                 "MCDU_FO_3"
+#define EventName_MCDU_FO_4                 "MCDU_FO_4"
+#define EventName_MCDU_FO_5                 "MCDU_FO_5"
+#define EventName_MCDU_FO_6                 "MCDU_FO_6"
+#define EventName_MCDU_FO_7                 "MCDU_FO_7"
+#define EventName_MCDU_FO_8                 "MCDU_FO_8"
+#define EventName_MCDU_FO_9                 "MCDU_FO_9"
 
 //-------------------------------------------------------------------------------------------------
 // MCDU colors

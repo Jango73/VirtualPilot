@@ -17,6 +17,9 @@ CAirbusFlightPlan::CAirbusFlightPlan()
     , m_dDescentVerticalSpeed_ms(2500.0 * FAC_FPM_TO_MS)
     , m_dCruiseAltitude_m(33000.0 * FAC_FEET_TO_METERS)
     , m_dCruiseSpeed_ms(250.0 * FAC_KNOTS_TO_MS)
+    , m_sCompanyRoute("LFPG-EBBR-1")
+    , m_sICAOFrom("LFPG")
+    , m_sICAOTo("EBBR")
 {
     LOG_DEBUG("CAirbusFlightPlan::CAirbusFlightPlan()");
 }
@@ -40,6 +43,13 @@ void CAirbusFlightPlan::setCruiseAltitude_m(double dValue)
 void CAirbusFlightPlan::setCruiseSpeed_ms(double dValue)
 {
     m_dCruiseSpeed_ms = dValue;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFlightPlan::setCompanyRoute(const QString& sValue)
+{
+    m_sCompanyRoute = sValue;
 }
 
 //-------------------------------------------------------------------------------------------------

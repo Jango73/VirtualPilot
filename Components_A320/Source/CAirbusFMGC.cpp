@@ -100,43 +100,54 @@ void CAirbusFMGC::work(double dDeltaTime)
 
 void CAirbusFMGC::work_FM(double dDeltaTime)
 {
-    CAirbusData* pFCU_VerticalSpeed_fs = getData(adFCU_VerticalSpeed_fs);
-
-    double dFCU_VerticalSpeed_fs = 0.0;
-
-    if (pFCU_VerticalSpeed_fs != nullptr)
-    {
-        dFCU_VerticalSpeed_fs = pFCU_VerticalSpeed_fs->getData().toDouble();
-    }
+    // Data processing from MCDU
+    work_FM_ProcessMCDUData(dDeltaTime);
 
     // Predictions computing
     work_FM_doPredictions(dDeltaTime);
 
     // Send flight plan
     pushData(CAirbusData(m_sName, adFG_FlightPlan_ptr, (quint64) &m_tFlightPlan));
+    pushData(CAirbusData(m_sName, adFM_CompanyRoute, m_tFlightPlan.companyRoute()));
+    pushData(CAirbusData(m_sName, adFM_ICAOFrom, m_tFlightPlan.ICAOFrom()));
+    pushData(CAirbusData(m_sName, adFM_ICAOTo, m_tFlightPlan.ICAOTo()));
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFMGC::work_FM_ProcessMCDUData(double dDeltaTime)
+{
+    Q_UNUSED(dDeltaTime);
+
+    EMCDUDataSet eMCDU_DataSetName = (EMCDUDataSet) GETDATA_INT(adMCDU_DataSetName);
+
+    if (eMCDU_DataSetName != mdsNone)
+    {
+        removeData(adMCDU_DataSetName);
+
+        switch (eMCDU_DataSetName)
+        {
+        case mdsCompanyRoute:
+            m_tFlightPlan.setCompanyRoute(GETDATA_STRING(adMCDU_DataSetValue));
+            break;
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
 
 void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
 {
+    Q_UNUSED(dDeltaTime);
+
     // Compute very 2 seconds
     if (m_tLastUpdate.secsTo(QDateTime::currentDateTime()) > 2)
     {
         m_tLastUpdate = QDateTime::currentDateTime();
 
         // Get flight data
-        CAirbusData* pAltitude_m = getData(adAir_Altitude_m);
-        CAirbusData* pVerticalSpeed_ms = getData(adAir_VerticalSpeed_ms);
-
-        double dAircraftAltitude_m = 0.0;
-        double dAircraftVerticalSpeed_ms = 0.0;
-
-        if (pAltitude_m != nullptr)
-            dAircraftAltitude_m = pAltitude_m->getData().toDouble();
-
-        if (pVerticalSpeed_ms != nullptr)
-            dAircraftVerticalSpeed_ms = pVerticalSpeed_ms->getData().toDouble();
+        double dAircraftAltitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
+        double dAircraftVerticalSpeed_ms = GETDATA_DOUBLE(adAir_VerticalSpeed_ms);
 
         // Clear generated data
         m_tFlightPlan.clearAllGeneratedWaypoints();
@@ -230,12 +241,6 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
 
-    // Send flight phase and modes
-
-    pushData(CAirbusData(m_sName, adFG_FlightPhase_fp, m_eFlightPhase));
-    pushData(CAirbusData(m_sName, adFG_LateralMode_alm, m_eLateralMode));
-    pushData(CAirbusData(m_sName, adFG_VerticalMode_avm, m_eVerticalMode));
-
     // Compute auto heading
 
     if (m_eLateralMode == almNav && m_tFlightPlan.waypoints().count() > 1)
@@ -287,10 +292,6 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedRollVelocity_ds = m_dCommandedRoll_deg - dAircraftRoll_deg;
     m_dCommandedRollVelocity_ds = Math::Angles::clipDouble(m_dCommandedRollVelocity_ds, -10.0, 10.0);
 
-    // Send auto heading command
-
-    pushData(CAirbusData(m_sName, adFG_CommandedRollVelocity_ds, m_dCommandedRollVelocity_ds));
-
     // Compute altitude command
 
     if (
@@ -318,10 +319,6 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedPitchVelocity_ds = (m_dCommandedPitch_deg - dAircraftPitch_deg) * 0.5;
     m_dCommandedPitchVelocity_ds = Math::Angles::clipDouble(m_dCommandedPitchVelocity_ds, -3.0, 3.0);
 
-    // Send altitude command
-
-    pushData(CAirbusData(m_sName, adFG_CommandedPitchVelocity_ds, m_dCommandedPitchVelocity_ds));
-
     // Compute thrust command
 
     m_dCommandedVelocity_ms = 250.0 * FAC_KNOTS_TO_MS;
@@ -344,8 +341,13 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
         m_dCommandedThrust_norm = m_pidDeceleration.output();
     }
 
-    // Send thrust command
+    // Send data
 
+    pushData(CAirbusData(m_sName, adFG_FlightPhase_fp, m_eFlightPhase));
+    pushData(CAirbusData(m_sName, adFG_LateralMode_alm, m_eLateralMode));
+    pushData(CAirbusData(m_sName, adFG_VerticalMode_avm, m_eVerticalMode));
+    pushData(CAirbusData(m_sName, adFG_CommandedRollVelocity_ds, m_dCommandedRollVelocity_ds));
+    pushData(CAirbusData(m_sName, adFG_CommandedPitchVelocity_ds, m_dCommandedPitchVelocity_ds));
     pushData(CAirbusData(m_sName, adFG_CommandedThrust_norm, m_dCommandedThrust_norm));
 
     // Debug information

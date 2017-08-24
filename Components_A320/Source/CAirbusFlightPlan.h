@@ -37,6 +37,9 @@ public:
     //!
     void setCruiseSpeed_ms(double dValue);
 
+    //!
+    void setCompanyRoute(const QString& sValue);
+
     //-------------------------------------------------------------------------------------------------
     // Getters
     //-------------------------------------------------------------------------------------------------
@@ -48,16 +51,25 @@ public:
     CWaypoint& lastWaypoint() { return m_vWaypoints.last(); }
 
     //!
-    double climbVerticalSpeed_ms() { return m_dClimbVerticalSpeed_ms; }
+    double climbVerticalSpeed_ms() const { return m_dClimbVerticalSpeed_ms; }
 
     //!
-    double descentVerticalSpeed_ms() { return m_dDescentVerticalSpeed_ms; }
+    double descentVerticalSpeed_ms() const { return m_dDescentVerticalSpeed_ms; }
 
     //!
-    double cruiseAltitude_m() { return m_dCruiseAltitude_m; }
+    double cruiseAltitude_m() const { return m_dCruiseAltitude_m; }
 
     //!
-    double cruiseSpeed_ms() { return m_dCruiseSpeed_ms; }
+    double cruiseSpeed_ms() const { return m_dCruiseSpeed_ms; }
+
+    //!
+    QString companyRoute() const { return m_sCompanyRoute; }
+
+    //!
+    QString ICAOFrom() const { return m_sICAOFrom; }
+
+    //!
+    QString ICAOTo() const { return m_sICAOTo; }
 
     //-------------------------------------------------------------------------------------------------
     // Control methods
@@ -83,4 +95,7 @@ protected:
     double                  m_dDescentVerticalSpeed_ms;
     double                  m_dCruiseAltitude_m;
     double                  m_dCruiseSpeed_ms;
+    QString                 m_sCompanyRoute;
+    QString                 m_sICAOFrom;
+    QString                 m_sICAOTo;
 };

@@ -140,7 +140,6 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
     }
 
     // Aircraft
-
     {
         QPointF point1(0.0, -W20);
         QPointF point2(0.0, W10);

@@ -129,6 +129,20 @@ void CAirbusDataSupplier::receiveData(CAirbusData incomingData)
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusDataSupplier::removeData(EAirbusData eDataID)
+{
+    for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)
+    {
+        if (m_vData[iIndex].getID() == eDataID)
+        {
+            m_vData.remove(iIndex);
+            iIndex--;
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+
 CAirbusData* CAirbusDataSupplier::getData(EAirbusData eID)
 {
     for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)

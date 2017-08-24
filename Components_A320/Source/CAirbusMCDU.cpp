@@ -31,7 +31,6 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
 {
     LOG_DEBUG("CAirbusMCDU::CAirbusMCDU()");
 
-    m_mEventToKey[EventName_MCDU_CAPT_MENU] = mkMenu;
     m_mEventToKey[EventName_MCDU_CAPT_1L] = mk1L;
     m_mEventToKey[EventName_MCDU_CAPT_2L] = mk2L;
     m_mEventToKey[EventName_MCDU_CAPT_3L] = mk3L;
@@ -44,8 +43,18 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_CAPT_4R] = mk4R;
     m_mEventToKey[EventName_MCDU_CAPT_5R] = mk5R;
     m_mEventToKey[EventName_MCDU_CAPT_6R] = mk6R;
+    m_mEventToKey[EventName_MCDU_CAPT_MENU] = mkMenu;
+    m_mEventToKey[EventName_MCDU_CAPT_0] = mk0;
+    m_mEventToKey[EventName_MCDU_CAPT_1] = mk1;
+    m_mEventToKey[EventName_MCDU_CAPT_2] = mk2;
+    m_mEventToKey[EventName_MCDU_CAPT_3] = mk3;
+    m_mEventToKey[EventName_MCDU_CAPT_4] = mk4;
+    m_mEventToKey[EventName_MCDU_CAPT_5] = mk5;
+    m_mEventToKey[EventName_MCDU_CAPT_6] = mk6;
+    m_mEventToKey[EventName_MCDU_CAPT_7] = mk7;
+    m_mEventToKey[EventName_MCDU_CAPT_8] = mk8;
+    m_mEventToKey[EventName_MCDU_CAPT_9] = mk9;
 
-    m_mEventToKey[EventName_MCDU_FO_MENU] = mkMenu;
     m_mEventToKey[EventName_MCDU_FO_1L] = mk1L;
     m_mEventToKey[EventName_MCDU_FO_2L] = mk2L;
     m_mEventToKey[EventName_MCDU_FO_3L] = mk3L;
@@ -58,6 +67,17 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_FO_4R] = mk4R;
     m_mEventToKey[EventName_MCDU_FO_5R] = mk5R;
     m_mEventToKey[EventName_MCDU_FO_6R] = mk6R;
+    m_mEventToKey[EventName_MCDU_FO_MENU] = mkMenu;
+    m_mEventToKey[EventName_MCDU_FO_0] = mk0;
+    m_mEventToKey[EventName_MCDU_FO_1] = mk1;
+    m_mEventToKey[EventName_MCDU_FO_2] = mk2;
+    m_mEventToKey[EventName_MCDU_FO_3] = mk3;
+    m_mEventToKey[EventName_MCDU_FO_4] = mk4;
+    m_mEventToKey[EventName_MCDU_FO_5] = mk5;
+    m_mEventToKey[EventName_MCDU_FO_6] = mk6;
+    m_mEventToKey[EventName_MCDU_FO_7] = mk7;
+    m_mEventToKey[EventName_MCDU_FO_8] = mk8;
+    m_mEventToKey[EventName_MCDU_FO_9] = mk9;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -159,13 +179,22 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
         switch (m_ePage)
         {
         case mpMenu: handleKey_Menu(eKey); break;
-//        case mpInitA: printPage_InitA(); break;
-//        case mpInitB: printPage_InitB(); break;
-//        case mpRouteSelection: printPage_RouteSelection(); break;
+        case mpInitA: handleKey_InitA(eKey); break;
+        case mpInitB: handleKey_InitB(eKey); break;
+        case mpRouteSelection: handleKey_RouteSelection(eKey); break;
         }
+    }
+    else if (eKey == mkInit)
+    {
+        m_ePage = mpInitA;
     }
     else if (eKey == mkMenu)
     {
+        m_ePage = mpMenu;
+    }
+    else if (eKey == mkClear)
+    {
+        m_sScratchPad = MCDU_CLEAR;
     }
 
     m_bNeedScreenRefresh = true;
@@ -295,7 +324,20 @@ void CAirbusMCDU::printPage_InitA()
     printLabel(3, false, "LONG");
     printLabel(5, false, "TROPO");
 
+    // Get data
+    QString sFM_CompanyRoute = GETDATA_STRING(adFM_CompanyRoute);
+    QString sFM_ICAOFrom = GETDATA_STRING(adFM_ICAOFrom);
+    QString sFM_ICAOTo = GETDATA_STRING(adFM_ICAOTo);
+
+    QString sFromTo = QString("%1/%2").arg(sFM_ICAOFrom).arg(sFM_ICAOTo);
+
+    // Left data
+    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : "__________");
+
     // Right data
+    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : "____/____");
+    printData(1, false, "REQUEST*");
+    printData(2, false, "ALIGN IRS>");
     printData(4, false, "WIND>");
 }
 
@@ -303,6 +345,13 @@ void CAirbusMCDU::printPage_InitA()
 
 void CAirbusMCDU::handleKey_InitA(EMCDUKey eKey)
 {
+    switch (eKey)
+    {
+    case mk1L:
+        if (m_sScratchPad.isEmpty() == false)
+            sendData(mdsCompanyRoute, m_sScratchPad);
+        break;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -327,4 +376,18 @@ void CAirbusMCDU::printPage_RouteSelection()
 
     // Right data
     printData(5, false, "INSERT*");
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::handleKey_RouteSelection(EMCDUKey eKey)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::sendData(EMCDUDataSet eDataName, QVariant vValue)
+{
+    pushData(CAirbusData(m_sName, adMCDU_DataSetName, (int) eDataName));
+    pushData(CAirbusData(m_sName, adMCDU_DataSetValue, vValue));
 }

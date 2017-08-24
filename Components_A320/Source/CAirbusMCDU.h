@@ -145,6 +145,10 @@ public:
     void handleKey_InitB(EMCDUKey eKey);
 
     void printPage_RouteSelection();
+    void handleKey_RouteSelection(EMCDUKey eKey);
+
+    //!
+    void sendData(EMCDUDataSet eDataName, QVariant vValue);
 
     //-------------------------------------------------------------------------------------------------
     // Inner classes

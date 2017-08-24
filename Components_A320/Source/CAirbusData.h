@@ -40,6 +40,7 @@
 #define GETDATA_BOOL(d)     (getData(d) != nullptr ? getData(d)->getData().toBool() : false)
 #define GETDATA_INT(d)      (getData(d) != nullptr ? getData(d)->getData().toInt() : 0)
 #define GETDATA_DOUBLE(d)   (getData(d) != nullptr ? getData(d)->getData().toDouble() : 0.0)
+#define GETDATA_STRING(d)   (getData(d) != nullptr ? getData(d)->getData().toString() : "")
 
 //-------------------------------------------------------------------------------------------------
 
@@ -97,6 +98,14 @@ enum EAirbusData
     adFG_CommandedPitchVelocity_ds,
     adFG_CommandedThrust_norm,
     adFG_FlightPlan_ptr,
+
+    adFM_CompanyRoute,
+    adFM_ICAOFrom,
+    adFM_ICAOTo,
+
+    // Data coming from MCDU
+    adMCDU_DataSetName,
+    adMCDU_DataSetValue,
 
     // Data coming from FCU
     adFCU_AutoPilot1_Engaged,
@@ -159,6 +168,16 @@ enum EAirbusVerticalMode
     avmOpenDescent,
     avmClimb,
     avmDescent
+};
+
+//-------------------------------------------------------------------------------------------------
+
+enum EMCDUDataSet
+{
+    mdsNone,
+    mdsCompanyRoute,
+    mdsICAOFrom,
+    mdsICAOTo
 };
 
 //-------------------------------------------------------------------------------------------------
