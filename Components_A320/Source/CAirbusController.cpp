@@ -19,35 +19,7 @@ CComponent* CAirbusController::instanciator(C3DScene* pScene)
 CAirbusController::CAirbusController(C3DScene* pScene)
     : CAircraftController(pScene)
 {
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_INIT;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_MENU;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1L;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2L;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3L;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4L;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5L;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6L;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1R;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2R;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3R;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4R;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5R;
-    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6R;
-
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_INIT;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_MENU;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1L;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2L;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3L;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4L;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5L;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6L;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1R;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2R;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3R;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4R;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5R;
-    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6R;
+    initializeLists();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -195,13 +167,13 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             generateQ3DEvent(CQ3DEvent(EventName_THR_THROTTLE_DEC, CQ3DEvent::Press));
             break;
         case Qt::Key_I:
-            if (event->modifiers() & Qt::Key_Control)
+            if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_INIT, CQ3DEvent::Press));
             }
             break;
         case Qt::Key_M:
-            if (event->modifiers() & Qt::Key_Control)
+            if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_MENU, CQ3DEvent::Press));
             }
@@ -392,4 +364,115 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
         pMCDU_2->handleEvent(event);
         return;
     }
+}
+
+void CAirbusController::initializeLists()
+{
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6R;
+
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_INIT;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_MENU;
+
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_0;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_3;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_4;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_5;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_7;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_8;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_9;
+
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_A;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_B;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_C;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_D;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_E;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_F;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_G;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_H;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_I;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_J;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_K;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_L;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_M;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_N;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_O;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_P;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_Q;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_R;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_S;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_T;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_U;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_V;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_W;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_X;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_Y;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_Z;
+
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6R;
+
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_INIT;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_MENU;
+
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_0;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_4;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_5;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_7;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_8;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_9;
+
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_A;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_B;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_C;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_D;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_E;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_F;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_G;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_H;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_I;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_J;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_K;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_L;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_M;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_N;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_O;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_P;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_Q;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_R;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_S;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_T;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_U;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_V;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_W;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_X;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_Y;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_Z;
 }

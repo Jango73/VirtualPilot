@@ -126,6 +126,14 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
 
                 painter.resetTransform();
 
+                for (int y = 0; y < MCDU_H; y++)
+                {
+                    for (int x = 0; x < MCDU_W; x++)
+                    {
+                        m_aScreen[x][y].m_cChar = ' ';
+                    }
+                }
+
                 printCurrentPage();
                 printScratchPad();
 

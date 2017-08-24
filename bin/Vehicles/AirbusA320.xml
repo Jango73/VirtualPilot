@@ -404,6 +404,7 @@
         <PowerInput Name=".CONT_FMGC_1"/>
         <DataInput Name=".ADIRU_1"/>
         <DataInput Name=".FCU"/>
+        <DataInput Name=".MCDU_1"/>
     </Component>
 
     <Component Name="CONT_FMGC_2" Class="CElectricalContactor">
@@ -415,6 +416,7 @@
         <PowerInput Name=".CONT_FMGC_2"/>
         <DataInput Name=".ADIRU_2"/>
         <DataInput Name=".FCU"/>
+        <DataInput Name=".MCDU_2"/>
     </Component>
 
     <!-- CONTROL -->

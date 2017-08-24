@@ -165,6 +165,33 @@
 #define EventName_MCDU_FO_8                 "MCDU_FO_8"
 #define EventName_MCDU_FO_9                 "MCDU_FO_9"
 
+#define EventName_MCDU_FO_A                 "MCDU_FO_A"
+#define EventName_MCDU_FO_B                 "MCDU_FO_B"
+#define EventName_MCDU_FO_C                 "MCDU_FO_C"
+#define EventName_MCDU_FO_D                 "MCDU_FO_D"
+#define EventName_MCDU_FO_E                 "MCDU_FO_E"
+#define EventName_MCDU_FO_F                 "MCDU_FO_F"
+#define EventName_MCDU_FO_G                 "MCDU_FO_G"
+#define EventName_MCDU_FO_H                 "MCDU_FO_H"
+#define EventName_MCDU_FO_I                 "MCDU_FO_I"
+#define EventName_MCDU_FO_J                 "MCDU_FO_J"
+#define EventName_MCDU_FO_K                 "MCDU_FO_K"
+#define EventName_MCDU_FO_L                 "MCDU_FO_L"
+#define EventName_MCDU_FO_M                 "MCDU_FO_M"
+#define EventName_MCDU_FO_N                 "MCDU_FO_N"
+#define EventName_MCDU_FO_O                 "MCDU_FO_O"
+#define EventName_MCDU_FO_P                 "MCDU_FO_P"
+#define EventName_MCDU_FO_Q                 "MCDU_FO_Q"
+#define EventName_MCDU_FO_R                 "MCDU_FO_R"
+#define EventName_MCDU_FO_S                 "MCDU_FO_S"
+#define EventName_MCDU_FO_T                 "MCDU_FO_T"
+#define EventName_MCDU_FO_U                 "MCDU_FO_U"
+#define EventName_MCDU_FO_V                 "MCDU_FO_V"
+#define EventName_MCDU_FO_W                 "MCDU_FO_W"
+#define EventName_MCDU_FO_X                 "MCDU_FO_X"
+#define EventName_MCDU_FO_Y                 "MCDU_FO_Y"
+#define EventName_MCDU_FO_Z                 "MCDU_FO_Z"
+
 //-------------------------------------------------------------------------------------------------
 // MCDU colors
 
