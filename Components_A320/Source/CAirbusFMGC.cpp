@@ -130,6 +130,16 @@ void CAirbusFMGC::work_FM_ProcessMCDUData(double dDeltaTime)
         case mdsCompanyRoute:
             m_tFlightPlan.setCompanyRoute(GETDATA_STRING(adMCDU_DataSetValue));
             break;
+
+        case mdsICAOFromTo:
+            QStringList lICAO = GETDATA_STRING(adMCDU_DataSetValue).split("/");
+
+            if (lICAO.count() == 2)
+            {
+                m_tFlightPlan.setICAOFrom(lICAO[0]);
+                m_tFlightPlan.setICAOTo(lICAO[1]);
+            }
+            break;
         }
     }
 }

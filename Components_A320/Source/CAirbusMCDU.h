@@ -58,10 +58,15 @@ enum EMCDUKey
 
 //-------------------------------------------------------------------------------------------------
 
-#define CHAR_PH '\219'
+#define CHAR_PH                 '\219'
 
-#define MCDU_W  24
-#define MCDU_H  14
+#define MCDU_W                  24
+#define MCDU_H                  14
+
+#define FORMAT_COMPANY_ROUTE    "__________"
+#define FORMAT_ICAO_FROM_TO     "____/____"
+
+//-------------------------------------------------------------------------------------------------
 
 //! Multipurpose Control and Display Unit
 //! HMI for FMGC
@@ -146,6 +151,9 @@ public:
 
     void printPage_RouteSelection();
     void handleKey_RouteSelection(EMCDUKey eKey);
+
+    //!
+    bool respectsFormat(const QString& sValue, const QString& sFormat);
 
     //!
     void sendData(EMCDUDataSet eDataName, QVariant vValue);

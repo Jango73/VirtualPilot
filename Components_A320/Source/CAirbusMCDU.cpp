@@ -332,10 +332,10 @@ void CAirbusMCDU::printPage_InitA()
     QString sFromTo = QString("%1/%2").arg(sFM_ICAOFrom).arg(sFM_ICAOTo);
 
     // Left data
-    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : "__________");
+    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : FORMAT_COMPANY_ROUTE);
 
     // Right data
-    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : "____/____");
+    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : FORMAT_ICAO_FROM_TO);
     printData(1, false, "REQUEST*");
     printData(2, false, "ALIGN IRS>");
     printData(4, false, "WIND>");
@@ -349,7 +349,19 @@ void CAirbusMCDU::handleKey_InitA(EMCDUKey eKey)
     {
     case mk1L:
         if (m_sScratchPad.isEmpty() == false)
+        {
             sendData(mdsCompanyRoute, m_sScratchPad);
+            m_sScratchPad.clear();
+        }
+        break;
+    case mk1R:
+        if (m_sScratchPad.isEmpty() == false)
+        {
+            if (respectsFormat(m_sScratchPad, FORMAT_ICAO_FROM_TO))
+            {
+                sendData(mdsICAOFromTo, m_sScratchPad);
+            }
+        }
         break;
     }
 }
@@ -382,6 +394,14 @@ void CAirbusMCDU::printPage_RouteSelection()
 
 void CAirbusMCDU::handleKey_RouteSelection(EMCDUKey eKey)
 {
+}
+
+//-------------------------------------------------------------------------------------------------
+
+bool CAirbusMCDU::respectsFormat(const QString& sValue, const QString& sFormat)
+{
+    // TODO : check if sValue respects sFormat
+    return true;
 }
 
 //-------------------------------------------------------------------------------------------------

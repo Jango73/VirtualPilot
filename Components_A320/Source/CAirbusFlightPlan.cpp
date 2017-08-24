@@ -54,6 +54,20 @@ void CAirbusFlightPlan::setCompanyRoute(const QString& sValue)
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusFlightPlan::setICAOFrom(const QString& sValue)
+{
+    m_sICAOFrom = sValue;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFlightPlan::setICAOTo(const QString& sValue)
+{
+    m_sICAOTo = sValue;
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusFlightPlan::update(double dDeltaTime)
 {
 }

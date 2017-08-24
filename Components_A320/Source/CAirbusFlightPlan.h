@@ -40,6 +40,12 @@ public:
     //!
     void setCompanyRoute(const QString& sValue);
 
+    //!
+    void setICAOFrom(const QString& sValue);
+
+    //!
+    void setICAOTo(const QString& sValue);
+
     //-------------------------------------------------------------------------------------------------
     // Getters
     //-------------------------------------------------------------------------------------------------

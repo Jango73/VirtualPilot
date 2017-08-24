@@ -176,8 +176,7 @@ enum EMCDUDataSet
 {
     mdsNone,
     mdsCompanyRoute,
-    mdsICAOFrom,
-    mdsICAOTo
+    mdsICAOFromTo
 };
 
 //-------------------------------------------------------------------------------------------------
