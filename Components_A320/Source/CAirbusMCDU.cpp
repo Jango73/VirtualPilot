@@ -419,6 +419,6 @@ bool CAirbusMCDU::respectsFormat(const QString& sValue, const QString& sFormat)
 
 void CAirbusMCDU::sendData(EMCDUDataSet eDataName, QVariant vValue)
 {
-    pushData(CAirbusData(m_sName, adMCDU_DataSetName, (int) eDataName));
-    pushData(CAirbusData(m_sName, adMCDU_DataSetValue, vValue));
+    pushData(CAirbusData(m_sName, adMCDU_DataSetName, (int) eDataName, false));
+    pushData(CAirbusData(m_sName, adMCDU_DataSetValue, vValue, false));
 }

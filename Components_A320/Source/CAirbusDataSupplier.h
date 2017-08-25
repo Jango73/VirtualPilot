@@ -36,7 +36,10 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    CAirbusData* getData(EAirbusData eID);
+    CAirbusData* data(EAirbusData eID);
+
+    //!
+    bool dataValid(EAirbusData eID);
 
     //-------------------------------------------------------------------------------------------------
     // Inherited methods

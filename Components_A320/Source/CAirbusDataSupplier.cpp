@@ -24,6 +24,28 @@ CAirbusDataSupplier::~CAirbusDataSupplier()
 
 //-------------------------------------------------------------------------------------------------
 
+CAirbusData* CAirbusDataSupplier::data(EAirbusData eID)
+{
+    for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)
+    {
+        if (m_vData[iIndex].ID() == eID)
+        {
+            return &(m_vData[iIndex]);
+        }
+    }
+
+    return nullptr;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+bool CAirbusDataSupplier::dataValid(EAirbusData eID)
+{
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusDataSupplier::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
 {
     QVector<CXMLNode> vInputsNodes = xComponent.getNodesByTagName("DataInput");
@@ -81,9 +103,9 @@ void CAirbusDataSupplier::pushData(CAirbusData incomingData)
 {
     for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)
     {
-        if (m_vData[iIndex].getID() == incomingData.getID() && m_vData[iIndex].getSource() == incomingData.getSource())
+        if (m_vData[iIndex].ID() == incomingData.ID() && m_vData[iIndex].source() == incomingData.source())
         {
-            m_vData[iIndex].setData(incomingData.getData());
+            m_vData[iIndex].setData(incomingData.data());
             return;
         }
     }
@@ -117,14 +139,16 @@ void CAirbusDataSupplier::receiveData(CAirbusData incomingData)
 {
     for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)
     {
-        if (m_vData[iIndex].getID() == incomingData.getID() && m_vData[iIndex].getSource() == incomingData.getSource())
+        if (m_vData[iIndex].ID() == incomingData.ID() && m_vData[iIndex].source() == incomingData.source())
         {
-            m_vData[iIndex].setData(incomingData.getData());
+            m_vData[iIndex].setData(incomingData.data());
+            m_vData[iIndex].setUpdateTime(QDateTime::currentDateTime());
             return;
         }
     }
 
     m_vData.append(incomingData);
+    m_vData.last().setUpdateTime(QDateTime::currentDateTime());
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -133,25 +157,10 @@ void CAirbusDataSupplier::removeData(EAirbusData eDataID)
 {
     for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)
     {
-        if (m_vData[iIndex].getID() == eDataID)
+        if (m_vData[iIndex].ID() == eDataID)
         {
             m_vData.remove(iIndex);
             iIndex--;
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------
-
-CAirbusData* CAirbusDataSupplier::getData(EAirbusData eID)
-{
-    for (int iIndex = 0; iIndex < m_vData.count(); iIndex++)
-    {
-        if (m_vData[iIndex].getID() == eID)
-        {
-            return &(m_vData[iIndex]);
-        }
-    }
-
-    return nullptr;
 }

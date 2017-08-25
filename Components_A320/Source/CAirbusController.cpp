@@ -299,20 +299,20 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            CAirbusData* pThrottle_1_norm = getData(adThrottle_1_norm);
-            CAirbusData* pThrottle_2_norm = getData(adThrottle_2_norm);
+            CAirbusData* pThrottle_1_norm = data(adThrottle_1_norm);
+            CAirbusData* pThrottle_2_norm = data(adThrottle_2_norm);
 
             double dThrottle_1_norm = 0.0;
             double dThrottle_2_norm = 0.0;
 
             if (pThrottle_1_norm != nullptr)
             {
-                dThrottle_1_norm = pThrottle_1_norm->getData().toDouble();
+                dThrottle_1_norm = pThrottle_1_norm->data().toDouble();
             }
 
             if (pThrottle_2_norm != nullptr)
             {
-                dThrottle_2_norm = pThrottle_2_norm->getData().toDouble();
+                dThrottle_2_norm = pThrottle_2_norm->data().toDouble();
             }
 
             dThrottle_1_norm = Math::Angles::clipDouble(dThrottle_1_norm + 0.1, 0.0, 1.0);
@@ -328,20 +328,20 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     {
         if (event->getAction() == CQ3DEvent::Press)
         {
-            CAirbusData* pThrottle_1_norm = getData(adThrottle_1_norm);
-            CAirbusData* pThrottle_2_norm = getData(adThrottle_2_norm);
+            CAirbusData* pThrottle_1_norm = data(adThrottle_1_norm);
+            CAirbusData* pThrottle_2_norm = data(adThrottle_2_norm);
 
             double dThrottle_1_norm = 0.0;
             double dThrottle_2_norm = 0.0;
 
             if (pThrottle_1_norm != nullptr)
             {
-                dThrottle_1_norm = pThrottle_1_norm->getData().toDouble();
+                dThrottle_1_norm = pThrottle_1_norm->data().toDouble();
             }
 
             if (pThrottle_2_norm != nullptr)
             {
-                dThrottle_2_norm = pThrottle_2_norm->getData().toDouble();
+                dThrottle_2_norm = pThrottle_2_norm->data().toDouble();
             }
 
             dThrottle_1_norm = Math::Angles::clipDouble(dThrottle_1_norm - 0.1, 0.0, 1.0);

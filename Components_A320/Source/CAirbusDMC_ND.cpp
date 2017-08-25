@@ -27,7 +27,7 @@ void CAirbusDMC::updateTexture_ND(QPainter* pPainter, CTexture* pTexture, double
 void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc)
 {
     // Get flight data
-    CAirbusData* pFG_FlightPlan_ptr = getData(adFG_FlightPlan_ptr);
+    CAirbusData* pFG_FlightPlan_ptr = data(adFG_FlightPlan_ptr);
 
     double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);
     double dGeoLoc_Longitude_deg = GETDATA_DOUBLE(adGeoLoc_Longitude_deg);
@@ -38,7 +38,7 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
 
     if (pFG_FlightPlan_ptr != nullptr)
     {
-        pFG_FlightPlan = (CAirbusFlightPlan*) pFG_FlightPlan_ptr->getData().toULongLong();
+        pFG_FlightPlan = (CAirbusFlightPlan*) pFG_FlightPlan_ptr->data().toULongLong();
     }
 
     //-----------------------------------------------------------------------------

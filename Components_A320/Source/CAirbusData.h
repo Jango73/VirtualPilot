@@ -37,10 +37,10 @@
 
 //-------------------------------------------------------------------------------------------------
 
-#define GETDATA_BOOL(d)     (getData(d) != nullptr ? getData(d)->getData().toBool() : false)
-#define GETDATA_INT(d)      (getData(d) != nullptr ? getData(d)->getData().toInt() : 0)
-#define GETDATA_DOUBLE(d)   (getData(d) != nullptr ? getData(d)->getData().toDouble() : 0.0)
-#define GETDATA_STRING(d)   (getData(d) != nullptr ? getData(d)->getData().toString() : "")
+#define GETDATA_BOOL(d)     (data(d) != nullptr ? data(d)->data().toBool() : false)
+#define GETDATA_INT(d)      (data(d) != nullptr ? data(d)->data().toInt() : 0)
+#define GETDATA_DOUBLE(d)   (data(d) != nullptr ? data(d)->data().toDouble() : 0.0)
+#define GETDATA_STRING(d)   (data(d) != nullptr ? data(d)->data().toString() : "")
 
 //-------------------------------------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ public:
     CAirbusData();
 
     //!
-    CAirbusData(const QString& sSource, EAirbusData eID, QVariant vData);
+    CAirbusData(const QString& source, EAirbusData eID, QVariant vData, bool bContinuous = true);
 
     //!
     virtual ~CAirbusData();
@@ -210,6 +210,9 @@ public:
     void setID(EAirbusData eID) { m_eID = eID; }
 
     //!
+    void setUpdateTime(QDateTime dValue) { m_dUpdateTime = dValue; }
+
+    //!
     void setData(QVariant vData) { m_vData = vData; }
 
     //-------------------------------------------------------------------------------------------------
@@ -217,13 +220,16 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    QString getSource() const { return m_sSource; }
+    QString source() const { return m_sSource; }
 
     //!
-    EAirbusData getID() const { return m_eID; }
+    EAirbusData ID() const { return m_eID; }
 
     //!
-    QVariant getData() const { return m_vData; }
+    QVariant data() const { return m_vData; }
+
+    //!
+    bool valid() const;
 
     //-------------------------------------------------------------------------------------------------
     // Inherited methods
@@ -241,5 +247,7 @@ protected:
 
     QString             m_sSource;
     EAirbusData         m_eID;
+    QDateTime           m_dUpdateTime;
     QVariant            m_vData;
+    bool                m_bContinuous;
 };
