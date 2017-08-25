@@ -27,6 +27,7 @@ CComponent* CAirbusMCDU::instanciator(C3DScene* pScene)
 CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_ePage(mpInitA)
+    , m_iSubPage(0)
     , m_bNeedScreenRefresh(true)
 {
     LOG_DEBUG("CAirbusMCDU::CAirbusMCDU()");
@@ -191,6 +192,7 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
         case mpInitA: handleKey_InitA(eKey); break;
         case mpInitB: handleKey_InitB(eKey); break;
         case mpRouteSelection: handleKey_RouteSelection(eKey); break;
+        case mpFlightPlanA: handleKey_FlightPlanA(eKey); break;
         }
     }
     else if (eKey == mkInit)
@@ -241,6 +243,13 @@ void CAirbusMCDU::printCenteredAt(QPoint pWhere, const QString& sText, QColor cC
 void CAirbusMCDU::printTitle(const QString& sText)
 {
     printCenteredAt(QPoint(MCDU_W / 2, 0), sText, A320_Color_White, true);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::printLeftTitle(const QString& sText)
+{
+    printAt(QPoint(0, 0), sText, A320_Color_White, false);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -405,6 +414,62 @@ void CAirbusMCDU::printPage_RouteSelection()
 
 void CAirbusMCDU::handleKey_RouteSelection(EMCDUKey eKey)
 {
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::printPage_FlightPlanA()
+{
+    CAirbusFlightPlan* pFG_FlightPlan_ptr = GETDATA_POINTER(adFG_FlightPlan_ptr, CAirbusFlightPlan);
+
+    printLeftTitle(" FROM");
+    printLabel(0, true, TEXT_FPLN_HEADER);
+
+    if (pFG_FlightPlan_ptr != nullptr)
+    {
+        int iFirstWaypoint = m_iSubPage * FPLN_WAYP_PER_PAGE;
+        int iLine = 0;
+
+        for (int index = iFirstWaypoint; index < pFG_FlightPlan_ptr->waypoints().count(); index++, iLine++)
+        {
+            QString sName = pFG_FlightPlan_ptr->waypoints()[index].name();
+            QString sSpeed = printableSpeed(pFG_FlightPlan_ptr->waypoints()[index].computedSpeed_ms());
+            QString sAltitude = printableAltitude(pFG_FlightPlan_ptr->waypoints()[index].computedAltitude_m());
+            QString sSpdAlt = QString("%1/ %2").arg(sSpeed).arg(sAltitude);
+
+            printData(iLine, true, sName, A320_Color_Blue);
+            printData(iLine, false, sSpdAlt, A320_Color_Blue);
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::handleKey_FlightPlanA(EMCDUKey eKey)
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+
+QString CAirbusMCDU::printableAltitude(double dAltitude_m)
+{
+    double dAltitude_ft = dAltitude_m * FAC_METERS_TO_FEET;
+
+    if (dAltitude_ft < 10000.0)
+    {
+        return QString::number(dAltitude_ft, 'g', 0);
+    }
+
+    return QString("FL").arg((int) (dAltitude_ft / 100.0));
+}
+
+
+//-------------------------------------------------------------------------------------------------
+
+QString CAirbusMCDU::printableSpeed(double dSpeed_ms)
+{
+    double dSpeed_kt = dSpeed_ms * FAC_MS_TO_KNOTS;
+    return QString::number(dSpeed_kt, 'g', 0);
 }
 
 //-------------------------------------------------------------------------------------------------

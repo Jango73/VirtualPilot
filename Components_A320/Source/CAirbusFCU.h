@@ -7,9 +7,14 @@
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
+// Forward declarations
 
 class C3DScene;
 
+//-------------------------------------------------------------------------------------------------
+
+//! Flight Control Unit
+//! Controls for autopilot and flight director
 class COMPONENTS_A320_EXPORT CAirbusFCU : public CAirbusFlightComputer
 {
 public:

@@ -62,9 +62,13 @@ enum EMCDUKey
 
 #define MCDU_W                  24
 #define MCDU_H                  14
+#define FPLN_WAYP_PER_PAGE      5
 
 #define FORMAT_COMPANY_ROUTE    "__________"
 #define FORMAT_ICAO_FROM_TO     "____/____"
+
+#define TEXT_FPLN_DISCONTINUITY " F-PLN DISCONTINUITY"
+#define TEXT_FPLN_HEADER        "       UTC    SPD/ALT"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -128,6 +132,9 @@ public:
     void printTitle(const QString& sText);
 
     //!
+    void printLeftTitle(const QString& sText);
+
+    //!
     void printLabel(int iLine, bool bLeft, const QString& sText);
 
     //!
@@ -151,6 +158,15 @@ public:
 
     void printPage_RouteSelection();
     void handleKey_RouteSelection(EMCDUKey eKey);
+
+    void printPage_FlightPlanA();
+    void handleKey_FlightPlanA(EMCDUKey eKey);
+
+    //!
+    QString printableAltitude(double dAltitude_m);
+
+    //!
+    QString printableSpeed(double dSpeed_ms);
 
     //!
     bool respectsFormat(const QString& sValue, const QString& sFormat);
@@ -185,6 +201,7 @@ public:
 protected:
 
     EMCDUPage                   m_ePage;
+    int                         m_iSubPage;
     MCDUChar                    m_aScreen[MCDU_W][MCDU_H];
     QString                     m_sScratchPad;
     QMap<QString, EMCDUKey>     m_mEventToKey;

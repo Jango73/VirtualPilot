@@ -20,6 +20,7 @@ class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
 
+//! Full Authority Digital Engine Control
 class COMPONENTS_A320_EXPORT CAirbusFADEC : public CAirbusFlightComputer
 {
 public:

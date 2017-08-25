@@ -21,6 +21,7 @@ class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
 
+//! Elevator and Aileron Computer
 class COMPONENTS_A320_EXPORT CAirbusELAC : public CAirbusFlightComputer
 {
 public:

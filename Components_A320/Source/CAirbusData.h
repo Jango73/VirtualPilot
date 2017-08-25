@@ -37,10 +37,11 @@
 
 //-------------------------------------------------------------------------------------------------
 
-#define GETDATA_BOOL(d)     (data(d) != nullptr ? data(d)->data().toBool() : false)
-#define GETDATA_INT(d)      (data(d) != nullptr ? data(d)->data().toInt() : 0)
-#define GETDATA_DOUBLE(d)   (data(d) != nullptr ? data(d)->data().toDouble() : 0.0)
-#define GETDATA_STRING(d)   (data(d) != nullptr ? data(d)->data().toString() : "")
+#define GETDATA_BOOL(d)         (data(d) != nullptr ? data(d)->data().toBool() : false)
+#define GETDATA_INT(d)          (data(d) != nullptr ? data(d)->data().toInt() : 0)
+#define GETDATA_DOUBLE(d)       (data(d) != nullptr ? data(d)->data().toDouble() : 0.0)
+#define GETDATA_STRING(d)       (data(d) != nullptr ? data(d)->data().toString() : "")
+#define GETDATA_POINTER(d,t)    (data(d) != nullptr ? (t*) data(d)->data().toULongLong() : nullptr)
 
 //-------------------------------------------------------------------------------------------------
 
