@@ -100,6 +100,11 @@
 #define EventName_MCDU_CAPT_INIT            "MCDU_CAPT_INIT"
 #define EventName_MCDU_CAPT_MENU            "MCDU_CAPT_MENU"
 
+#define EventName_MCDU_CAPT_UP              "MCDU_CAPT_UP"
+#define EventName_MCDU_CAPT_DOWN            "MCDU_CAPT_DOWN"
+#define EventName_MCDU_CAPT_LEFT            "MCDU_CAPT_LEFT"
+#define EventName_MCDU_CAPT_RIGHT           "MCDU_CAPT_RIGHT"
+
 #define EventName_MCDU_CAPT_0               "MCDU_CAPT_0"
 #define EventName_MCDU_CAPT_1               "MCDU_CAPT_1"
 #define EventName_MCDU_CAPT_2               "MCDU_CAPT_2"
@@ -153,6 +158,11 @@
 
 #define EventName_MCDU_FO_INIT              "MCDU_FO_INIT"
 #define EventName_MCDU_FO_MENU              "MCDU_FO_MENU"
+
+#define EventName_MCDU_FO_UP                "MCDU_FO_UP"
+#define EventName_MCDU_FO_DOWN              "MCDU_FO_DOWN"
+#define EventName_MCDU_FO_LEFT              "MCDU_FO_LEFT"
+#define EventName_MCDU_FO_RIGHT             "MCDU_FO_RIGHT"
 
 #define EventName_MCDU_FO_0                 "MCDU_FO_0"
 #define EventName_MCDU_FO_1                 "MCDU_FO_1"

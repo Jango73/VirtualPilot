@@ -12,6 +12,11 @@
     <Physics MassKG="50000.0" Friction="0.1" Drag="0.0001" AngularDrag="0.75"/>
     <CenterOfMass x="0.0" y="0.0" z="4.0"/>
 
+    <EFISWindow Name="FlatMCDU1" Class="CAirbusFlatMCDU"
+        MCDU=".MCDU_1"
+        Updater=".MCDU_1"
+    />
+
     <Controller Class="CAirbusController" Name="AirbusControl"
         PositionTarget=".Pilot"
         RotationTarget=".Pilot"

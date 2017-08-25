@@ -384,6 +384,11 @@ void CAirbusController::initializeLists()
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_INIT;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_MENU;
 
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_UP;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_DOWN;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_LEFT;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_RIGHT;
+
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_0;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_1;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_2;
@@ -437,6 +442,11 @@ void CAirbusController::initializeLists()
 
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_INIT;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_MENU;
+
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_UP;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_DOWN;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_LEFT;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_RIGHT;
 
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_0;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1;
