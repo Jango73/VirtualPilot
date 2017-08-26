@@ -18,6 +18,8 @@ CComponent* CAirbusController::instanciator(C3DScene* pScene)
 
 CAirbusController::CAirbusController(C3DScene* pScene)
     : CAircraftController(pScene)
+    , m_dEngine1ThrustLever_norm(0.0)
+    , m_dEngine2ThrustLever_norm(0.0)
 {
     initializeLists();
 }
@@ -80,51 +82,72 @@ void CAirbusController::update(double dDeltaTime)
         CVector2 vStick = CVector2(m_pJoystick->axisStates()[0], m_pJoystick->axisStates()[1]);
         double dThrottle = 1.0 - ((m_pJoystick->axisStates()[2] + 1.0) * 0.5);
 
-        pushData(CAirbusData(m_sName, adStick_CAPT_x, vStick.X));
-        pushData(CAirbusData(m_sName, adStick_CAPT_y, vStick.Y));
-        pushData(CAirbusData(m_sName, adThrottle_1_norm, dThrottle));
-        pushData(CAirbusData(m_sName, adThrottle_2_norm, dThrottle));
+        pushData(CAirbusData(m_sName, adStick_CAPT_x, vStick.X, false));
+        pushData(CAirbusData(m_sName, adStick_CAPT_y, vStick.Y, false));
+        pushData(CAirbusData(m_sName, adThrottle_1_norm, dThrottle, false));
+        pushData(CAirbusData(m_sName, adThrottle_2_norm, dThrottle, false));
     }
     else
     {
         if (m_bAileronLeft)
         {
-            pushData(CAirbusData(m_sName, adStick_CAPT_x, -1.0));
+            pushData(CAirbusData(m_sName, adStick_CAPT_x, -1.0, false));
         }
         else if (m_bAileronRight)
         {
-            pushData(CAirbusData(m_sName, adStick_CAPT_x, 1.0));
+            pushData(CAirbusData(m_sName, adStick_CAPT_x, 1.0, false));
         }
         else
         {
-            pushData(CAirbusData(m_sName, adStick_CAPT_x, 0.0));
+            pushData(CAirbusData(m_sName, adStick_CAPT_x, 0.0, false));
         }
 
         if (m_bNoseUp)
         {
-            pushData(CAirbusData(m_sName, adStick_CAPT_y, 1.0));
+            pushData(CAirbusData(m_sName, adStick_CAPT_y, 1.0, false));
         }
         else if (m_bNoseDown)
         {
-            pushData(CAirbusData(m_sName, adStick_CAPT_y, -1.0));
+            pushData(CAirbusData(m_sName, adStick_CAPT_y, -1.0, false));
         }
         else
         {
-            pushData(CAirbusData(m_sName, adStick_CAPT_y, 0.0));
+            pushData(CAirbusData(m_sName, adStick_CAPT_y, 0.0, false));
         }
 
         if (m_bRudderLeft)
         {
-            pushData(CAirbusData(m_sName, adRudder_CAPT, -1.0));
+            pushData(CAirbusData(m_sName, adRudder_CAPT, -1.0, false));
         }
         else if (m_bRudderRight)
         {
-            pushData(CAirbusData(m_sName, adRudder_CAPT, 1.0));
+            pushData(CAirbusData(m_sName, adRudder_CAPT, 1.0, false));
         }
         else
         {
-            pushData(CAirbusData(m_sName, adRudder_CAPT, 0.0));
+            pushData(CAirbusData(m_sName, adRudder_CAPT, 0.0, false));
         }
+
+        if (m_bEngine1ThrustUp)
+        {
+            m_dEngine1ThrustLever_norm += 0.05;
+        }
+        else if (m_bEngine1ThrustDown)
+        {
+            m_dEngine1ThrustLever_norm -= 0.05;
+        }
+
+        if (m_bEngine2ThrustUp)
+        {
+            m_dEngine2ThrustLever_norm += 0.05;
+        }
+        else if (m_bEngine2ThrustDown)
+        {
+            m_dEngine2ThrustLever_norm -= 0.05;
+        }
+
+        pushData(CAirbusData(m_sName, adThrottle_1_norm, m_dEngine1ThrustLever_norm, false));
+        pushData(CAirbusData(m_sName, adThrottle_2_norm, m_dEngine2ThrustLever_norm, false));
     }
 
     sendData();
@@ -159,12 +182,6 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             break;
         case Qt::Key_Left:
             generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_DEC, CQ3DEvent::Press));
-            break;
-        case Qt::Key_PageUp:
-            generateQ3DEvent(CQ3DEvent(EventName_THR_THROTTLE_INC, CQ3DEvent::Press));
-            break;
-        case Qt::Key_PageDown:
-            generateQ3DEvent(CQ3DEvent(EventName_THR_THROTTLE_DEC, CQ3DEvent::Press));
             break;
         case Qt::Key_I:
             if (event->modifiers() & Qt::ControlModifier)
@@ -291,64 +308,6 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
             {
                 pFCU->decrement_SelectedHeading(false);
             }
-        }
-        return;
-    }
-
-    if (event->getName() == EventName_THR_THROTTLE_INC)
-    {
-        if (event->getAction() == CQ3DEvent::Press)
-        {
-            CAirbusData* pThrottle_1_norm = data(adThrottle_1_norm);
-            CAirbusData* pThrottle_2_norm = data(adThrottle_2_norm);
-
-            double dThrottle_1_norm = 0.0;
-            double dThrottle_2_norm = 0.0;
-
-            if (pThrottle_1_norm != nullptr)
-            {
-                dThrottle_1_norm = pThrottle_1_norm->data().toDouble();
-            }
-
-            if (pThrottle_2_norm != nullptr)
-            {
-                dThrottle_2_norm = pThrottle_2_norm->data().toDouble();
-            }
-
-            dThrottle_1_norm = Math::Angles::clipDouble(dThrottle_1_norm + 0.1, 0.0, 1.0);
-            dThrottle_2_norm = Math::Angles::clipDouble(dThrottle_2_norm + 0.1, 0.0, 1.0);
-
-            pushData(CAirbusData(m_sName, adThrottle_1_norm, dThrottle_1_norm));
-            pushData(CAirbusData(m_sName, adThrottle_2_norm, dThrottle_2_norm));
-        }
-        return;
-    }
-
-    if (event->getName() == EventName_THR_THROTTLE_DEC)
-    {
-        if (event->getAction() == CQ3DEvent::Press)
-        {
-            CAirbusData* pThrottle_1_norm = data(adThrottle_1_norm);
-            CAirbusData* pThrottle_2_norm = data(adThrottle_2_norm);
-
-            double dThrottle_1_norm = 0.0;
-            double dThrottle_2_norm = 0.0;
-
-            if (pThrottle_1_norm != nullptr)
-            {
-                dThrottle_1_norm = pThrottle_1_norm->data().toDouble();
-            }
-
-            if (pThrottle_2_norm != nullptr)
-            {
-                dThrottle_2_norm = pThrottle_2_norm->data().toDouble();
-            }
-
-            dThrottle_1_norm = Math::Angles::clipDouble(dThrottle_1_norm - 0.1, 0.0, 1.0);
-            dThrottle_2_norm = Math::Angles::clipDouble(dThrottle_2_norm - 0.1, 0.0, 1.0);
-
-            pushData(CAirbusData(m_sName, adThrottle_1_norm, dThrottle_1_norm));
-            pushData(CAirbusData(m_sName, adThrottle_2_norm, dThrottle_2_norm));
         }
         return;
     }

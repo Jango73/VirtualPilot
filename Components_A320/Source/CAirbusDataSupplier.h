@@ -13,6 +13,14 @@
 
 //-------------------------------------------------------------------------------------------------
 
+#define GETDATA_BOOL(d)         (data(d) != nullptr ? data(d)->data().toBool() : false)
+#define GETDATA_INT(d)          (data(d) != nullptr ? data(d)->data().toInt() : 0)
+#define GETDATA_DOUBLE(d)       (data(d) != nullptr ? data(d)->data().toDouble() : 0.0)
+#define GETDATA_STRING(d)       (data(d) != nullptr ? data(d)->data().toString() : "")
+#define GETDATA_POINTER(d,t)    (data(d) != nullptr ? (t*) data(d)->data().toULongLong() : nullptr)
+
+//-------------------------------------------------------------------------------------------------
+
 class COMPONENTS_A320_EXPORT CAirbusDataSupplier : public ILoadable
 {
 public:
@@ -62,7 +70,7 @@ public:
     virtual void solveLinks(C3DScene* pScene, CComponent* pCaller);
 
     //!
-    void pushData(CAirbusData data);
+    void pushData(CAirbusData outgoingData);
 
     //!
     void sendData();
@@ -85,5 +93,6 @@ protected:
     QVector<QString>                m_vDataInputNames;
     QVector<CAirbusDataSupplier*>   m_vDataOutputs;
     QVector<CAirbusDataSupplier*>   m_vDataInputs;
-    QVector<CAirbusData>            m_vData;
+    QVector<CAirbusData>            m_vDataIncoming;
+    QVector<CAirbusData>            m_vDataOutgoing;
 };

@@ -19,37 +19,30 @@ using namespace Math;
 
 void CAirbusDMC::updateTexture_ND(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
-    drawRosace(pPainter, pTexture, dDeltaTime, true);
+    drawCompass(pPainter, pTexture, dDeltaTime, true);
 }
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc)
+void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc)
 {
     // Get flight data
-    CAirbusData* pFG_FlightPlan_ptr = data(adFG_FlightPlan_ptr);
-
+    CAirbusFlightPlan* pFG_FlightPlan_ptr = GETDATA_POINTER(adFG_FlightPlan_ptr, CAirbusFlightPlan);
     double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);
     double dGeoLoc_Longitude_deg = GETDATA_DOUBLE(adGeoLoc_Longitude_deg);
     double dGeoLoc_TrueHeading_deg = GETDATA_DOUBLE(adGeoLoc_TrueHeading_deg);
     double dGeoLoc_TrueTrack_deg = GETDATA_DOUBLE(adGeoLoc_TrueTrack_deg);
     double dFCU_Heading_deg = GETDATA_DOUBLE(adFCU_Heading_deg);
-    CAirbusFlightPlan* pFG_FlightPlan = nullptr;
-
-    if (pFG_FlightPlan_ptr != nullptr)
-    {
-        pFG_FlightPlan = (CAirbusFlightPlan*) pFG_FlightPlan_ptr->data().toULongLong();
-    }
 
     //-----------------------------------------------------------------------------
 
     double dRange_m = 40 * FAC_NM_TO_M;
 
     // Compute coordinates
-    double X = m_rRosace.left() * pTexture->image().width();
-    double Y = m_rRosace.top() * pTexture->image().height();
-    double W = m_rRosace.width() * pTexture->image().width();
-    double H = m_rRosace.height() * pTexture->image().height();
+    double X = m_rCompass.left() * pTexture->image().width();
+    double Y = m_rCompass.top() * pTexture->image().height();
+    double W = m_rCompass.width() * pTexture->image().width();
+    double H = m_rCompass.height() * pTexture->image().height();
 
     double W8 = W / 8.0;
     double W10 = W / 10.0;
@@ -62,10 +55,10 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
 
     if (bArc)
     {
-        X = (m_rRosace.center().x() - m_rRosace.width()) * pTexture->image().width();
-        Y = m_rRosace.top() * pTexture->image().height();
-        W = (m_rRosace.width() * 2.0) * pTexture->image().width();
-        H = (m_rRosace.height() * 2.0) * pTexture->image().height();
+        X = (m_rCompass.center().x() - m_rCompass.width()) * pTexture->image().width();
+        Y = m_rCompass.top() * pTexture->image().height();
+        W = (m_rCompass.width() * 2.0) * pTexture->image().width();
+        H = (m_rCompass.height() * 2.0) * pTexture->image().height();
 
         W8 = W / 16.0;
         W20 = W / 40.0;
@@ -113,15 +106,15 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
     pPainter->translate(rWholePart.center());
 
     // Flight plan
-    if (pFG_FlightPlan != nullptr)
+    if (pFG_FlightPlan_ptr != nullptr)
     {
         CMatrix4 mHeading = CMatrix4::makeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
         CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
         CVector3 vPreviousPosition;
 
-        for (int iIndex = 0; iIndex < pFG_FlightPlan->waypoints().count(); iIndex++)
+        for (int iIndex = 0; iIndex < pFG_FlightPlan_ptr->waypoints().count(); iIndex++)
         {
-            CVector3 vCurrentPosition = pFG_FlightPlan->waypoints()[iIndex].geoloc().toVector3(gGeoloc);
+            CVector3 vCurrentPosition = pFG_FlightPlan_ptr->waypoints()[iIndex].geoloc().toVector3(gGeoloc);
             vCurrentPosition = mHeading * vCurrentPosition;
             vCurrentPosition.Z *= -1.0;
             vCurrentPosition *= dRangeFactor;
@@ -130,10 +123,11 @@ void CAirbusDMC::drawRosace(QPainter* pPainter, CTexture* pTexture, double dDelt
 
             if (iIndex > 0)
             {
+                pPainter->setPen(A320_Color_White);
                 pPainter->drawLine(vPreviousPosition.X, vPreviousPosition.Z, vCurrentPosition.X, vCurrentPosition.Z);
             }
 
-            drawWaypoint(pPainter, pTexture, dDeltaTime, pFG_FlightPlan->waypoints()[iIndex], wpt, true);
+            drawWaypoint(pPainter, pTexture, dDeltaTime, pFG_FlightPlan_ptr->waypoints()[iIndex], wpt, true);
 
             vPreviousPosition = vCurrentPosition;
         }

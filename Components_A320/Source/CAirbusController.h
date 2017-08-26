@@ -98,4 +98,7 @@ protected:
 
     QStringList                         m_lEVENTS_MCDU_1;
     QStringList                         m_lEVENTS_MCDU_2;
+
+    double                              m_dEngine1ThrustLever_norm;
+    double                              m_dEngine2ThrustLever_norm;
 };

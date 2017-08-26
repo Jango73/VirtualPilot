@@ -315,6 +315,7 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
 
     // Set main font
     pPainter->setFont(m_fMainFont);
+    pPainter->setPen(A320_Color_Green);
 
     // Altitude background
     pPainter->setPen(A320_Color_White);

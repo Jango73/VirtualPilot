@@ -86,27 +86,10 @@ void CAirbusFADEC::work(double dDeltaTime)
 
     if (pEngine1 != nullptr && pEngine2 != nullptr )
     {
-        CAirbusData* pFG_CommandedThrust_norm = data(adFG_CommandedThrust_norm);
-        CAirbusData* pFCU_AutoThrust_Engaged = data(adFCU_AutoThrust_Engaged);
-        CAirbusData* pThrottle_1_norm = data(adThrottle_1_norm);
-        CAirbusData* pThrottle_2_norm = data(adThrottle_2_norm);
-
-        double dFG_CommandedThrust_norm = 0.0;
-        bool bFCU_AutoThrust_Engaged = false;
-        double dThrottle_1_norm = 0.0;
-        double dThrottle_2_norm = 0.0;
-
-        if (pFG_CommandedThrust_norm != nullptr)
-            dFG_CommandedThrust_norm = pFG_CommandedThrust_norm->data().toDouble();
-
-        if (pFCU_AutoThrust_Engaged != nullptr)
-            bFCU_AutoThrust_Engaged = pFCU_AutoThrust_Engaged->data().toBool();
-
-        if (pThrottle_1_norm != nullptr)
-            dThrottle_1_norm = pThrottle_1_norm->data().toDouble();
-
-        if (pThrottle_2_norm != nullptr)
-            dThrottle_2_norm = pThrottle_2_norm->data().toDouble();
+        double dFG_CommandedThrust_norm = GETDATA_DOUBLE(adFG_CommandedThrust_norm);
+        bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged);
+        double dThrottle_1_norm = GETDATA_DOUBLE(adThrottle_1_norm);
+        double dThrottle_2_norm = GETDATA_DOUBLE(adThrottle_2_norm);
 
         if (bFCU_AutoThrust_Engaged == true)
         {

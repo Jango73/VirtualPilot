@@ -267,6 +267,7 @@
         <DataInput Name=".ADIRU_1"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
+        <DataInput Name=".FCU"/>
     </Component>
 
     <Component Name="CONT_DMC_2" Class="CElectricalContactor">
@@ -278,6 +279,7 @@
         <DataInput Name=".ADIRU_2"/>
         <DataInput Name=".FMGC_2"/>
         <DataInput Name=".FADEC"/>
+        <DataInput Name=".FCU"/>
     </Component>
 
     <Component Name="CONT_DMC_3" Class="CElectricalContactor">
@@ -289,6 +291,7 @@
         <DataInput Name=".ADIRU_3"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
+        <DataInput Name=".FCU"/>
     </Component>
 
     <!-- FAC - Flight Augmentation Computer -->
@@ -424,7 +427,7 @@
         <DataInput Name=".MCDU_2"/>
     </Component>
 
-    <!-- CONTROL -->
+    <!-- FCU - Flight Control Unit -->
     <Component Name="FCU" Class="CAirbusFCU">
         <PowerInput Name=".DC_ESS_BUS"/>
     </Component>
@@ -435,6 +438,7 @@
         <General Closed="1"/>
     </Component>
     <Component Name="MCDU_1" Class="CAirbusMCDU">
+        <General UnitIndex="0"/>
         <PowerInput Name=".CONT_MCDU_1"/>
         <DataInput Name=".FMGC_1"/>
     </Component>
@@ -444,6 +448,7 @@
         <General Closed="1"/>
     </Component>
     <Component Name="MCDU_2" Class="CAirbusMCDU">
+        <General UnitIndex="1"/>
         <PowerInput Name=".CONT_MCDU_2"/>
         <DataInput Name=".FMGC_2"/>
     </Component>

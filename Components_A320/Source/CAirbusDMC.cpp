@@ -48,7 +48,7 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
     m_iVerticalSpeedMarker.addValue( 2000.0 * FAC_FPM_TO_MS, -0.90);
     m_iVerticalSpeedMarker.addValue( 6000.0 * FAC_FPM_TO_MS, -1.00);
 
-    m_rRosace = QRectF(0.20, 0.20, 0.60, 0.60);
+    m_rCompass = QRectF(0.20, 0.20, 0.60, 0.60);
 
     m_rEWD_Engines = QRectF(0.00, 0.00, 0.60, 0.70);
 

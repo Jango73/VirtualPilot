@@ -83,7 +83,7 @@ public:
     void drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
 
     //!
-    void drawRosace(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc);
+    void drawCompass(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc);
 
     //!
     void drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CWaypoint& wWaypoint, const QRectF& rect, bool bIsFlight);
@@ -107,7 +107,7 @@ protected:
     QRectF                      m_rFMA;
     CInterpolator<double>       m_iVerticalSpeedMarker;
 
-    QRectF                      m_rRosace;
+    QRectF                      m_rCompass;
 
     QRectF                      m_rEWD_Engines;
     QRectF                      m_rEWD_Flaps;
