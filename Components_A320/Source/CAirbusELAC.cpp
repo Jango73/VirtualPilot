@@ -94,80 +94,16 @@ void CAirbusELAC::work(double dDeltaTime)
         QSP<CWing> pRightWing = QSP_CAST(CWing, m_rRightWingTarget.component());
         QSP<CElevator> pElevator = QSP_CAST(CElevator, m_rElevatorTarget.component());
 
-        CAirbusData* pInertial_Roll_deg = data(adInertial_Roll_deg);
-        CAirbusData* pInertial_Pitch_deg = data(adInertial_Pitch_deg);
-        CAirbusData* pInertial_RollVelocity_ds = data(adInertial_RollVelocity_ds);
-        CAirbusData* pInertial_PitchVelocity_ds = data(adInertial_PitchVelocity_ds);
-        CAirbusData* pFG_CommandedRollVelocity_ds = data(adFG_CommandedRollVelocity_ds);
-        CAirbusData* pFG_CommandedPitchVelocity_ds = data(adFG_CommandedPitchVelocity_ds);
-        CAirbusData* pStick_CAPT_x = data(adStick_CAPT_x);
-        CAirbusData* pStick_CAPT_y = data(adStick_CAPT_y);
-        CAirbusData* pFCU_AutoPilot1_Engaged = data(adFCU_AutoPilot1_Engaged);
-        CAirbusData* pFCU_AutoPilot2_Engaged = data(adFCU_AutoPilot2_Engaged);
-
-        double dInertial_Roll_deg = 0.0;
-        double dInertial_Pitch_deg = 0.0;
-        double dInertial_RollVelocity_ds = 0.0;
-        double dInertial_PitchVelocity_ds = 0.0;
-        double dFG_CommandedRollVelocity_ds = 0.0;
-        double dFG_CommandedPitchVelocity_ds = 0.0;
-        bool bFCU_AutoPilot1_Engaged = false;
-        bool bFCU_AutoPilot2_Engaged = false;
-
-        if (pInertial_Roll_deg != nullptr)
-        {
-            dInertial_Roll_deg = pInertial_Roll_deg->data().toDouble();
-        }
-
-        if (pInertial_Pitch_deg != nullptr)
-        {
-            dInertial_Pitch_deg = pInertial_Pitch_deg->data().toDouble();
-        }
-
-        if (pInertial_PitchVelocity_ds != nullptr)
-        {
-            dInertial_PitchVelocity_ds = pInertial_PitchVelocity_ds->data().toDouble();
-        }
-
-        if (pInertial_RollVelocity_ds != nullptr)
-        {
-            dInertial_RollVelocity_ds = pInertial_RollVelocity_ds->data().toDouble();
-        }
-
-        if (pInertial_PitchVelocity_ds != nullptr)
-        {
-            dInertial_PitchVelocity_ds = pInertial_PitchVelocity_ds->data().toDouble();
-        }
-
-        if (pFG_CommandedRollVelocity_ds != nullptr)
-        {
-            dFG_CommandedRollVelocity_ds = pFG_CommandedRollVelocity_ds->data().toDouble();
-        }
-
-        if (pFG_CommandedPitchVelocity_ds != nullptr)
-        {
-            dFG_CommandedPitchVelocity_ds = pFG_CommandedPitchVelocity_ds->data().toDouble();
-        }
-
-        if (pStick_CAPT_x != nullptr)
-        {
-            m_vStick.X = pStick_CAPT_x->data().toDouble();
-        }
-
-        if (pStick_CAPT_y != nullptr)
-        {
-            m_vStick.Y = pStick_CAPT_y->data().toDouble();
-        }
-
-        if (pFCU_AutoPilot1_Engaged != nullptr)
-        {
-            bFCU_AutoPilot1_Engaged = pFCU_AutoPilot1_Engaged->data().toBool();
-        }
-
-        if (pFCU_AutoPilot2_Engaged != nullptr)
-        {
-            bFCU_AutoPilot2_Engaged = pFCU_AutoPilot2_Engaged->data().toBool();
-        }
+        double dInertial_Roll_deg = GETDATA_DOUBLE(adInertial_Roll_deg);
+        double dInertial_Pitch_deg = GETDATA_DOUBLE(adInertial_Pitch_deg);
+        double dInertial_RollVelocity_ds = GETDATA_DOUBLE(adInertial_RollVelocity_ds);
+        double dInertial_PitchVelocity_ds = GETDATA_DOUBLE(adInertial_PitchVelocity_ds);
+        double dFG_CommandedRollVelocity_ds = GETDATA_DOUBLE(adFG_CommandedRollVelocity_ds);
+        double dFG_CommandedPitchVelocity_ds = GETDATA_DOUBLE(adFG_CommandedPitchVelocity_ds);
+        bool bFCU_AutoPilot1_Engaged = GETDATA_BOOL(adFCU_AutoPilot1_Engaged);
+        bool bFCU_AutoPilot2_Engaged = GETDATA_BOOL(adFCU_AutoPilot2_Engaged);
+        m_vStick.X = GETDATA_DOUBLE(adStick_CAPT_x);
+        m_vStick.Y = GETDATA_DOUBLE(adStick_CAPT_y);
 
         //-----------------------------------------------------------------------------
 

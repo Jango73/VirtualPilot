@@ -78,6 +78,8 @@ protected:
     bool	m_bAutoPilot1_Engaged;
     bool	m_bAutoPilot2_Engaged;
     bool	m_bAutoThrust_Engaged;
+    bool    m_bLateralManaged;
+    bool    m_bVerticalManaged;
 
     double	m_dSelectedHeading;
     double  m_dSelectedAltitude;

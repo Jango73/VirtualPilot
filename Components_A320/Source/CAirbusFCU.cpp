@@ -24,6 +24,8 @@ CAirbusFCU::CAirbusFCU(C3DScene* pScene)
     , m_bAutoPilot1_Engaged(false)
     , m_bAutoPilot2_Engaged(false)
     , m_bAutoThrust_Engaged(false)
+    , m_bLateralManaged(true)
+    , m_bVerticalManaged(true)
     , m_dSelectedHeading(0.0)
     , m_dSelectedAltitude(33000.0 * FAC_FEET_TO_METERS)
 {
@@ -46,6 +48,8 @@ void CAirbusFCU::update(double dDeltaTime)
     pushData(CAirbusData(m_sName, adFCU_AutoPilot1_Engaged, m_bAutoPilot1_Engaged));
     pushData(CAirbusData(m_sName, adFCU_AutoPilot2_Engaged, m_bAutoPilot2_Engaged));
     pushData(CAirbusData(m_sName, adFCU_AutoThrust_Engaged, m_bAutoThrust_Engaged));
+    pushData(CAirbusData(m_sName, adFCU_Lateral_Managed, m_bLateralManaged));
+    pushData(CAirbusData(m_sName, adFCU_Vertical_Managed, m_bVerticalManaged));
 
     pushData(CAirbusData(m_sName, adFCU_Altitude_f, m_dSelectedAltitude));
     pushData(CAirbusData(m_sName, adFCU_Heading_deg, m_dSelectedHeading));

@@ -23,10 +23,8 @@ CComponent* CAirbusFMGC::instanciator(C3DScene* pScene)
 CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_eFlightPhase(fpPark)
-    // , m_eLateralMode(almHeading)
-    , m_eLateralMode(almNav)
-    // , m_eVerticalMode(avmAltitudeHold)
-    , m_eVerticalMode(avmNav)
+    , m_eLateralMode(almNone)
+    , m_eVerticalMode(avmNone)
     , m_pidVerticalSpeed(5.0, 0.0, 0.1)
     , m_pidAcceleration(0.5, 0.0, 0.001)
     , m_pidDeceleration(0.02, 0.0, 0.001)
@@ -87,13 +85,16 @@ void CAirbusFMGC::work(double dDeltaTime)
 {
     CAirbusFlightComputer::work(dDeltaTime);
 
-    m_dDeltaTime = dDeltaTime;
+    if (m_iUnitIndex == 0)
+    {
+        m_dDeltaTime = dDeltaTime;
 
-    // Flight Management
-    work_FM(dDeltaTime);
+        // Flight Management
+        work_FM(dDeltaTime);
 
-    // Flight Guidance
-    work_FG(dDeltaTime);
+        // Flight Guidance
+        work_FG(dDeltaTime);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -236,6 +237,8 @@ void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
 
 void CAirbusFMGC::work_FG(double dDeltaTime)
 {
+    bool bFCU_Lateral_Managed = GETDATA_BOOL(adFCU_Lateral_Managed);
+    bool bFCU_Vertical_Managed = GETDATA_BOOL(adFCU_Vertical_Managed);
     double dFCU_Altitude_f = GETDATA_DOUBLE(adFCU_Altitude_f);
     double dFCU_Heading_deg = GETDATA_DOUBLE(adFCU_Heading_deg);
     double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);
@@ -254,9 +257,9 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     // Compute auto heading
 
-    if (m_eLateralMode == almNav && m_tFlightPlan.waypoints().count() > 1)
+    if (bFCU_Lateral_Managed && m_tFlightPlan.waypoints().count() > 1)
     {
-        // CMatrix4 mHeading = CMatrix4::MakeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
+        m_eLateralMode = almNav;
 
         // Get two points of current segment
         CGeoloc gSegmentStart = m_tFlightPlan.waypoints()[WAYPOINT_TO - 1].geoloc();
@@ -293,8 +296,11 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     }
     else
     {
+        m_eLateralMode = almHeading;
         m_dCommandedHeading_deg = dFCU_Heading_deg;
     }
+
+    // Compute heading commands
 
     m_dCommandedRoll_deg = Math::Angles::angleDifferenceDegree(m_dCommandedHeading_deg, dGeoLoc_TrueHeading_deg);
     m_dCommandedRoll_deg = m_dCommandedRoll_deg * -2.0;
@@ -303,20 +309,24 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedRollVelocity_ds = m_dCommandedRoll_deg - dAircraftRoll_deg;
     m_dCommandedRollVelocity_ds = Math::Angles::clipDouble(m_dCommandedRollVelocity_ds, -10.0, 10.0);
 
-    // Compute altitude command
+    // Compute auto altitude
 
     if (
-            m_eLateralMode == avmNav &&
+            bFCU_Vertical_Managed &&
             m_tFlightPlan.waypoints().count() > 1 &&
-            m_tFlightPlan.waypoints()[WAYPOINT_TO].selectedAltitude_m() != 0.0
+            m_tFlightPlan.waypoints()[WAYPOINT_TO].computedAltitude_m() != 0.0
             )
     {
-        m_dCommandedAltitude_m = m_tFlightPlan.waypoints()[WAYPOINT_TO].selectedAltitude_m();
+        m_eVerticalMode = avmClimb;
+        m_dCommandedAltitude_m = m_tFlightPlan.waypoints()[WAYPOINT_TO].computedAltitude_m();
     }
     else
     {
+        m_eVerticalMode = avmAltitudeHold;
         m_dCommandedAltitude_m = dFCU_Altitude_f;
     }
+
+    // Compute altitude commands
 
     m_dCommandedVerticalSpeed_ms = (m_dCommandedAltitude_m - dAircraftAltitude_m) * 0.25;
     m_dCommandedVerticalSpeed_ms = Math::Angles::clipDouble(m_dCommandedVerticalSpeed_ms, -8.0, 8.0);

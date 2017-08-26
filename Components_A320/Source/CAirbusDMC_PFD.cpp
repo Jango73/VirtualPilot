@@ -412,9 +412,6 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
             case avmAltitudeHold :
                 sTextPart2_1 = "ALT";
                 break;
-            case avmNav :
-                sTextPart2_1 = "NAV";
-                break;
             case avmOpenClimb :
                 sTextPart2_1 = "OP CLB";
                 break;
