@@ -63,6 +63,7 @@ enum EAirbusData
     adGeoLoc_GroundSpeed_ms,
     adGeoLoc_TrueHeading_deg,
     adGeoLoc_TrueTrack_deg,
+    adRadar_AltitudeAGL_m,
 
     // Data coming from ?
     adFuel_TotalFuel_l,
@@ -121,14 +122,17 @@ enum EAirbusData
 
 enum EFlightLaw
 {
-    flNormal
+    flNormal,
+    flAlternate,
+    flDirect
 };
 
 //-------------------------------------------------------------------------------------------------
 // Flight phases
 
-enum EFlightPhase
+enum EAirbusFlightPhase
 {
+    fpNone,
     fpPark,
     fpTaxi,
     fpTakeoff,
@@ -137,8 +141,7 @@ enum EFlightPhase
     fpDescent,
     fpApproach,
     fpLand,
-    fpGoAround,
-    fpTaxiToGate
+    fpGoAround
 };
 
 //-------------------------------------------------------------------------------------------------
@@ -148,7 +151,13 @@ enum EAirbusLateralMode
 {
     almNone,
     almHeading,
-    almNav
+    almNav,
+    almAppNav,
+    almLoc,
+    almRunway,
+    almRunwayTrack,
+    almGoAroundTrack,
+    almRollOut
 };
 
 //-------------------------------------------------------------------------------------------------
@@ -157,12 +166,18 @@ enum EAirbusLateralMode
 enum EAirbusVerticalMode
 {
     avmNone,
-    avmVerticalSpeedHold,
-    avmAltitudeHold,
     avmOpenClimb,
     avmOpenDescent,
+    avmVerticalSpeedHold,
+    avmAltitudeHold,
     avmClimb,
-    avmDescent
+    avmDescent,
+    avmAltitudeConstraint,
+    avmAltitudeCruise,
+    avmGlideSlope,
+    avmFinal,
+    avmFinalApproach,
+    avmFlare
 };
 
 //-------------------------------------------------------------------------------------------------

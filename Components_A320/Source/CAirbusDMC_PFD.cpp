@@ -356,6 +356,7 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
     bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged);
     EAirbusLateralMode eFG_LateralMode_alm = (EAirbusLateralMode) GETDATA_INT(adFG_LateralMode_alm);
     EAirbusVerticalMode eFG_VerticalMode_avm = (EAirbusVerticalMode) GETDATA_INT(adFG_VerticalMode_avm);
+    EAirbusFlightPhase eFG_FlightPhase_fp = (EAirbusFlightPhase) GETDATA_INT(adFG_FlightPhase_fp);
 
     // Compute coordinates
     double X = m_rFMA.left() * pTexture->image().width();
@@ -366,14 +367,20 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
     double H3 = H / 3.0;
 
     QRectF rPart1_1(X + W5 * 0, Y + H3 * 0, W5, H3);	// FMA Col 1 Row 1
+    QRectF rPart1_2(X + W5 * 0, Y + H3 * 1, W5, H3);	// FMA Col 1 Row 2
+
     QRectF rPart2_1(X + W5 * 1, Y + H3 * 0, W5, H3);	// FMA Col 2 Row 1
+
     QRectF rPart3_1(X + W5 * 2, Y + H3 * 0, W5, H3);	// FMA Col 3 Row 1
+
     QRectF rPart4_1(X + W5 * 3, Y + H3 * 0, W5, H3);	// FMA Col 4 Row 1
+
     QRectF rPart5_1(X + W5 * 4, Y + H3 * 0, W5, H3);	// FMA Col 5 Row 1
     QRectF rPart5_2(X + W5 * 4, Y + H3 * 1, W5, H3);	// FMA Col 5 Row 2
     QRectF rPart5_3(X + W5 * 4, Y + H3 * 2, W5, H3);	// FMA Col 5 Row 3
 
     QString sTextPart1_1;
+    QString sTextPart1_2;
     QString sTextPart2_1;
     QString sTextPart3_1;
     QString sTextPart4_1;
@@ -402,27 +409,63 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
             case almNav :
                 sTextPart3_1 = "NAV";
                 break;
+            case almAppNav :
+                sTextPart3_1 = "APP NAV";
+                break;
+            case almLoc :
+                sTextPart3_1 = "LOC";
+                break;
+            case almRunway :
+                sTextPart3_1 = "RWY";
+                break;
+            case almRunwayTrack :
+                sTextPart3_1 = "RWY TRK";
+                break;
+            case almGoAroundTrack :
+                sTextPart3_1 = "GA TRK";
+                break;
+            case almRollOut :
+                sTextPart3_1 = "ROLL OUT";
+                break;
         }
 
         switch (eFG_VerticalMode_avm)
         {
-            case avmVerticalSpeedHold :
-                sTextPart2_1 = "VS";
-                break;
-            case avmAltitudeHold :
-                sTextPart2_1 = "ALT";
-                break;
             case avmOpenClimb :
                 sTextPart2_1 = "OP CLB";
                 break;
             case avmOpenDescent :
                 sTextPart2_1 = "OP DES";
                 break;
+            case avmVerticalSpeedHold :
+                sTextPart2_1 = "VS";
+                break;
+            case avmAltitudeHold :
+                sTextPart2_1 = "ALT";
+                break;
             case avmClimb :
                 sTextPart2_1 = "CLB";
                 break;
             case avmDescent :
                 sTextPart2_1 = "DES";
+                break;
+            case avmAltitudeConstraint :
+                sTextPart2_1 = "ALT CSTR";
+                break;
+            case avmAltitudeCruise :
+                sTextPart2_1 = "ALT CRZ";
+                break;
+            case avmGlideSlope :
+                sTextPart2_1 = "GS";
+                break;
+            case avmFinal :
+                sTextPart2_1 = "FINAL";
+                break;
+            case avmFinalApproach :
+                sTextPart2_1 = "FINAL APP";
+                break;
+            case avmFlare :
+                sTextPart2_1 = "FLARE";
                 break;
         }
     }
@@ -433,9 +476,12 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
         sTextPart5_3 = "A/THR";
     }
 
+    sTextPart1_2 = QString::number(eFG_FlightPhase_fp);
+
     // Col 1
     pPainter->setPen(A320_Color_Green);
     pPainter->drawText(rPart1_1, Qt::AlignCenter, sTextPart1_1);
+    pPainter->drawText(rPart1_2, Qt::AlignCenter, sTextPart1_2);
 
     // Col 2
     pPainter->setPen(A320_Color_Green);

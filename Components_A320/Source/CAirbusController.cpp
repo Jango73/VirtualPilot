@@ -178,10 +178,24 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             generateQ3DEvent(CQ3DEvent(EventName_FCU_ATHR, CQ3DEvent::Press));
             break;
         case Qt::Key_Right:
-            generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_INC, CQ3DEvent::Press));
+            if (event->modifiers() & Qt::ControlModifier)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_RIGHT, CQ3DEvent::Press));
+            }
+            else
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_INC, CQ3DEvent::Press));
+            }
             break;
         case Qt::Key_Left:
-            generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_DEC, CQ3DEvent::Press));
+            if (event->modifiers() & Qt::ControlModifier)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_LEFT, CQ3DEvent::Press));
+            }
+            else
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_DEC, CQ3DEvent::Press));
+            }
             break;
         case Qt::Key_I:
             if (event->modifiers() & Qt::ControlModifier)
@@ -193,6 +207,12 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_MENU, CQ3DEvent::Press));
+            }
+            break;
+        case Qt::Key_F:
+            if (event->modifiers() & Qt::ControlModifier)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_FPLN, CQ3DEvent::Press));
             }
             break;
     }
@@ -341,6 +361,7 @@ void CAirbusController::initializeLists()
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_6R;
 
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_INIT;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_FPLN;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_MENU;
 
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_UP;
@@ -400,6 +421,7 @@ void CAirbusController::initializeLists()
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_6R;
 
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_INIT;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_FPLN;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_MENU;
 
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_UP;

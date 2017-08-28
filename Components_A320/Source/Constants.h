@@ -98,6 +98,7 @@
 #define EventName_MCDU_CAPT_6R              "MCDU_CAPT_6R"
 
 #define EventName_MCDU_CAPT_INIT            "MCDU_CAPT_INIT"
+#define EventName_MCDU_CAPT_FPLN            "MCDU_CAPT_FPLN"
 #define EventName_MCDU_CAPT_MENU            "MCDU_CAPT_MENU"
 
 #define EventName_MCDU_CAPT_UP              "MCDU_CAPT_UP"
@@ -157,6 +158,7 @@
 #define EventName_MCDU_FO_6R                "MCDU_FO_6R"
 
 #define EventName_MCDU_FO_INIT              "MCDU_FO_INIT"
+#define EventName_MCDU_FO_FPLN              "MCDU_FO_FPLN"
 #define EventName_MCDU_FO_MENU              "MCDU_FO_MENU"
 
 #define EventName_MCDU_FO_UP                "MCDU_FO_UP"

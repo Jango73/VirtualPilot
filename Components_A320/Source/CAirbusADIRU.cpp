@@ -117,6 +117,10 @@ void CAirbusADIRU::work(double dDeltaTime)
         pushData(CAirbusData(m_sName, adAir_Altitude_m, dAltitude_m));
         pushData(CAirbusData(m_sName, adGeoLoc_Altitude_m, dAltitude_m));
 
+        // Compute radar altitude
+        double dAltitudeAGL_m = pAircraft->altitudeAGL_m();
+        pushData(CAirbusData(m_sName, adRadar_AltitudeAGL_m, dAltitudeAGL_m));
+
         // Log some values
         LOG_VALUE(QString("%1 (GS/TRK/MCH)").arg(m_sName),
                   QString("%1 / %2 / %3")

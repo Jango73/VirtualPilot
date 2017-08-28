@@ -46,6 +46,7 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_CAPT_6R] = mk6R;
 
     m_mEventToKey[EventName_MCDU_CAPT_INIT] = mkInit;
+    m_mEventToKey[EventName_MCDU_CAPT_FPLN] = mkFPln;
     m_mEventToKey[EventName_MCDU_CAPT_MENU] = mkMenu;
 
     m_mEventToKey[EventName_MCDU_CAPT_UP] = mkUp;
@@ -105,6 +106,7 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_FO_6R] = mk6R;
 
     m_mEventToKey[EventName_MCDU_FO_INIT] = mkInit;
+    m_mEventToKey[EventName_MCDU_FO_FPLN] = mkFPln;
     m_mEventToKey[EventName_MCDU_FO_MENU] = mkMenu;
 
     m_mEventToKey[EventName_MCDU_FO_UP] = mkUp;
@@ -256,16 +258,20 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
     {
         switch (m_ePage)
         {
-        case mpMenu: handleKey_Menu(eKey); break;
-        case mpInitA: handleKey_InitA(eKey); break;
-        case mpInitB: handleKey_InitB(eKey); break;
-        case mpRouteSelection: handleKey_RouteSelection(eKey); break;
-        case mpFlightPlanA: handleKey_FlightPlanA(eKey); break;
+            case mpMenu: handleKey_Menu(eKey); break;
+            case mpInitA: handleKey_InitA(eKey); break;
+            case mpInitB: handleKey_InitB(eKey); break;
+            case mpRouteSelection: handleKey_RouteSelection(eKey); break;
+            case mpFlightPlanA: handleKey_FlightPlanA(eKey); break;
         }
     }
     else if (eKey == mkInit)
     {
         m_ePage = mpInitA;
+    }
+    else if (eKey == mkFPln)
+    {
+        m_ePage = mpFlightPlanA;
     }
     else if (eKey == mkMenu)
     {
@@ -354,10 +360,11 @@ void CAirbusMCDU::printCurrentPage()
 {
     switch (m_ePage)
     {
-    case mpMenu: printPage_Menu(); break;
-    case mpInitA: printPage_InitA(); break;
-    case mpInitB: printPage_InitB(); break;
-    case mpRouteSelection: printPage_RouteSelection(); break;
+        case mpMenu: printPage_Menu(); break;
+        case mpInitA: printPage_InitA(); break;
+        case mpInitB: printPage_InitB(); break;
+        case mpRouteSelection: printPage_RouteSelection(); break;
+        case mpFlightPlanA: printPage_FlightPlanA(); break;
     }
 }
 
@@ -435,22 +442,22 @@ void CAirbusMCDU::handleKey_InitA(EMCDUKey eKey)
 {
     switch (eKey)
     {
-    case mk1L:
-        if (m_sScratchPad.isEmpty() == false)
-        {
-            sendData(mdsCompanyRoute, m_sScratchPad);
-            m_sScratchPad.clear();
-        }
-        break;
-    case mk1R:
-        if (m_sScratchPad.isEmpty() == false)
-        {
-            if (respectsFormat(m_sScratchPad, FORMAT_ICAO_FROM_TO))
+        case mk1L:
+            if (m_sScratchPad.isEmpty() == false)
             {
-                sendData(mdsICAOFromTo, m_sScratchPad);
+                sendData(mdsCompanyRoute, m_sScratchPad);
+                m_sScratchPad.clear();
             }
-        }
-        break;
+            break;
+        case mk1R:
+            if (m_sScratchPad.isEmpty() == false)
+            {
+                if (respectsFormat(m_sScratchPad, FORMAT_ICAO_FROM_TO))
+                {
+                    sendData(mdsICAOFromTo, m_sScratchPad);
+                }
+            }
+            break;
     }
 }
 
@@ -492,21 +499,27 @@ void CAirbusMCDU::printPage_FlightPlanA()
 
     printLeftTitle(" FROM");
     printLabel(0, true, TEXT_FPLN_HEADER);
+    printLabel(5, true, TEXT_FPLN_FOOTER);
 
     if (pFG_FlightPlan_ptr != nullptr)
     {
         int iFirstWaypoint = m_iSubPage * FPLN_WAYP_PER_PAGE;
         int iLine = 0;
 
-        for (int index = iFirstWaypoint; index < pFG_FlightPlan_ptr->waypoints().count(); index++, iLine++)
+        for (int index = 0; index < FPLN_WAYP_PER_PAGE; index++, iLine++)
         {
-            QString sName = pFG_FlightPlan_ptr->waypoints()[index].name();
-            QString sSpeed = printableSpeed(pFG_FlightPlan_ptr->waypoints()[index].computedSpeed_ms());
-            QString sAltitude = printableAltitude(pFG_FlightPlan_ptr->waypoints()[index].computedAltitude_m());
-            QString sSpdAlt = QString("%1/ %2").arg(sSpeed).arg(sAltitude);
+            int iWaypIndex = iFirstWaypoint + index;
 
-            printData(iLine, true, sName, A320_Color_Blue);
-            printData(iLine, false, sSpdAlt, A320_Color_Blue);
+            if (iWaypIndex < pFG_FlightPlan_ptr->waypoints().count())
+            {
+                QString sName = pFG_FlightPlan_ptr->waypoints()[iWaypIndex].name();
+                QString sSpeed = printableSpeed(pFG_FlightPlan_ptr->waypoints()[iWaypIndex].computedSpeed_ms());
+                QString sAltitude = printableAltitude(pFG_FlightPlan_ptr->waypoints()[iWaypIndex].computedAltitude_m());
+                QString sSpdAlt = QString("%1/%2").arg(sSpeed).arg(sAltitude);
+
+                printData(iLine, true, sName, A320_Color_Blue);
+                printData(iLine, false, sSpdAlt, A320_Color_Blue);
+            }
         }
     }
 }
@@ -521,8 +534,8 @@ void CAirbusMCDU::handleKey_FlightPlanA(EMCDUKey eKey)
     {
         switch (eKey)
         {
-        case mkLeft: m_iSubPage--; break;
-        case mkRight: m_iSubPage++; break;
+            case mkLeft: m_iSubPage--; break;
+            case mkRight: m_iSubPage++; break;
         }
 
         int iTotalCount = pFG_FlightPlan_ptr->waypoints().count();
@@ -539,12 +552,16 @@ QString CAirbusMCDU::printableAltitude(double dAltitude_m)
 {
     double dAltitude_ft = dAltitude_m * FAC_METERS_TO_FEET;
 
-    if (dAltitude_ft < 10000.0)
+    if (dAltitude_ft == 0.0)
+    {
+        return "-----";
+    }
+    else if (dAltitude_ft < 10000.0)
     {
         return QString::number(dAltitude_ft, 'g', 0);
     }
 
-    return QString("FL").arg((int) (dAltitude_ft / 100.0));
+    return QString("FL%1").arg((int) (dAltitude_ft / 100.0));
 }
 
 
@@ -553,6 +570,12 @@ QString CAirbusMCDU::printableAltitude(double dAltitude_m)
 QString CAirbusMCDU::printableSpeed(double dSpeed_ms)
 {
     double dSpeed_kt = dSpeed_ms * FAC_MS_TO_KNOTS;
+
+    if (dSpeed_kt == 0.0)
+    {
+        return "---";
+    }
+
     return QString::number(dSpeed_kt, 'g', 0);
 }
 

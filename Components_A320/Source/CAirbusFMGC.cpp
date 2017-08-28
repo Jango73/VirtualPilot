@@ -22,7 +22,7 @@ CComponent* CAirbusFMGC::instanciator(C3DScene* pScene)
 
 CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
-    , m_eFlightPhase(fpPark)
+    , m_eFlightPhase(fpTaxi)
     , m_eLateralMode(almNone)
     , m_eVerticalMode(avmNone)
     , m_pidVerticalSpeed(5.0, 0.0, 0.1)
@@ -89,6 +89,8 @@ void CAirbusFMGC::work(double dDeltaTime)
     {
         m_dDeltaTime = dDeltaTime;
 
+        computeFlightPhase(dDeltaTime);
+
         // Flight Management
         work_FM(dDeltaTime);
 
@@ -129,19 +131,19 @@ void CAirbusFMGC::work_FM_ProcessMCDUData(double dDeltaTime)
 
         switch (eMCDU_DataSetName)
         {
-        case mdsCompanyRoute:
-            m_tFlightPlan.setCompanyRoute(GETDATA_STRING(adMCDU_DataSetValue));
-            break;
+            case mdsCompanyRoute:
+                m_tFlightPlan.setCompanyRoute(GETDATA_STRING(adMCDU_DataSetValue));
+                break;
 
-        case mdsICAOFromTo:
-            QStringList lICAO = GETDATA_STRING(adMCDU_DataSetValue).split("/");
+            case mdsICAOFromTo:
+                QStringList lICAO = GETDATA_STRING(adMCDU_DataSetValue).split("/");
 
-            if (lICAO.count() == 2)
-            {
-                m_tFlightPlan.setICAOFrom(lICAO[0]);
-                m_tFlightPlan.setICAOTo(lICAO[1]);
-            }
-            break;
+                if (lICAO.count() == 2)
+                {
+                    m_tFlightPlan.setICAOFrom(lICAO[0]);
+                    m_tFlightPlan.setICAOTo(lICAO[1]);
+                }
+                break;
         }
     }
 }
@@ -246,12 +248,12 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     double dGeoLoc_TrueHeading_deg = GETDATA_DOUBLE(adGeoLoc_TrueHeading_deg);
     double dGeoLoc_TrueTrack_deg = GETDATA_DOUBLE(adGeoLoc_TrueTrack_deg);
     double dGeoLoc_GroundSpeed_ms = GETDATA_DOUBLE(adGeoLoc_GroundSpeed_ms);
-    double dAircraftAltitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
+    double dAir_Altitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
     double dAircraftVerticalSpeed_ms = GETDATA_DOUBLE(adAir_VerticalSpeed_ms);
-    double dIndicatedAirspeed_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeed_ms);
-    double dIndicatedAcceleration_ms = GETDATA_DOUBLE(adAir_IndicatedAcceleration_ms);
-    double dAircraftRoll_deg = GETDATA_DOUBLE(adInertial_Roll_deg);
-    double dAircraftPitch_deg = GETDATA_DOUBLE(adInertial_Pitch_deg);
+    double dAir_IndicatedAirspeed_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeed_ms);
+    double dAir_IndicatedAcceleration_ms = GETDATA_DOUBLE(adAir_IndicatedAcceleration_ms);
+    double dInertial_Roll_deg = GETDATA_DOUBLE(adInertial_Roll_deg);
+    double dInertial_Pitch_deg = GETDATA_DOUBLE(adInertial_Pitch_deg);
 
     CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
 
@@ -306,7 +308,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedRoll_deg = m_dCommandedRoll_deg * -2.0;
     m_dCommandedRoll_deg = Math::Angles::clipDouble(m_dCommandedRoll_deg, -30.0, 30.0);
 
-    m_dCommandedRollVelocity_ds = m_dCommandedRoll_deg - dAircraftRoll_deg;
+    m_dCommandedRollVelocity_ds = m_dCommandedRoll_deg - dInertial_Roll_deg;
     m_dCommandedRollVelocity_ds = Math::Angles::clipDouble(m_dCommandedRollVelocity_ds, -10.0, 10.0);
 
     // Compute auto altitude
@@ -328,7 +330,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     // Compute altitude commands
 
-    m_dCommandedVerticalSpeed_ms = (m_dCommandedAltitude_m - dAircraftAltitude_m) * 0.25;
+    m_dCommandedVerticalSpeed_ms = (m_dCommandedAltitude_m - dAir_Altitude_m) * 0.25;
     m_dCommandedVerticalSpeed_ms = Math::Angles::clipDouble(m_dCommandedVerticalSpeed_ms, -8.0, 8.0);
 
     m_pidVerticalSpeed.setSetPoint(m_dCommandedVerticalSpeed_ms);
@@ -337,23 +339,23 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     m_dCommandedPitch_deg = -m_pidVerticalSpeed.output();
     m_dCommandedPitch_deg = Math::Angles::clipDouble(m_dCommandedPitch_deg, -20.0, 10.0);
 
-    m_dCommandedPitchVelocity_ds = (m_dCommandedPitch_deg - dAircraftPitch_deg) * 0.5;
+    m_dCommandedPitchVelocity_ds = (m_dCommandedPitch_deg - dInertial_Pitch_deg) * 0.5;
     m_dCommandedPitchVelocity_ds = Math::Angles::clipDouble(m_dCommandedPitchVelocity_ds, -3.0, 3.0);
 
     // Compute thrust command
 
     m_dCommandedVelocity_ms = 250.0 * FAC_KNOTS_TO_MS;
 
-    m_dCommandedAcceleration_ms = (m_dCommandedVelocity_ms - dIndicatedAirspeed_ms) * 0.5;
+    m_dCommandedAcceleration_ms = (m_dCommandedVelocity_ms - dAir_IndicatedAirspeed_ms) * 0.5;
     m_dCommandedAcceleration_ms = Math::Angles::clipDouble(m_dCommandedAcceleration_ms, -2.0, 2.0);
 
     m_pidAcceleration.setSetPoint(m_dCommandedAcceleration_ms);
-    m_pidAcceleration.update(dIndicatedAcceleration_ms, m_dDeltaTime * 1000.0);
+    m_pidAcceleration.update(dAir_IndicatedAcceleration_ms, m_dDeltaTime * 1000.0);
 
     m_pidDeceleration.setSetPoint(m_dCommandedAcceleration_ms);
-    m_pidDeceleration.update(dIndicatedAcceleration_ms, m_dDeltaTime * 1000.0);
+    m_pidDeceleration.update(dAir_IndicatedAcceleration_ms, m_dDeltaTime * 1000.0);
 
-    if (m_dCommandedAcceleration_ms > dIndicatedAcceleration_ms)
+    if (m_dCommandedAcceleration_ms > dAir_IndicatedAcceleration_ms)
     {
         m_dCommandedThrust_norm = m_pidAcceleration.output();
     }
@@ -393,4 +395,88 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
               .arg(QString::number(m_dCommandedAcceleration_ms, 'f', 2))
               .arg(QString::number(m_dCommandedThrust_norm, 'f', 2))
               );
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFMGC::computeFlightPhase(double dDeltaTime)
+{
+    double dAir_Altitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
+    double dAir_VerticalSpeed_ms = GETDATA_DOUBLE(adAir_VerticalSpeed_ms);
+    double dGeoLoc_GroundSpeed_ms = GETDATA_DOUBLE(adGeoLoc_GroundSpeed_ms);
+    double dRadar_AltitudeAGL_m = GETDATA_DOUBLE(adRadar_AltitudeAGL_m);
+    double dThrottle_1_norm = GETDATA_DOUBLE(adThrottle_1_norm);
+    double dThrottle_2_norm = GETDATA_DOUBLE(adThrottle_2_norm);
+
+    switch (m_eFlightPhase)
+    {
+        case fpPark:
+            break;
+
+        case fpTaxi:
+            if (dThrottle_1_norm > FP_TAXI_THRUST_THRESHOLD || dThrottle_2_norm > FP_TAXI_THRUST_THRESHOLD)
+            {
+                m_eFlightPhase = fpTakeoff;
+            }
+            break;
+
+        case fpTakeoff:
+            if (dRadar_AltitudeAGL_m > FP_TAKEOFF_ALTITUDE_AGL_THRESHOLD)
+            {
+                m_eFlightPhase = fpClimb;
+            }
+            else if (dThrottle_1_norm < FP_TAXI_THRUST_THRESHOLD)
+            {
+                m_eFlightPhase = fpLand;
+            }
+            break;
+
+        case fpClimb:
+            if (m_tFlightPlan.cruiseAltitude_m() != 0.0)
+            {
+                double dCurrentAndCruiseAltDiff = fabs(m_tFlightPlan.cruiseAltitude_m() - dAir_Altitude_m);
+
+                if (dCurrentAndCruiseAltDiff < FP_CLIMB_ALTITUDE_THRESHOLD)
+                {
+                    m_eFlightPhase = fpCruise;
+                }
+            }
+            else if (dAir_VerticalSpeed_ms < -FP_CRUISE_VERTSPEED_THRESHOLD)
+            {
+                m_eFlightPhase = fpDescent;
+            }
+            break;
+
+        case fpCruise:
+            if (dAir_VerticalSpeed_ms < -FP_CRUISE_VERTSPEED_THRESHOLD)
+            {
+                m_eFlightPhase = fpDescent;
+            }
+            else if (dRadar_AltitudeAGL_m < FP_CRUISE_ALTITUDE_AGL_THRESHOLD)
+            {
+                m_eFlightPhase = fpDescent;
+            }
+            break;
+
+        case fpDescent:
+            if (dRadar_AltitudeAGL_m < FP_DESCENT_ALTITUDE_AGL_THRESHOLD)
+            {
+                m_eFlightPhase = fpApproach;
+            }
+            break;
+
+        case fpApproach:
+            if (dRadar_AltitudeAGL_m < FP_TAKEOFF_ALTITUDE_AGL_THRESHOLD)
+            {
+                m_eFlightPhase = fpLand;
+            }
+            break;
+
+        case fpLand:
+            if (dGeoLoc_GroundSpeed_ms < FP_LAND_GROUNDSPEED_THRESHOLD)
+            {
+                m_eFlightPhase = fpTaxi;
+            }
+            break;
+    }
 }

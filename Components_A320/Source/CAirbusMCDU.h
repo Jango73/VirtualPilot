@@ -68,7 +68,8 @@ enum EMCDUKey
 #define FORMAT_ICAO_FROM_TO     "____/____"
 
 #define TEXT_FPLN_DISCONTINUITY " F-PLN DISCONTINUITY"
-#define TEXT_FPLN_HEADER        "       UTC    SPD/ALT"
+#define TEXT_FPLN_HEADER        "          UTC  SPD/ALT  "
+#define TEXT_FPLN_FOOTER        " DEST     UTC  DIST EFOB"
 
 //-------------------------------------------------------------------------------------------------
 
