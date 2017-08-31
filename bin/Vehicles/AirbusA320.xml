@@ -47,7 +47,7 @@
     </Component>
 
     <Component Name="Pilot" Class="CCamera">
-        <Position x="-0.55" y="0.7" z="14.3"/>
+        <Position x="-0.6" y="0.7" z="14.3"/>
         <Rotation x="0.0" y="0.0" z="0.0"/>
         <Controller Class="CStandardController"/>
         <RotationMinimum x="-5.0" y="-5.0" z="-5.0"/>
