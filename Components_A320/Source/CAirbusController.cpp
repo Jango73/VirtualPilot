@@ -237,9 +237,9 @@ void CAirbusController::wheelEvent(QWheelEvent *event)
 
         if (pCamera != nullptr)
         {
-            double dFOV = Math::Angles::clipDouble(pCamera->FOV() + dDelta, 5.0, 120.0);
+            double dFOV = Math::Angles::clipDouble(pCamera->verticalFOV() + dDelta, 5.0, 90.0);
 
-            pCamera->setFOV(dFOV);
+            pCamera->setVerticalFOV(dFOV);
         }
     }
 }
