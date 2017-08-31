@@ -183,8 +183,8 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
 
             if (m_bPowered)
             {
-                double W = 1.0 * pTexture->image().width();
-                double H = 1.0 * pTexture->image().height();
+                double W = pTexture->image().width();
+                double H = pTexture->image().height();
 
                 double xCellSize = W / (double) MCDU_W;
                 double yCellSize = H / (double) MCDU_H;
@@ -192,8 +192,8 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
                 int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
                 int iFontSmallSize = (iFontLargeSize * 4) / 5;
 
-                QFont fFontLarge = QFont("Arial", iFontLargeSize);
-                QFont fFontSmall = QFont("Arial", iFontSmallSize);
+                QFont fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
+                QFont fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
 
                 painter.resetTransform();
 

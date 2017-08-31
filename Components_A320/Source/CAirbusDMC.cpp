@@ -29,8 +29,6 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
 {
     LOG_DEBUG("CAirbusDMC::CAirbusDMC()");
 
-    m_fMainFont = QFont("Arial", 20);
-
     m_rVelocityBar = QRectF(0.00, 0.20, 0.20, 0.60);
     m_rArtificialHorizon = QRectF(0.25, 0.20, 0.45, 0.60);
     m_rAltitudeBar = QRectF(0.75, 0.20, 0.25, 0.60);
@@ -87,6 +85,10 @@ void CAirbusDMC::updateTexture(CTexture* pTexture, double dDeltaTime)
 
     if (painter.begin(&(pTexture->image())))
     {
+        int iFontLargeSize = ((pTexture->image().height() / 14) * 4) / 5;
+
+        m_fMainFont = QFont(A320_MCDU_FONT, iFontLargeSize);
+
         painter.fillRect(0, 0, pTexture->image().width(), pTexture->image().height(), QColor(0, 0, 0));
 
         if (m_bPowered)

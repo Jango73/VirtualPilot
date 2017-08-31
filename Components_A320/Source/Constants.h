@@ -219,3 +219,5 @@
 #define A320_Color_DarkGray                 QColor( 64,  64,  64)
 #define A320_Color_Ground                   QColor( 96,  64,   0)
 #define A320_Color_Sky                      A320_Color_Blue
+
+#define A320_MCDU_FONT                      "Calibri"
