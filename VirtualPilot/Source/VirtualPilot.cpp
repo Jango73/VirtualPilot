@@ -272,8 +272,8 @@ void VirtualPilot::onTimer()
                 .arg(m_pScene->m_tStatistics.m_iNumPolysDrawn)
                 .arg(m_pScene->m_tStatistics.m_iNumChunksDrawn)
                 .arg(CComponent::getNumComponents())
-                .arg(CWorldChunk::getNumWorldChunks())
-                .arg(CTerrain::numTerrains())
+                .arg(CComponent::componentCounter()[ClassName_CWorldChunk])
+                .arg(CComponent::componentCounter()[ClassName_CTerrain])
                 ;
 
         ui.m_lInfo->setText(sInfo);
