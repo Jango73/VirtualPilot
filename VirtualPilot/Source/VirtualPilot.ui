@@ -252,7 +252,7 @@
         <property name="minimumSize">
          <size>
           <width>180</width>
-          <height>90</height>
+          <height>120</height>
          </size>
         </property>
         <property name="title">
@@ -370,6 +370,22 @@
          </property>
          <property name="text">
           <string>Normals only</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="m_chkOverlook">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>91</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="text">
+          <string>Overlook</string>
          </property>
         </widget>
        </widget>

@@ -83,4 +83,10 @@ protected:
     CComponentReference<CEngineGenerator>   m_rGenerator2;
     CComponentReference<CElectricalBus>     m_rACBus1;
     CComponentReference<CElectricalBus>     m_rACBus2;
+    CComponentReference<CElectricalBus>     m_rTr1;
+    CComponentReference<CElectricalBus>     m_rTr2;
+    CComponentReference<CElectricalBus>     m_rDCBus1;
+    CComponentReference<CElectricalBus>     m_rDCBus2;
+    CComponentReference<CElectricalBus>     m_rDCBatBus;
+    CComponentReference<CElectricalBus>     m_rDCEssBus;
 };

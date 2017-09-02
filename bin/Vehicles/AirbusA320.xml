@@ -269,6 +269,12 @@
             Generator2=".GEN_2"
             ACBus1=".AC_BUS_1"
             ACBus2=".AC_BUS_2"
+            Tr1=".TR_1"
+            Tr2=".TR_2"
+            DCBus1=".DC_BUS_1"
+            DCBus2=".DC_BUS_2"
+            DCBatBus=".DC_BAT_BUS"
+            DCEssBus=".DC_ESS_BUS"
         />
     </Component>
 

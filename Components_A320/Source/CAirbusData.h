@@ -86,9 +86,13 @@ enum EAirbusData
     adELEC_ACBus1_Power_v,
     adELEC_ACBus2_Power_v,
     adELEC_Tr1_Power_v,
+    adELEC_Tr1_Load_a,
     adELEC_Tr2_Power_v,
+    adELEC_Tr2_Load_a,
     adELEC_DCBus1_Power_v,
     adELEC_DCBus2_Power_v,
+    adELEC_DCBatBus_Power_v,
+    adELEC_DCEssBus_Power_v,
 
     // Data coming from FADEC
     adFADEC_Engine1_N1_norm,
@@ -126,7 +130,10 @@ enum EAirbusData
     adFCU_Velocity_kts,
     adFCU_Velocity_mach,
     adFCU_HeadingType_idx,
-    adFCU_Heading_deg
+    adFCU_Heading_deg,
+
+    // Data coming from SD controls
+    adSD_Page_idx
 };
 
 //-------------------------------------------------------------------------------------------------
@@ -199,6 +206,14 @@ enum EMCDUDataSet
     mdsNone,
     mdsCompanyRoute,
     mdsICAOFromTo
+};
+
+//-------------------------------------------------------------------------------------------------
+
+enum ESDPage
+{
+    sdpElectrical,
+    sdpHydraulic
 };
 
 //-------------------------------------------------------------------------------------------------

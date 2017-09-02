@@ -63,6 +63,8 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     connect(ui.m_sWindLevel, SIGNAL(valueChanged(int)), this, SLOT(onWindLevelChanged(int)));
     connect(ui.m_sShaderQuality, SIGNAL(valueChanged(int)), this, SLOT(onShaderQualityChanged(int)));
 
+    connect(ui.m_chkOverlook, SIGNAL(clicked()), this, SLOT(onOverlookClicked()));
+
     loadScene(QCoreApplication::applicationDirPath() + "/" + sSceneFileName);
 
     readPreferences();
@@ -370,4 +372,11 @@ void VirtualPilot::onWindLevelChanged(int iValue)
 void VirtualPilot::onShaderQualityChanged(int iValue)
 {
     m_pScene->setShaderQuality((double) iValue / 100.0);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onOverlookClicked()
+{
+    m_pScene->setOverlookScene(ui.m_chkOverlook->checkState() == Qt::Checked);
 }

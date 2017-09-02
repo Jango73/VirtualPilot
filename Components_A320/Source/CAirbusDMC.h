@@ -92,6 +92,9 @@ public:
     void drawEngineN1Gauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, double dN1);
 
     //!
+    void drawSDTitle(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QString& sText);
+
+    //!
     void drawElectricalPage(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
 
     //!
@@ -99,6 +102,12 @@ public:
 
     //!
     void drawGeneratorGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive, double dPower_v, double dFreq_hz);
+
+    //!
+    void drawBatGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive, double dPower_v, double dLoad_a);
+
+    //!
+    void drawHydraulicPage(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
 
     //-------------------------------------------------------------------------------------------------
     // Control methods
