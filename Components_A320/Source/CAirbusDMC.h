@@ -91,6 +91,15 @@ public:
     //!
     void drawEngineN1Gauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, double dN1);
 
+    //!
+    void drawElectricalPage(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
+
+    //!
+    void drawSimpleElecGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive);
+
+    //!
+    void drawGeneratorGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive, double dPower_v, double dFreq_hz);
+
     //-------------------------------------------------------------------------------------------------
     // Control methods
     //-------------------------------------------------------------------------------------------------

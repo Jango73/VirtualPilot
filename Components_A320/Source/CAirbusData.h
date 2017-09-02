@@ -78,6 +78,18 @@ enum EAirbusData
     adThrottle_1_norm,
     adThrottle_2_norm,
 
+    // Data coming from electrical components
+    adELEC_Gen1_Power_v,
+    adELEC_Gen1_Freq_hz,
+    adELEC_Gen2_Power_v,
+    adELEC_Gen2_Freq_hz,
+    adELEC_ACBus1_Power_v,
+    adELEC_ACBus2_Power_v,
+    adELEC_Tr1_Power_v,
+    adELEC_Tr2_Power_v,
+    adELEC_DCBus1_Power_v,
+    adELEC_DCBus2_Power_v,
+
     // Data coming from FADEC
     adFADEC_Engine1_N1_norm,
     adFADEC_Engine1_N2_norm,

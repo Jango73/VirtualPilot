@@ -257,6 +257,21 @@
 
     <!-- COMPUTERS -->
 
+    <!-- CFDIU - Centralized Fault Display Indicating Unit -->
+    <Component Name="CONT_CFDIU" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="CFDIU" Class="CAirbusCFDIU">
+        <PowerInput Name=".CONT_CFDIU"/>
+        <Components
+            Generator1=".GEN_1"
+            Generator2=".GEN_2"
+            ACBus1=".AC_BUS_1"
+            ACBus2=".AC_BUS_2"
+        />
+    </Component>
+
     <!-- DMC - Data Monitoring Computer -->
     <Component Name="CONT_DMC_1" Class="CElectricalContactor">
         <PowerInput Name=".AC_ESS_BUS"/>
@@ -268,6 +283,7 @@
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
         <DataInput Name=".FCU"/>
+        <DataInput Name=".CFDIU"/>
     </Component>
 
     <Component Name="CONT_DMC_2" Class="CElectricalContactor">
@@ -280,6 +296,7 @@
         <DataInput Name=".FMGC_2"/>
         <DataInput Name=".FADEC"/>
         <DataInput Name=".FCU"/>
+        <DataInput Name=".CFDIU"/>
     </Component>
 
     <Component Name="CONT_DMC_3" Class="CElectricalContactor">
@@ -292,6 +309,7 @@
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
         <DataInput Name=".FCU"/>
+        <DataInput Name=".CFDIU"/>
     </Component>
 
     <!-- FAC - Flight Augmentation Computer -->

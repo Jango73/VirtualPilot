@@ -206,5 +206,4 @@ protected:
     MCDUChar                    m_aScreen[MCDU_W][MCDU_H];
     QString                     m_sScratchPad;
     QMap<QString, EMCDUKey>     m_mEventToKey;
-    bool                        m_bNeedScreenRefresh;
 };

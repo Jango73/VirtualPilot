@@ -9,6 +9,7 @@
 #include "CAirbusAOASensor.h"
 #include "CAirbusFlightComputer.h"
 #include "CAirbusADIRU.h"
+#include "CAirbusCFDIU.h"
 #include "CAirbusDMC.h"
 #include "CAirbusMCDU.h"
 #include "CAirbusELAC.h"
@@ -29,6 +30,7 @@ COMPONENTS_A320_EXPORT bool PLUGIN_ENTRY_NAME(CPluginInterface* pInterface)
     pInterface->registerComponent(ClassName_CAirbusAOASensor, CAirbusAOASensor::instanciator);
     pInterface->registerComponent(ClassName_CAirbusFlightComputer, CAirbusFlightComputer::instanciator);
     pInterface->registerComponent(ClassName_CAirbusADIRU, CAirbusADIRU::instanciator);
+    pInterface->registerComponent(ClassName_CAirbusCFDIU, CAirbusCFDIU::instanciator);
     pInterface->registerComponent(ClassName_CAirbusDMC, CAirbusDMC::instanciator);
     pInterface->registerComponent(ClassName_CAirbusMCDU, CAirbusMCDU::instanciator);
     pInterface->registerComponent(ClassName_CAirbusELAC, CAirbusELAC::instanciator);

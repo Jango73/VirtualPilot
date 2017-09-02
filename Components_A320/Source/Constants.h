@@ -11,6 +11,7 @@
 #define ClassName_CAirbusEngineGenerator    "CAirbusEngineGenerator"
 #define ClassName_CAirbusFlightComputer     "CAirbusFlightComputer"
 #define ClassName_CAirbusADIRU              "CAirbusADIRU"
+#define ClassName_CAirbusCFDIU              "CAirbusCFDIU"
 #define ClassName_CAirbusDMC                "CAirbusDMC"
 #define ClassName_CAirbusMCDU               "CAirbusMCDU"
 #define ClassName_CAirbusELAC               "CAirbusELAC"

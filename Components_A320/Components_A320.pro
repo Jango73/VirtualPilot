@@ -49,6 +49,7 @@ HEADERS += \
     Source/CAirbusController.h \
     Source/CAirbusData.h \
     Source/CAirbusDataSupplier.h \
+    Source/CAirbusCFDIU.h \
     Source/CAirbusDMC.h \
     Source/CAirbusMCDU.h \
     Source/CAirbusELAC.h \
@@ -73,6 +74,7 @@ SOURCES += \
     Source/CAirbusController.cpp \
     Source/CAirbusData.cpp \
     Source/CAirbusDataSupplier.cpp \
+    Source/CAirbusCFDIU.cpp \
     Source/CAirbusDMC.cpp \
     Source/CAirbusDMC_EWD.cpp \
     Source/CAirbusDMC_ND.cpp \

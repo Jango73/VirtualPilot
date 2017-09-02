@@ -28,7 +28,6 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_ePage(mpInitA)
     , m_iSubPage(0)
-    , m_bNeedScreenRefresh(true)
 {
     LOG_DEBUG("CAirbusMCDU::CAirbusMCDU()");
 
@@ -171,65 +170,60 @@ void CAirbusMCDU::update(double dDeltaTime)
 
 void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
 {
-    if (m_bNeedScreenRefresh)
+    QPainter painter;
+
+    if (painter.begin(&(pTexture->image())))
     {
-        m_bNeedScreenRefresh = false;
+        painter.fillRect(0, 0, pTexture->image().width(), pTexture->image().height(), QColor(0, 0, 0));
 
-        QPainter painter;
-
-        if (painter.begin(&(pTexture->image())))
+        if (m_bPowered)
         {
-            painter.fillRect(0, 0, pTexture->image().width(), pTexture->image().height(), QColor(0, 0, 0));
+            double W = pTexture->image().width();
+            double H = pTexture->image().height();
 
-            if (m_bPowered)
+            double xCellSize = W / (double) MCDU_W;
+            double yCellSize = H / (double) MCDU_H;
+
+            int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
+            int iFontSmallSize = (iFontLargeSize * 4) / 5;
+
+            QFont fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
+            QFont fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
+
+            painter.resetTransform();
+
+            for (int y = 0; y < MCDU_H; y++)
             {
-                double W = pTexture->image().width();
-                double H = pTexture->image().height();
-
-                double xCellSize = W / (double) MCDU_W;
-                double yCellSize = H / (double) MCDU_H;
-
-                int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
-                int iFontSmallSize = (iFontLargeSize * 4) / 5;
-
-                QFont fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
-                QFont fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
-
-                painter.resetTransform();
-
-                for (int y = 0; y < MCDU_H; y++)
+                for (int x = 0; x < MCDU_W; x++)
                 {
-                    for (int x = 0; x < MCDU_W; x++)
-                    {
-                        m_aScreen[x][y].m_cChar = ' ';
-                    }
-                }
-
-                printCurrentPage();
-                printScratchPad();
-
-                for (int y = 0; y < MCDU_H; y++)
-                {
-                    for (int x = 0; x < MCDU_W; x++)
-                    {
-                        if (m_aScreen[x][y].m_bLarge)
-                            painter.setFont(fFontLarge);
-                        else
-                            painter.setFont(fFontSmall);
-
-                        painter.setPen(m_aScreen[x][y].m_cColor);
-
-                        int screenX = x * xCellSize;
-                        int screenY = y * yCellSize;
-                        QRectF rChar(screenX, screenY, xCellSize, yCellSize);
-
-                        painter.drawText(rChar, Qt::AlignCenter, QString(m_aScreen[x][y].m_cChar));
-                    }
+                    m_aScreen[x][y].m_cChar = ' ';
                 }
             }
 
-            painter.end();
+            printCurrentPage();
+            printScratchPad();
+
+            for (int y = 0; y < MCDU_H; y++)
+            {
+                for (int x = 0; x < MCDU_W; x++)
+                {
+                    if (m_aScreen[x][y].m_bLarge)
+                        painter.setFont(fFontLarge);
+                    else
+                        painter.setFont(fFontSmall);
+
+                    painter.setPen(m_aScreen[x][y].m_cColor);
+
+                    int screenX = x * xCellSize;
+                    int screenY = y * yCellSize;
+                    QRectF rChar(screenX, screenY, xCellSize, yCellSize);
+
+                    painter.drawText(rChar, Qt::AlignCenter, QString(m_aScreen[x][y].m_cChar));
+                }
+            }
         }
+
+        painter.end();
     }
 }
 
@@ -281,8 +275,6 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
     {
         m_sScratchPad = MCDU_CLEAR;
     }
-
-    m_bNeedScreenRefresh = true;
 }
 
 //-------------------------------------------------------------------------------------------------

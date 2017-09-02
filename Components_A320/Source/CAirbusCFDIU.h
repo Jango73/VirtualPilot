@@ -2,13 +2,13 @@
 #pragma once
 
 // qt-plus
-#include "CPIDController.h"
+#include "CInterpolator.h"
 
 // Quick3D
+#include "CGeoloc.h"
 #include "CComponentReference.h"
-#include "CWing.h"
-#include "CElevator.h"
-#include "CVector2.h"
+#include "CEngineGenerator.h"
+#include "CElectricalBus.h"
 
 // Application
 #include "components_a320_global.h"
@@ -21,8 +21,8 @@ class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
 
-//! Elevator and Aileron Computer
-class COMPONENTS_A320_EXPORT CAirbusELAC : public CAirbusFlightComputer
+//! Data Monitoring Computer
+class COMPONENTS_A320_EXPORT CAirbusCFDIU : public CAirbusFlightComputer
 {
 public:
 
@@ -34,10 +34,10 @@ public:
     static CComponent* instanciator(C3DScene* pScene);
 
     //!
-    CAirbusELAC(C3DScene* pScene);
+    CAirbusCFDIU(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusELAC();
+    virtual ~CAirbusCFDIU();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -52,7 +52,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusELAC; }
+    virtual QString getClassName() const { return ClassName_CAirbusCFDIU; }
 
     //! Loads this object's parameters
     virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;
@@ -79,15 +79,8 @@ public:
 
 protected:
 
-    CComponentReference<CWing>		m_rLeftWingTarget;
-    CComponentReference<CWing>		m_rRightWingTarget;
-    CComponentReference<CElevator>	m_rElevatorTarget;
-
-    CPIDController					m_pidYaw;
-    CPIDController					m_pidPitch;
-    CPIDController					m_pidRoll;
-
-    Math::CVector2					m_vStick;
-    Math::CVector2					m_vStickPrevious;
-    Math::CVector3					m_vCommandedAttitude;
+    CComponentReference<CEngineGenerator>   m_rGenerator1;
+    CComponentReference<CEngineGenerator>   m_rGenerator2;
+    CComponentReference<CElectricalBus>     m_rACBus1;
+    CComponentReference<CElectricalBus>     m_rACBus2;
 };
