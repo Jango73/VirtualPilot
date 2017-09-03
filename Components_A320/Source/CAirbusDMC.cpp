@@ -85,7 +85,7 @@ void CAirbusDMC::updateTexture(CTexture* pTexture, double dDeltaTime)
 
     if (painter.begin(&(pTexture->image())))
     {
-        int iFontLargeSize = ((pTexture->image().height() / 14) * 4) / 5;
+        int iFontLargeSize = ((pTexture->image().height() / 16) * 4) / 5;
 
         m_fMainFont = QFont(A320_MCDU_FONT, iFontLargeSize);
 

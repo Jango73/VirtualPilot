@@ -95,6 +95,12 @@ public:
     void drawSDTitle(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QString& sText);
 
     //!
+    void drawStraightLine(QPainter* pPainter, const QPointF& p1, const QPointF& p2);
+
+    //!
+    void drawAutoPath(QPainter* pPainter, const QPointF& p1, const QPointF& p2);
+
+    //!
     void drawElectricalPage(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
 
     //!

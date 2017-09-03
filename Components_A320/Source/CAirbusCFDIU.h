@@ -9,6 +9,7 @@
 #include "CComponentReference.h"
 #include "CEngineGenerator.h"
 #include "CElectricalBus.h"
+#include "CElectricalContactor.h"
 
 // Application
 #include "components_a320_global.h"
@@ -79,14 +80,19 @@ public:
 
 protected:
 
-    CComponentReference<CEngineGenerator>   m_rGenerator1;
-    CComponentReference<CEngineGenerator>   m_rGenerator2;
-    CComponentReference<CElectricalBus>     m_rACBus1;
-    CComponentReference<CElectricalBus>     m_rACBus2;
-    CComponentReference<CElectricalBus>     m_rTr1;
-    CComponentReference<CElectricalBus>     m_rTr2;
-    CComponentReference<CElectricalBus>     m_rDCBus1;
-    CComponentReference<CElectricalBus>     m_rDCBus2;
-    CComponentReference<CElectricalBus>     m_rDCBatBus;
-    CComponentReference<CElectricalBus>     m_rDCEssBus;
+    CComponentReference<CEngineGenerator>       m_rGenerator1;
+    CComponentReference<CEngineGenerator>       m_rGenerator2;
+    CComponentReference<CElectricalBus>         m_rACBus1;
+    CComponentReference<CElectricalBus>         m_rACBus2;
+    CComponentReference<CElectricalBus>         m_rTr1;
+    CComponentReference<CElectricalBus>         m_rTr2;
+    CComponentReference<CElectricalBus>         m_rDCBus1;
+    CComponentReference<CElectricalBus>         m_rDCBus2;
+    CComponentReference<CElectricalBus>         m_rDCBatBus;
+    CComponentReference<CElectricalBus>         m_rDCEssBus;
+
+    CComponentReference<CElectricalContactor>   m_rContGen1;
+    CComponentReference<CElectricalContactor>   m_rContGen2;
+    CComponentReference<CElectricalContactor>   m_rContGenAPU1;
+    CComponentReference<CElectricalContactor>   m_rContGenAPU2;
 };

@@ -56,6 +56,24 @@ void CAirbusDMC::drawSDTitle(QPainter* pPainter, CTexture* pTexture, double dDel
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusDMC::drawStraightLine(QPainter* pPainter, const QPointF& p1, const QPointF& p2)
+{
+    pPainter->drawLine(p1, p2);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusDMC::drawAutoPath(QPainter* pPainter, const QPointF& p1, const QPointF& p2)
+{
+    double dMidY = (p1.y() + p2.y()) * 0.5;
+    double dMidX = (p1.x() + p2.x()) * 0.5;
+    pPainter->drawLine(QPointF(p1.x(), p1.y()), QPointF(p1.x(), dMidY));
+    pPainter->drawLine(QPointF(p1.x(), dMidY), QPointF(p2.x(), dMidY));
+    pPainter->drawLine(QPointF(p2.x(), dMidY), QPointF(p2.x(), p2.y()));
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
     drawSDTitle(pPainter, pTexture, dDeltaTime, "ELEC");
@@ -64,6 +82,8 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double dELEC_Gen1_Freq_hz = GETDATA_DOUBLE(adELEC_Gen1_Freq_hz);
     double dELEC_Gen2_Power_v = GETDATA_DOUBLE(adELEC_Gen2_Power_v);
     double dELEC_Gen2_Freq_hz = GETDATA_DOUBLE(adELEC_Gen2_Freq_hz);
+    double dELEC_GenAPU_Power_v = GETDATA_DOUBLE(adELEC_GenAPU_Power_v);
+    double dELEC_GenAPU_Freq_hz = GETDATA_DOUBLE(adELEC_GenAPU_Freq_hz);
     double dELEC_ACBus1_Power_v = GETDATA_DOUBLE(adELEC_ACBus1_Power_v);
     double dELEC_ACBus2_Power_v = GETDATA_DOUBLE(adELEC_ACBus2_Power_v);
     double dELEC_Tr1_Power_v = GETDATA_DOUBLE(adELEC_Tr1_Power_v);
@@ -74,6 +94,11 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double dELEC_DCBus2_Power_v = GETDATA_DOUBLE(adELEC_DCBus2_Power_v);
     double dELEC_DCBatBus_Power_v = GETDATA_DOUBLE(adELEC_DCBatBus_Power_v);
     double dELEC_DCEssBus_Power_v = GETDATA_DOUBLE(adELEC_DCEssBus_Power_v);
+
+    bool dELEC_Cont_Gen1_bool = GETDATA_BOOL(adELEC_Cont_Gen1_bool);
+    bool dELEC_Cont_Gen2_bool = GETDATA_BOOL(adELEC_Cont_Gen2_bool);
+    bool dELEC_Cont_GenAPU_1_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_1_bool);
+    bool dELEC_Cont_GenAPU_2_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_2_bool);
 
     double W = pTexture->image().width();
     double H = pTexture->image().height();
@@ -95,18 +120,18 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     QRectF rDCBatBus (W5 * 2.0, H22 *  3, W5, H22 * 1);
     QRectF rDCEssBus (W5 * 2.0, H22 *  8, W5, H22 * 1);
 
-    rGen1.adjust(W50, 0.0, -W50, 0.0);
-    rGen2.adjust(W50, 0.0, -W50, 0.0);
-    rACBus1.adjust(W50, 0.0, -W50, 0.0);
-    rACBus2.adjust(W50, 0.0, -W50, 0.0);
-    rTr1.adjust(W50, 0.0, -W50, 0.0);
-    rTr2.adjust(W50, 0.0, -W50, 0.0);
-    rDCBus1.adjust(W50, 0.0, -W50, 0.0);
-    rDCBus2.adjust(W50, 0.0, -W50, 0.0);
-    rBat1.adjust(W50, 0.0, -W50, 0.0);
-    rBat2.adjust(W50, 0.0, -W50, 0.0);
-    rDCBatBus.adjust(W50, 0.0, -W50, 0.0);
-    rDCEssBus.adjust(W50, 0.0, -W50, 0.0);
+    rGen1.adjust     (W50, 0.0, -W50, 0.0);
+    rGen2.adjust     (W50, 0.0, -W50, 0.0);
+    rACBus1.adjust   (W50, 0.0, -W50, 0.0);
+    rACBus2.adjust   (W50, 0.0, -W50, 0.0);
+    rTr1.adjust      (W50, 0.0, -W50, 0.0);
+    rTr2.adjust      (W50, 0.0, -W50, 0.0);
+    rDCBus1.adjust   (W50, 0.0, -W50, 0.0);
+    rDCBus2.adjust   (W50, 0.0, -W50, 0.0);
+    rBat1.adjust     (W50, 0.0, -W50, 0.0);
+    rBat2.adjust     (W50, 0.0, -W50, 0.0);
+    rDCBatBus.adjust (W50, 0.0, -W50, 0.0);
+    rDCEssBus.adjust (W50, 0.0, -W50, 0.0);
 
     // Set main font
     pPainter->setFont(m_fMainFont);
@@ -114,7 +139,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     // Generators
     drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rGen1, "GEN 1", dELEC_Gen1_Power_v > 0.0, dELEC_Gen1_Power_v, dELEC_Gen1_Freq_hz);
     drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rGen2, "GEN 2", dELEC_Gen2_Power_v > 0.0, dELEC_Gen2_Power_v, dELEC_Gen2_Freq_hz);
-    drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rAPUGen, "APU GEN", false, 0.0, 0.0);
+    drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rAPUGen, "APU GEN", dELEC_GenAPU_Power_v > 0.0, dELEC_GenAPU_Power_v, dELEC_GenAPU_Freq_hz);
 
     // AC Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rACBus1, "AC 1", dELEC_ACBus1_Power_v > 0.0);
@@ -137,6 +162,30 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
 
     // DC Ess Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rDCEssBus, "DC ESS", dELEC_DCEssBus_Power_v > 0.0);
+
+    // Gen1 contactor
+    if (dELEC_Cont_Gen1_bool)
+    {
+        pPainter->setPen(A320_Color_Green);
+        drawStraightLine(pPainter, QPointF(rGen1.center().x(), rGen1.top()), QPointF(rGen1.center().x(), rACBus1.bottom()));
+    }
+    else if (dELEC_Cont_GenAPU_1_bool)
+    {
+        pPainter->setPen(A320_Color_Green);
+        drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus1.center().x(), rACBus1.bottom()));
+    }
+
+    // Gen2 contactor
+    if (dELEC_Cont_Gen2_bool)
+    {
+        pPainter->setPen(A320_Color_Green);
+        drawStraightLine(pPainter, QPointF(rGen2.center().x(), rGen2.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
+    }
+    else if (dELEC_Cont_GenAPU_2_bool)
+    {
+        pPainter->setPen(A320_Color_Green);
+        drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
+    }
 }
 
 //-------------------------------------------------------------------------------------------------

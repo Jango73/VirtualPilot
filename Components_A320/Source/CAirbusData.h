@@ -83,6 +83,8 @@ enum EAirbusData
     adELEC_Gen1_Freq_hz,
     adELEC_Gen2_Power_v,
     adELEC_Gen2_Freq_hz,
+    adELEC_GenAPU_Power_v,
+    adELEC_GenAPU_Freq_hz,
     adELEC_ACBus1_Power_v,
     adELEC_ACBus2_Power_v,
     adELEC_Tr1_Power_v,
@@ -93,6 +95,11 @@ enum EAirbusData
     adELEC_DCBus2_Power_v,
     adELEC_DCBatBus_Power_v,
     adELEC_DCEssBus_Power_v,
+
+    adELEC_Cont_Gen1_bool,
+    adELEC_Cont_Gen2_bool,
+    adELEC_Cont_GenAPU_1_bool,
+    adELEC_Cont_GenAPU_2_bool,
 
     // Data coming from FADEC
     adFADEC_Engine1_N1_norm,

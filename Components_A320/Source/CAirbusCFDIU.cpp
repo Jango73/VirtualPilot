@@ -55,6 +55,11 @@ void CAirbusCFDIU::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
     m_rDCBus2.setName(xNode.attributes()["DCBus2"]);
     m_rDCBatBus.setName(xNode.attributes()["DCBatBus"]);
     m_rDCEssBus.setName(xNode.attributes()["DCEssBus"]);
+
+    m_rContGen1.setName(xNode.attributes()["ContGen1"]);
+    m_rContGen2.setName(xNode.attributes()["ContGen2"]);
+    m_rContGenAPU1.setName(xNode.attributes()["ContGenAPU1"]);
+    m_rContGenAPU2.setName(xNode.attributes()["ContGenAPU2"]);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -73,6 +78,11 @@ void CAirbusCFDIU::solveLinks(C3DScene* pScene)
     m_rDCBus2.solve(pScene, QSP<CComponent>(this));
     m_rDCBatBus.solve(pScene, QSP<CComponent>(this));
     m_rDCEssBus.solve(pScene, QSP<CComponent>(this));
+
+    m_rContGen1.solve(pScene, QSP<CComponent>(this));
+    m_rContGen2.solve(pScene, QSP<CComponent>(this));
+    m_rContGenAPU1.solve(pScene, QSP<CComponent>(this));
+    m_rContGenAPU2.solve(pScene, QSP<CComponent>(this));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -91,6 +101,11 @@ void CAirbusCFDIU::clearLinks(C3DScene* pScene)
     m_rDCBus2.clear();
     m_rDCBatBus.clear();
     m_rDCEssBus.clear();
+
+    m_rContGen1.clear();
+    m_rContGen2.clear();
+    m_rContGenAPU1.clear();
+    m_rContGenAPU2.clear();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -116,6 +131,11 @@ void CAirbusCFDIU::work(double dDeltaTime)
     QSP<CElectricalBus> pDCBus2 = QSP_CAST(CElectricalBus, m_rDCBus2.component());
     QSP<CElectricalBus> pDCBatBus = QSP_CAST(CElectricalBus, m_rDCBatBus.component());
     QSP<CElectricalBus> pDCEssBus = QSP_CAST(CElectricalBus, m_rDCEssBus.component());
+
+    QSP<CElectricalContactor> pContGen1 = QSP_CAST(CElectricalContactor, m_rContGen1.component());
+    QSP<CElectricalContactor> pContGen2 = QSP_CAST(CElectricalContactor, m_rContGen2.component());
+    QSP<CElectricalContactor> pContGenAPU1 = QSP_CAST(CElectricalContactor, m_rContGenAPU1.component());
+    QSP<CElectricalContactor> pContGenAPU2 = QSP_CAST(CElectricalContactor, m_rContGenAPU2.component());
 
     if (pGen1 != nullptr)
     {
@@ -169,5 +189,25 @@ void CAirbusCFDIU::work(double dDeltaTime)
     if (pDCEssBus != nullptr)
     {
         pushData(CAirbusData(m_sName, adELEC_DCEssBus_Power_v, pDCEssBus->load().m_dVoltage));
+    }
+
+    if (pContGen1 != nullptr)
+    {
+        pushData(CAirbusData(m_sName, adELEC_Cont_Gen1_bool, pContGen1->closed()));
+    }
+
+    if (pContGen2 != nullptr)
+    {
+        pushData(CAirbusData(m_sName, adELEC_Cont_Gen2_bool, pContGen2->closed()));
+    }
+
+    if (pContGenAPU1 != nullptr)
+    {
+        pushData(CAirbusData(m_sName, adELEC_Cont_GenAPU_1_bool, pContGenAPU1->closed()));
+    }
+
+    if (pContGenAPU2 != nullptr)
+    {
+        pushData(CAirbusData(m_sName, adELEC_Cont_GenAPU_2_bool, pContGenAPU2->closed()));
     }
 }
