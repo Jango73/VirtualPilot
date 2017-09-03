@@ -95,4 +95,6 @@ protected:
     CComponentReference<CElectricalContactor>   m_rContGen2;
     CComponentReference<CElectricalContactor>   m_rContGenAPU1;
     CComponentReference<CElectricalContactor>   m_rContGenAPU2;
+    CComponentReference<CElectricalContactor>   m_rContTr1;
+    CComponentReference<CElectricalContactor>   m_rContTr2;
 };

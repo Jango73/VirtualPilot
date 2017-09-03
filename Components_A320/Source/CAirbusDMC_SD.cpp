@@ -66,7 +66,6 @@ void CAirbusDMC::drawStraightLine(QPainter* pPainter, const QPointF& p1, const Q
 void CAirbusDMC::drawAutoPath(QPainter* pPainter, const QPointF& p1, const QPointF& p2)
 {
     double dMidY = (p1.y() + p2.y()) * 0.5;
-    double dMidX = (p1.x() + p2.x()) * 0.5;
     pPainter->drawLine(QPointF(p1.x(), p1.y()), QPointF(p1.x(), dMidY));
     pPainter->drawLine(QPointF(p1.x(), dMidY), QPointF(p2.x(), dMidY));
     pPainter->drawLine(QPointF(p2.x(), dMidY), QPointF(p2.x(), p2.y()));
@@ -95,10 +94,12 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double dELEC_DCBatBus_Power_v = GETDATA_DOUBLE(adELEC_DCBatBus_Power_v);
     double dELEC_DCEssBus_Power_v = GETDATA_DOUBLE(adELEC_DCEssBus_Power_v);
 
-    bool dELEC_Cont_Gen1_bool = GETDATA_BOOL(adELEC_Cont_Gen1_bool);
-    bool dELEC_Cont_Gen2_bool = GETDATA_BOOL(adELEC_Cont_Gen2_bool);
-    bool dELEC_Cont_GenAPU_1_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_1_bool);
-    bool dELEC_Cont_GenAPU_2_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_2_bool);
+    bool bELEC_Cont_Gen1_bool = GETDATA_BOOL(adELEC_Cont_Gen1_bool);
+    bool bELEC_Cont_Gen2_bool = GETDATA_BOOL(adELEC_Cont_Gen2_bool);
+    bool bELEC_Cont_GenAPU_1_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_1_bool);
+    bool bELEC_Cont_GenAPU_2_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_2_bool);
+    bool bELEC_Cont_Tr1_bool = GETDATA_BOOL(adELEC_Cont_Tr1_bool);
+    bool bELEC_Cont_Tr2_bool = GETDATA_BOOL(adELEC_Cont_Tr2_bool);
 
     double W = pTexture->image().width();
     double H = pTexture->image().height();
@@ -106,19 +107,19 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double W5 = W / 5.0;
     double W50 = W / 50.0;
 
-    QRectF rGen1     (W5 * 0.0, H22 * 14, W5, H22 * 4);
-    QRectF rGen2     (W5 * 4.0, H22 * 14, W5, H22 * 4);
-    QRectF rAPUGen   (W5 * 2.0, H22 * 14, W5, H22 * 4);
-    QRectF rACBus1   (W5 * 0.0, H22 * 12, W5, H22 * 1);
-    QRectF rACBus2   (W5 * 4.0, H22 * 12, W5, H22 * 1);
-    QRectF rTr1      (W5 * 0.0, H22 *  8, W5, H22 * 3);
-    QRectF rTr2      (W5 * 4.0, H22 *  8, W5, H22 * 3);
+    QRectF rGen1     (W5 * 0.0, H22 * 13, W5, H22 * 4);
+    QRectF rGen2     (W5 * 4.0, H22 * 13, W5, H22 * 4);
+    QRectF rAPUGen   (W5 * 2.0, H22 * 13, W5, H22 * 4);
+    QRectF rACBus1   (W5 * 0.0, H22 * 11, W5, H22 * 1);
+    QRectF rACBus2   (W5 * 4.0, H22 * 11, W5, H22 * 1);
+    QRectF rTr1      (W5 * 0.0, H22 *  7, W5, H22 * 3);
+    QRectF rTr2      (W5 * 4.0, H22 *  7, W5, H22 * 3);
     QRectF rDCBus1   (W5 * 0.0, H22 *  4, W5, H22 * 1);
     QRectF rDCBus2   (W5 * 4.0, H22 *  4, W5, H22 * 1);
     QRectF rBat1     (W5 * 1.0, H22 *  1, W5, H22 * 3);
     QRectF rBat2     (W5 * 3.0, H22 *  1, W5, H22 * 3);
     QRectF rDCBatBus (W5 * 2.0, H22 *  3, W5, H22 * 1);
-    QRectF rDCEssBus (W5 * 2.0, H22 *  8, W5, H22 * 1);
+    QRectF rDCEssBus (W5 * 2.0, H22 *  6, W5, H22 * 1);
 
     rGen1.adjust     (W50, 0.0, -W50, 0.0);
     rGen2.adjust     (W50, 0.0, -W50, 0.0);
@@ -163,28 +164,39 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     // DC Ess Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rDCEssBus, "DC ESS", dELEC_DCEssBus_Power_v > 0.0);
 
+    QPen linePen(QBrush(A320_Color_Green), 2);
+    pPainter->setPen(linePen);
+
     // Gen1 contactor
-    if (dELEC_Cont_Gen1_bool)
+    if (bELEC_Cont_Gen1_bool)
     {
-        pPainter->setPen(A320_Color_Green);
         drawStraightLine(pPainter, QPointF(rGen1.center().x(), rGen1.top()), QPointF(rGen1.center().x(), rACBus1.bottom()));
     }
-    else if (dELEC_Cont_GenAPU_1_bool)
+    else if (bELEC_Cont_GenAPU_1_bool)
     {
-        pPainter->setPen(A320_Color_Green);
         drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus1.center().x(), rACBus1.bottom()));
     }
 
     // Gen2 contactor
-    if (dELEC_Cont_Gen2_bool)
+    if (bELEC_Cont_Gen2_bool)
     {
-        pPainter->setPen(A320_Color_Green);
         drawStraightLine(pPainter, QPointF(rGen2.center().x(), rGen2.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
     }
-    else if (dELEC_Cont_GenAPU_2_bool)
+    else if (bELEC_Cont_GenAPU_2_bool)
     {
-        pPainter->setPen(A320_Color_Green);
         drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
+    }
+
+    // Tr1 contactor
+    if (bELEC_Cont_Tr1_bool)
+    {
+        drawStraightLine(pPainter, QPointF(rACBus1.center().x(), rACBus1.top()), QPointF(rTr1.center().x(), rTr1.bottom()));
+    }
+
+    // Tr2 contactor
+    if (bELEC_Cont_Tr2_bool)
+    {
+        drawStraightLine(pPainter, QPointF(rACBus2.center().x(), rACBus2.top()), QPointF(rTr2.center().x(), rTr2.bottom()));
     }
 }
 

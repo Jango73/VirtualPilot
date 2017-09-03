@@ -100,6 +100,8 @@ enum EAirbusData
     adELEC_Cont_Gen2_bool,
     adELEC_Cont_GenAPU_1_bool,
     adELEC_Cont_GenAPU_2_bool,
+    adELEC_Cont_Tr1_bool,
+    adELEC_Cont_Tr2_bool,
 
     // Data coming from FADEC
     adFADEC_Engine1_N1_norm,

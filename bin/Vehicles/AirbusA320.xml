@@ -293,6 +293,8 @@
             ContGen2=".CONT_GEN_2"
             ContGenAPU1=".CONT_GEN_APU_1"
             ContGenAPU2=".CONT_GEN_APU_2"
+            ContTr1=".CONT_TR_1"
+            ContTr2=".CONT_TR_2"
         />
     </Component>
 

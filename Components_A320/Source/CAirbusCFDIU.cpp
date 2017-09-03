@@ -60,6 +60,8 @@ void CAirbusCFDIU::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
     m_rContGen2.setName(xNode.attributes()["ContGen2"]);
     m_rContGenAPU1.setName(xNode.attributes()["ContGenAPU1"]);
     m_rContGenAPU2.setName(xNode.attributes()["ContGenAPU2"]);
+    m_rContTr1.setName(xNode.attributes()["ContTr1"]);
+    m_rContTr2.setName(xNode.attributes()["ContTr2"]);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -83,6 +85,8 @@ void CAirbusCFDIU::solveLinks(C3DScene* pScene)
     m_rContGen2.solve(pScene, QSP<CComponent>(this));
     m_rContGenAPU1.solve(pScene, QSP<CComponent>(this));
     m_rContGenAPU2.solve(pScene, QSP<CComponent>(this));
+    m_rContTr1.solve(pScene, QSP<CComponent>(this));
+    m_rContTr2.solve(pScene, QSP<CComponent>(this));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -106,6 +110,8 @@ void CAirbusCFDIU::clearLinks(C3DScene* pScene)
     m_rContGen2.clear();
     m_rContGenAPU1.clear();
     m_rContGenAPU2.clear();
+    m_rContTr1.clear();
+    m_rContTr2.clear();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -136,6 +142,8 @@ void CAirbusCFDIU::work(double dDeltaTime)
     QSP<CElectricalContactor> pContGen2 = QSP_CAST(CElectricalContactor, m_rContGen2.component());
     QSP<CElectricalContactor> pContGenAPU1 = QSP_CAST(CElectricalContactor, m_rContGenAPU1.component());
     QSP<CElectricalContactor> pContGenAPU2 = QSP_CAST(CElectricalContactor, m_rContGenAPU2.component());
+    QSP<CElectricalContactor> pContTr1 = QSP_CAST(CElectricalContactor, m_rContTr1.component());
+    QSP<CElectricalContactor> pContTr2 = QSP_CAST(CElectricalContactor, m_rContTr2.component());
 
     if (pGen1 != nullptr)
     {
@@ -209,5 +217,15 @@ void CAirbusCFDIU::work(double dDeltaTime)
     if (pContGenAPU2 != nullptr)
     {
         pushData(CAirbusData(m_sName, adELEC_Cont_GenAPU_2_bool, pContGenAPU2->closed()));
+    }
+
+    if (pContTr1 != nullptr)
+    {
+        pushData(CAirbusData(m_sName, adELEC_Cont_Tr1_bool, pContTr1->closed()));
+    }
+
+    if (pContTr2 != nullptr)
+    {
+        pushData(CAirbusData(m_sName, adELEC_Cont_Tr2_bool, pContTr2->closed()));
     }
 }
