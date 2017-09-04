@@ -15,7 +15,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusStaticPort::instanciator(C3DScene* pScene)
+CComponent* CAirbusStaticPort::instantiator(C3DScene* pScene)
 {
     return new CAirbusStaticPort(pScene);
 }

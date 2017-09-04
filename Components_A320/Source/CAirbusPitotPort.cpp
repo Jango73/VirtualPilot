@@ -12,7 +12,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusPitotPort::instanciator(C3DScene* pScene)
+CComponent* CAirbusPitotPort::instantiator(C3DScene* pScene)
 {
     return new CAirbusPitotPort(pScene);
 }

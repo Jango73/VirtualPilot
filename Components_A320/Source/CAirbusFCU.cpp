@@ -12,7 +12,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusFCU::instanciator(C3DScene* pScene)
+CComponent* CAirbusFCU::instantiator(C3DScene* pScene)
 {
     return new CAirbusFCU(pScene);
 }

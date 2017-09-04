@@ -30,7 +30,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    static CComponent* instanciator(C3DScene* pScene);
+    static CComponent* instantiator(C3DScene* pScene);
 
     //!
     CAirbusFADEC(C3DScene* pScene);

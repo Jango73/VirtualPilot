@@ -9,7 +9,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusController::instanciator(C3DScene* pScene)
+CComponent* CAirbusController::instantiator(C3DScene* pScene)
 {
     return new CAirbusController(pScene);
 }

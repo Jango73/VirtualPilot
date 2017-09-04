@@ -12,7 +12,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusFAC::instanciator(C3DScene* pScene)
+CComponent* CAirbusFAC::instantiator(C3DScene* pScene)
 {
     return new CAirbusFAC(pScene);
 }

@@ -17,7 +17,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusELAC::instanciator(C3DScene* pScene)
+CComponent* CAirbusELAC::instantiator(C3DScene* pScene)
 {
     return new CAirbusELAC(pScene);
 }

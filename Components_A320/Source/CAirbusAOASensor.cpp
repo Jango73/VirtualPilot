@@ -14,7 +14,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusAOASensor::instanciator(C3DScene* pScene)
+CComponent* CAirbusAOASensor::instantiator(C3DScene* pScene)
 {
     return new CAirbusAOASensor(pScene);
 }

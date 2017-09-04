@@ -16,7 +16,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusFADEC::instanciator(C3DScene* pScene)
+CComponent* CAirbusFADEC::instantiator(C3DScene* pScene)
 {
     return new CAirbusFADEC(pScene);
 }

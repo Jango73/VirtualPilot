@@ -13,7 +13,7 @@ using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusFMGC::instanciator(C3DScene* pScene)
+CComponent* CAirbusFMGC::instantiator(C3DScene* pScene)
 {
     return new CAirbusFMGC(pScene);
 }

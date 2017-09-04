@@ -39,7 +39,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    static CComponent* instanciator(C3DScene* pScene);
+    static CComponent* instantiator(C3DScene* pScene);
 
     //!
     CAirbusFMGC(C3DScene* pScene);
