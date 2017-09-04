@@ -89,6 +89,8 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double dELEC_Tr1_Load_a = GETDATA_DOUBLE(adELEC_Tr1_Load_a);
     double dELEC_Tr2_Power_v = GETDATA_DOUBLE(adELEC_Tr2_Power_v);
     double dELEC_Tr2_Load_a = GETDATA_DOUBLE(adELEC_Tr2_Load_a);
+    double dELEC_EssTr_Power_v = GETDATA_DOUBLE(adELEC_EssTr_Power_v);
+    double dELEC_EssTr_Load_a = GETDATA_DOUBLE(adELEC_EssTr_Load_a);
     double dELEC_DCBus1_Power_v = GETDATA_DOUBLE(adELEC_DCBus1_Power_v);
     double dELEC_DCBus2_Power_v = GETDATA_DOUBLE(adELEC_DCBus2_Power_v);
     double dELEC_DCBatBus_Power_v = GETDATA_DOUBLE(adELEC_DCBatBus_Power_v);
@@ -102,6 +104,9 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     bool bELEC_Cont_ACTie2_bool = GETDATA_BOOL(adELEC_Cont_ACTie2_bool);
     bool bELEC_Cont_Tr1_bool = GETDATA_BOOL(adELEC_Cont_Tr1_bool);
     bool bELEC_Cont_Tr2_bool = GETDATA_BOOL(adELEC_Cont_Tr2_bool);
+    bool bELEC_Cont_DCTie1_bool = GETDATA_BOOL(adELEC_Cont_DCTie1_bool);
+    bool bELEC_Cont_DCTie2_bool = GETDATA_BOOL(adELEC_Cont_DCTie2_bool);
+    bool bELEC_Cont_EssTr_bool = GETDATA_BOOL(adELEC_Cont_EssTr_bool);
     bool bELEC_Cont_ACEssFeed_1_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_1_bool);
     bool bELEC_Cont_ACEssFeed_2_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_2_bool);
 
@@ -124,7 +129,9 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     QRectF rBat2     (W5 * 3.0, H22 *  1, W5, H22 * 3);
     QRectF rDCBatBus (W5 * 2.0, H22 *  3, W5, H22 * 1);
     QRectF rDCEssBus (W5 * 2.0, H22 *  6, W5, H22 * 1);
-    QRectF rACEssBus (W5 * 2.0, H22 * 12, W5, H22 * 1);
+    QRectF rEssTr    (W5 * 1.0, H22 *  8, W5, H22 * 1);
+    QRectF rEmerGen  (W5 * 3.0, H22 *  8, W5, H22 * 1);
+    QRectF rACEssBus (W5 * 2.0, H22 * 11, W5, H22 * 1);
 
     rGen1.adjust     (W50, 0.0, -W50, 0.0);
     rGen2.adjust     (W50, 0.0, -W50, 0.0);
@@ -138,6 +145,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     rBat2.adjust     (W50, 0.0, -W50, 0.0);
     rDCBatBus.adjust (W50, 0.0, -W50, 0.0);
     rDCEssBus.adjust (W50, 0.0, -W50, 0.0);
+    rEssTr.adjust    (W50, 0.0, -W50, 0.0);
     rACEssBus.adjust (W50, 0.0, -W50, 0.0);
 
     // Set main font
@@ -146,7 +154,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     // Generators
     drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rGen1, "GEN 1", dELEC_Gen1_Power_v > 0.0, dELEC_Gen1_Power_v, dELEC_Gen1_Freq_hz);
     drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rGen2, "GEN 2", dELEC_Gen2_Power_v > 0.0, dELEC_Gen2_Power_v, dELEC_Gen2_Freq_hz);
-    drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rAPUGen, "APU GEN", dELEC_GenAPU_Power_v > 0.0, dELEC_GenAPU_Power_v, dELEC_GenAPU_Freq_hz);
+    drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rAPUGen, "APU GEN", dELEC_GenAPU_Power_v > 0.0, dELEC_GenAPU_Power_v, dELEC_GenAPU_Freq_hz, true);
 
     // AC Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rACBus1, "AC 1", dELEC_ACBus1_Power_v > 0.0);
@@ -169,6 +177,12 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
 
     // DC Ess Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rDCEssBus, "DC ESS", dELEC_DCEssBus_Power_v > 0.0);
+
+    // Ess Tr
+    drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rEssTr, "ESS TR", dELEC_EssTr_Power_v > 0.0, true);
+
+    // Emergency generator
+    drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rEmerGen, "EMER GEN", false, true);
 
     // AC Ess Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rACEssBus, "AC ESS", dELEC_ACEssBus_Power_v > 0.0);
@@ -196,10 +210,46 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
         drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
     }
 
+    // Tr1 feed
+    if (dELEC_ACBus1_Power_v > 0.0)
+    {
+        drawStraightLine(pPainter, QPointF(rACBus1.center().x(), rACBus1.top()), QPointF(rTr1.center().x(), rTr1.bottom()));
+    }
+
+    // Tr2 feed
+    if (dELEC_ACBus2_Power_v > 0.0)
+    {
+        drawStraightLine(pPainter, QPointF(rACBus2.center().x(), rACBus2.top()), QPointF(rTr2.center().x(), rTr2.bottom()));
+    }
+
+    // Tr1 contactor
+    if (bELEC_Cont_Tr1_bool)
+    {
+        drawStraightLine(pPainter, QPointF(rTr1.center().x(), rTr1.top()), QPointF(rDCBus1.center().x(), rDCBus1.bottom()));
+    }
+
+    // Tr2 contactor
+    if (bELEC_Cont_Tr2_bool)
+    {
+        drawStraightLine(pPainter, QPointF(rTr2.center().x(), rTr2.top()), QPointF(rDCBus2.center().x(), rDCBus2.bottom()));
+    }
+
     // AC Ess Feed 1 contactor
     if (bELEC_Cont_ACEssFeed_1_bool)
     {
         drawStraightLine(pPainter, QPointF(rACBus1.right(), rACBus1.center().y()), QPointF(rACEssBus.left(), rACEssBus.center().y()));
+    }
+
+    // DC Tie 1
+    if (bELEC_Cont_DCTie1_bool > 0.0)
+    {
+        drawAutoPath(pPainter, QPointF(rDCBus1.right(), rDCBus1.center().y()), QPointF(rDCBatBus.center().x(), rDCBatBus.bottom()));
+    }
+
+    // DC Tie 2
+    if (bELEC_Cont_DCTie2_bool > 0.0)
+    {
+        drawAutoPath(pPainter, QPointF(rDCBus2.left(), rDCBus2.center().y()), QPointF(rDCBatBus.center().x(), rDCBatBus.bottom()));
     }
 
     // AC Ess Feed 2 contactor
@@ -207,28 +257,17 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     {
         drawStraightLine(pPainter, QPointF(rACEssBus.right(), rACEssBus.center().y()), QPointF(rACBus2.left(), rACBus2.center().y()));
     }
-
-    // Tr1 contactor
-    if (bELEC_Cont_Tr1_bool)
-    {
-        drawStraightLine(pPainter, QPointF(rACBus1.center().x(), rACBus1.top()), QPointF(rTr1.center().x(), rTr1.bottom()));
-    }
-
-    // Tr2 contactor
-    if (bELEC_Cont_Tr2_bool)
-    {
-        drawStraightLine(pPainter, QPointF(rACBus2.center().x(), rACBus2.top()), QPointF(rTr2.center().x(), rTr2.bottom()));
-    }
 }
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusDMC::drawSimpleElecGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive)
+void CAirbusDMC::drawSimpleElecGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive, bool bNoBordersWhenOff)
 {
     Q_UNUSED(pTexture);
     Q_UNUSED(dDeltaTime);
 
-    pPainter->fillRect(rRect, A320_Color_Gray);
+    if (bActive || bNoBordersWhenOff == false)
+        pPainter->fillRect(rRect, A320_Color_Gray);
 
     if (bActive)
         pPainter->setPen(A320_Color_Green);
@@ -240,7 +279,17 @@ void CAirbusDMC::drawSimpleElecGauge(QPainter* pPainter, CTexture* pTexture, dou
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusDMC::drawGeneratorGauge(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const QRectF& rRect, const QString& sName, bool bActive, double dPower_v, double dFreq_hz)
+void CAirbusDMC::drawGeneratorGauge(
+        QPainter* pPainter,
+        CTexture* pTexture,
+        double dDeltaTime,
+        const QRectF& rRect,
+        const QString& sName,
+        bool bActive,
+        double dPower_v,
+        double dFreq_hz,
+        bool bNoBordersWhenOff
+        )
 {
     Q_UNUSED(pTexture);
     Q_UNUSED(dDeltaTime);
@@ -253,7 +302,12 @@ void CAirbusDMC::drawGeneratorGauge(QPainter* pPainter, CTexture* pTexture, doub
     QRectF r4(rRect.x(), rRect.y() + H4 * 3.0, rRect.width(), H4);
 
     pPainter->setPen(A320_Color_White);
-    pPainter->drawRect(rRect);
+
+    if (bActive || bNoBordersWhenOff == false)
+    {
+        pPainter->drawRect(rRect);
+    }
+
     pPainter->drawText(r1, Qt::AlignCenter, sName);
 
     if (bActive)
@@ -269,7 +323,10 @@ void CAirbusDMC::drawGeneratorGauge(QPainter* pPainter, CTexture* pTexture, doub
     }
     else
     {
-        pPainter->drawText(r3, Qt::AlignCenter, "OFF");
+        if (bNoBordersWhenOff == false)
+        {
+            pPainter->drawText(r3, Qt::AlignCenter, "OFF");
+        }
     }
 }
 

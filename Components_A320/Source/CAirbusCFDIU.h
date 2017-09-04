@@ -100,6 +100,8 @@ protected:
     CComponentReference<CElectricalContactor>   m_rContACTie2;
     CComponentReference<CElectricalContactor>   m_rContTr1;
     CComponentReference<CElectricalContactor>   m_rContTr2;
+    CComponentReference<CElectricalContactor>   m_rContDCTie1;
+    CComponentReference<CElectricalContactor>   m_rContDCTie2;
     CComponentReference<CElectricalContactor>   m_rContEssTr;
     CComponentReference<CElectricalContactor>   m_rContACEssFeed1;
     CComponentReference<CElectricalContactor>   m_rContACEssFeed2;

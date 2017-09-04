@@ -178,6 +178,11 @@
         <PowerInput Name=".CROSS_AC_ESS_FEED"/>
     </Component>
 
+    <Component Name="CONT_EMER_GEN" Class="CElectricalContactor">
+        <!-- <PowerInput Name=".EMER_GEN"/> -->
+        <General Closed="0"/>
+    </Component>
+
     <Component Name="TR_1" Class="CElectricalBus">
         <PowerInput Name=".AC_BUS_1"/>
     </Component>
@@ -185,7 +190,7 @@
         <PowerInput Name=".AC_BUS_2"/>
     </Component>
     <Component Name="ESS_TR" Class="CElectricalBus">
-        <PowerInput Name=".AC_ESS_BUS"/>
+        <PowerInput Name=".CONT_EMER_GEN"/>
     </Component>
 
     <Component Name="CONT_TR_1" Class="CElectricalContactor">
@@ -297,6 +302,8 @@
             ContACTie2=".CONT_AC_TIE_2"
             ContTr1=".CONT_TR_1"
             ContTr2=".CONT_TR_2"
+            ContDCTie1=".CONT_DC_TIE_1"
+            ContDCTie2=".CONT_DC_TIE_2"
             ContEssTr=".CONT_ESS_TR"
             ContACEssFeed1=".CONT_AC_ESS_FEED_1"
             ContACEssFeed2=".CONT_AC_ESS_FEED_2"

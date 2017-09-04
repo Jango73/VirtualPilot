@@ -106,6 +106,8 @@ enum EAirbusData
     adELEC_Cont_ACTie2_bool,
     adELEC_Cont_Tr1_bool,
     adELEC_Cont_Tr2_bool,
+    adELEC_Cont_DCTie1_bool,
+    adELEC_Cont_DCTie2_bool,
     adELEC_Cont_EssTr_bool,
     adELEC_Cont_ACEssFeed_1_bool,
     adELEC_Cont_ACEssFeed_2_bool,
