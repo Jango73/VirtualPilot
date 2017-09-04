@@ -289,12 +289,15 @@
             DCBus2=".DC_BUS_2"
             DCBatBus=".DC_BAT_BUS"
             DCEssBus=".DC_ESS_BUS"
+            ACEssBus=".AC_ESS_BUS"
             ContGen1=".CONT_GEN_1"
             ContGen2=".CONT_GEN_2"
             ContGenAPU1=".CONT_GEN_APU_1"
             ContGenAPU2=".CONT_GEN_APU_2"
             ContTr1=".CONT_TR_1"
             ContTr2=".CONT_TR_2"
+            ContACEssFeed1=".CONT_AC_ESS_FEED_1"
+            ContACEssFeed2=".CONT_AC_ESS_FEED_2"
         />
     </Component>
 

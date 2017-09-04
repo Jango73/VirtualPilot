@@ -5,7 +5,7 @@
 #include "components_a320_global.h"
 
 //-------------------------------------------------------------------------------------------------
-// Facteurs de conversion
+// Conversion factors
 
 // Meters <-> Feet
 #define FAC_METERS_TO_FEET	3.280840
@@ -95,6 +95,7 @@ enum EAirbusData
     adELEC_DCBus2_Power_v,
     adELEC_DCBatBus_Power_v,
     adELEC_DCEssBus_Power_v,
+    adELEC_ACEssBus_Power_v,
 
     adELEC_Cont_Gen1_bool,
     adELEC_Cont_Gen2_bool,
@@ -102,6 +103,8 @@ enum EAirbusData
     adELEC_Cont_GenAPU_2_bool,
     adELEC_Cont_Tr1_bool,
     adELEC_Cont_Tr2_bool,
+    adELEC_Cont_ACEssFeed_1_bool,
+    adELEC_Cont_ACEssFeed_2_bool,
 
     // Data coming from FADEC
     adFADEC_Engine1_N1_norm,
@@ -209,6 +212,7 @@ enum EAirbusVerticalMode
 };
 
 //-------------------------------------------------------------------------------------------------
+// Data setting from MCDU to FMGC
 
 enum EMCDUDataSet
 {
@@ -218,6 +222,7 @@ enum EMCDUDataSet
 };
 
 //-------------------------------------------------------------------------------------------------
+// System display pages
 
 enum ESDPage
 {

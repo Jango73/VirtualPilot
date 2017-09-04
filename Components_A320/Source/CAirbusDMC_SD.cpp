@@ -93,6 +93,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double dELEC_DCBus2_Power_v = GETDATA_DOUBLE(adELEC_DCBus2_Power_v);
     double dELEC_DCBatBus_Power_v = GETDATA_DOUBLE(adELEC_DCBatBus_Power_v);
     double dELEC_DCEssBus_Power_v = GETDATA_DOUBLE(adELEC_DCEssBus_Power_v);
+    double dELEC_ACEssBus_Power_v = GETDATA_DOUBLE(adELEC_ACEssBus_Power_v);
 
     bool bELEC_Cont_Gen1_bool = GETDATA_BOOL(adELEC_Cont_Gen1_bool);
     bool bELEC_Cont_Gen2_bool = GETDATA_BOOL(adELEC_Cont_Gen2_bool);
@@ -100,6 +101,8 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     bool bELEC_Cont_GenAPU_2_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_2_bool);
     bool bELEC_Cont_Tr1_bool = GETDATA_BOOL(adELEC_Cont_Tr1_bool);
     bool bELEC_Cont_Tr2_bool = GETDATA_BOOL(adELEC_Cont_Tr2_bool);
+    bool bELEC_Cont_ACEssFeed_1_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_1_bool);
+    bool bELEC_Cont_ACEssFeed_2_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_2_bool);
 
     double W = pTexture->image().width();
     double H = pTexture->image().height();
@@ -120,6 +123,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     QRectF rBat2     (W5 * 3.0, H22 *  1, W5, H22 * 3);
     QRectF rDCBatBus (W5 * 2.0, H22 *  3, W5, H22 * 1);
     QRectF rDCEssBus (W5 * 2.0, H22 *  6, W5, H22 * 1);
+    QRectF rACEssBus (W5 * 2.0, H22 * 12, W5, H22 * 1);
 
     rGen1.adjust     (W50, 0.0, -W50, 0.0);
     rGen2.adjust     (W50, 0.0, -W50, 0.0);
@@ -133,6 +137,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     rBat2.adjust     (W50, 0.0, -W50, 0.0);
     rDCBatBus.adjust (W50, 0.0, -W50, 0.0);
     rDCEssBus.adjust (W50, 0.0, -W50, 0.0);
+    rACEssBus.adjust (W50, 0.0, -W50, 0.0);
 
     // Set main font
     pPainter->setFont(m_fMainFont);
@@ -164,6 +169,9 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     // DC Ess Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rDCEssBus, "DC ESS", dELEC_DCEssBus_Power_v > 0.0);
 
+    // AC Ess Bus
+    drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rACEssBus, "AC ESS", dELEC_ACEssBus_Power_v > 0.0);
+
     QPen linePen(QBrush(A320_Color_Green), 2);
     pPainter->setPen(linePen);
 
@@ -185,6 +193,18 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     else if (bELEC_Cont_GenAPU_2_bool)
     {
         drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
+    }
+
+    // AC Ess Feed 1 contactor
+    if (bELEC_Cont_ACEssFeed_1_bool)
+    {
+        drawStraightLine(pPainter, QPointF(rACBus1.right(), rACBus1.center().y()), QPointF(rACEssBus.left(), rACEssBus.center().y()));
+    }
+
+    // AC Ess Feed 2 contactor
+    if (bELEC_Cont_ACEssFeed_2_bool)
+    {
+        drawStraightLine(pPainter, QPointF(rACEssBus.right(), rACEssBus.center().y()), QPointF(rACBus2.left(), rACBus2.center().y()));
     }
 
     // Tr1 contactor
