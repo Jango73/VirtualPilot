@@ -56,6 +56,7 @@ HEADERS += \
     Source/CAirbusFAC.h \
     Source/CAirbusFADEC.h \
     Source/CAirbusFCU.h \
+    Source/CAirbusElectricalPanel.h \
     Source/CAirbusFlightComputer.h \
     Source/CAirbusFlightPlan.h \
     Source/CAirbusFMGC.h \
@@ -85,6 +86,7 @@ SOURCES += \
     Source/CAirbusFAC.cpp \
     Source/CAirbusFADEC.cpp \
     Source/CAirbusFCU.cpp \
+    Source/CAirbusElectricalPanel.cpp \
     Source/CAirbusFlightComputer.cpp \
     Source/CAirbusFlightPlan.cpp \
     Source/CAirbusFMGC.cpp \

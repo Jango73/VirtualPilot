@@ -91,6 +91,8 @@ enum EAirbusData
     adELEC_Tr1_Load_a,
     adELEC_Tr2_Power_v,
     adELEC_Tr2_Load_a,
+    adELEC_EssTr_Power_v,
+    adELEC_EssTr_Load_a,
     adELEC_DCBus1_Power_v,
     adELEC_DCBus2_Power_v,
     adELEC_DCBatBus_Power_v,
@@ -99,10 +101,12 @@ enum EAirbusData
 
     adELEC_Cont_Gen1_bool,
     adELEC_Cont_Gen2_bool,
-    adELEC_Cont_GenAPU_1_bool,
-    adELEC_Cont_GenAPU_2_bool,
+    adELEC_Cont_GenAPU_bool,
+    adELEC_Cont_ACTie1_bool,
+    adELEC_Cont_ACTie2_bool,
     adELEC_Cont_Tr1_bool,
     adELEC_Cont_Tr2_bool,
+    adELEC_Cont_EssTr_bool,
     adELEC_Cont_ACEssFeed_1_bool,
     adELEC_Cont_ACEssFeed_2_bool,
 

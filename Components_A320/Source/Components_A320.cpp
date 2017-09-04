@@ -18,6 +18,7 @@
 #include "CAirbusFCU.h"
 #include "CAirbusFMGC.h"
 #include "CAirbusSEC.h"
+#include "CAirbusElectricalPanel.h"
 
 extern "C"
 {
@@ -39,6 +40,7 @@ COMPONENTS_A320_EXPORT bool PLUGIN_ENTRY_NAME(CPluginInterface* pInterface)
     pInterface->registerComponent(ClassName_CAirbusFCU, CAirbusFCU::instantiator);
     pInterface->registerComponent(ClassName_CAirbusFMGC, CAirbusFMGC::instantiator);
     pInterface->registerComponent(ClassName_CAirbusSEC, CAirbusSEC::instantiator);
+    pInterface->registerComponent(ClassName_CAirbusElectricalPanel, CAirbusElectricalPanel::instantiator);
 
     return true;
 }

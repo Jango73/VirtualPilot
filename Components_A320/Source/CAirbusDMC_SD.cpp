@@ -97,8 +97,9 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
 
     bool bELEC_Cont_Gen1_bool = GETDATA_BOOL(adELEC_Cont_Gen1_bool);
     bool bELEC_Cont_Gen2_bool = GETDATA_BOOL(adELEC_Cont_Gen2_bool);
-    bool bELEC_Cont_GenAPU_1_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_1_bool);
-    bool bELEC_Cont_GenAPU_2_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_2_bool);
+    bool bELEC_Cont_GenAPU_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_bool);
+    bool bELEC_Cont_ACTie1_bool = GETDATA_BOOL(adELEC_Cont_ACTie1_bool);
+    bool bELEC_Cont_ACTie2_bool = GETDATA_BOOL(adELEC_Cont_ACTie2_bool);
     bool bELEC_Cont_Tr1_bool = GETDATA_BOOL(adELEC_Cont_Tr1_bool);
     bool bELEC_Cont_Tr2_bool = GETDATA_BOOL(adELEC_Cont_Tr2_bool);
     bool bELEC_Cont_ACEssFeed_1_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_1_bool);
@@ -180,7 +181,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     {
         drawStraightLine(pPainter, QPointF(rGen1.center().x(), rGen1.top()), QPointF(rGen1.center().x(), rACBus1.bottom()));
     }
-    else if (bELEC_Cont_GenAPU_1_bool)
+    else if (bELEC_Cont_GenAPU_bool && bELEC_Cont_ACTie1_bool)
     {
         drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus1.center().x(), rACBus1.bottom()));
     }
@@ -190,7 +191,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     {
         drawStraightLine(pPainter, QPointF(rGen2.center().x(), rGen2.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
     }
-    else if (bELEC_Cont_GenAPU_2_bool)
+    else if (bELEC_Cont_GenAPU_bool && bELEC_Cont_ACTie2_bool)
     {
         drawAutoPath(pPainter, QPointF(rAPUGen.center().x(), rAPUGen.top()), QPointF(rACBus2.center().x(), rACBus2.bottom()));
     }

@@ -21,6 +21,7 @@
 #define ClassName_CAirbusFMGC               "CAirbusFMGC"
 #define ClassName_CAirbusFWC                "CAirbusFWC"
 #define ClassName_CAirbusSEC                "CAirbusSEC"
+#define ClassName_CAirbusElectricalPanel    "CAirbusElectricalPanel"
 
 //-------------------------------------------------------------------------------------------------
 // Parameter names

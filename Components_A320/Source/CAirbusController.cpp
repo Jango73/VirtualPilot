@@ -39,6 +39,7 @@ void CAirbusController::loadParameters(const QString& sBaseFile, CXMLNode xNode)
     m_rFCU.setName(xNode.attributes()["FCU"]);
     m_rMCDU_1.setName(xNode.attributes()["MCDU_1"]);
     m_rMCDU_2.setName(xNode.attributes()["MCDU_2"]);
+    m_rElectricalPanel.setName(xNode.attributes()["ElectricalPanel"]);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ void CAirbusController::solveLinks(C3DScene* pScene)
     m_rFCU.solve(pScene, QSP<CComponent>(this));
     m_rMCDU_1.solve(pScene, QSP<CComponent>(this));
     m_rMCDU_2.solve(pScene, QSP<CComponent>(this));
+    m_rElectricalPanel.solve(pScene, QSP<CComponent>(this));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -61,6 +63,7 @@ void CAirbusController::clearLinks(C3DScene* pScene)
     m_rFCU.clear();
     m_rMCDU_1.clear();
     m_rMCDU_2.clear();
+    m_rElectricalPanel.clear();
 }
 
 //-------------------------------------------------------------------------------------------------

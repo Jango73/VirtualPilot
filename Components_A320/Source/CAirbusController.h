@@ -15,6 +15,7 @@
 #include "CAirbusDataSupplier.h"
 #include "CAirbusFCU.h"
 #include "CAirbusMCDU.h"
+#include "CAirbusElectricalPanel.h"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -92,13 +93,14 @@ public:
 
 protected:
 
-    CComponentReference<CAirbusFCU>     m_rFCU;
-    CComponentReference<CAirbusMCDU>    m_rMCDU_1;
-    CComponentReference<CAirbusMCDU>    m_rMCDU_2;
+    CComponentReference<CAirbusFCU>                 m_rFCU;
+    CComponentReference<CAirbusMCDU>                m_rMCDU_1;
+    CComponentReference<CAirbusMCDU>                m_rMCDU_2;
+    CComponentReference<CAirbusElectricalPanel>     m_rElectricalPanel;
 
-    QStringList                         m_lEVENTS_MCDU_1;
-    QStringList                         m_lEVENTS_MCDU_2;
+    QStringList                                     m_lEVENTS_MCDU_1;
+    QStringList                                     m_lEVENTS_MCDU_2;
 
-    double                              m_dEngine1ThrustLever_norm;
-    double                              m_dEngine2ThrustLever_norm;
+    double                                          m_dEngine1ThrustLever_norm;
+    double                                          m_dEngine2ThrustLever_norm;
 };

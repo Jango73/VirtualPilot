@@ -13,9 +13,8 @@ class C3DScene;
 
 //-------------------------------------------------------------------------------------------------
 
-//! Flight Control Unit
-//! Controls for autopilot and flight director
-class COMPONENTS_A320_EXPORT CAirbusFCU : public CAirbusFlightComputer
+//! Electrical panel
+class COMPONENTS_A320_EXPORT CAirbusElectricalPanel : public CAirbusFlightComputer
 {
 public:
 
@@ -27,10 +26,10 @@ public:
     static CComponent* instantiator(C3DScene* pScene);
 
     //!
-    CAirbusFCU(C3DScene* pScene);
+    CAirbusElectricalPanel(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusFCU();
+    virtual ~CAirbusElectricalPanel();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -45,7 +44,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusFCU; }
+    virtual QString getClassName() const { return ClassName_CAirbusElectricalPanel; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
@@ -55,19 +54,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //
-    void toggle_AutoPilot1_Engaged();
-
-    //
-    void toggle_AutoPilot2_Engaged();
-
-    //
-    void toggle_AutoThrust_Engaged();
-
-    //
-    void increment_SelectedHeading(bool bFast);
-
-    //
-    void decrement_SelectedHeading(bool bFast);
+    void toggle_Value1();
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -75,12 +62,5 @@ public:
 
 protected:
 
-    bool    m_bAutoPilot1_Engaged;
-    bool    m_bAutoPilot2_Engaged;
-    bool    m_bAutoThrust_Engaged;
-    bool    m_bLateralManaged;
-    bool    m_bVerticalManaged;
-
-    double  m_dSelectedHeading;
-    double  m_dSelectedAltitude;
+    bool    m_bValue1;
 };

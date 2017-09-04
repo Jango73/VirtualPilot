@@ -86,6 +86,7 @@ protected:
     CComponentReference<CElectricalBus>         m_rACBus2;
     CComponentReference<CElectricalBus>         m_rTr1;
     CComponentReference<CElectricalBus>         m_rTr2;
+    CComponentReference<CElectricalBus>         m_rEssTr;
     CComponentReference<CElectricalBus>         m_rDCBus1;
     CComponentReference<CElectricalBus>         m_rDCBus2;
     CComponentReference<CElectricalBus>         m_rDCBatBus;
@@ -94,10 +95,12 @@ protected:
 
     CComponentReference<CElectricalContactor>   m_rContGen1;
     CComponentReference<CElectricalContactor>   m_rContGen2;
-    CComponentReference<CElectricalContactor>   m_rContGenAPU1;
-    CComponentReference<CElectricalContactor>   m_rContGenAPU2;
+    CComponentReference<CElectricalContactor>   m_rContGenAPU;
+    CComponentReference<CElectricalContactor>   m_rContACTie1;
+    CComponentReference<CElectricalContactor>   m_rContACTie2;
     CComponentReference<CElectricalContactor>   m_rContTr1;
     CComponentReference<CElectricalContactor>   m_rContTr2;
+    CComponentReference<CElectricalContactor>   m_rContEssTr;
     CComponentReference<CElectricalContactor>   m_rContACEssFeed1;
     CComponentReference<CElectricalContactor>   m_rContACEssFeed2;
 };
