@@ -256,6 +256,7 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
     QSP<CAirbusFCU> pFCU = QSP_CAST(CAirbusFCU, m_rFCU.component());
     QSP<CAirbusMCDU> pMCDU_1 = QSP_CAST(CAirbusMCDU, m_rMCDU_1.component());
     QSP<CAirbusMCDU> pMCDU_2 = QSP_CAST(CAirbusMCDU, m_rMCDU_2.component());
+    QSP<CAirbusElectricalPanel> pElectricalPanel = QSP_CAST(CAirbusElectricalPanel, m_rElectricalPanel.component());
 
     if (event->getName() == EventName_Jump500)
     {
@@ -333,6 +334,28 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
             }
         }
         return;
+    }
+
+    if (event->getName() == EventName_ELEC_GEN1)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pElectricalPanel != nullptr)
+            {
+                pElectricalPanel->toggle_Generator1_Online();
+            }
+        }
+    }
+
+    if (event->getName() == EventName_ELEC_GEN2)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pElectricalPanel != nullptr)
+            {
+                pElectricalPanel->toggle_Generator2_Online();
+            }
+        }
     }
 
     if (m_lEVENTS_MCDU_1.contains(event->getName()) && pMCDU_1 != nullptr)

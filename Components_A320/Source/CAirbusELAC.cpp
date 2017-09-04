@@ -100,8 +100,8 @@ void CAirbusELAC::work(double dDeltaTime)
         double dInertial_PitchVelocity_ds = GETDATA_DOUBLE(adInertial_PitchVelocity_ds);
         double dFG_CommandedRollVelocity_ds = GETDATA_DOUBLE(adFG_CommandedRollVelocity_ds);
         double dFG_CommandedPitchVelocity_ds = GETDATA_DOUBLE(adFG_CommandedPitchVelocity_ds);
-        bool bFCU_AutoPilot1_Engaged = GETDATA_BOOL(adFCU_AutoPilot1_Engaged);
-        bool bFCU_AutoPilot2_Engaged = GETDATA_BOOL(adFCU_AutoPilot2_Engaged);
+        bool bFCU_AutoPilot1_Engaged = GETDATA_BOOL(adFCU_AutoPilot1_Engaged_bool);
+        bool bFCU_AutoPilot2_Engaged = GETDATA_BOOL(adFCU_AutoPilot2_Engaged_bool);
         m_vStick.X = GETDATA_DOUBLE(adStick_CAPT_x);
         m_vStick.Y = GETDATA_DOUBLE(adStick_CAPT_y);
 

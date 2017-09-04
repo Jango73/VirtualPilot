@@ -239,8 +239,8 @@ void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
 
 void CAirbusFMGC::work_FG(double dDeltaTime)
 {
-    bool bFCU_Lateral_Managed = GETDATA_BOOL(adFCU_Lateral_Managed);
-    bool bFCU_Vertical_Managed = GETDATA_BOOL(adFCU_Vertical_Managed);
+    bool bFCU_Lateral_Managed = GETDATA_BOOL(adFCU_Lateral_Managed_bool);
+    bool bFCU_Vertical_Managed = GETDATA_BOOL(adFCU_Vertical_Managed_bool);
     double dFCU_Altitude_f = GETDATA_DOUBLE(adFCU_Altitude_f);
     double dFCU_Heading_deg = GETDATA_DOUBLE(adFCU_Heading_deg);
     double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);

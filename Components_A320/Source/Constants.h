@@ -86,6 +86,16 @@
 #define EventName_THR_THROTTLE_INC          "THR_THROTTLE_INC"
 #define EventName_THR_THROTTLE_DEC          "THR_THROTTLE_DEC"
 
+#define EventName_ELEC_GEN1                 "ELEC_GEN1"
+#define EventName_ELEC_GEN2                 "ELEC_GEN2"
+#define EventName_ELEC_APU_GEN              "ELEC_APU_GEN"
+#define EventName_ELEC_AC_TIE               "ELEC_AC_TIE"
+#define EventName_ELEC_IDG1                 "ELEC_IDG1"
+#define EventName_ELEC_IDG2                 "ELEC_IDG2"
+#define EventName_ELEC_BAT1                 "ELEC_BAT1"
+#define EventName_ELEC_BAT2                 "ELEC_BAT2"
+#define EventName_ELEC_AC_ESS_FEED          "ELEC_AC_ESS_FEED"
+
 #define EventName_MCDU_CAPT_1L              "MCDU_CAPT_1L"
 #define EventName_MCDU_CAPT_2L              "MCDU_CAPT_2L"
 #define EventName_MCDU_CAPT_3L              "MCDU_CAPT_3L"

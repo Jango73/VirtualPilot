@@ -54,7 +54,10 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //
-    void toggle_Value1();
+    void toggle_Generator1_Online();
+
+    //
+    void toggle_Generator2_Online();
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -62,5 +65,6 @@ public:
 
 protected:
 
-    bool    m_bValue1;
+    bool    m_bGenerator1_Online;
+    bool    m_bGenerator2_Online;
 };

@@ -45,11 +45,11 @@ void CAirbusFCU::update(double dDeltaTime)
 {
     CAirbusFlightComputer::update(dDeltaTime);
 
-    pushData(CAirbusData(m_sName, adFCU_AutoPilot1_Engaged, m_bAutoPilot1_Engaged));
-    pushData(CAirbusData(m_sName, adFCU_AutoPilot2_Engaged, m_bAutoPilot2_Engaged));
-    pushData(CAirbusData(m_sName, adFCU_AutoThrust_Engaged, m_bAutoThrust_Engaged));
-    pushData(CAirbusData(m_sName, adFCU_Lateral_Managed, m_bLateralManaged));
-    pushData(CAirbusData(m_sName, adFCU_Vertical_Managed, m_bVerticalManaged));
+    pushData(CAirbusData(m_sName, adFCU_AutoPilot1_Engaged_bool, m_bAutoPilot1_Engaged));
+    pushData(CAirbusData(m_sName, adFCU_AutoPilot2_Engaged_bool, m_bAutoPilot2_Engaged));
+    pushData(CAirbusData(m_sName, adFCU_AutoThrust_Engaged_bool, m_bAutoThrust_Engaged));
+    pushData(CAirbusData(m_sName, adFCU_Lateral_Managed_bool, m_bLateralManaged));
+    pushData(CAirbusData(m_sName, adFCU_Vertical_Managed_bool, m_bVerticalManaged));
 
     pushData(CAirbusData(m_sName, adFCU_Altitude_f, m_dSelectedAltitude));
     pushData(CAirbusData(m_sName, adFCU_Heading_deg, m_dSelectedHeading));

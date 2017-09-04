@@ -87,7 +87,7 @@ void CAirbusFADEC::work(double dDeltaTime)
     if (pEngine1 != nullptr && pEngine2 != nullptr )
     {
         double dFG_CommandedThrust_norm = GETDATA_DOUBLE(adFG_CommandedThrust_norm);
-        bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged);
+        bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged_bool);
         double dThrottle_1_norm = GETDATA_DOUBLE(adThrottle_1_norm);
         double dThrottle_2_norm = GETDATA_DOUBLE(adThrottle_2_norm);
 

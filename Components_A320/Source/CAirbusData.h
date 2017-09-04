@@ -135,11 +135,11 @@ enum EAirbusData
     adMCDU_DataSetValue,
 
     // Data coming from FCU
-    adFCU_AutoPilot1_Engaged,
-    adFCU_AutoPilot2_Engaged,
-    adFCU_AutoThrust_Engaged,
-    adFCU_Lateral_Managed,
-    adFCU_Vertical_Managed,
+    adFCU_AutoPilot1_Engaged_bool,
+    adFCU_AutoPilot2_Engaged_bool,
+    adFCU_AutoThrust_Engaged_bool,
+    adFCU_Lateral_Managed_bool,
+    adFCU_Vertical_Managed_bool,
     adFCU_VerticalSpeed_fs,
     adFCU_Altitude_f,
     adFCU_VelocityType_idx,
@@ -147,6 +147,10 @@ enum EAirbusData
     adFCU_Velocity_mach,
     adFCU_HeadingType_idx,
     adFCU_Heading_deg,
+
+    // Data coming from electrical panel
+    adELEC_Generator1_Online_bool,
+    adELEC_Generator2_Online_bool,
 
     // Data coming from SD controls
     adSD_Page_idx

@@ -519,7 +519,7 @@
         FCU=".FCU"
         MCDU_1=".MCDU_1"
         MCDU_2=".MCDU_2"
-        ElectricalPanel="ELEC_PANEL"
+        ElectricalPanel=".ELEC_PANEL"
     />
 
 </Component>

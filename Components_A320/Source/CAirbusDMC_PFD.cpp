@@ -351,9 +351,9 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
 
 void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
-    bool bFCU_AutoPilot1_Engaged = GETDATA_BOOL(adFCU_AutoPilot1_Engaged);
-    bool bFCU_AutoPilot2_Engaged = GETDATA_BOOL(adFCU_AutoPilot2_Engaged);
-    bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged);
+    bool bFCU_AutoPilot1_Engaged = GETDATA_BOOL(adFCU_AutoPilot1_Engaged_bool);
+    bool bFCU_AutoPilot2_Engaged = GETDATA_BOOL(adFCU_AutoPilot2_Engaged_bool);
+    bool bFCU_AutoThrust_Engaged = GETDATA_BOOL(adFCU_AutoThrust_Engaged_bool);
     EAirbusLateralMode eFG_LateralMode_alm = (EAirbusLateralMode) GETDATA_INT(adFG_LateralMode_alm);
     EAirbusVerticalMode eFG_VerticalMode_avm = (EAirbusVerticalMode) GETDATA_INT(adFG_VerticalMode_avm);
     EAirbusFlightPhase eFG_FlightPhase_fp = (EAirbusFlightPhase) GETDATA_INT(adFG_FlightPhase_fp);
