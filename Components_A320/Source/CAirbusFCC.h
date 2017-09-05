@@ -12,9 +12,8 @@
 
 class C3DScene;
 
-//! Flight Augmentation Computer
-//! Control surface driver
-class COMPONENTS_A320_EXPORT CAirbusFAC : public CAirbusFlightComputer
+//! Flight Control Computer
+class COMPONENTS_A320_EXPORT CAirbusFCC : public CAirbusFlightComputer
 {
 public:
 
@@ -26,10 +25,10 @@ public:
     static CComponent* instantiator(C3DScene* pScene);
 
     //!
-    CAirbusFAC(C3DScene* pScene);
+    CAirbusFCC(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusFAC();
+    virtual ~CAirbusFCC();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -44,7 +43,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusFAC; }
+    virtual QString getClassName() const { return ClassName_CAirbusFCC; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
@@ -61,4 +60,6 @@ public:
     //-------------------------------------------------------------------------------------------------
 
 protected:
+
+    EFlightLaw  m_eFlightLaw;
 };

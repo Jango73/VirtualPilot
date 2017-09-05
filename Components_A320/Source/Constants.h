@@ -8,6 +8,7 @@
 #define ClassName_CAirbusStaticPort         "CAirbusStaticPort"
 #define ClassName_CAirbusPitotPort          "CAirbusPitotPort"
 #define ClassName_CAirbusAOASensor          "CAirbusAOASensor"
+#define ClassName_CAirbusGearSensor         "CAirbusGearSensor"
 #define ClassName_CAirbusEngineGenerator    "CAirbusEngineGenerator"
 #define ClassName_CAirbusFlightComputer     "CAirbusFlightComputer"
 #define ClassName_CAirbusADIRU              "CAirbusADIRU"
@@ -16,6 +17,7 @@
 #define ClassName_CAirbusMCDU               "CAirbusMCDU"
 #define ClassName_CAirbusELAC               "CAirbusELAC"
 #define ClassName_CAirbusFAC                "CAirbusFAC"
+#define ClassName_CAirbusFCC                "CAirbusFCC"
 #define ClassName_CAirbusFADEC              "CAirbusFADEC"
 #define ClassName_CAirbusFCU                "CAirbusFCU"
 #define ClassName_CAirbusFMGC               "CAirbusFMGC"
@@ -45,6 +47,7 @@
 #define EquipName_FAC                       "Flight Augmentation Computer"
 #define EquipName_FADEC                     "Full Authority Digital Engine Control"
 #define EquipName_FCDC                      "Flight Control Data Concentrators"
+#define EquipName_FCC                       "Flight Control Computer"
 #define EquipName_FCU                       "Flight Control Unit"                       // Autopilot panel
 #define EquipName_FMA                       "Flight Mode Annunciator"
 #define EquipName_FMGC                      "Flight Management Guidance Computer"

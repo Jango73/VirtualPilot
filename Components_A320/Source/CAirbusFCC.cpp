@@ -6,41 +6,45 @@
 #include "C3DScene.h"
 
 // Application
-#include "CAirbusFAC.h"
+#include "CAirbusFCC.h"
 
 using namespace Math;
 
 //-------------------------------------------------------------------------------------------------
 
-CComponent* CAirbusFAC::instantiator(C3DScene* pScene)
+CComponent* CAirbusFCC::instantiator(C3DScene* pScene)
 {
-    return new CAirbusFAC(pScene);
+    return new CAirbusFCC(pScene);
 }
 
 //-------------------------------------------------------------------------------------------------
 
-CAirbusFAC::CAirbusFAC(C3DScene* pScene)
+CAirbusFCC::CAirbusFCC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
+    , m_eFlightLaw(flNormal)
 {
-    LOG_DEBUG("CAirbusFAC::CAirbusFAC()");
+    LOG_DEBUG("CAirbusFCC::CAirbusFCC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
-CAirbusFAC::~CAirbusFAC()
+CAirbusFCC::~CAirbusFCC()
 {
-    LOG_DEBUG("CAirbusFAC::~CAirbusFAC()");
+    LOG_DEBUG("CAirbusFCC::~CAirbusFCC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusFAC::update(double dDeltaTime)
+void CAirbusFCC::update(double dDeltaTime)
 {
     CAirbusFlightComputer::update(dDeltaTime);
 }
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusFAC::work(double dDeltaTime)
+void CAirbusFCC::work(double dDeltaTime)
 {
+    bool bGear_OnGround_bool = GETDATA_BOOL(adGear_OnGround_bool);
+
+    // Compute flight law
 }

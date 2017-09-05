@@ -1,20 +1,15 @@
 
 #pragma once
 
-// Quick3D
-#include "CAirbusFlightComputer.h"
-
 // Application
 #include "components_a320_global.h"
+#include "CAirbusComponent.h"
+#include "CAirbusDataSupplier.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
 
-class C3DScene;
-
-//! Flight Augmentation Computer
-//! Control surface driver
-class COMPONENTS_A320_EXPORT CAirbusFAC : public CAirbusFlightComputer
+class COMPONENTS_A320_EXPORT CAirbusGearSensor : public CComponent, public CAirbusComponent, public CAirbusDataSupplier
 {
 public:
 
@@ -26,10 +21,10 @@ public:
     static CComponent* instantiator(C3DScene* pScene);
 
     //!
-    CAirbusFAC(C3DScene* pScene);
+    CAirbusGearSensor(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusFAC();
+    virtual ~CAirbusGearSensor();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -44,13 +39,10 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusFAC; }
+    virtual QString getClassName() const { return ClassName_CAirbusGearSensor; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
-
-    //!
-    virtual void work(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Control methods

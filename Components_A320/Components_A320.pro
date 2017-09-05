@@ -45,6 +45,7 @@ CONFIG(debug, debug|release) {
 HEADERS += \
     Source/CAirbusADIRU.h \
     Source/CAirbusAOASensor.h \
+    Source/CAirbusGearSensor.h \
     Source/CAirbusComponent.h \
     Source/CAirbusController.h \
     Source/CAirbusData.h \
@@ -55,6 +56,7 @@ HEADERS += \
     Source/CAirbusELAC.h \
     Source/CAirbusFAC.h \
     Source/CAirbusFADEC.h \
+    Source/CAirbusFCC.h \
     Source/CAirbusFCU.h \
     Source/CAirbusElectricalPanel.h \
     Source/CAirbusFlightComputer.h \
@@ -71,6 +73,7 @@ HEADERS += \
 SOURCES += \
     Source/CAirbusADIRU.cpp \
     Source/CAirbusAOASensor.cpp \
+    Source/CAirbusGearSensor.cpp \
     Source/CAirbusComponent.cpp \
     Source/CAirbusController.cpp \
     Source/CAirbusData.cpp \
@@ -85,6 +88,7 @@ SOURCES += \
     Source/CAirbusELAC.cpp \
     Source/CAirbusFAC.cpp \
     Source/CAirbusFADEC.cpp \
+    Source/CAirbusFCC.cpp \
     Source/CAirbusFCU.cpp \
     Source/CAirbusElectricalPanel.cpp \
     Source/CAirbusFlightComputer.cpp \

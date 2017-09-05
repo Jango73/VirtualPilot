@@ -116,6 +116,8 @@
     </Component>
     <Component Name="AOA_FO" Class="CAirbusAOASensor">
     </Component>
+    <Component Name="GEAR_SENSOR" Class="CAirbusGearSensor">
+    </Component>
 
     <!-- ELECTRICAL -->
 
@@ -275,6 +277,17 @@
 
     <!-- COMPUTERS -->
 
+    <!-- FCC - Flight Control Computer -->
+    <Component Name="CONT_FCC" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="FCC" Class="CAirbusFCC">
+        <PowerInput Name=".CONT_FCC"/>
+        <DataInput Name=".ADIRU_1"/>
+        <DataInput Name=".GEAR_SENSOR"/>
+    </Component>
+
     <!-- CFDIU - Centralized Fault Display Indicating Unit -->
     <Component Name="CONT_CFDIU" Class="CElectricalContactor">
         <PowerInput Name=".AC_ESS_BUS"/>
@@ -317,6 +330,7 @@
     </Component>
     <Component Name="DMC_1" Class="CAirbusDMC">
         <PowerInput Name=".CONT_DMC_1"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_1"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
@@ -330,6 +344,7 @@
     </Component>
     <Component Name="DMC_2" Class="CAirbusDMC">
         <PowerInput Name=".CONT_DMC_2"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_2"/>
         <DataInput Name=".FMGC_2"/>
         <DataInput Name=".FADEC"/>
@@ -343,6 +358,7 @@
     </Component>
     <Component Name="DMC_3" Class="CAirbusDMC">
         <PowerInput Name=".CONT_DMC_3"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_3"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
@@ -466,7 +482,9 @@
     <Component Name="FMGC_1" Class="CAirbusFMGC">
         <General UnitIndex="0"/>
         <PowerInput Name=".CONT_FMGC_1"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_1"/>
+        <DataInput Name=".FCC"/>
         <DataInput Name=".FCU"/>
         <DataInput Name=".MCDU_1"/>
     </Component>
@@ -478,7 +496,9 @@
     <Component Name="FMGC_2" Class="CAirbusFMGC">
         <General UnitIndex="1"/>
         <PowerInput Name=".CONT_FMGC_2"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_2"/>
+        <DataInput Name=".FCC"/>
         <DataInput Name=".FCU"/>
         <DataInput Name=".MCDU_2"/>
     </Component>
