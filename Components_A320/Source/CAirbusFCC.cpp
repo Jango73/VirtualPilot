@@ -44,7 +44,19 @@ void CAirbusFCC::update(double dDeltaTime)
 
 void CAirbusFCC::work(double dDeltaTime)
 {
-    bool bGear_OnGround_bool = GETDATA_BOOL(adGear_OnGround_bool);
+    work_FlightLaws(dDeltaTime);
+    work_Electrical(dDeltaTime);
+}
 
-    // Compute flight law
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFCC::work_FlightLaws(double dDeltaTime)
+{
+    bool bGear_OnGround_bool = GETDATA_BOOL(adGear_OnGround_bool);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFCC::work_Electrical(double dDeltaTime)
+{
 }

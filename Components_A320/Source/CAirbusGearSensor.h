@@ -39,7 +39,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusGearSensor; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusGearSensor; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;

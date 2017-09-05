@@ -181,7 +181,7 @@
     </Component>
 
     <Component Name="CONT_EMER_GEN" Class="CElectricalContactor">
-        <!-- <PowerInput Name=".EMER_GEN"/> -->
+        <PowerInput Name=".EMER_GEN"/>
         <General Closed="0"/>
     </Component>
 
@@ -237,6 +237,12 @@
     <Component Name="HOT_BUS_1" Class="CElectricalBus">
     </Component>
     <Component Name="HOT_BUS_2" Class="CElectricalBus">
+    </Component>
+
+    <!-- HYDRAULIC -->
+
+    <Component Name="EMER_GEN" Class="CHydraulicGenerator">
+        <!-- <HydraulicInput Name="."/> -->
     </Component>
 
     <!-- DATA -->
@@ -532,13 +538,11 @@
     </Component>
 
     <!-- Electrical panel -->
-
     <Component Name="ELEC_PANEL" Class="CAirbusElectricalPanel">
         <PowerInput Name=".DC_ESS_BUS"/>
     </Component>
 
     <!-- Global controller -->
-
     <Controller Class="CAirbusController" Name="AirbusControl"
         PositionTarget=".Pilot"
         RotationTarget=".Pilot"

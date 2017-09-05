@@ -60,10 +60,13 @@
 #define EquipName_PFD                       "Primary Flight Display"
 #define EquipName_PITOT                     "Pitot probe"
 #define EquipName_RMP                       "Radio Management Panel"
+#define EquipName_RAT                       "Ram Air Turbine"
 #define EquipName_SEC                       "Spoilers and Elevator Computer"
+#define EquipName_SI                        "Static Inverter"
 #define EquipName_STATIC                    "Static probe"
 #define EquipName_TAT                       "Total Air Temperature probe"
 #define EquipName_TCAS                      "Traffic Alert and Collision Avoidance System"
+#define EquipName_TR                        "Transformer Rectifier"
 
 //-------------------------------------------------------------------------------------------------
 // MCDU Strings

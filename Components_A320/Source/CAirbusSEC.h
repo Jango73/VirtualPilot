@@ -40,10 +40,13 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusSEC; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusSEC; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
+
+    //!
+    virtual void work(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Control methods

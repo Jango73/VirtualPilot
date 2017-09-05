@@ -43,7 +43,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusFCC; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusFCC; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
@@ -54,6 +54,12 @@ public:
     //-------------------------------------------------------------------------------------------------
     // Control methods
     //-------------------------------------------------------------------------------------------------
+
+    //!
+    void work_FlightLaws(double dDeltaTime);
+
+    //!
+    void work_Electrical(double dDeltaTime);
 
     //-------------------------------------------------------------------------------------------------
     // Properties
