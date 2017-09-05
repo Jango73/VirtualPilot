@@ -34,6 +34,9 @@ void CAirbusDMC::updateTexture_SD(QPainter* pPainter, CTexture* pTexture, double
         case sdpHydraulic:
             drawHydraulicPage(pPainter, pTexture, dDeltaTime);
             break;
+
+        default:
+            break;
     }
 }
 
@@ -97,6 +100,8 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     double dELEC_DCEssBus_Power_v = GETDATA_DOUBLE(adELEC_DCEssBus_Power_v);
     double dELEC_ACEssBus_Power_v = GETDATA_DOUBLE(adELEC_ACEssBus_Power_v);
 
+    Q_UNUSED(dELEC_EssTr_Load_a);
+
     bool bELEC_Cont_Gen1_bool = GETDATA_BOOL(adELEC_Cont_Gen1_bool);
     bool bELEC_Cont_Gen2_bool = GETDATA_BOOL(adELEC_Cont_Gen2_bool);
     bool bELEC_Cont_GenAPU_bool = GETDATA_BOOL(adELEC_Cont_GenAPU_bool);
@@ -109,6 +114,8 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     bool bELEC_Cont_EssTr_bool = GETDATA_BOOL(adELEC_Cont_EssTr_bool);
     bool bELEC_Cont_ACEssFeed_1_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_1_bool);
     bool bELEC_Cont_ACEssFeed_2_bool = GETDATA_BOOL(adELEC_Cont_ACEssFeed_2_bool);
+
+    Q_UNUSED(bELEC_Cont_EssTr_bool);
 
     double W = pTexture->image().width();
     double H = pTexture->image().height();

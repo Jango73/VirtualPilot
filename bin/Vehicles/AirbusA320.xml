@@ -493,6 +493,7 @@
         <DataInput Name=".FCC"/>
         <DataInput Name=".FCU"/>
         <DataInput Name=".MCDU_1"/>
+        <DataInput Name=".AirbusControl"/>
     </Component>
 
     <Component Name="CONT_FMGC_2" Class="CElectricalContactor">
@@ -507,6 +508,7 @@
         <DataInput Name=".FCC"/>
         <DataInput Name=".FCU"/>
         <DataInput Name=".MCDU_2"/>
+        <DataInput Name=".AirbusControl"/>
     </Component>
 
     <!-- CONTROLLERS -->
