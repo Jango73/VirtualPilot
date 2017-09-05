@@ -52,6 +52,7 @@
 #define EquipName_FWC                       "Flight Warning Computer"
 #define EquipName_GPS                       "Global Positioning System"
 #define EquipName_GPWS                      "Ground Proximity Warning System"
+#define EquipName_IDG                       "Integrated Drive Generator"
 #define EquipName_MCDU                      "Multipurpose Control and Display Unit"
 #define EquipName_ND                        "Navigation Display"
 #define EquipName_PFD                       "Primary Flight Display"
