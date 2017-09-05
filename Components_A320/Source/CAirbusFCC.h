@@ -1,20 +1,19 @@
 
 #pragma once
 
+// Quick3D
+#include "CAirbusFlightComputer.h"
+
 // Application
 #include "components_a320_global.h"
-#include "CAirbusFlightComputer.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
-// Forward declarations
 
 class C3DScene;
 
-//-------------------------------------------------------------------------------------------------
-
-//! Electrical panel
-class COMPONENTS_A320_EXPORT CAirbusElectricalPanel : public CAirbusFlightComputer
+//! Flight Control Computer
+class COMPONENTS_A320_EXPORT CAirbusFCC : public CAirbusFlightComputer
 {
 public:
 
@@ -26,10 +25,10 @@ public:
     static CComponent* instantiator(C3DScene* pScene);
 
     //!
-    CAirbusElectricalPanel(C3DScene* pScene);
+    CAirbusFCC(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusElectricalPanel();
+    virtual ~CAirbusFCC();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -44,20 +43,23 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusElectricalPanel; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusFCC; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
+
+    //!
+    virtual void work(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Control methods
     //-------------------------------------------------------------------------------------------------
 
-    //
-    void toggle_Generator1_Online();
+    //!
+    void work_FlightLaws(double dDeltaTime);
 
-    //
-    void toggle_Generator2_Online();
+    //!
+    void work_Electrical(double dDeltaTime);
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -65,6 +67,5 @@ public:
 
 protected:
 
-    bool    m_bGenerator1_Online;
-    bool    m_bGenerator2_Online;
+    EFlightLaw  m_eFlightLaw;
 };

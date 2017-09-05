@@ -42,7 +42,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusADIRU; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusADIRU; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
@@ -60,5 +60,5 @@ public:
 
 protected:
 
-    double		m_dPreviousIndicatedAirSpeed_ms;
+    double      m_dPreviousIndicatedAirSpeed_ms;
 };

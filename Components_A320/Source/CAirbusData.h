@@ -65,6 +65,9 @@ enum EAirbusData
     adGeoLoc_TrueTrack_deg,
     adRadar_AltitudeAGL_m,
 
+    // Data coming from gear sensor
+    adGear_OnGround_bool,
+
     // Data coming from ?
     adFuel_TotalFuel_l,
 
@@ -164,8 +167,10 @@ enum EAirbusData
 enum EFlightLaw
 {
     flNormal,
-    flAlternate,
-    flDirect
+    flAlternate1,
+    flAlternate2,
+    flDirect,
+    flMechanical
 };
 
 //-------------------------------------------------------------------------------------------------

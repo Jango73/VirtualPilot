@@ -38,3 +38,9 @@ void CAirbusFAC::update(double dDeltaTime)
 {
     CAirbusFlightComputer::update(dDeltaTime);
 }
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFAC::work(double dDeltaTime)
+{
+}

@@ -50,7 +50,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusDMC; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusDMC; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;

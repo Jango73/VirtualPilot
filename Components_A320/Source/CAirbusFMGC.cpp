@@ -22,7 +22,7 @@ CComponent* CAirbusFMGC::instantiator(C3DScene* pScene)
 
 CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
-    , m_eFlightPhase(fpTaxi)
+    , m_eFlightPhase(fpPark)
     , m_eLateralMode(almNone)
     , m_eVerticalMode(avmNone)
     , m_pidVerticalSpeed(5.0, 0.0, 0.1)
@@ -132,10 +132,13 @@ void CAirbusFMGC::work_FM_ProcessMCDUData(double dDeltaTime)
         switch (eMCDU_DataSetName)
         {
             case mdsCompanyRoute:
+            {
                 m_tFlightPlan.setCompanyRoute(GETDATA_STRING(adMCDU_DataSetValue));
                 break;
+            }
 
             case mdsICAOFromTo:
+            {
                 QStringList lICAO = GETDATA_STRING(adMCDU_DataSetValue).split("/");
 
                 if (lICAO.count() == 2)
@@ -143,6 +146,10 @@ void CAirbusFMGC::work_FM_ProcessMCDUData(double dDeltaTime)
                     m_tFlightPlan.setICAOFrom(lICAO[0]);
                     m_tFlightPlan.setICAOTo(lICAO[1]);
                 }
+                break;
+            }
+
+            default:
                 break;
         }
     }
@@ -163,6 +170,8 @@ void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
         double dAircraftAltitude_m = GETDATA_DOUBLE(adAir_Altitude_m);
         double dAircraftVerticalSpeed_ms = GETDATA_DOUBLE(adAir_VerticalSpeed_ms);
 
+        Q_UNUSED(dAircraftVerticalSpeed_ms);
+
         // Clear generated data
         m_tFlightPlan.clearAllGeneratedWaypoints();
 
@@ -171,6 +180,8 @@ void CAirbusFMGC::work_FM_doPredictions(double dDeltaTime)
             // Set markers
             bool bClimbDone = false;
             bool bDescentDone = false;
+
+            Q_UNUSED(bDescentDone);
 
             if (m_eFlightPhase > fpClimb)
             {
@@ -254,6 +265,8 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     double dAir_IndicatedAcceleration_ms = GETDATA_DOUBLE(adAir_IndicatedAcceleration_ms);
     double dInertial_Roll_deg = GETDATA_DOUBLE(adInertial_Roll_deg);
     double dInertial_Pitch_deg = GETDATA_DOUBLE(adInertial_Pitch_deg);
+
+    Q_UNUSED(dGeoLoc_TrueTrack_deg);
 
     CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
 
@@ -411,6 +424,20 @@ void CAirbusFMGC::computeFlightPhase(double dDeltaTime)
     switch (m_eFlightPhase)
     {
         case fpPark:
+            if (true)
+            {
+                if (
+                        dRadar_AltitudeAGL_m > (FP_TAKEOFF_ALTITUDE_AGL_THRESHOLD * 2.0) &&
+                        dGeoLoc_GroundSpeed_ms > (FP_LAND_GROUNDSPEED_THRESHOLD * 2.0)
+                        )
+                {
+                    m_eFlightPhase = fpCruise;
+                }
+                else
+                {
+                    m_eFlightPhase = fpTaxi;
+                }
+            }
             break;
 
         case fpTaxi:
@@ -452,9 +479,9 @@ void CAirbusFMGC::computeFlightPhase(double dDeltaTime)
             {
                 m_eFlightPhase = fpDescent;
             }
-            else if (dRadar_AltitudeAGL_m < FP_CRUISE_ALTITUDE_AGL_THRESHOLD)
+            else if (dRadar_AltitudeAGL_m < FP_DESCENT_ALTITUDE_AGL_THRESHOLD)
             {
-                m_eFlightPhase = fpDescent;
+                m_eFlightPhase = fpApproach;
             }
             break;
 
@@ -477,6 +504,9 @@ void CAirbusFMGC::computeFlightPhase(double dDeltaTime)
             {
                 m_eFlightPhase = fpTaxi;
             }
+            break;
+
+        default:
             break;
     }
 }

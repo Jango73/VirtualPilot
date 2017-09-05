@@ -52,7 +52,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusELAC; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusELAC; }
 
     //! Loads this object's parameters
     virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;

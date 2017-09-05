@@ -116,6 +116,8 @@
     </Component>
     <Component Name="AOA_FO" Class="CAirbusAOASensor">
     </Component>
+    <Component Name="GEAR_SENSOR" Class="CAirbusGearSensor">
+    </Component>
 
     <!-- ELECTRICAL -->
 
@@ -179,7 +181,7 @@
     </Component>
 
     <Component Name="CONT_EMER_GEN" Class="CElectricalContactor">
-        <!-- <PowerInput Name=".EMER_GEN"/> -->
+        <PowerInput Name=".EMER_GEN"/>
         <General Closed="0"/>
     </Component>
 
@@ -237,6 +239,12 @@
     <Component Name="HOT_BUS_2" Class="CElectricalBus">
     </Component>
 
+    <!-- HYDRAULIC -->
+
+    <Component Name="EMER_GEN" Class="CHydraulicGenerator">
+        <!-- <HydraulicInput Name="."/> -->
+    </Component>
+
     <!-- DATA -->
 
     <!-- ADIRU - Air Data and Inertial Reference Unit -->
@@ -274,6 +282,17 @@
     </Component>
 
     <!-- COMPUTERS -->
+
+    <!-- FCC - Flight Control Computer -->
+    <Component Name="CONT_FCC" Class="CElectricalContactor">
+        <PowerInput Name=".AC_ESS_BUS"/>
+        <General Closed="1"/>
+    </Component>
+    <Component Name="FCC" Class="CAirbusFCC">
+        <PowerInput Name=".CONT_FCC"/>
+        <DataInput Name=".ADIRU_1"/>
+        <DataInput Name=".GEAR_SENSOR"/>
+    </Component>
 
     <!-- CFDIU - Centralized Fault Display Indicating Unit -->
     <Component Name="CONT_CFDIU" Class="CElectricalContactor">
@@ -317,6 +336,7 @@
     </Component>
     <Component Name="DMC_1" Class="CAirbusDMC">
         <PowerInput Name=".CONT_DMC_1"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_1"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
@@ -330,6 +350,7 @@
     </Component>
     <Component Name="DMC_2" Class="CAirbusDMC">
         <PowerInput Name=".CONT_DMC_2"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_2"/>
         <DataInput Name=".FMGC_2"/>
         <DataInput Name=".FADEC"/>
@@ -343,6 +364,7 @@
     </Component>
     <Component Name="DMC_3" Class="CAirbusDMC">
         <PowerInput Name=".CONT_DMC_3"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_3"/>
         <DataInput Name=".FMGC_1"/>
         <DataInput Name=".FADEC"/>
@@ -466,9 +488,12 @@
     <Component Name="FMGC_1" Class="CAirbusFMGC">
         <General UnitIndex="0"/>
         <PowerInput Name=".CONT_FMGC_1"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_1"/>
+        <DataInput Name=".FCC"/>
         <DataInput Name=".FCU"/>
         <DataInput Name=".MCDU_1"/>
+        <DataInput Name=".AirbusControl"/>
     </Component>
 
     <Component Name="CONT_FMGC_2" Class="CElectricalContactor">
@@ -478,9 +503,12 @@
     <Component Name="FMGC_2" Class="CAirbusFMGC">
         <General UnitIndex="1"/>
         <PowerInput Name=".CONT_FMGC_2"/>
+        <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_2"/>
+        <DataInput Name=".FCC"/>
         <DataInput Name=".FCU"/>
         <DataInput Name=".MCDU_2"/>
+        <DataInput Name=".AirbusControl"/>
     </Component>
 
     <!-- CONTROLLERS -->
@@ -512,13 +540,11 @@
     </Component>
 
     <!-- Electrical panel -->
-
     <Component Name="ELEC_PANEL" Class="CAirbusElectricalPanel">
         <PowerInput Name=".DC_ESS_BUS"/>
     </Component>
 
     <!-- Global controller -->
-
     <Controller Class="CAirbusController" Name="AirbusControl"
         PositionTarget=".Pilot"
         RotationTarget=".Pilot"

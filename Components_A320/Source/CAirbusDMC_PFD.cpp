@@ -427,6 +427,8 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
             case almRollOut :
                 sTextPart3_1 = "ROLL OUT";
                 break;
+            default:
+                break;
         }
 
         switch (eFG_VerticalMode_avm)
@@ -466,6 +468,8 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
                 break;
             case avmFlare :
                 sTextPart2_1 = "FLARE";
+                break;
+            default:
                 break;
         }
     }

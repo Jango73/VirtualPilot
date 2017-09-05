@@ -3,18 +3,13 @@
 
 // Application
 #include "components_a320_global.h"
-#include "CAirbusFlightComputer.h"
+#include "CAirbusComponent.h"
+#include "CAirbusDataSupplier.h"
 #include "Constants.h"
 
 //-------------------------------------------------------------------------------------------------
-// Forward declarations
 
-class C3DScene;
-
-//-------------------------------------------------------------------------------------------------
-
-//! Electrical panel
-class COMPONENTS_A320_EXPORT CAirbusElectricalPanel : public CAirbusFlightComputer
+class COMPONENTS_A320_EXPORT CAirbusGearSensor : public CComponent, public CAirbusComponent, public CAirbusDataSupplier
 {
 public:
 
@@ -26,10 +21,10 @@ public:
     static CComponent* instantiator(C3DScene* pScene);
 
     //!
-    CAirbusElectricalPanel(C3DScene* pScene);
+    CAirbusGearSensor(C3DScene* pScene);
 
     //!
-    virtual ~CAirbusElectricalPanel();
+    virtual ~CAirbusGearSensor();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -44,7 +39,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusElectricalPanel; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusGearSensor; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
@@ -53,18 +48,9 @@ public:
     // Control methods
     //-------------------------------------------------------------------------------------------------
 
-    //
-    void toggle_Generator1_Online();
-
-    //
-    void toggle_Generator2_Online();
-
     //-------------------------------------------------------------------------------------------------
     // Properties
     //-------------------------------------------------------------------------------------------------
 
 protected:
-
-    bool    m_bGenerator1_Online;
-    bool    m_bGenerator2_Online;
 };

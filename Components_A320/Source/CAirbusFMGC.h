@@ -22,7 +22,6 @@ class C3DScene;
 #define FP_TAKEOFF_ALTITUDE_AGL_THRESHOLD   (30.0 * FAC_FEET_TO_METERS)
 #define FP_CLIMB_ALTITUDE_THRESHOLD         (500.0 * FAC_FEET_TO_METERS)
 #define FP_CRUISE_VERTSPEED_THRESHOLD       (500.0 * FAC_FPM_TO_MS)
-#define FP_CRUISE_ALTITUDE_AGL_THRESHOLD    (500.0 * FAC_FEET_TO_METERS)
 #define FP_DESCENT_ALTITUDE_AGL_THRESHOLD   (2500.0 * FAC_FEET_TO_METERS)
 #define FP_LAND_GROUNDSPEED_THRESHOLD       (50.0 * FAC_KNOTS_TO_MS)
 
@@ -60,7 +59,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const { return ClassName_CAirbusFMGC; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusFMGC; }
 
     //!
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
