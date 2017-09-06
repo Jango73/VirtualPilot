@@ -54,31 +54,42 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
     // Thin pens
 
     m_pAmberThin = QPen(A320_Color_Amber);
+    m_pAmberThin.setWidth(2);
+
     m_pBlueThin = QPen(A320_Color_Blue);
+    m_pBlueThin.setWidth(2);
+
     m_pGreenThin = QPen(A320_Color_Green);
+    m_pGreenThin.setWidth(2);
+
     m_pPurpleThin = QPen(A320_Color_Purple);
+    m_pPurpleThin.setWidth(2);
+
     m_pWhiteThin = QPen(A320_Color_White);
+    m_pWhiteThin.setWidth(2);
+
     m_pYellowThin = QPen(A320_Color_Yellow);
+    m_pYellowThin.setWidth(2);
 
     // Bold pens
 
     m_pAmberBold = QPen(A320_Color_Amber);
-    m_pAmberBold.setWidth(2);
+    m_pAmberBold.setWidth(4);
 
     m_pBlueBold = QPen(A320_Color_Blue);
-    m_pBlueBold.setWidth(2);
+    m_pBlueBold.setWidth(4);
 
     m_pGreenBold = QPen(A320_Color_Green);
-    m_pGreenBold.setWidth(2);
+    m_pGreenBold.setWidth(4);
 
     m_pPurpleBold = QPen(A320_Color_Purple);
-    m_pPurpleBold.setWidth(2);
+    m_pPurpleBold.setWidth(4);
 
     m_pWhiteBold = QPen(A320_Color_White);
-    m_pWhiteBold.setWidth(2);
+    m_pWhiteBold.setWidth(4);
 
     m_pYellowBold = QPen(A320_Color_Yellow);
-    m_pYellowBold.setWidth(2);
+    m_pYellowBold.setWidth(4);
 
     QVector<qreal> dashes;
     dashes << 4 << 4;
