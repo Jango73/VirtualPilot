@@ -44,8 +44,11 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     double dAirspeed_VMax1_kts = dAirspeed_VMax_ms * FAC_MS_TO_KNOTS;
     double dAirspeed_VMax2_kts = dAirspeed_VMax1_kts * 2.0;
 
-    // Compute nearest 10th knots
-    int iNearestTenKnots = ( ((int) (dAirspeed_kts / 10.0) ) * 10);
+    // Compute nearest 20th knots
+    int iKnotLineStep = 10;
+    int iKnotLabelStep = 20;
+    int iKnotSpan = 40;
+    int iNearestTwentyKnots = ( ((int) (dAirspeed_kts / (double) iKnotLabelStep) ) * iKnotLabelStep);
 
     // Compute coordinates
     double X = m_rVelocityBar.left() * pTexture->image().width();
@@ -55,7 +58,7 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     double W2 = W / 2.0;
     double W4 = W / 4.0;
     double W10 = W / 10.0;
-    double dVelocityScale = 0.1;
+    double dVelocityScale = H / (double) iKnotSpan;
 
     QRectF rWholePart(X, Y, W, H);
     QRectF rLeftPart(X, Y, W2 + W4, H);
@@ -100,15 +103,15 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     pPainter->translate(vLeftPartCenter);
 
     // Knots bars
-    for (int iVelocityStep = -40; iVelocityStep < 40; iVelocityStep += 5)
+    for (int iVelocityStep = -iKnotSpan; iVelocityStep < iKnotSpan; iVelocityStep += iKnotLineStep)
     {
-        int iVelocity = iNearestTenKnots + iVelocityStep;
+        int iVelocity = iNearestTwentyKnots + iVelocityStep;
         double dVelocityPos = ((dAirspeed_kts - (double) iVelocity) / dVelocityScale);
         QString sVelocity = QString::number(iVelocity);
 
         pPainter->drawLine(QPointF(LW2 - W10, dVelocityPos), QPointF(LW2, dVelocityPos));
 
-        if (iVelocity % 10 == 0)
+        if (iVelocity % iKnotLabelStep == 0)
         {
             pPainter->drawText(QRectF(-LW2, dVelocityPos - LW2, LW, LW), Qt::AlignCenter, sVelocity);
         }
@@ -283,9 +286,6 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
     double W = m_rAltitudeBar.width() * pTexture->image().width();
     double H = m_rAltitudeBar.height() * pTexture->image().height();
     double W2 = W / 2.00;
-    // double W3 = W / 3.00;
-    // double W4 = W / 4.00;
-    // double H2 = H * 0.50;
     double dAltitudeScale = 4.0;
 
     QRectF rWholePart(X, Y, W, H);
@@ -310,7 +310,6 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
     double RW = rRightPart.width();
     double RH = rRightPart.height();
     double RW2 = RW / 2.0;
-    // double RW4 = RW / 4.0;
     double RW10 = RW / 10.0;
     double RH2 = RH / 2.0;
     double RH4 = RH / 4.0;
@@ -353,12 +352,9 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
     pPath.addRect(rLeftPart);
 
     double LW = rLeftPart.width();
-    // double LH = rLeftPart.height();
     double LW2 = LW / 2.0;
-    // double LW3 = LW / 3.0;
     double LW4 = LW / 4.0;
     double LW10 = LW / 10.0;
-    // double LH2 = LH / 2.0;
 
     pPainter->resetTransform();
     pPainter->setClipPath(pPath);
