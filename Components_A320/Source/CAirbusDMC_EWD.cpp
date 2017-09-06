@@ -26,11 +26,7 @@ void CAirbusDMC::updateTexture_EWD(QPainter* pPainter, CTexture* pTexture, doubl
     double X = m_rEWD_Engines.left() * pTexture->image().width();
     double Y = m_rEWD_Engines.top() * pTexture->image().height();
     double W = m_rEWD_Engines.width() * pTexture->image().width();
-    // double H = m_rEWD_Engines.height() * pTexture->getImage().height();
     double W25 = W / 2.50;
-    // double W4 = W / 4.00;
-    // double H2 = H * 0.50;
-    // double dAltitudeScale = 4.0;
 
     QRectF rEngine1_N1(X, Y, W25, W25);
     QRectF rEngine2_N1((X + W) - W25, Y, W25, W25);
@@ -48,11 +44,11 @@ void CAirbusDMC::drawEngineN1Gauge(QPainter* pPainter, CTexture* pTexture, doubl
     double dAngle_N1 = (dN1 * (dAngle2 - dAngle1)) + 60;
 
     // Set main font
-    pPainter->setFont(m_fMainFont);
+    pPainter->setFont(m_fFontLarge);
 
     pPainter->resetTransform();
 
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->drawArc(rRect, (int) dAngle1 * 16, (int) dAngle2 * 16);
 
     pPainter->translate(rRect.center());
@@ -63,8 +59,6 @@ void CAirbusDMC::drawEngineN1Gauge(QPainter* pPainter, CTexture* pTexture, doubl
 
     pPainter->resetTransform();
 
-    // double X = rRect.left();
-    // double Y = rRect.top();
     double W = rRect.width();
     double H = rRect.height();
     double W15 = W / 2.80;
@@ -76,7 +70,7 @@ void CAirbusDMC::drawEngineN1Gauge(QPainter* pPainter, CTexture* pTexture, doubl
 
     pPainter->drawText(rText, Qt::AlignCenter, QString::number(dN1 * 100.0, 'f', 1));
 
-    pPainter->setPen(A320_Color_Green);
+    pPainter->setPen(m_pGreenThin);
     pPainter->drawRect(rText);
     pPainter->drawRect(rText.adjusted(2, 2, -2, -2));
 }

@@ -90,10 +90,10 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     pPainter->setClipping(true);
 
     // Set main font
-    pPainter->setFont(m_fMainFont);
+    pPainter->setFont(m_fFontLarge);
 
     // Velocity background
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->fillRect(rLeftPart, A320_Color_DarkGray);
 
     pPainter->save();
@@ -121,7 +121,7 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     pPainter->drawLine(rLeftPart.bottomLeft(), rLeftPart.bottomLeft() + QPointF(rWholePart.width(), 0.0));
     pPainter->drawLine(rLeftPart.topRight(), rLeftPart.bottomRight());
 
-    pPainter->setPen(A320_Color_Yellow);
+    pPainter->setPen(m_pYellowThin);
 
     pPainter->drawLine(rLeftPart.topLeft() + QPointF(0.0, LH2), rLeftPart.topRight() + QPointF(0.0, LH2));
 
@@ -130,12 +130,12 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
 
     if (bFCU_Vertical_Managed)
     {
-        pPainter->setPen(A320_Color_Purple);
+        pPainter->setPen(m_pPurpleThin);
         dTargetAirspeed_kts = dManagedAirspeed_kts;
     }
     else
     {
-        pPainter->setPen(A320_Color_Blue);
+        pPainter->setPen(m_pBlueThin);
         dTargetAirspeed_kts = dSelectedAirspeed_kts;
     }
 
@@ -227,14 +227,14 @@ void CAirbusDMC::drawArtificialHorizon(QPainter* pPainter, CTexture* pTexture, d
     pPainter->setClipping(true);
 
     // Set main font
-    pPainter->setFont(m_fMainFont);
+    pPainter->setFont(m_fFontLarge);
 
     // Set transform for rotating stuff
     pPainter->rotate(dAircraftRoll);
     pPainter->translate(QPointF(0.0, (-dAircraftPitch / dDegreeScale) * H));
 
     // Ground/air background and horizon line
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->fillRect(-W,  -H * 2, W * 2, H * 2, A320_Color_Sky);
     pPainter->fillRect(-W, 0.0, W * 2, H * 2, A320_Color_Ground);
     pPainter->drawLine(QPointF(-1.0 * W, 0.0), QPointF(1.0 * W, 0.0));
@@ -365,11 +365,10 @@ void CAirbusDMC::drawAltitudeBar(QPainter* pPainter, CTexture* pTexture, double 
     pPainter->setClipping(true);
 
     // Set main font
-    pPainter->setFont(m_fMainFont);
-    pPainter->setPen(A320_Color_Green);
+    pPainter->setFont(m_fFontLarge);
 
     // Altitude background
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->fillRect(rLeftPart, A320_Color_DarkGray);
 
     pPainter->save();
@@ -419,12 +418,16 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
 
     QRectF rPart1_1(X + W5 * 0, Y + H3 * 0, W5, H3);	// FMA Col 1 Row 1
     QRectF rPart1_2(X + W5 * 0, Y + H3 * 1, W5, H3);	// FMA Col 1 Row 2
+    QRectF rPart1_3(X + W5 * 0, Y + H3 * 2, W5, H3);	// FMA Col 1 Row 3
 
     QRectF rPart2_1(X + W5 * 1, Y + H3 * 0, W5, H3);	// FMA Col 2 Row 1
+    QRectF rPart2_2(X + W5 * 1, Y + H3 * 1, W5, H3);	// FMA Col 2 Row 2
 
     QRectF rPart3_1(X + W5 * 2, Y + H3 * 0, W5, H3);	// FMA Col 3 Row 1
+    QRectF rPart3_2(X + W5 * 2, Y + H3 * 1, W5, H3);	// FMA Col 3 Row 2
 
     QRectF rPart4_1(X + W5 * 3, Y + H3 * 0, W5, H3);	// FMA Col 4 Row 1
+    QRectF rPart4_2(X + W5 * 3, Y + H3 * 1, W5, H3);	// FMA Col 4 Row 2
 
     QRectF rPart5_1(X + W5 * 4, Y + H3 * 0, W5, H3);	// FMA Col 5 Row 1
     QRectF rPart5_2(X + W5 * 4, Y + H3 * 1, W5, H3);	// FMA Col 5 Row 2
@@ -432,6 +435,7 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
 
     QString sTextPart1_1;
     QString sTextPart1_2;
+    QString sTextPart1_3;
     QString sTextPart2_1;
     QString sTextPart3_1;
     QString sTextPart4_1;
@@ -531,23 +535,22 @@ void CAirbusDMC::drawFMA(QPainter* pPainter, CTexture* pTexture, double dDeltaTi
         sTextPart5_3 = "A/THR";
     }
 
-    sTextPart1_2 = QString::number(eFG_FlightPhase_fp);
-
     // Col 1
-    pPainter->setPen(A320_Color_Green);
+    pPainter->setPen(m_pGreenThin);
     pPainter->drawText(rPart1_1, Qt::AlignCenter, sTextPart1_1);
     pPainter->drawText(rPart1_2, Qt::AlignCenter, sTextPart1_2);
+    pPainter->drawText(rPart1_3, Qt::AlignCenter, sTextPart1_3);
 
     // Col 2
-    pPainter->setPen(A320_Color_Green);
+    pPainter->setPen(m_pGreenThin);
     pPainter->drawText(rPart2_1, Qt::AlignCenter, sTextPart2_1);
 
     // Col 3
-    pPainter->setPen(A320_Color_Green);
+    pPainter->setPen(m_pGreenThin);
     pPainter->drawText(rPart3_1, Qt::AlignCenter, sTextPart3_1);
 
     // Col 5
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->drawText(rPart5_1, Qt::AlignCenter, sTextPart5_1);
     pPainter->drawText(rPart5_2, Qt::AlignCenter, sTextPart5_2);
     pPainter->drawText(rPart5_3, Qt::AlignCenter, sTextPart5_3);

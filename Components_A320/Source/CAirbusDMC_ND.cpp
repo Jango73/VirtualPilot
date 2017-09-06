@@ -74,12 +74,12 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
     QRectF rWholePart(X, Y, W, H);
 
     // Set main font
-    pPainter->setFont(m_fMainFont);
+    pPainter->setFont(m_fFontLarge);
 
     pPainter->resetTransform();
 
     // Main ellipses
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
 
     pPainter->drawEllipse(rWholePart);
 
@@ -123,7 +123,7 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
             if (iIndex > 0)
             {
-                pPainter->setPen(A320_Color_White);
+                pPainter->setPen(m_pWhiteThin);
                 pPainter->drawLine(vPreviousPosition.X, vPreviousPosition.Z, vCurrentPosition.X, vCurrentPosition.Z);
             }
 
@@ -147,7 +147,7 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
     pPainter->rotate(-dGeoLoc_TrueHeading_deg);
 
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
 
     // Marks
     pPainter->save();
@@ -193,7 +193,7 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
         pPainter->rotate(dFCU_Heading_deg);
 
-        pPainter->setPen(A320_Color_Blue);
+        pPainter->setPen(m_pBlueThin);
 
         QPointF point1(0.0, rWholePart.height() * -0.5);
         QPointF point2(-W20, rWholePart.height() * -0.5 - W20);
@@ -213,7 +213,7 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
         pPainter->rotate(dGeoLoc_TrueTrack_deg - dGeoLoc_TrueHeading_deg);
 
-        pPainter->setPen(A320_Color_Green);
+        pPainter->setPen(m_pGreenThin);
 
         QPointF point1(0.0, rWholePart.height() * -0.5);
         QPointF point2(-H40, rWholePart.height() * -0.5 + H40);
@@ -242,7 +242,7 @@ void CAirbusDMC::drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDe
 
     if (bIsFlight)
     {
-        pPainter->setPen(A320_Color_Green);
+        pPainter->setPen(m_pGreenThin);
         pPainter->drawLine(dXC, dY1, dX2, dYC);
         pPainter->drawLine(dX2, dYC, dXC, dY2);
         pPainter->drawLine(dXC, dY2, dX1, dYC);
@@ -253,7 +253,7 @@ void CAirbusDMC::drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDe
         switch (wWaypoint.type())
         {
             case wtAirport:
-                pPainter->setPen(A320_Color_Purple);
+                pPainter->setPen(m_pPurpleThin);
                 // pPainter->drawEllipse(wpt);
                 pPainter->drawLine(dX1, dYC, dX2, dYC);
                 pPainter->drawLine(dXC, dY1, dXC, dY2);

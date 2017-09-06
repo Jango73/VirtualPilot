@@ -125,6 +125,8 @@ public:
 
 protected:
 
+    int                         m_iLastHeight;
+
     QRectF                      m_rVelocityBar;
     QRectF                      m_rArtificialHorizon;
     QRectF                      m_rAltitudeBar;
@@ -137,10 +139,22 @@ protected:
     QRectF                      m_rEWD_Flaps;
     QRectF                      m_rEWD_Checklist;
 
-    QFont                       m_fMainFont;
-    QPen                        m_pGreenBold;
-    QPen                        m_pYellowBold;
+    QFont                       m_fFontLarge;
+    QFont                       m_fFontSmall;
+
+    QPen                        m_pAmberThin;
+    QPen                        m_pBlueThin;
+    QPen                        m_pGreenThin;
+    QPen                        m_pPurpleThin;
+    QPen                        m_pWhiteThin;
+    QPen                        m_pYellowThin;
+
+    QPen                        m_pAmberBold;
     QPen                        m_pBlueBold;
+    QPen                        m_pGreenBold;
     QPen                        m_pPurpleBold;
+    QPen                        m_pWhiteBold;
+    QPen                        m_pYellowBold;
+
     QPen                        m_pWhiteDashed;
 };

@@ -26,6 +26,7 @@ CComponent* CAirbusDMC::instantiator(C3DScene* pScene)
 
 CAirbusDMC::CAirbusDMC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
+    , m_iLastHeight(0)
 {
     LOG_DEBUG("CAirbusDMC::CAirbusDMC()");
 
@@ -50,17 +51,34 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
 
     m_rEWD_Engines = QRectF(0.00, 0.00, 0.60, 0.70);
 
-    m_pGreenBold = QPen(A320_Color_Green);
-    m_pGreenBold.setWidth(2);
+    // Thin pens
 
-    m_pYellowBold = QPen(A320_Color_Yellow);
-    m_pYellowBold.setWidth(2);
+    m_pAmberThin = QPen(A320_Color_Amber);
+    m_pBlueThin = QPen(A320_Color_Blue);
+    m_pGreenThin = QPen(A320_Color_Green);
+    m_pPurpleThin = QPen(A320_Color_Purple);
+    m_pWhiteThin = QPen(A320_Color_White);
+    m_pYellowThin = QPen(A320_Color_Yellow);
+
+    // Bold pens
+
+    m_pAmberBold = QPen(A320_Color_Amber);
+    m_pAmberBold.setWidth(2);
 
     m_pBlueBold = QPen(A320_Color_Blue);
     m_pBlueBold.setWidth(2);
 
+    m_pGreenBold = QPen(A320_Color_Green);
+    m_pGreenBold.setWidth(2);
+
     m_pPurpleBold = QPen(A320_Color_Purple);
     m_pPurpleBold.setWidth(2);
+
+    m_pWhiteBold = QPen(A320_Color_White);
+    m_pWhiteBold.setWidth(2);
+
+    m_pYellowBold = QPen(A320_Color_Yellow);
+    m_pYellowBold.setWidth(2);
 
     QVector<qreal> dashes;
     dashes << 4 << 4;
@@ -91,9 +109,14 @@ void CAirbusDMC::updateTexture(CTexture* pTexture, double dDeltaTime)
 
     if (painter.begin(&(pTexture->image())))
     {
-        int iFontLargeSize = ((pTexture->image().height() / 16) * 4) / 5;
-
-        m_fMainFont = QFont(A320_MCDU_FONT, iFontLargeSize);
+        if (m_iLastHeight != pTexture->image().height())
+        {
+            m_iLastHeight = pTexture->image().height();
+            int iFontLargeSize = ((m_iLastHeight / 16) * 4) / 5;
+            int iFontSmallSize = (iFontLargeSize * 4) / 5;
+            m_fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
+            m_fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
+        }
 
         painter.fillRect(0, 0, pTexture->image().width(), pTexture->image().height(), QColor(0, 0, 0));
 

@@ -28,6 +28,7 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_ePage(mpInitA)
     , m_iSubPage(0)
+    , m_iLastHeight(0)
 {
     LOG_DEBUG("CAirbusMCDU::CAirbusMCDU()");
 
@@ -184,11 +185,14 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
             double xCellSize = W / (double) MCDU_W;
             double yCellSize = H / (double) MCDU_H;
 
-            int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
-            int iFontSmallSize = (iFontLargeSize * 4) / 5;
-
-            QFont fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
-            QFont fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
+            if (m_iLastHeight != pTexture->image().height())
+            {
+                m_iLastHeight = pTexture->image().height();
+                int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
+                int iFontSmallSize = (iFontLargeSize * 4) / 5;
+                m_fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
+                m_fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
+            }
 
             painter.resetTransform();
 
@@ -208,9 +212,9 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
                 for (int x = 0; x < MCDU_W; x++)
                 {
                     if (m_aScreen[x][y].m_bLarge)
-                        painter.setFont(fFontLarge);
+                        painter.setFont(m_fFontLarge);
                     else
-                        painter.setFont(fFontSmall);
+                        painter.setFont(m_fFontSmall);
 
                     painter.setPen(m_aScreen[x][y].m_cColor);
 

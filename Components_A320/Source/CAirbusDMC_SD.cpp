@@ -52,8 +52,8 @@ void CAirbusDMC::drawSDTitle(QPainter* pPainter, CTexture* pTexture, double dDel
 
     QRectF rect(0.0, 0.0, W, H22);
 
-    pPainter->setFont(m_fMainFont);
-    pPainter->setPen(A320_Color_White);
+    pPainter->setFont(m_fFontLarge);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->drawText(rect, Qt::AlignLeft, sText);
 }
 
@@ -156,7 +156,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     rACEssBus.adjust (W50, 0.0, -W50, 0.0);
 
     // Set main font
-    pPainter->setFont(m_fMainFont);
+    pPainter->setFont(m_fFontLarge);
 
     // Generators
     drawGeneratorGauge(pPainter, pTexture, dDeltaTime, rGen1, "GEN 1", dELEC_Gen1_Power_v > 0.0, dELEC_Gen1_Power_v, dELEC_Gen1_Freq_hz);
@@ -194,8 +194,7 @@ void CAirbusDMC::drawElectricalPage(QPainter* pPainter, CTexture* pTexture, doub
     // AC Ess Bus
     drawSimpleElecGauge(pPainter, pTexture, dDeltaTime, rACEssBus, "AC ESS", dELEC_ACEssBus_Power_v > 0.0);
 
-    QPen linePen(QBrush(A320_Color_Green), 2);
-    pPainter->setPen(linePen);
+    pPainter->setPen(m_pGreenBold);
 
     // Gen1 contactor
     if (bELEC_Cont_Gen1_bool)
@@ -277,9 +276,9 @@ void CAirbusDMC::drawSimpleElecGauge(QPainter* pPainter, CTexture* pTexture, dou
         pPainter->fillRect(rRect, A320_Color_Gray);
 
     if (bActive)
-        pPainter->setPen(A320_Color_Green);
+        pPainter->setPen(m_pGreenThin);
     else
-        pPainter->setPen(A320_Color_Amber);
+        pPainter->setPen(m_pAmberThin);
 
     pPainter->drawText(rRect, Qt::AlignCenter, sName);
 }
@@ -308,7 +307,7 @@ void CAirbusDMC::drawGeneratorGauge(
     QRectF r3(rRect.x(), rRect.y() + H4 * 2.0, rRect.width(), H4);
     QRectF r4(rRect.x(), rRect.y() + H4 * 3.0, rRect.width(), H4);
 
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
 
     if (bActive || bNoBordersWhenOff == false)
     {
@@ -318,9 +317,9 @@ void CAirbusDMC::drawGeneratorGauge(
     pPainter->drawText(r1, Qt::AlignCenter, sName);
 
     if (bActive)
-        pPainter->setPen(A320_Color_Green);
+        pPainter->setPen(m_pGreenThin);
     else
-        pPainter->setPen(A320_Color_Amber);
+        pPainter->setPen(m_pAmberThin);
 
     if (bActive)
     {
@@ -350,14 +349,14 @@ void CAirbusDMC::drawBatGauge(QPainter* pPainter, CTexture* pTexture, double dDe
     QRectF r2(rRect.x(), rRect.y() + H3 * 1.0, rRect.width(), H3);
     QRectF r3(rRect.x(), rRect.y() + H3 * 2.0, rRect.width(), H3);
 
-    pPainter->setPen(A320_Color_White);
+    pPainter->setPen(m_pWhiteThin);
     pPainter->drawRect(rRect);
     pPainter->drawText(r1, Qt::AlignCenter, sName);
 
     if (bActive)
-        pPainter->setPen(A320_Color_Green);
+        pPainter->setPen(m_pGreenThin);
     else
-        pPainter->setPen(A320_Color_Amber);
+        pPainter->setPen(m_pAmberThin);
 
     if (bActive)
     {

@@ -206,4 +206,8 @@ protected:
     MCDUChar                    m_aScreen[MCDU_W][MCDU_H];
     QString                     m_sScratchPad;
     QMap<QString, EMCDUKey>     m_mEventToKey;
+
+    int                         m_iLastHeight;
+    QFont                       m_fFontLarge;
+    QFont                       m_fFontSmall;
 };
