@@ -59,6 +59,9 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
     m_pBlueBold = QPen(A320_Color_Blue);
     m_pBlueBold.setWidth(2);
 
+    m_pPurpleBold = QPen(A320_Color_Purple);
+    m_pPurpleBold.setWidth(2);
+
     QVector<qreal> dashes;
     dashes << 4 << 4;
 

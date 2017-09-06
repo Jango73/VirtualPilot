@@ -30,12 +30,17 @@ void CAirbusDMC::updateTexture_PFD(QPainter* pPainter, CTexture* pTexture, doubl
 void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double dDeltaTime)
 {
     // Get flight data
+    bool bFCU_Lateral_Managed = GETDATA_BOOL(adFCU_Lateral_Managed_bool);
+    bool bFCU_Vertical_Managed = GETDATA_BOOL(adFCU_Vertical_Managed_bool);
+    double dFG_ManagedAltitude_m = GETDATA_DOUBLE(adFG_ManagedAltitude_m);
+    double dFG_ManagedAirspeed_ms = GETDATA_DOUBLE(adFG_ManagedAirspeed_ms);
     double dAirspeed_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeed_ms);
     double dAirspeed_VMax_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeedVMax_ms);
     double dFCU_Airspeed_ms = GETDATA_DOUBLE(adFCU_Airspeed_ms);
 
     double dAirspeed_kts = dAirspeed_ms * FAC_MS_TO_KNOTS;
     double dSelectedAirspeed_kts = dFCU_Airspeed_ms * FAC_MS_TO_KNOTS;
+    double dManagedAirspeed_kts = dFG_ManagedAirspeed_ms * FAC_MS_TO_KNOTS;
     double dAirspeed_VMax1_kts = dAirspeed_VMax_ms * FAC_MS_TO_KNOTS;
     double dAirspeed_VMax2_kts = dAirspeed_VMax1_kts * 2.0;
 
@@ -121,26 +126,44 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     pPainter->drawLine(rLeftPart.topLeft() + QPointF(0.0, LH2), rLeftPart.topRight() + QPointF(0.0, LH2));
 
     // Selected velocity
-    double dSelectedVelocityPos = vLeftPartCenter.y() + ((dAirspeed_kts - dSelectedAirspeed_kts) / dVelocityScale);
-    QString sSelectedVelocity = QString::number(dSelectedAirspeed_kts);
+    double dTargetAirspeed_kts = 0.0;
 
-    pPainter->setPen(A320_Color_Blue);
-
-    if (dSelectedVelocityPos < rLeftPart.top())
+    if (bFCU_Vertical_Managed)
     {
-        pPainter->drawText(QRectF(rLeftPart.left(), rLeftPart.top() - W2, rLeftPart.width(), W2), Qt::AlignCenter, sSelectedVelocity);
-    }
-    else if (dSelectedVelocityPos > rLeftPart.bottom())
-    {
-        pPainter->drawText(QRectF(rLeftPart.left(), rLeftPart.bottom(), rLeftPart.width(), W2), Qt::AlignCenter, sSelectedVelocity);
+        pPainter->setPen(A320_Color_Purple);
+        dTargetAirspeed_kts = dManagedAirspeed_kts;
     }
     else
     {
-        pPainter->setPen(m_pBlueBold);
+        pPainter->setPen(A320_Color_Blue);
+        dTargetAirspeed_kts = dSelectedAirspeed_kts;
+    }
 
-        QPointF point1(rLeftPart.right(), dSelectedVelocityPos);
-        QPointF point2(rLeftPart.right() + LW4, dSelectedVelocityPos - LW8);
-        QPointF point3(rLeftPart.right() + LW4, dSelectedVelocityPos + LW8);
+    double dSelectedAirspeedPos = vLeftPartCenter.y() + ((dAirspeed_kts - dTargetAirspeed_kts) / dVelocityScale);
+    QString sSelectedAirspeed = QString::number(dTargetAirspeed_kts);
+
+    if (dSelectedAirspeedPos < rLeftPart.top())
+    {
+        pPainter->drawText(QRectF(rLeftPart.left(), rLeftPart.top() - W2, rLeftPart.width(), W2), Qt::AlignCenter, sSelectedAirspeed);
+    }
+    else if (dSelectedAirspeedPos > rLeftPart.bottom())
+    {
+        pPainter->drawText(QRectF(rLeftPart.left(), rLeftPart.bottom(), rLeftPart.width(), W2), Qt::AlignCenter, sSelectedAirspeed);
+    }
+    else
+    {
+        if (bFCU_Vertical_Managed)
+        {
+            pPainter->setPen(m_pPurpleBold);
+        }
+        else
+        {
+            pPainter->setPen(m_pBlueBold);
+        }
+
+        QPointF point1(rLeftPart.right(), dSelectedAirspeedPos);
+        QPointF point2(rLeftPart.right() + LW4, dSelectedAirspeedPos - LW8);
+        QPointF point3(rLeftPart.right() + LW4, dSelectedAirspeedPos + LW8);
 
         pPainter->drawLine(point1, point2);
         pPainter->drawLine(point2, point3);

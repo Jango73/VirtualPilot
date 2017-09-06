@@ -141,5 +141,6 @@ protected:
     QPen                        m_pGreenBold;
     QPen                        m_pYellowBold;
     QPen                        m_pBlueBold;
+    QPen                        m_pPurpleBold;
     QPen                        m_pWhiteDashed;
 };

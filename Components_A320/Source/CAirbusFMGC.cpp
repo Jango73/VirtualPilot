@@ -34,7 +34,7 @@ CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
     , m_dCommandedAltitude_m(0.0)
     , m_dCommandedRoll_deg(0.0)
     , m_dCommandedRollVelocity_ds(0.0)
-    , m_dCommandedVelocity_ms(0.0)
+    , m_dCommandedAirspeed_ms(0.0)
     , m_dCommandedAcceleration_ms(0.0)
 {
     LOG_DEBUG("CAirbusFMGC::CAirbusFMGC()");
@@ -357,9 +357,9 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     // Compute thrust command
 
-    m_dCommandedVelocity_ms = 250.0 * FAC_KNOTS_TO_MS;
+    m_dCommandedAirspeed_ms = 250.0 * FAC_KNOTS_TO_MS;
 
-    m_dCommandedAcceleration_ms = (m_dCommandedVelocity_ms - dAir_IndicatedAirspeed_ms) * 0.5;
+    m_dCommandedAcceleration_ms = (m_dCommandedAirspeed_ms - dAir_IndicatedAirspeed_ms) * 0.5;
     m_dCommandedAcceleration_ms = Math::Angles::clipDouble(m_dCommandedAcceleration_ms, -2.0, 2.0);
 
     m_pidAcceleration.setSetPoint(m_dCommandedAcceleration_ms);
@@ -382,6 +382,8 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
     pushData(CAirbusData(m_sName, adFG_FlightPhase_fp, m_eFlightPhase));
     pushData(CAirbusData(m_sName, adFG_LateralMode_alm, m_eLateralMode));
     pushData(CAirbusData(m_sName, adFG_VerticalMode_avm, m_eVerticalMode));
+    pushData(CAirbusData(m_sName, adFG_ManagedAltitude_m, m_dCommandedAltitude_m));
+    pushData(CAirbusData(m_sName, adFG_ManagedAirspeed_ms, m_dCommandedAirspeed_ms));
     pushData(CAirbusData(m_sName, adFG_CommandedRollVelocity_ds, m_dCommandedRollVelocity_ds));
     pushData(CAirbusData(m_sName, adFG_CommandedPitchVelocity_ds, m_dCommandedPitchVelocity_ds));
     pushData(CAirbusData(m_sName, adFG_CommandedThrust_norm, m_dCommandedThrust_norm));
@@ -404,7 +406,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     LOG_VALUE(QString("%1 VEL / ACCEL / THT").arg(m_sName),
               QString("%1 / %2 / %3")
-              .arg(QString::number(m_dCommandedVelocity_ms, 'f', 2))
+              .arg(QString::number(m_dCommandedAirspeed_ms, 'f', 2))
               .arg(QString::number(m_dCommandedAcceleration_ms, 'f', 2))
               .arg(QString::number(m_dCommandedThrust_norm, 'f', 2))
               );

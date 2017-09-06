@@ -125,6 +125,8 @@ enum EAirbusData
     adFG_FlightPhase_fp,
     adFG_LateralMode_alm,
     adFG_VerticalMode_avm,
+    adFG_ManagedAltitude_m,
+    adFG_ManagedAirspeed_ms,
     adFG_CommandedRollVelocity_ds,
     adFG_CommandedPitchVelocity_ds,
     adFG_CommandedThrust_norm,

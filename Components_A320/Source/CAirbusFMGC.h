@@ -116,7 +116,7 @@ protected:
     CPIDController          m_pidVerticalSpeed;
 
     // Commandes de poussée
-    double                  m_dCommandedVelocity_ms;
+    double                  m_dCommandedAirspeed_ms;
     double                  m_dCommandedAcceleration_ms;
     double                  m_dCommandedThrust_norm;
 
