@@ -48,7 +48,7 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     int iKnotLineStep = 10;
     int iKnotLabelStep = 20;
     int iKnotSpan = 80;
-    int iNearestTenKnots = ( ((int) (dAirspeed_kts / (double) iKnotLineStep) ) * iKnotLabelStep);
+    int iNearestTenKnots = ( ((int) (dAirspeed_kts / (double) iKnotLineStep) ) * iKnotLineStep);
 
     // Compute coordinates
     double X = m_rVelocityBar.left() * pTexture->image().width();
