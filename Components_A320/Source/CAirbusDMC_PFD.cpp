@@ -32,8 +32,10 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     // Get flight data
     double dAirspeed_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeed_ms);
     double dAirspeed_VMax_ms = GETDATA_DOUBLE(adAir_IndicatedAirspeedVMax_ms);
+    double dFCU_Airspeed_ms = GETDATA_DOUBLE(adFCU_Airspeed_ms);
 
     double dAirspeed_kts = dAirspeed_ms * FAC_MS_TO_KNOTS;
+    double dSelectedAirspeed_kts = dFCU_Airspeed_ms * FAC_MS_TO_KNOTS;
     double dAirspeed_VMax1_kts = dAirspeed_VMax_ms * FAC_MS_TO_KNOTS;
     double dAirspeed_VMax2_kts = dAirspeed_VMax1_kts * 2.0;
 
@@ -48,7 +50,6 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     double W2 = W / 2.0;
     double W4 = W / 4.0;
     double W10 = W / 10.0;
-    // double H2 = H / 2.0;
     double dVelocityScale = 0.1;
 
     QRectF rWholePart(X, Y, W, H);
@@ -68,12 +69,12 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     double LW = rLeftPart.width();
     double LH = rLeftPart.height();
     double LW2 = LW / 2.0;
+    double LW4 = LW / 4.0;
+    double LW8 = LW / 8.0;
     double LH2 = LH / 2.0;
 
     double RW = rRightPart.width();
-    // double RH = rRightPart.height();
     double RW2 = RW / 2.0;
-    // double RH2 = RH / 2.0;
 
     // Create clipping path and prepare painter
     QPainterPath pPath;
@@ -118,6 +119,33 @@ void CAirbusDMC::drawVelocityBar(QPainter* pPainter, CTexture* pTexture, double 
     pPainter->setPen(A320_Color_Yellow);
 
     pPainter->drawLine(rLeftPart.topLeft() + QPointF(0.0, LH2), rLeftPart.topRight() + QPointF(0.0, LH2));
+
+    // Selected velocity
+    double dSelectedVelocityPos = vLeftPartCenter.y() + ((dAirspeed_kts - dSelectedAirspeed_kts) / dVelocityScale);
+    QString sSelectedVelocity = QString::number(dSelectedAirspeed_kts);
+
+    pPainter->setPen(A320_Color_Blue);
+
+    if (dSelectedVelocityPos < rLeftPart.top())
+    {
+        pPainter->drawText(QRectF(rLeftPart.left(), rLeftPart.top() - W2, rLeftPart.width(), W2), Qt::AlignCenter, sSelectedVelocity);
+    }
+    else if (dSelectedVelocityPos > rLeftPart.bottom())
+    {
+        pPainter->drawText(QRectF(rLeftPart.left(), rLeftPart.bottom(), rLeftPart.width(), W2), Qt::AlignCenter, sSelectedVelocity);
+    }
+    else
+    {
+        pPainter->setPen(m_pBlueBold);
+
+        QPointF point1(rLeftPart.right(), dSelectedVelocityPos);
+        QPointF point2(rLeftPart.right() + LW4, dSelectedVelocityPos - LW8);
+        QPointF point3(rLeftPart.right() + LW4, dSelectedVelocityPos + LW8);
+
+        pPainter->drawLine(point1, point2);
+        pPainter->drawLine(point2, point3);
+        pPainter->drawLine(point3, point1);
+    }
 
     //-----------------------------------------------
 

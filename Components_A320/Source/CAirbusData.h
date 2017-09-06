@@ -148,8 +148,8 @@ enum EAirbusData
     adFCU_VerticalSpeed_fs,
     adFCU_Altitude_f,
     adFCU_VelocityType_idx,
-    adFCU_Velocity_kts,
-    adFCU_Velocity_mach,
+    adFCU_Airspeed_ms,
+    adFCU_Airspeed_mach,
     adFCU_HeadingType_idx,
     adFCU_Heading_deg,
 

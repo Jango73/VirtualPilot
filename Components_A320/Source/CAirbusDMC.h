@@ -140,5 +140,6 @@ protected:
     QFont                       m_fMainFont;
     QPen                        m_pGreenBold;
     QPen                        m_pYellowBold;
+    QPen                        m_pBlueBold;
     QPen                        m_pWhiteDashed;
 };

@@ -27,7 +27,8 @@ CAirbusFCU::CAirbusFCU(C3DScene* pScene)
     , m_bLateralManaged(true)
     , m_bVerticalManaged(true)
     , m_dSelectedHeading(0.0)
-    , m_dSelectedAltitude(33000.0 * FAC_FEET_TO_METERS)
+    , m_dSelectedAltitude_m(10000.0 * FAC_FEET_TO_METERS)
+    , m_dSelectedVelocity_ms(200.0 * FAC_KNOTS_TO_MS)
 {
     LOG_DEBUG("CAirbusFCU::CAirbusFCU()");
 }
@@ -51,8 +52,9 @@ void CAirbusFCU::update(double dDeltaTime)
     pushData(CAirbusData(m_sName, adFCU_Lateral_Managed_bool, m_bLateralManaged));
     pushData(CAirbusData(m_sName, adFCU_Vertical_Managed_bool, m_bVerticalManaged));
 
-    pushData(CAirbusData(m_sName, adFCU_Altitude_f, m_dSelectedAltitude));
+    pushData(CAirbusData(m_sName, adFCU_Altitude_f, m_dSelectedAltitude_m));
     pushData(CAirbusData(m_sName, adFCU_Heading_deg, m_dSelectedHeading));
+    pushData(CAirbusData(m_sName, adFCU_Airspeed_ms, m_dSelectedVelocity_ms));
 }
 
 //-------------------------------------------------------------------------------------------------

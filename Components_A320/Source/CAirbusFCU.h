@@ -82,5 +82,6 @@ protected:
     bool    m_bVerticalManaged;
 
     double  m_dSelectedHeading;
-    double  m_dSelectedAltitude;
+    double  m_dSelectedAltitude_m;
+    double  m_dSelectedVelocity_ms;
 };
