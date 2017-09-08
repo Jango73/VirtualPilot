@@ -317,7 +317,7 @@
         </widget>
         <widget class="QCheckBox" name="m_chkBoundsOnly">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>

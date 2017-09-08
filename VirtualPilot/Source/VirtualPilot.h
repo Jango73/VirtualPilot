@@ -83,6 +83,7 @@ private slots:
     void onWindLevelChanged(int iValue);
     void onShaderQualityChanged(int iValue);
 
+    void onBoundsOnlyClicked();
     void onOverlookClicked();
 
     //-------------------------------------------------------------------------------------------------
