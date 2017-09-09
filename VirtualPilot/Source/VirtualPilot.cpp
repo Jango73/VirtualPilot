@@ -62,8 +62,10 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     connect(ui.m_sFogLevel, SIGNAL(valueChanged(int)), this, SLOT(onFogLevelChanged(int)));
     connect(ui.m_sWindLevel, SIGNAL(valueChanged(int)), this, SLOT(onWindLevelChanged(int)));
     connect(ui.m_sShaderQuality, SIGNAL(valueChanged(int)), this, SLOT(onShaderQualityChanged(int)));
+    connect(ui.m_sOverlookFOV, SIGNAL(valueChanged(int)), this, SLOT(onOverlookFOVChanged(int)));
 
     connect(ui.m_chkBoundsOnly, SIGNAL(clicked()), this, SLOT(onBoundsOnlyClicked()));
+    connect(ui.m_chkNormalsOnly, SIGNAL(clicked()), this, SLOT(onNormalsOnlyClicked()));
     connect(ui.m_chkOverlook, SIGNAL(clicked()), this, SLOT(onOverlookClicked()));
 
     loadScene(QCoreApplication::applicationDirPath() + "/" + sSceneFileName);
@@ -377,9 +379,23 @@ void VirtualPilot::onShaderQualityChanged(int iValue)
 
 //-------------------------------------------------------------------------------------------------
 
+void VirtualPilot::onOverlookFOVChanged(int iValue)
+{
+    m_pScene->setOverlookFOV((double) iValue);
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void VirtualPilot::onBoundsOnlyClicked()
 {
     m_pScene->setBoundsOnly(ui.m_chkBoundsOnly->checkState() == Qt::Checked);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onNormalsOnlyClicked()
+{
+    m_pScene->setNormalsOnly(ui.m_chkNormalsOnly->checkState() == Qt::Checked);
 }
 
 //-------------------------------------------------------------------------------------------------

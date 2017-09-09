@@ -1,6 +1,5 @@
 
-#ifndef VIRTUALPILOT_H
-#define VIRTUALPILOT_H
+#pragma once
 
 // QT
 #include <QtGlobal>
@@ -13,7 +12,6 @@
 
 // Application
 #include "ui_VirtualPilot.h"
-
 #include "CGLWidgetScene.h"
 #include "CComponent.h"
 #include "CView.h"
@@ -82,8 +80,10 @@ private slots:
     void onFogLevelChanged(int iValue);
     void onWindLevelChanged(int iValue);
     void onShaderQualityChanged(int iValue);
+    void onOverlookFOVChanged(int iValue);
 
     void onBoundsOnlyClicked();
+    void onNormalsOnlyClicked();
     void onOverlookClicked();
 
     //-------------------------------------------------------------------------------------------------
@@ -103,5 +103,3 @@ protected:
     bool                            m_bRun;
     bool                            m_bRealTime;
 };
-
-#endif // VIRTUALPILOT_H
