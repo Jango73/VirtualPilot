@@ -38,7 +38,7 @@
     </Component>
 
     <Component Name="Pilot" Class="CCamera">
-        <Position x="-0.6" y="0.7" z="14.3"/>
+        <Position x="-0.4" y="0.7" z="14.3"/>
         <Rotation x="0.0" y="0.0" z="0.0"/>
         <Controller Class="CStandardController"/>
         <RotationMinimum x="-5.0" y="-5.0" z="-5.0"/>
@@ -86,13 +86,13 @@
         <Position x="5.6" y="-2.1" z="1.9"/>
         <Rotation x="0.0" y="0.0" z="0.0"/>
         <Physics MassKG="3000.0"/>
-        <Thrust MaxThrustKG="6000.0"/>
+        <Thrust MaxThrustKG="5000.0"/>
     </Component>
     <Component Name="Engine2" Class="CJetEngine">
         <Position x="-5.6" y="-2.1" z="1.9"/>
         <Rotation x="0.0" y="0.0" z="0.0"/>
         <Physics MassKG="3000.0"/>
-        <Thrust MaxThrustKG="6000.0"/>
+        <Thrust MaxThrustKG="5000.0"/>
     </Component>
 
     <Component Name="APU" Class="CJetEngine">

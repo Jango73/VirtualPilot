@@ -264,7 +264,21 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
     }
     else if (eKey == mkClear)
     {
-        m_sScratchPad = MCDU_CLEAR;
+        if (m_sError.isEmpty() == false)
+        {
+            m_sError.clear();
+        }
+        else
+        {
+            if (m_sScratchPad == MCDU_CLEAR)
+            {
+                m_sScratchPad.clear();
+            }
+            else
+            {
+                m_sScratchPad = MCDU_CLEAR;
+            }
+        }
     }
     else if (eKey == mkSlash)
     {
@@ -275,20 +289,23 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
     }
     else if (eKey >= mkSpace && eKey <= mkZ)
     {
-        if (m_sScratchPad.count() < MCDU_W)
+        if (m_sError.isEmpty() && m_sScratchPad.count() < MCDU_W)
         {
             m_sScratchPad += QString(QChar(eKey));
         }
     }
     else if (eKey >= mk1L && eKey <= mkRight)
     {
-        switch (m_ePage)
+        if (m_sError.isEmpty())
         {
-            case mpMenu: handleKey_Menu(eKey); break;
-            case mpInitA: handleKey_InitA(eKey); break;
-            case mpInitB: handleKey_InitB(eKey); break;
-            case mpRouteSelection: handleKey_RouteSelection(eKey); break;
-            case mpFlightPlanA: handleKey_FlightPlanA(eKey); break;
+            switch (m_ePage)
+            {
+                case mpMenu: handleKey_Menu(eKey); break;
+                case mpInitA: handleKey_InitA(eKey); break;
+                case mpInitB: handleKey_InitB(eKey); break;
+                case mpRouteSelection: handleKey_RouteSelection(eKey); break;
+                case mpFlightPlanA: handleKey_FlightPlanA(eKey); break;
+            }
         }
     }
     else if (eKey == mkInit)
@@ -392,7 +409,14 @@ void CAirbusMCDU::printCurrentPage()
 
 void CAirbusMCDU::printScratchPad()
 {
-    printAt(QPoint(0, MCDU_H - 1), m_sScratchPad, A320_Color_White, true);
+    if (m_sError.isEmpty() == false)
+    {
+        printAt(QPoint(0, MCDU_H - 1), m_sError, A320_Color_White, true);
+    }
+    else
+    {
+        printAt(QPoint(0, MCDU_H - 1), m_sScratchPad, A320_Color_White, true);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -469,14 +493,23 @@ void CAirbusMCDU::handleKey_InitA(EMCDUKey eKey)
                 m_sScratchPad.clear();
             }
             break;
+
         case mk1R:
             if (m_sScratchPad.isEmpty() == false)
             {
                 if (respectsFormat(m_sScratchPad, FORMAT_ICAO_FROM_TO))
                 {
                     sendData(mdsICAOFromTo, m_sScratchPad);
+                    m_sScratchPad.clear();
+                }
+                else
+                {
+                    m_sError = ERROR_BAD_FORMAT;
                 }
             }
+            break;
+
+        default:
             break;
     }
 }
@@ -556,6 +589,7 @@ void CAirbusMCDU::handleKey_FlightPlanA(EMCDUKey eKey)
         {
             case mkLeft: m_iSubPage--; break;
             case mkRight: m_iSubPage++; break;
+            default: break;
         }
 
         int iTotalCount = pFG_FlightPlan_ptr->waypoints().count();
@@ -603,8 +637,21 @@ QString CAirbusMCDU::printableSpeed(double dSpeed_ms)
 
 bool CAirbusMCDU::respectsFormat(const QString& sValue, const QString& sFormat)
 {
-    // TODO : check if sValue respects sFormat
-    return true;
+    QString sText;
+
+    for (int index = 0; index < sValue.count(); index++)
+    {
+        if (sValue[index].isLetterOrNumber())
+        {
+            sText += "_";
+        }
+        else
+        {
+            sText += sValue[index];
+        }
+    }
+
+    return sText == sFormat;
 }
 
 //-------------------------------------------------------------------------------------------------

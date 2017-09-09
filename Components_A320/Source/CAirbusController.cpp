@@ -178,7 +178,7 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
 
     if (event->key() >= Qt::Key_F1 && event->key() <= Qt::Key_F12 && bMCDUModifiers)
     {
-        int iKey = (int) event->key() - (int) Qt::Key_F12;
+        int iKey = (int) event->key() - (int) Qt::Key_F1;
         generateQ3DEvent(CQ3DEvent(m_mFunctionToEvent[iKey], CQ3DEvent::Press));
         return;
     }
@@ -240,7 +240,7 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             return;
 
         case Qt::Key_Right:
-            if (event->modifiers() & Qt::ControlModifier)
+            if (bMCDUModifiers)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_RIGHT, CQ3DEvent::Press));
                 return;
@@ -253,7 +253,7 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             break;
 
         case Qt::Key_Left:
-            if (event->modifiers() & Qt::ControlModifier)
+            if (bMCDUModifiers)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_LEFT, CQ3DEvent::Press));
                 return;
@@ -262,6 +262,36 @@ void CAirbusController::keyPressEvent(QKeyEvent* event)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_DEC, CQ3DEvent::Press));
                 return;
+            }
+            break;
+
+        case Qt::Key_Up:
+            generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_ALTITUDE_INC, CQ3DEvent::Press));
+            break;
+
+        case Qt::Key_Down:
+            generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_ALTITUDE_DEC, CQ3DEvent::Press));
+            break;
+
+        case Qt::Key_L:
+            if (event->modifiers() & Qt::ControlModifier)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_FCU_LATERAL_MANAGED, CQ3DEvent::Press));
+            }
+            else
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_FCU_LATERAL_SELECTED, CQ3DEvent::Press));
+            }
+            break;
+
+        case Qt::Key_V:
+            if (event->modifiers() & Qt::ControlModifier)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_FCU_VERTICAL_MANAGED, CQ3DEvent::Press));
+            }
+            else
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_FCU_VERTICAL_SELECTED, CQ3DEvent::Press));
             }
             break;
 
@@ -403,6 +433,78 @@ void CAirbusController::q3dEvent(CQ3DEvent* event)
             if (pFCU != nullptr)
             {
                 pFCU->decrement_SelectedHeading(false);
+            }
+        }
+        return;
+    }
+
+    if (event->getName() == EventName_FCU_SEL_ALTITUDE_INC)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pFCU != nullptr)
+            {
+                pFCU->increment_SelectedAltitude(false);
+            }
+        }
+        return;
+    }
+
+    if (event->getName() == EventName_FCU_SEL_ALTITUDE_DEC)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pFCU != nullptr)
+            {
+                pFCU->decrement_SelectedAltitude(false);
+            }
+        }
+        return;
+    }
+
+    if (event->getName() == EventName_FCU_LATERAL_MANAGED)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pFCU != nullptr)
+            {
+                pFCU->setLateralManaged(true);
+            }
+        }
+        return;
+    }
+
+    if (event->getName() == EventName_FCU_LATERAL_SELECTED)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pFCU != nullptr)
+            {
+                pFCU->setLateralManaged(false);
+            }
+        }
+        return;
+    }
+
+    if (event->getName() == EventName_FCU_VERTICAL_MANAGED)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pFCU != nullptr)
+            {
+                pFCU->setVerticalManaged(true);
+            }
+        }
+        return;
+    }
+
+    if (event->getName() == EventName_FCU_VERTICAL_SELECTED)
+    {
+        if (event->getAction() == CQ3DEvent::Press)
+        {
+            if (pFCU != nullptr)
+            {
+                pFCU->setVerticalManaged(false);
             }
         }
         return;

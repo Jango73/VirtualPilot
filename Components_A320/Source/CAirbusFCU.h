@@ -36,6 +36,12 @@ public:
     // Setters
     //-------------------------------------------------------------------------------------------------
 
+    //!
+    void setLateralManaged(bool bValue);
+
+    //!
+    void setVerticalManaged(bool bValue);
+
     //-------------------------------------------------------------------------------------------------
     // Getters
     //-------------------------------------------------------------------------------------------------
@@ -54,20 +60,26 @@ public:
     // Control methods
     //-------------------------------------------------------------------------------------------------
 
-    //
+    //!
     void toggle_AutoPilot1_Engaged();
 
-    //
+    //!
     void toggle_AutoPilot2_Engaged();
 
-    //
+    //!
     void toggle_AutoThrust_Engaged();
 
-    //
+    //!
     void increment_SelectedHeading(bool bFast);
 
-    //
+    //!
     void decrement_SelectedHeading(bool bFast);
+
+    //!
+    void increment_SelectedAltitude(bool bFast);
+
+    //!
+    void decrement_SelectedAltitude(bool bFast);
 
     //-------------------------------------------------------------------------------------------------
     // Properties

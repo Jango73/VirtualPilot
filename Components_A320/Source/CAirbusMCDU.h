@@ -72,6 +72,8 @@ enum EMCDUKey
 #define TEXT_FPLN_HEADER        "          UTC  SPD/ALT  "
 #define TEXT_FPLN_FOOTER        " DEST     UTC  DIST EFOB"
 
+#define ERROR_BAD_FORMAT        "BAD FORMAT"
+
 //-------------------------------------------------------------------------------------------------
 
 //! Multipurpose Control and Display Unit
@@ -206,6 +208,7 @@ protected:
     int                         m_iSubPage;
     MCDUChar                    m_aScreen[MCDU_W][MCDU_H];
     QString                     m_sScratchPad;
+    QString                     m_sError;
     QMap<QString, EMCDUKey>     m_mEventToKey;
 
     int                         m_iLastHeight;
