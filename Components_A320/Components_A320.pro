@@ -1,8 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2016-01-22T20:41:20
-#
-#-------------------------------------------------
 
 QT += core gui network opengl xml
 
@@ -102,15 +97,3 @@ SOURCES += \
 
 RESOURCES += \
     A320.qrc
-
-# Copy qt-plus to bin
-copyfile = $$PWD/../Quick3D/qt-plus/bin/*.dll
-copydest = $$PWD/../bin
-
-QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
-
-# Copy Quick3D to Binary
-copyfile = $$PWD/../Quick3D/Quick3D/bin/*.dll
-copydest = $$PWD/../bin
-
-QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
