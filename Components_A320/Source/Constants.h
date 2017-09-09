@@ -163,6 +163,11 @@
 #define EventName_MCDU_CAPT_Y               "MCDU_CAPT_Y"
 #define EventName_MCDU_CAPT_Z               "MCDU_CAPT_Z"
 
+#define EventName_MCDU_CAPT_SPACE           "MCDU_CAPT_SPACE"
+#define EventName_MCDU_CAPT_DELETE          "MCDU_CAPT_DELETE"
+#define EventName_MCDU_CAPT_SLASH           "MCDU_CAPT_SLASH"
+#define EventName_MCDU_CAPT_CLEAR           "MCDU_CAPT_CLEAR"
+
 #define EventName_MCDU_FO_1L                "MCDU_FO_1L"
 #define EventName_MCDU_FO_2L                "MCDU_FO_2L"
 #define EventName_MCDU_FO_3L                "MCDU_FO_3L"
@@ -222,6 +227,11 @@
 #define EventName_MCDU_FO_X                 "MCDU_FO_X"
 #define EventName_MCDU_FO_Y                 "MCDU_FO_Y"
 #define EventName_MCDU_FO_Z                 "MCDU_FO_Z"
+
+#define EventName_MCDU_FO_SPACE             "MCDU_FO_SPACE"
+#define EventName_MCDU_FO_DELETE            "MCDU_FO_DELETE"
+#define EventName_MCDU_FO_SLASH             "MCDU_FO_SLASH"
+#define EventName_MCDU_FO_CLEAR             "MCDU_FO_CLEAR"
 
 //-------------------------------------------------------------------------------------------------
 // MCDU colors

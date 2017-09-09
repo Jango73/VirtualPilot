@@ -100,6 +100,9 @@ protected:
 
     QStringList                                     m_lEVENTS_MCDU_1;
     QStringList                                     m_lEVENTS_MCDU_2;
+    QMap<int, QString>                              m_mLetterToEvent;
+    QMap<int, QString>                              m_mDigitToEvent;
+    QMap<int, QString>                              m_mFunctionToEvent;
 
     double                                          m_dEngine1ThrustLever_norm;
     double                                          m_dEngine2ThrustLever_norm;

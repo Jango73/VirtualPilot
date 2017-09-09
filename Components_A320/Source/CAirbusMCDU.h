@@ -47,6 +47,7 @@ enum EMCDUKey
     mk0 = 48, mk1, mk2, mk3, mk4, mk5, mk6, mk7, mk8, mk9,
     mkA = 65, mkB, mkC, mkD, mkE, mkF, mkG, mkH, mkI, mkJ, mkK, mkL, mkM,
     mkN, mkO, mkP, mkQ, mkR, mkS, mkT, mkU, mkV, mkW, mkX, mkY, mkZ,
+    mkDelete = 127,
     mk1L = 300, mk2L, mk3L, mk4L, mk5L, mk6L,
     mk1R, mk2R, mk3R, mk4R, mk5R, mk6R,
     mkUp, mkDown, mkLeft, mkRight,

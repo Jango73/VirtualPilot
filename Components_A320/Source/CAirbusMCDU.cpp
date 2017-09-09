@@ -92,6 +92,11 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_CAPT_Y] = mkY;
     m_mEventToKey[EventName_MCDU_CAPT_Z] = mkZ;
 
+    m_mEventToKey[EventName_MCDU_CAPT_SPACE] = mkSpace;
+    m_mEventToKey[EventName_MCDU_CAPT_DELETE] = mkDelete;
+    m_mEventToKey[EventName_MCDU_CAPT_SLASH] = mkSlash;
+    m_mEventToKey[EventName_MCDU_CAPT_CLEAR] = mkClear;
+
     m_mEventToKey[EventName_MCDU_FO_1L] = mk1L;
     m_mEventToKey[EventName_MCDU_FO_2L] = mk2L;
     m_mEventToKey[EventName_MCDU_FO_3L] = mk3L;
@@ -151,6 +156,11 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     m_mEventToKey[EventName_MCDU_FO_X] = mkX;
     m_mEventToKey[EventName_MCDU_FO_Y] = mkY;
     m_mEventToKey[EventName_MCDU_FO_Z] = mkZ;
+
+    m_mEventToKey[EventName_MCDU_FO_SPACE] = mkSpace;
+    m_mEventToKey[EventName_MCDU_FO_DELETE] = mkDelete;
+    m_mEventToKey[EventName_MCDU_FO_SLASH] = mkSlash;
+    m_mEventToKey[EventName_MCDU_FO_CLEAR] = mkClear;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -245,7 +255,25 @@ void CAirbusMCDU::handleEvent(CQ3DEvent* event)
 
 void CAirbusMCDU::handleKey(EMCDUKey eKey)
 {
-    if (eKey >= mkSpace && eKey <= mkZ)
+    if (eKey == mkDelete)
+    {
+        if (m_sScratchPad.count() > 0)
+        {
+            m_sScratchPad.chop(1);
+        }
+    }
+    else if (eKey == mkClear)
+    {
+        m_sScratchPad = MCDU_CLEAR;
+    }
+    else if (eKey == mkSlash)
+    {
+        if (m_sScratchPad.count() < MCDU_W)
+        {
+            m_sScratchPad += QString("/");
+        }
+    }
+    else if (eKey >= mkSpace && eKey <= mkZ)
     {
         if (m_sScratchPad.count() < MCDU_W)
         {
@@ -274,10 +302,6 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
     else if (eKey == mkMenu)
     {
         m_ePage = mpMenu;
-    }
-    else if (eKey == mkClear)
-    {
-        m_sScratchPad = MCDU_CLEAR;
     }
 }
 

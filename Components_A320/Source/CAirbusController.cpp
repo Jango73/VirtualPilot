@@ -160,65 +160,137 @@ void CAirbusController::update(double dDeltaTime)
 
 void CAirbusController::keyPressEvent(QKeyEvent* event)
 {
-    CAircraftController::keyPressEvent(event);
+    bool bMCDUModifiers = m_bControlPressed && m_bShiftPressed;
+
+    if (event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z && bMCDUModifiers)
+    {
+        int iKey = (int) event->key() - (int) Qt::Key_A;
+        generateQ3DEvent(CQ3DEvent(m_mLetterToEvent[iKey], CQ3DEvent::Press));
+        return;
+    }
+
+    if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9 && bMCDUModifiers)
+    {
+        int iKey = (int) event->key() - (int) Qt::Key_0;
+        generateQ3DEvent(CQ3DEvent(m_mDigitToEvent[iKey], CQ3DEvent::Press));
+        return;
+    }
+
+    if (event->key() >= Qt::Key_F1 && event->key() <= Qt::Key_F12 && bMCDUModifiers)
+    {
+        int iKey = (int) event->key() - (int) Qt::Key_F12;
+        generateQ3DEvent(CQ3DEvent(m_mFunctionToEvent[iKey], CQ3DEvent::Press));
+        return;
+    }
 
     switch (event->key())
     {
         case Qt::Key_Space:
-            generateQ3DEvent(CQ3DEvent(EventName_Jump500, CQ3DEvent::Press));
+            if (bMCDUModifiers)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_SPACE, CQ3DEvent::Press));
+                return;
+            }
+            else
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_Jump500, CQ3DEvent::Press));
+                return;
+            }
             break;
+
+        case Qt::Key_Backspace:
+            if (bMCDUModifiers)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_DELETE, CQ3DEvent::Press));
+                return;
+            }
+            break;
+
+        case Qt::Key_Delete:
+            if (bMCDUModifiers)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_CLEAR, CQ3DEvent::Press));
+                return;
+            }
+            break;
+
+        case Qt::Key_Slash:
+            if (bMCDUModifiers)
+            {
+                generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_SLASH, CQ3DEvent::Press));
+                return;
+            }
+            break;
+
         case Qt::Key_A:
             if (m_bControlPressed)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_FCU_AP2, CQ3DEvent::Press));
+                return;
             }
             else
             {
                 generateQ3DEvent(CQ3DEvent(EventName_FCU_AP1, CQ3DEvent::Press));
+                return;
             }
             break;
+
         case Qt::Key_T:
             generateQ3DEvent(CQ3DEvent(EventName_FCU_ATHR, CQ3DEvent::Press));
-            break;
+            return;
+
         case Qt::Key_Right:
             if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_RIGHT, CQ3DEvent::Press));
+                return;
             }
             else
             {
                 generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_INC, CQ3DEvent::Press));
+                return;
             }
             break;
+
         case Qt::Key_Left:
             if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_LEFT, CQ3DEvent::Press));
+                return;
             }
             else
             {
                 generateQ3DEvent(CQ3DEvent(EventName_FCU_SEL_HEADING_DEC, CQ3DEvent::Press));
+                return;
             }
             break;
+
         case Qt::Key_I:
             if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_INIT, CQ3DEvent::Press));
+                return;
             }
             break;
+
         case Qt::Key_M:
             if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_MENU, CQ3DEvent::Press));
+                return;
             }
             break;
+
         case Qt::Key_F:
             if (event->modifiers() & Qt::ControlModifier)
             {
                 generateQ3DEvent(CQ3DEvent(EventName_MCDU_CAPT_FPLN, CQ3DEvent::Press));
+                return;
             }
             break;
     }
+
+    CAircraftController::keyPressEvent(event);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -433,6 +505,11 @@ void CAirbusController::initializeLists()
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_Y;
     m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_Z;
 
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_SPACE;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_DELETE;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_SLASH;
+    m_lEVENTS_MCDU_1 << EventName_MCDU_CAPT_CLEAR;
+
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_1L;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_2L;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_3L;
@@ -492,4 +569,60 @@ void CAirbusController::initializeLists()
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_X;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_Y;
     m_lEVENTS_MCDU_2 << EventName_MCDU_FO_Z;
+
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_SPACE;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_DELETE;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_SLASH;
+    m_lEVENTS_MCDU_2 << EventName_MCDU_FO_CLEAR;
+
+    m_mLetterToEvent[ 0] = EventName_MCDU_CAPT_A;
+    m_mLetterToEvent[ 1] = EventName_MCDU_CAPT_B;
+    m_mLetterToEvent[ 2] = EventName_MCDU_CAPT_C;
+    m_mLetterToEvent[ 3] = EventName_MCDU_CAPT_D;
+    m_mLetterToEvent[ 4] = EventName_MCDU_CAPT_E;
+    m_mLetterToEvent[ 5] = EventName_MCDU_CAPT_F;
+    m_mLetterToEvent[ 6] = EventName_MCDU_CAPT_G;
+    m_mLetterToEvent[ 7] = EventName_MCDU_CAPT_H;
+    m_mLetterToEvent[ 8] = EventName_MCDU_CAPT_I;
+    m_mLetterToEvent[ 9] = EventName_MCDU_CAPT_J;
+    m_mLetterToEvent[10] = EventName_MCDU_CAPT_K;
+    m_mLetterToEvent[11] = EventName_MCDU_CAPT_L;
+    m_mLetterToEvent[12] = EventName_MCDU_CAPT_M;
+    m_mLetterToEvent[13] = EventName_MCDU_CAPT_N;
+    m_mLetterToEvent[14] = EventName_MCDU_CAPT_O;
+    m_mLetterToEvent[15] = EventName_MCDU_CAPT_P;
+    m_mLetterToEvent[16] = EventName_MCDU_CAPT_Q;
+    m_mLetterToEvent[17] = EventName_MCDU_CAPT_R;
+    m_mLetterToEvent[18] = EventName_MCDU_CAPT_S;
+    m_mLetterToEvent[19] = EventName_MCDU_CAPT_T;
+    m_mLetterToEvent[20] = EventName_MCDU_CAPT_U;
+    m_mLetterToEvent[21] = EventName_MCDU_CAPT_V;
+    m_mLetterToEvent[22] = EventName_MCDU_CAPT_W;
+    m_mLetterToEvent[23] = EventName_MCDU_CAPT_X;
+    m_mLetterToEvent[24] = EventName_MCDU_CAPT_Y;
+    m_mLetterToEvent[25] = EventName_MCDU_CAPT_Z;
+
+    m_mDigitToEvent[0] = EventName_MCDU_CAPT_0;
+    m_mDigitToEvent[1] = EventName_MCDU_CAPT_1;
+    m_mDigitToEvent[2] = EventName_MCDU_CAPT_2;
+    m_mDigitToEvent[3] = EventName_MCDU_CAPT_3;
+    m_mDigitToEvent[4] = EventName_MCDU_CAPT_4;
+    m_mDigitToEvent[5] = EventName_MCDU_CAPT_5;
+    m_mDigitToEvent[6] = EventName_MCDU_CAPT_6;
+    m_mDigitToEvent[7] = EventName_MCDU_CAPT_7;
+    m_mDigitToEvent[8] = EventName_MCDU_CAPT_8;
+    m_mDigitToEvent[9] = EventName_MCDU_CAPT_9;
+
+    m_mFunctionToEvent[ 0] = EventName_MCDU_CAPT_1L;
+    m_mFunctionToEvent[ 1] = EventName_MCDU_CAPT_2L;
+    m_mFunctionToEvent[ 2] = EventName_MCDU_CAPT_3L;
+    m_mFunctionToEvent[ 3] = EventName_MCDU_CAPT_4L;
+    m_mFunctionToEvent[ 4] = EventName_MCDU_CAPT_5L;
+    m_mFunctionToEvent[ 5] = EventName_MCDU_CAPT_6L;
+    m_mFunctionToEvent[ 6] = EventName_MCDU_CAPT_1R;
+    m_mFunctionToEvent[ 7] = EventName_MCDU_CAPT_2R;
+    m_mFunctionToEvent[ 8] = EventName_MCDU_CAPT_3R;
+    m_mFunctionToEvent[ 9] = EventName_MCDU_CAPT_4R;
+    m_mFunctionToEvent[10] = EventName_MCDU_CAPT_5R;
+    m_mFunctionToEvent[11] = EventName_MCDU_CAPT_6R;
 }
