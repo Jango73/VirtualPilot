@@ -44,14 +44,16 @@ HEADERS += \
     Source/CNavaidDatabase.h \
     Source/CNavaidComponent.h \
     Source/CAirport.h \
-    Source/CRunway.h
+    Source/CRunway.h \
+    Source/CNavaid.h
 
 SOURCES += \
     Source/Components_Generic.cpp \
     Source/CNavaidDatabase.cpp \
     Source/CNavaidComponent.cpp \
     Source/CAirport.cpp \
-    Source/CRunway.cpp
+    Source/CRunway.cpp \
+    Source/CNavaid.cpp
 
 # Copy qt-plus to bin
 copyfile = $$PWD/../Quick3D/qt-plus/bin/*.dll

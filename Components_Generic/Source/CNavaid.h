@@ -3,17 +3,14 @@
 
 // Quick3D
 #include "CComponent.h"
-#include "CGeoTree.h"
 
 // Application
 #include "Components_Generic_Global.h"
-#include "Constants.h"
-#include "CAirport.h"
-#include "CNavaid.h"
+#include "CNavaidComponent.h"
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidDatabase : public CComponent, public CGeoTree<CNavaidComponent*>
+class COMPONENTS_GENERIC_EXPORT CNavaid : public CNavaidComponent
 {
 public:
 
@@ -21,14 +18,11 @@ public:
     // Constructors and destructor
     //-------------------------------------------------------------------------------------------------
 
-    //!
-    static CComponent* instantiator(C3DScene* pScene);
-
     //! Constructor using a scene
-    CNavaidDatabase(C3DScene* pScene);
+    CNavaid();
 
     //! Destructor
-    virtual ~CNavaidDatabase();
+    virtual ~CNavaid();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -39,23 +33,14 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CNavaidDatabase; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CNavaid; }
 
     //! Loads this object's parameters
-    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;
-
-    //-------------------------------------------------------------------------------------------------
-    // Control methods
-    //-------------------------------------------------------------------------------------------------
-
-    //!
-    void loadFromFile(const QString& sFileName);
+    virtual void loadParameters(const QString& sBaseFile, CXMLNode xNavaid) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Properties
     //-------------------------------------------------------------------------------------------------
 
 protected:
-
-    QVector<CNavaidComponent*>  m_vNavaids;
 };

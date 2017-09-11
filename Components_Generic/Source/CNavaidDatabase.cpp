@@ -23,10 +23,7 @@ CNavaidDatabase::CNavaidDatabase(C3DScene* pScene)
 
 CNavaidDatabase::~CNavaidDatabase()
 {
-    foreach (CNavaidComponent* pNavaid, m_vNavaids)
-    {
-        delete pNavaid;
-    }
+    DELETE_VECTOR_ITEMS(m_vNavaids);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -57,5 +54,17 @@ void CNavaidDatabase::loadFromFile(const QString& sFileName)
         CAirport* pNewAiport = new CAirport();
         pNewAiport->loadParameters(sFileName, xAirport);
         m_vNavaids << pNewAiport;
+        append(pNewAiport->geoloc(), pNewAiport);
+    }
+
+    // Load navaids
+    QVector<CXMLNode> xNavaids = xDataBase.getNodesByTagName(ParamName_Navaid);
+
+    foreach (CXMLNode xNavaid, xNavaids)
+    {
+        CNavaid* pNavaid = new CNavaid();
+        pNavaid->loadParameters(sFileName, xNavaid);
+        m_vNavaids << pNavaid;
+        append(pNavaid->geoloc(), pNavaid);
     }
 }
