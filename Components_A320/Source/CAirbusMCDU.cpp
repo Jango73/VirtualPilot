@@ -32,135 +32,7 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
 {
     LOG_DEBUG("CAirbusMCDU::CAirbusMCDU()");
 
-    m_mEventToKey[EventName_MCDU_CAPT_1L] = mk1L;
-    m_mEventToKey[EventName_MCDU_CAPT_2L] = mk2L;
-    m_mEventToKey[EventName_MCDU_CAPT_3L] = mk3L;
-    m_mEventToKey[EventName_MCDU_CAPT_4L] = mk4L;
-    m_mEventToKey[EventName_MCDU_CAPT_5L] = mk5L;
-    m_mEventToKey[EventName_MCDU_CAPT_6L] = mk6L;
-    m_mEventToKey[EventName_MCDU_CAPT_1R] = mk1R;
-    m_mEventToKey[EventName_MCDU_CAPT_2R] = mk2R;
-    m_mEventToKey[EventName_MCDU_CAPT_3R] = mk3R;
-    m_mEventToKey[EventName_MCDU_CAPT_4R] = mk4R;
-    m_mEventToKey[EventName_MCDU_CAPT_5R] = mk5R;
-    m_mEventToKey[EventName_MCDU_CAPT_6R] = mk6R;
-
-    m_mEventToKey[EventName_MCDU_CAPT_INIT] = mkInit;
-    m_mEventToKey[EventName_MCDU_CAPT_FPLN] = mkFPln;
-    m_mEventToKey[EventName_MCDU_CAPT_MENU] = mkMenu;
-
-    m_mEventToKey[EventName_MCDU_CAPT_UP] = mkUp;
-    m_mEventToKey[EventName_MCDU_CAPT_DOWN] = mkDown;
-    m_mEventToKey[EventName_MCDU_CAPT_LEFT] = mkLeft;
-    m_mEventToKey[EventName_MCDU_CAPT_RIGHT] = mkRight;
-
-    m_mEventToKey[EventName_MCDU_CAPT_0] = mk0;
-    m_mEventToKey[EventName_MCDU_CAPT_1] = mk1;
-    m_mEventToKey[EventName_MCDU_CAPT_2] = mk2;
-    m_mEventToKey[EventName_MCDU_CAPT_3] = mk3;
-    m_mEventToKey[EventName_MCDU_CAPT_4] = mk4;
-    m_mEventToKey[EventName_MCDU_CAPT_5] = mk5;
-    m_mEventToKey[EventName_MCDU_CAPT_6] = mk6;
-    m_mEventToKey[EventName_MCDU_CAPT_7] = mk7;
-    m_mEventToKey[EventName_MCDU_CAPT_8] = mk8;
-    m_mEventToKey[EventName_MCDU_CAPT_9] = mk9;
-
-    m_mEventToKey[EventName_MCDU_CAPT_A] = mkA;
-    m_mEventToKey[EventName_MCDU_CAPT_B] = mkB;
-    m_mEventToKey[EventName_MCDU_CAPT_C] = mkC;
-    m_mEventToKey[EventName_MCDU_CAPT_D] = mkD;
-    m_mEventToKey[EventName_MCDU_CAPT_E] = mkE;
-    m_mEventToKey[EventName_MCDU_CAPT_F] = mkF;
-    m_mEventToKey[EventName_MCDU_CAPT_G] = mkG;
-    m_mEventToKey[EventName_MCDU_CAPT_H] = mkH;
-    m_mEventToKey[EventName_MCDU_CAPT_I] = mkI;
-    m_mEventToKey[EventName_MCDU_CAPT_J] = mkJ;
-    m_mEventToKey[EventName_MCDU_CAPT_K] = mkK;
-    m_mEventToKey[EventName_MCDU_CAPT_L] = mkL;
-    m_mEventToKey[EventName_MCDU_CAPT_M] = mkM;
-    m_mEventToKey[EventName_MCDU_CAPT_N] = mkN;
-    m_mEventToKey[EventName_MCDU_CAPT_O] = mkO;
-    m_mEventToKey[EventName_MCDU_CAPT_P] = mkP;
-    m_mEventToKey[EventName_MCDU_CAPT_Q] = mkQ;
-    m_mEventToKey[EventName_MCDU_CAPT_R] = mkR;
-    m_mEventToKey[EventName_MCDU_CAPT_S] = mkS;
-    m_mEventToKey[EventName_MCDU_CAPT_T] = mkT;
-    m_mEventToKey[EventName_MCDU_CAPT_U] = mkU;
-    m_mEventToKey[EventName_MCDU_CAPT_V] = mkV;
-    m_mEventToKey[EventName_MCDU_CAPT_W] = mkW;
-    m_mEventToKey[EventName_MCDU_CAPT_X] = mkX;
-    m_mEventToKey[EventName_MCDU_CAPT_Y] = mkY;
-    m_mEventToKey[EventName_MCDU_CAPT_Z] = mkZ;
-
-    m_mEventToKey[EventName_MCDU_CAPT_SPACE] = mkSpace;
-    m_mEventToKey[EventName_MCDU_CAPT_DELETE] = mkDelete;
-    m_mEventToKey[EventName_MCDU_CAPT_SLASH] = mkSlash;
-    m_mEventToKey[EventName_MCDU_CAPT_CLEAR] = mkClear;
-
-    m_mEventToKey[EventName_MCDU_FO_1L] = mk1L;
-    m_mEventToKey[EventName_MCDU_FO_2L] = mk2L;
-    m_mEventToKey[EventName_MCDU_FO_3L] = mk3L;
-    m_mEventToKey[EventName_MCDU_FO_4L] = mk4L;
-    m_mEventToKey[EventName_MCDU_FO_5L] = mk5L;
-    m_mEventToKey[EventName_MCDU_FO_6L] = mk6L;
-    m_mEventToKey[EventName_MCDU_FO_1R] = mk1R;
-    m_mEventToKey[EventName_MCDU_FO_2R] = mk2R;
-    m_mEventToKey[EventName_MCDU_FO_3R] = mk3R;
-    m_mEventToKey[EventName_MCDU_FO_4R] = mk4R;
-    m_mEventToKey[EventName_MCDU_FO_5R] = mk5R;
-    m_mEventToKey[EventName_MCDU_FO_6R] = mk6R;
-
-    m_mEventToKey[EventName_MCDU_FO_INIT] = mkInit;
-    m_mEventToKey[EventName_MCDU_FO_FPLN] = mkFPln;
-    m_mEventToKey[EventName_MCDU_FO_MENU] = mkMenu;
-
-    m_mEventToKey[EventName_MCDU_FO_UP] = mkUp;
-    m_mEventToKey[EventName_MCDU_FO_DOWN] = mkDown;
-    m_mEventToKey[EventName_MCDU_FO_LEFT] = mkLeft;
-    m_mEventToKey[EventName_MCDU_FO_RIGHT] = mkRight;
-
-    m_mEventToKey[EventName_MCDU_FO_0] = mk0;
-    m_mEventToKey[EventName_MCDU_FO_1] = mk1;
-    m_mEventToKey[EventName_MCDU_FO_2] = mk2;
-    m_mEventToKey[EventName_MCDU_FO_3] = mk3;
-    m_mEventToKey[EventName_MCDU_FO_4] = mk4;
-    m_mEventToKey[EventName_MCDU_FO_5] = mk5;
-    m_mEventToKey[EventName_MCDU_FO_6] = mk6;
-    m_mEventToKey[EventName_MCDU_FO_7] = mk7;
-    m_mEventToKey[EventName_MCDU_FO_8] = mk8;
-    m_mEventToKey[EventName_MCDU_FO_9] = mk9;
-
-    m_mEventToKey[EventName_MCDU_FO_A] = mkA;
-    m_mEventToKey[EventName_MCDU_FO_B] = mkB;
-    m_mEventToKey[EventName_MCDU_FO_C] = mkC;
-    m_mEventToKey[EventName_MCDU_FO_D] = mkD;
-    m_mEventToKey[EventName_MCDU_FO_E] = mkE;
-    m_mEventToKey[EventName_MCDU_FO_F] = mkF;
-    m_mEventToKey[EventName_MCDU_FO_G] = mkG;
-    m_mEventToKey[EventName_MCDU_FO_H] = mkH;
-    m_mEventToKey[EventName_MCDU_FO_I] = mkI;
-    m_mEventToKey[EventName_MCDU_FO_J] = mkJ;
-    m_mEventToKey[EventName_MCDU_FO_K] = mkK;
-    m_mEventToKey[EventName_MCDU_FO_L] = mkL;
-    m_mEventToKey[EventName_MCDU_FO_M] = mkM;
-    m_mEventToKey[EventName_MCDU_FO_N] = mkN;
-    m_mEventToKey[EventName_MCDU_FO_O] = mkO;
-    m_mEventToKey[EventName_MCDU_FO_P] = mkP;
-    m_mEventToKey[EventName_MCDU_FO_Q] = mkQ;
-    m_mEventToKey[EventName_MCDU_FO_R] = mkR;
-    m_mEventToKey[EventName_MCDU_FO_S] = mkS;
-    m_mEventToKey[EventName_MCDU_FO_T] = mkT;
-    m_mEventToKey[EventName_MCDU_FO_U] = mkU;
-    m_mEventToKey[EventName_MCDU_FO_V] = mkV;
-    m_mEventToKey[EventName_MCDU_FO_W] = mkW;
-    m_mEventToKey[EventName_MCDU_FO_X] = mkX;
-    m_mEventToKey[EventName_MCDU_FO_Y] = mkY;
-    m_mEventToKey[EventName_MCDU_FO_Z] = mkZ;
-
-    m_mEventToKey[EventName_MCDU_FO_SPACE] = mkSpace;
-    m_mEventToKey[EventName_MCDU_FO_DELETE] = mkDelete;
-    m_mEventToKey[EventName_MCDU_FO_SLASH] = mkSlash;
-    m_mEventToKey[EventName_MCDU_FO_CLEAR] = mkClear;
+    fillTables();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -660,4 +532,139 @@ void CAirbusMCDU::sendData(EMCDUDataSet eDataName, QVariant vValue)
 {
     pushData(CAirbusData(m_sName, adMCDU_DataSetName, (int) eDataName, false));
     pushData(CAirbusData(m_sName, adMCDU_DataSetValue, vValue, false));
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusMCDU::fillTables()
+{
+    m_mEventToKey[EventName_MCDU_CAPT_1L] = mk1L;
+    m_mEventToKey[EventName_MCDU_CAPT_2L] = mk2L;
+    m_mEventToKey[EventName_MCDU_CAPT_3L] = mk3L;
+    m_mEventToKey[EventName_MCDU_CAPT_4L] = mk4L;
+    m_mEventToKey[EventName_MCDU_CAPT_5L] = mk5L;
+    m_mEventToKey[EventName_MCDU_CAPT_6L] = mk6L;
+    m_mEventToKey[EventName_MCDU_CAPT_1R] = mk1R;
+    m_mEventToKey[EventName_MCDU_CAPT_2R] = mk2R;
+    m_mEventToKey[EventName_MCDU_CAPT_3R] = mk3R;
+    m_mEventToKey[EventName_MCDU_CAPT_4R] = mk4R;
+    m_mEventToKey[EventName_MCDU_CAPT_5R] = mk5R;
+    m_mEventToKey[EventName_MCDU_CAPT_6R] = mk6R;
+
+    m_mEventToKey[EventName_MCDU_CAPT_INIT] = mkInit;
+    m_mEventToKey[EventName_MCDU_CAPT_FPLN] = mkFPln;
+    m_mEventToKey[EventName_MCDU_CAPT_MENU] = mkMenu;
+
+    m_mEventToKey[EventName_MCDU_CAPT_UP] = mkUp;
+    m_mEventToKey[EventName_MCDU_CAPT_DOWN] = mkDown;
+    m_mEventToKey[EventName_MCDU_CAPT_LEFT] = mkLeft;
+    m_mEventToKey[EventName_MCDU_CAPT_RIGHT] = mkRight;
+
+    m_mEventToKey[EventName_MCDU_CAPT_0] = mk0;
+    m_mEventToKey[EventName_MCDU_CAPT_1] = mk1;
+    m_mEventToKey[EventName_MCDU_CAPT_2] = mk2;
+    m_mEventToKey[EventName_MCDU_CAPT_3] = mk3;
+    m_mEventToKey[EventName_MCDU_CAPT_4] = mk4;
+    m_mEventToKey[EventName_MCDU_CAPT_5] = mk5;
+    m_mEventToKey[EventName_MCDU_CAPT_6] = mk6;
+    m_mEventToKey[EventName_MCDU_CAPT_7] = mk7;
+    m_mEventToKey[EventName_MCDU_CAPT_8] = mk8;
+    m_mEventToKey[EventName_MCDU_CAPT_9] = mk9;
+
+    m_mEventToKey[EventName_MCDU_CAPT_A] = mkA;
+    m_mEventToKey[EventName_MCDU_CAPT_B] = mkB;
+    m_mEventToKey[EventName_MCDU_CAPT_C] = mkC;
+    m_mEventToKey[EventName_MCDU_CAPT_D] = mkD;
+    m_mEventToKey[EventName_MCDU_CAPT_E] = mkE;
+    m_mEventToKey[EventName_MCDU_CAPT_F] = mkF;
+    m_mEventToKey[EventName_MCDU_CAPT_G] = mkG;
+    m_mEventToKey[EventName_MCDU_CAPT_H] = mkH;
+    m_mEventToKey[EventName_MCDU_CAPT_I] = mkI;
+    m_mEventToKey[EventName_MCDU_CAPT_J] = mkJ;
+    m_mEventToKey[EventName_MCDU_CAPT_K] = mkK;
+    m_mEventToKey[EventName_MCDU_CAPT_L] = mkL;
+    m_mEventToKey[EventName_MCDU_CAPT_M] = mkM;
+    m_mEventToKey[EventName_MCDU_CAPT_N] = mkN;
+    m_mEventToKey[EventName_MCDU_CAPT_O] = mkO;
+    m_mEventToKey[EventName_MCDU_CAPT_P] = mkP;
+    m_mEventToKey[EventName_MCDU_CAPT_Q] = mkQ;
+    m_mEventToKey[EventName_MCDU_CAPT_R] = mkR;
+    m_mEventToKey[EventName_MCDU_CAPT_S] = mkS;
+    m_mEventToKey[EventName_MCDU_CAPT_T] = mkT;
+    m_mEventToKey[EventName_MCDU_CAPT_U] = mkU;
+    m_mEventToKey[EventName_MCDU_CAPT_V] = mkV;
+    m_mEventToKey[EventName_MCDU_CAPT_W] = mkW;
+    m_mEventToKey[EventName_MCDU_CAPT_X] = mkX;
+    m_mEventToKey[EventName_MCDU_CAPT_Y] = mkY;
+    m_mEventToKey[EventName_MCDU_CAPT_Z] = mkZ;
+
+    m_mEventToKey[EventName_MCDU_CAPT_SPACE] = mkSpace;
+    m_mEventToKey[EventName_MCDU_CAPT_DELETE] = mkDelete;
+    m_mEventToKey[EventName_MCDU_CAPT_SLASH] = mkSlash;
+    m_mEventToKey[EventName_MCDU_CAPT_CLEAR] = mkClear;
+
+    m_mEventToKey[EventName_MCDU_FO_1L] = mk1L;
+    m_mEventToKey[EventName_MCDU_FO_2L] = mk2L;
+    m_mEventToKey[EventName_MCDU_FO_3L] = mk3L;
+    m_mEventToKey[EventName_MCDU_FO_4L] = mk4L;
+    m_mEventToKey[EventName_MCDU_FO_5L] = mk5L;
+    m_mEventToKey[EventName_MCDU_FO_6L] = mk6L;
+    m_mEventToKey[EventName_MCDU_FO_1R] = mk1R;
+    m_mEventToKey[EventName_MCDU_FO_2R] = mk2R;
+    m_mEventToKey[EventName_MCDU_FO_3R] = mk3R;
+    m_mEventToKey[EventName_MCDU_FO_4R] = mk4R;
+    m_mEventToKey[EventName_MCDU_FO_5R] = mk5R;
+    m_mEventToKey[EventName_MCDU_FO_6R] = mk6R;
+
+    m_mEventToKey[EventName_MCDU_FO_INIT] = mkInit;
+    m_mEventToKey[EventName_MCDU_FO_FPLN] = mkFPln;
+    m_mEventToKey[EventName_MCDU_FO_MENU] = mkMenu;
+
+    m_mEventToKey[EventName_MCDU_FO_UP] = mkUp;
+    m_mEventToKey[EventName_MCDU_FO_DOWN] = mkDown;
+    m_mEventToKey[EventName_MCDU_FO_LEFT] = mkLeft;
+    m_mEventToKey[EventName_MCDU_FO_RIGHT] = mkRight;
+
+    m_mEventToKey[EventName_MCDU_FO_0] = mk0;
+    m_mEventToKey[EventName_MCDU_FO_1] = mk1;
+    m_mEventToKey[EventName_MCDU_FO_2] = mk2;
+    m_mEventToKey[EventName_MCDU_FO_3] = mk3;
+    m_mEventToKey[EventName_MCDU_FO_4] = mk4;
+    m_mEventToKey[EventName_MCDU_FO_5] = mk5;
+    m_mEventToKey[EventName_MCDU_FO_6] = mk6;
+    m_mEventToKey[EventName_MCDU_FO_7] = mk7;
+    m_mEventToKey[EventName_MCDU_FO_8] = mk8;
+    m_mEventToKey[EventName_MCDU_FO_9] = mk9;
+
+    m_mEventToKey[EventName_MCDU_FO_A] = mkA;
+    m_mEventToKey[EventName_MCDU_FO_B] = mkB;
+    m_mEventToKey[EventName_MCDU_FO_C] = mkC;
+    m_mEventToKey[EventName_MCDU_FO_D] = mkD;
+    m_mEventToKey[EventName_MCDU_FO_E] = mkE;
+    m_mEventToKey[EventName_MCDU_FO_F] = mkF;
+    m_mEventToKey[EventName_MCDU_FO_G] = mkG;
+    m_mEventToKey[EventName_MCDU_FO_H] = mkH;
+    m_mEventToKey[EventName_MCDU_FO_I] = mkI;
+    m_mEventToKey[EventName_MCDU_FO_J] = mkJ;
+    m_mEventToKey[EventName_MCDU_FO_K] = mkK;
+    m_mEventToKey[EventName_MCDU_FO_L] = mkL;
+    m_mEventToKey[EventName_MCDU_FO_M] = mkM;
+    m_mEventToKey[EventName_MCDU_FO_N] = mkN;
+    m_mEventToKey[EventName_MCDU_FO_O] = mkO;
+    m_mEventToKey[EventName_MCDU_FO_P] = mkP;
+    m_mEventToKey[EventName_MCDU_FO_Q] = mkQ;
+    m_mEventToKey[EventName_MCDU_FO_R] = mkR;
+    m_mEventToKey[EventName_MCDU_FO_S] = mkS;
+    m_mEventToKey[EventName_MCDU_FO_T] = mkT;
+    m_mEventToKey[EventName_MCDU_FO_U] = mkU;
+    m_mEventToKey[EventName_MCDU_FO_V] = mkV;
+    m_mEventToKey[EventName_MCDU_FO_W] = mkW;
+    m_mEventToKey[EventName_MCDU_FO_X] = mkX;
+    m_mEventToKey[EventName_MCDU_FO_Y] = mkY;
+    m_mEventToKey[EventName_MCDU_FO_Z] = mkZ;
+
+    m_mEventToKey[EventName_MCDU_FO_SPACE] = mkSpace;
+    m_mEventToKey[EventName_MCDU_FO_DELETE] = mkDelete;
+    m_mEventToKey[EventName_MCDU_FO_SLASH] = mkSlash;
+    m_mEventToKey[EventName_MCDU_FO_CLEAR] = mkClear;
 }

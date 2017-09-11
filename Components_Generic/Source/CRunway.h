@@ -6,12 +6,11 @@
 
 // Application
 #include "Components_Generic_Global.h"
-#include "Constants.h"
-#include "CAirport.h"
+#include "CNavaidComponent.h"
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidDatabase : public CComponent
+class COMPONENTS_GENERIC_EXPORT CRunway : public CNavaidComponent
 {
 public:
 
@@ -19,35 +18,32 @@ public:
     // Constructors and destructor
     //-------------------------------------------------------------------------------------------------
 
-    //!
-    static CComponent* instantiator(C3DScene* pScene);
-
     //! Constructor using a scene
-    CNavaidDatabase(C3DScene* pScene);
+    CRunway();
 
     //! Destructor
-    virtual ~CNavaidDatabase();
+    virtual ~CRunway();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
     //-------------------------------------------------------------------------------------------------
 
     //-------------------------------------------------------------------------------------------------
+    // Getters
+    //-------------------------------------------------------------------------------------------------
+
+    //!
+    double heading_deg() const;
+
+    //!
+    Math::CVector3 size() const;
+
+    //-------------------------------------------------------------------------------------------------
     // Inherited methods
     //-------------------------------------------------------------------------------------------------
 
-    //!
-    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CNavaidDatabase; }
-
     //! Loads this object's parameters
-    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;
-
-    //-------------------------------------------------------------------------------------------------
-    // Control methods
-    //-------------------------------------------------------------------------------------------------
-
-    //!
-    void loadFromFile(const QString& sFileName);
+    virtual void loadParameters(const QString& sBaseFile, CXMLNode xRunway) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -55,5 +51,6 @@ public:
 
 protected:
 
-    QVector<CNavaidComponent*>  m_vNavaids;
+    double          m_dHeading_deg;
+    Math::CVector3  m_vSize;
 };

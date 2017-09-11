@@ -1,17 +1,20 @@
 
 #pragma once
 
+// qt-plus
+#include "CXMLNode.h"
+
 // Quick3D
-#include "CComponent.h"
+#include "CGeoloc.h"
+#include "CQ3DConstants.h"
 
 // Application
 #include "Components_Generic_Global.h"
 #include "Constants.h"
-#include "CAirport.h"
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidDatabase : public CComponent
+class COMPONENTS_GENERIC_EXPORT CNavaidComponent
 {
 public:
 
@@ -19,35 +22,35 @@ public:
     // Constructors and destructor
     //-------------------------------------------------------------------------------------------------
 
-    //!
-    static CComponent* instantiator(C3DScene* pScene);
-
     //! Constructor using a scene
-    CNavaidDatabase(C3DScene* pScene);
+    CNavaidComponent();
 
     //! Destructor
-    virtual ~CNavaidDatabase();
+    virtual ~CNavaidComponent();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
     //-------------------------------------------------------------------------------------------------
 
     //-------------------------------------------------------------------------------------------------
-    // Inherited methods
+    // Getters
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CNavaidDatabase; }
+    QString ID() const;
 
-    //! Loads this object's parameters
-    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;
+    //!
+    CGeoloc geoloc() const;
 
     //-------------------------------------------------------------------------------------------------
     // Control methods
     //-------------------------------------------------------------------------------------------------
 
     //!
-    void loadFromFile(const QString& sFileName);
+    virtual QString getClassName() const { return ClassName_CNavaidComponent; }
+
+    //! Loads this object's parameters
+    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent);
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -55,5 +58,6 @@ public:
 
 protected:
 
-    QVector<CNavaidComponent*>  m_vNavaids;
+    QString m_sID;
+    CGeoloc m_gGeoloc;
 };

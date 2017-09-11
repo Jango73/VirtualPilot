@@ -6,12 +6,12 @@
 
 // Application
 #include "Components_Generic_Global.h"
-#include "Constants.h"
-#include "CAirport.h"
+#include "CNavaidComponent.h"
+#include "CRunway.h"
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidDatabase : public CComponent
+class COMPONENTS_GENERIC_EXPORT CAirport : public CNavaidComponent
 {
 public:
 
@@ -19,14 +19,11 @@ public:
     // Constructors and destructor
     //-------------------------------------------------------------------------------------------------
 
-    //!
-    static CComponent* instantiator(C3DScene* pScene);
-
     //! Constructor using a scene
-    CNavaidDatabase(C3DScene* pScene);
+    CAirport();
 
     //! Destructor
-    virtual ~CNavaidDatabase();
+    virtual ~CAirport();
 
     //-------------------------------------------------------------------------------------------------
     // Setters
@@ -37,17 +34,10 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //!
-    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CNavaidDatabase; }
+    virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirport; }
 
     //! Loads this object's parameters
-    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;
-
-    //-------------------------------------------------------------------------------------------------
-    // Control methods
-    //-------------------------------------------------------------------------------------------------
-
-    //!
-    void loadFromFile(const QString& sFileName);
+    virtual void loadParameters(const QString& sBaseFile, CXMLNode xAirport) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Properties
@@ -55,5 +45,5 @@ public:
 
 protected:
 
-    QVector<CNavaidComponent*>  m_vNavaids;
+    QVector<CRunway*>   m_vRunways;
 };
