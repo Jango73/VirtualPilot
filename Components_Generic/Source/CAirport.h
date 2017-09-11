@@ -10,6 +10,18 @@
 #include "CRunway.h"
 
 //-------------------------------------------------------------------------------------------------
+// Enumerators
+
+enum ERadioType
+{
+    rtApproach,
+    rtATIS,
+    rtDeparture,
+    rtGround,
+    rtTower
+};
+
+//-------------------------------------------------------------------------------------------------
 
 class COMPONENTS_GENERIC_EXPORT CAirport : public CNavaidComponent
 {
@@ -45,5 +57,6 @@ public:
 
 protected:
 
-    QVector<CRunway*>   m_vRunways;
+    QVector<CRunway*>           m_vRunways;
+    QMap<ERadioType, double>    m_mRadios;
 };

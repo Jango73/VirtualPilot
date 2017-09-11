@@ -9,6 +9,19 @@
 #include "CNavaidComponent.h"
 
 //-------------------------------------------------------------------------------------------------
+// Enumerators
+
+enum ENavaidType
+{
+    ntNone,
+    ntNDB,
+    ntTACAN,
+    ntVOR,
+    ntVORDME,
+    ntVORTAC
+};
+
+//-------------------------------------------------------------------------------------------------
 
 class COMPONENTS_GENERIC_EXPORT CNavaid : public CNavaidComponent
 {
@@ -43,4 +56,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
 protected:
+
+    ENavaidType     m_eType;
+    double          m_dFrequency_MHz;
 };

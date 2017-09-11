@@ -40,5 +40,18 @@ void CAirport::loadParameters(const QString& sBaseFile, CXMLNode xAirport)
 
     foreach (CXMLNode xRadio, xRadios)
     {
+        QString sType = xRadio.attributes()[ParamName_Type];
+        ERadioType eType = rtTower;
+
+        if (sType == ParamName_RadioType_Approach)
+            eType = rtApproach;
+        else if (sType == ParamName_RadioType_ATIS)
+            eType = rtATIS;
+        else if (sType == ParamName_RadioType_Departure)
+            eType = rtDeparture;
+        else if (sType == ParamName_RadioType_Ground)
+            eType = rtGround;
+
+        m_mRadios[eType] = xRadio.attributes()[ParamName_Frequency].toDouble();
     }
 }

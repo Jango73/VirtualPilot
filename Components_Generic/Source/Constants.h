@@ -21,6 +21,9 @@
 #define ParamName_Radio                 "Radio"
 #define ParamName_Runway                "Runway"
 
+//-------------------------------------------------------------------------------------------------
+// Navaid database types
+
 #define ParamName_RadioType_Approach    "Approach"
 #define ParamName_RadioType_ATIS        "ATIS"
 #define ParamName_RadioType_Departure   "Departure"
@@ -32,6 +35,3 @@
 #define ParamName_NavaidType_VOR        "VOR"
 #define ParamName_NavaidType_VORDME     "VOR-DME"
 #define ParamName_NavaidType_VORTAC     "VOR-TAC"
-
-//-------------------------------------------------------------------------------------------------
-// Navaid database parameters
