@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Component Name="AirbusA320" Class="CAircraft">
-    <Geoloc Latitude="19.2393" Longitude="10.8994" Altitude="40.0"/>
+    <Geoloc Latitude="48.998321" Longitude="2.601997" Altitude="0.0"/>
     <Rotation x="0.0" y="90.0" z="0.0"/>
     <Mesh Name="A320.q3d"/>
     <DynamicTexture Name="DynTex_PFD_CAPT" Updater=".DMC_1"/>
