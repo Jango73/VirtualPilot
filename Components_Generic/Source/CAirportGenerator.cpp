@@ -89,7 +89,7 @@ void CAirportGenerator::generate(QSP<CWorldChunk> pChunk)
                     {
                         if (pChunk->worldBounds().contains(pRunway->geoloc()))
                         {
-                            placeRunway(pChunk, pRunway->geoloc(), pRunway->rotation(), pRunway->size());
+                            placeRunway(pChunk, pRunway->ID(), pRunway->geoloc(), pRunway->rotation(), pRunway->size());
                         }
                     }
                 }
@@ -100,10 +100,12 @@ void CAirportGenerator::generate(QSP<CWorldChunk> pChunk)
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirportGenerator::placeRunway(QSP<CWorldChunk> pChunk, CGeoloc gPosition, Math::CVector3 vRotation, Math::CVector3 vSize)
+void CAirportGenerator::placeRunway(QSP<CWorldChunk> pChunk, const QString& sID, CGeoloc gPosition, Math::CVector3 vRotation, Math::CVector3 vSize)
 {
     CBox* pBox = new CBox(m_pScene);
     CMeshInstance* pMeshInstance = new CMeshInstance(QSP<CMesh>(pBox));
+
+    pMeshInstance->setName(sID);
 
     CVector3 vMinimum(-vSize.X * 0.5, -10.0, -vSize.Z * 0.5);
     CVector3 vMaximum( vSize.X * 0.5,   0.1,  vSize.Z * 0.5);

@@ -73,7 +73,7 @@ public:
 protected:
 
     //!
-    void placeRunway(QSP<CWorldChunk> pChunk, CGeoloc gPosition, Math::CVector3 vRotation, Math::CVector3 vSize);
+    void placeRunway(QSP<CWorldChunk> pChunk, const QString& sID, CGeoloc gPosition, Math::CVector3 vRotation, Math::CVector3 vSize);
 
     //-------------------------------------------------------------------------------------------------
     // Properties
