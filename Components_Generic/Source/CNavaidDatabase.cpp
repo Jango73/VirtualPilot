@@ -1,4 +1,8 @@
 
+// qt-plus
+#include "CLogger.h"
+
+// Application
 #include "CNavaidDatabase.h"
 
 //-------------------------------------------------------------------------------------------------
@@ -17,12 +21,15 @@ CComponent* CNavaidDatabase::instantiator(C3DScene* pScene)
 CNavaidDatabase::CNavaidDatabase(C3DScene* pScene)
     : CComponent(pScene)
 {
+    LOG_DEBUG("CNavaidDatabase::CNavaidDatabase()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CNavaidDatabase::~CNavaidDatabase()
 {
+    LOG_DEBUG("CNavaidDatabase::~CNavaidDatabase()");
+
     DELETE_VECTOR_ITEMS(m_vNavaids);
 }
 

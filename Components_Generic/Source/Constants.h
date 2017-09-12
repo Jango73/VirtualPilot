@@ -18,6 +18,7 @@
 #define ParamName_Fixes                 "Fixes"
 #define ParamName_Frequency             "Frequency"
 #define ParamName_ID                    "ID"
+#define ParamName_ILSType               "ILSType"
 #define ParamName_Navaid                "Navaid"
 #define ParamName_Radio                 "Radio"
 #define ParamName_Runway                "Runway"
@@ -31,6 +32,7 @@
 #define ParamName_RadioType_Ground      "Ground"
 #define ParamName_RadioType_Tower       "Tower"
 
+#define ParamName_NavaidType_ILS        "ILS"
 #define ParamName_NavaidType_NDB        "NDB"
 #define ParamName_NavaidType_TACAN      "TACAN"
 #define ParamName_NavaidType_VOR        "VOR"
@@ -38,6 +40,10 @@
 #define ParamName_NavaidType_VORTAC     "VOR-TAC"
 
 #define ParamName_NavaidInput           "NavaidInput"
+
+#define ParamName_ILSType_Cat1          "Cat1"
+#define ParamName_ILSType_Cat2          "Cat2"
+#define ParamName_ILSType_Cat3          "Cat3"
 
 //-------------------------------------------------------------------------------------------------
 

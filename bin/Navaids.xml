@@ -2,16 +2,16 @@
 <Database>
     <Airport ID="LFPG" Name="Paris-Charles-de-Gaulle">
         <Geoloc Latitude="49.010037" Longitude="2.562661" Altitude="119.0"/>
-        <Runway ID="26R" Length="3600" Width="75">
+        <Runway ID="26R" Length="4215" Width="45" Heading="265.0">
             <Geoloc Latitude="48.997213" Longitude="2.581390" Altitude="0.0"/>
         </Runway>
-        <Runway ID="26L" Length="2700" Width="61">
+        <Runway ID="26L" Length="2700" Width="60" Heading="265.0">
             <Geoloc Latitude="48.993899" Longitude="2.583917" Altitude="0.0"/>
         </Runway>
-        <Runway ID="27R" Length="2700" Width="61">
+        <Runway ID="27R" Length="2700" Width="60" Heading="266.0">
             <Geoloc Latitude="49.025743" Longitude="2.543051" Altitude="0.0"/>
         </Runway>
-        <Runway ID="27L" Length="3600" Width="75">
+        <Runway ID="27L" Length="4200" Width="45" Heading="266.0">
             <Geoloc Latitude="49.022125" Longitude="2.540998" Altitude="0.0"/>
         </Runway>
         <Radio Type="Approach" Frequency="121.15"/>
@@ -22,14 +22,20 @@
     </Airport>
     <Airport ID="LFPO" Name="Paris-Orly">
         <Geoloc Latitude="48.725278" Longitude="2.359444" Altitude="89.0"/>
-        <Runway ID="02" Length="2400" Width="60">
+        <Runway ID="02" Length="2400" Width="60" Heading="20.0">
             <Geoloc Latitude="48.725278" Longitude="2.359444" Altitude="0.0"/>
         </Runway>
     </Airport>
     <Airport ID="LFPB" Name="Paris-Le-Bourget">
         <Geoloc Latitude="48.969444" Longitude="2.441389" Altitude="66.0"/>
-        <Runway ID="03" Length="2665" Width="60">
-            <Geoloc Latitude="48.969444" Longitude="2.441389" Altitude="0.0"/>
+        <Runway ID="03" Length="2665" Width="60" Heading="26.0">
+            <Geoloc Latitude="48.960149" Longitude="2.434935" Altitude="0.0"/>
+        </Runway>
+        <Runway ID="07" Length="3000" Width="45" Heading="69.0">
+            <Geoloc Latitude="48.969028" Longitude="2.440262" Altitude="0.0"/>
+        </Runway>
+        <Runway ID="09" Length="1845" Width="45" Heading="86.0">
+            <Geoloc Latitude="48.964561" Longitude="2.435896" Altitude="0.0"/>
         </Runway>
         <Radio Type="ATIS" Frequency="120.0"/>
         <Radio Type="Ground" Frequency="121.9"/>
@@ -37,6 +43,12 @@
     </Airport>
     <Navaid ID="PGS" Type="VOR-DME" Frequency="117.05" Name="CHARLES DE GAULLE">
         <Geoloc Latitude="48.999472" Longitude="2.623806" Altitude="0.0"/>
+    </Navaid>
+    <Navaid ID="LFPG-26R" Type="ILS" Frequency="125.825" Name="LFPG-26R" ILSType="Cat3">
+        <Geoloc Latitude="48.998753" Longitude="2.610183" Altitude="0.0"/>
+    </Navaid>
+    <Navaid ID="LFPG-27L" Type="ILS" Frequency="121.15" Name="LFPG-27L" ILSType="Cat3">
+        <Geoloc Latitude="49.023692" Longitude="2.570294" Altitude="0.0"/>
     </Navaid>
     <Fix />
 </Database>

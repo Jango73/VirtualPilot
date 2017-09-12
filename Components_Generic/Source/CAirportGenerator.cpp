@@ -89,7 +89,7 @@ void CAirportGenerator::generate(QSP<CWorldChunk> pChunk)
                     {
                         if (pChunk->worldBounds().contains(pRunway->geoloc()))
                         {
-                            placeRunway(pChunk, pRunway->geoloc(), CVector3(), pRunway->size());
+                            placeRunway(pChunk, pRunway->geoloc(), pRunway->rotation(), pRunway->size());
                         }
                     }
                 }

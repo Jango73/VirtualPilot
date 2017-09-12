@@ -38,6 +38,9 @@ public:
     //!
     Math::CVector3 size() const;
 
+    //!
+    Math::CVector3 rotation() const;
+
     //-------------------------------------------------------------------------------------------------
     // Inherited methods
     //-------------------------------------------------------------------------------------------------
@@ -51,6 +54,6 @@ public:
 
 protected:
 
-    double          m_dHeading_deg;
     Math::CVector3  m_vSize;
+    Math::CVector3  m_vRotation;
 };
