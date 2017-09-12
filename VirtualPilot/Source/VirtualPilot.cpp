@@ -12,6 +12,9 @@
 #include "CComponentLoader.h"
 #include "CController.h"
 
+// Generic components
+#include "../../Components_Generic/Source/Constants.h"
+
 // Application
 #include "VirtualPilot.h"
 
@@ -138,7 +141,7 @@ void VirtualPilot::loadVehicle(QString sFileName)
 
     if (pComponent != nullptr)
     {
-        QVector<QSP<CComponent> > vComponents = m_pScene->componentsByTag("PLAYER");
+        QVector<QSP<CComponent> > vComponents = m_pScene->componentsByTag(TagName_Player);
 
         if (vComponents.count() > 0)
         {
@@ -148,11 +151,11 @@ void VirtualPilot::loadVehicle(QString sFileName)
 
         LOG_DEBUG("VirtualPilot::loadVehicle() : adding component to scene...");
 
-        m_pScene->deleteComponentsByTag("PLAYER");
+        m_pScene->deleteComponentsByTag(TagName_Player);
         m_pScene->addComponent(pComponent);
         m_pScene->setController(pComponent->controller());
 
-        pComponent->setTag("PLAYER");
+        pComponent->setTag(TagName_Player);
 
         if (playerGeoloc.valid())
         {

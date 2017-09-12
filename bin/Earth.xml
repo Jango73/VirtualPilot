@@ -8,6 +8,8 @@
             <General FOV="10.0" CastShadows="1"/>
             <Color r="1.0" g="1.0" b="1.0"/>
         </Component>
+        <Component Name="Navaids" Class="CNavaidDatabase" Tag="NAVAIDS" File="Navaids.xml">
+        </Component>
         <Component Name="Terrain" Class="CWorldTerrain">
             <Parameters>
                 <General Levels="16" Resolution="31" />
@@ -308,7 +310,9 @@
                     </Building>
                 </Buildings>
                 <Generators>
-                    <Component Name="Airports" Class="CAirportGenerator" />
+                    <Component Name="Airports" Class="CAirportGenerator">
+                        <NavaidInput Name=".Navaids"/>
+                    </Component>
                 </Generators>
             </Parameters>
         </Component>

@@ -15,10 +15,35 @@ CAirport::CAirport()
 
 CAirport::~CAirport()
 {
-    foreach (CRunway* pRunway, m_vRunways)
-    {
-        delete pRunway;
-    }
+    DELETE_VECTOR_ITEMS(m_vRunways);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+QVector<CRunway*>& CAirport::runways()
+{
+    return m_vRunways;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+const QVector<CRunway*>& CAirport::runways() const
+{
+    return m_vRunways;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+QMap<ERadioType, double>& CAirport::radios()
+{
+    return m_mRadios;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+const QMap<ERadioType, double>& CAirport::radios() const
+{
+    return m_mRadios;
 }
 
 //-------------------------------------------------------------------------------------------------

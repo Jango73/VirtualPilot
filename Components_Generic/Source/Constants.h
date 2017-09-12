@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------------------------------------
 // Component class names
 
+#define ClassName_CAirportGenerator         "CAirportGenerator"
 #define ClassName_CNavaidDatabase           "CNavaidDatabase"
 #define ClassName_CNavaidComponent          "CNavaidComponent"
 #define ClassName_CAirport                  "CAirport"
@@ -35,3 +36,9 @@
 #define ParamName_NavaidType_VOR        "VOR"
 #define ParamName_NavaidType_VORDME     "VOR-DME"
 #define ParamName_NavaidType_VORTAC     "VOR-TAC"
+
+#define ParamName_NavaidInput           "NavaidInput"
+
+//-------------------------------------------------------------------------------------------------
+
+#define TagName_Player                  "PLAYER"

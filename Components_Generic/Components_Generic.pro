@@ -41,6 +41,7 @@ HEADERS += \
     Source/Components_Generic_Global.h \
     Source/Components_Generic.h \
     Source/Constants.h \
+    Source/CAirportGenerator.h \
     Source/CNavaidDatabase.h \
     Source/CNavaidComponent.h \
     Source/CAirport.h \
@@ -49,6 +50,7 @@ HEADERS += \
 
 SOURCES += \
     Source/Components_Generic.cpp \
+    Source/CAirportGenerator.cpp \
     Source/CNavaidDatabase.cpp \
     Source/CNavaidComponent.cpp \
     Source/CAirport.cpp \
