@@ -58,7 +58,7 @@ public:
     const QMap<ERadioType, double>& radios() const;
 
     //-------------------------------------------------------------------------------------------------
-    // Inherited methods
+    // Overridden methods
     //-------------------------------------------------------------------------------------------------
 
     //!
@@ -66,6 +66,9 @@ public:
 
     //! Loads this object's parameters
     virtual void loadParameters(const QString& sBaseFile, CXMLNode xAirport) Q_DECL_OVERRIDE;
+
+    //! Dumps contents to a stream
+    virtual void dump(QTextStream& stream, int iIdent) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Properties

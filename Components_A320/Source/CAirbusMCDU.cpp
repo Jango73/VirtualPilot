@@ -64,13 +64,13 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
             double W = pTexture->image().width();
             double H = pTexture->image().height();
 
-            double xCellSize = W / (double) MCDU_W;
-            double yCellSize = H / (double) MCDU_H;
+            double xCellSize = W / (double) MCDU_SCREEN_WIDTH;
+            double yCellSize = H / (double) MCDU_SCREEN_HEIGHT;
 
             if (m_iLastHeight != pTexture->image().height())
             {
                 m_iLastHeight = pTexture->image().height();
-                int iFontLargeSize = ((H / MCDU_H) * 4) / 5;
+                int iFontLargeSize = ((H / MCDU_SCREEN_HEIGHT) * 4) / 5;
                 int iFontSmallSize = (iFontLargeSize * 4) / 5;
                 m_fFontLarge = QFont(A320_MCDU_FONT, iFontLargeSize);
                 m_fFontSmall = QFont(A320_MCDU_FONT, iFontSmallSize);
@@ -78,9 +78,9 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
 
             painter.resetTransform();
 
-            for (int y = 0; y < MCDU_H; y++)
+            for (int y = 0; y < MCDU_SCREEN_HEIGHT; y++)
             {
-                for (int x = 0; x < MCDU_W; x++)
+                for (int x = 0; x < MCDU_SCREEN_WIDTH; x++)
                 {
                     m_aScreen[x][y].m_cChar = ' ';
                 }
@@ -89,9 +89,9 @@ void CAirbusMCDU::updateTexture(CTexture* pTexture, double dDeltaTime)
             printCurrentPage();
             printScratchPad();
 
-            for (int y = 0; y < MCDU_H; y++)
+            for (int y = 0; y < MCDU_SCREEN_HEIGHT; y++)
             {
-                for (int x = 0; x < MCDU_W; x++)
+                for (int x = 0; x < MCDU_SCREEN_WIDTH; x++)
                 {
                     if (m_aScreen[x][y].m_bLarge)
                         painter.setFont(m_fFontLarge);
@@ -154,14 +154,14 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
     }
     else if (eKey == mkSlash)
     {
-        if (m_sScratchPad.count() < MCDU_W)
+        if (m_sScratchPad.count() < MCDU_SCREEN_WIDTH)
         {
             m_sScratchPad += QString("/");
         }
     }
     else if (eKey >= mkSpace && eKey <= mkZ)
     {
-        if (m_sError.isEmpty() && m_sScratchPad.count() < MCDU_W)
+        if (m_sError.isEmpty() && m_sScratchPad.count() < MCDU_SCREEN_WIDTH)
         {
             m_sScratchPad += QString(QChar(eKey));
         }
@@ -177,6 +177,7 @@ void CAirbusMCDU::handleKey(EMCDUKey eKey)
                 case mpInitB: handleKey_InitB(eKey); break;
                 case mpRouteSelection: handleKey_RouteSelection(eKey); break;
                 case mpFlightPlanA: handleKey_FlightPlanA(eKey); break;
+                default: break;
             }
         }
     }
@@ -203,7 +204,7 @@ void CAirbusMCDU::printAt(QPoint pWhere, const QString& sText, QColor cColor, bo
         int x = pWhere.x() + index;
         int y = pWhere.y();
 
-        if (x >= 0 && x < MCDU_W && y >= 0 && y < MCDU_H)
+        if (x >= 0 && x < MCDU_SCREEN_WIDTH && y >= 0 && y < MCDU_SCREEN_HEIGHT)
         {
             m_aScreen[x][y].m_cChar = sText[index];
             m_aScreen[x][y].m_cColor = cColor;
@@ -225,7 +226,7 @@ void CAirbusMCDU::printCenteredAt(QPoint pWhere, const QString& sText, QColor cC
 
 void CAirbusMCDU::printTitle(const QString& sText)
 {
-    printCenteredAt(QPoint(MCDU_W / 2, 0), sText, A320_Color_White, true);
+    printCenteredAt(QPoint(MCDU_SCREEN_WIDTH / 2, 0), sText, A320_Color_White, true);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -243,7 +244,7 @@ void CAirbusMCDU::printLabel(int iLine, bool bLeft, const QString& sText)
 
     if (bLeft == false)
     {
-        pWhere.setX(MCDU_W - sText.length());
+        pWhere.setX(MCDU_SCREEN_WIDTH - sText.length());
     }
 
     printAt(pWhere, sText, A320_Color_White, false);
@@ -257,7 +258,7 @@ void CAirbusMCDU::printData(int iLine, bool bLeft, const QString& sText, QColor 
 
     if (bLeft == false)
     {
-        pWhere.setX(MCDU_W - sText.length());
+        pWhere.setX(MCDU_SCREEN_WIDTH - sText.length());
     }
 
     printAt(pWhere, sText, cColor, true);
@@ -274,6 +275,7 @@ void CAirbusMCDU::printCurrentPage()
         case mpInitB: printPage_InitB(); break;
         case mpRouteSelection: printPage_RouteSelection(); break;
         case mpFlightPlanA: printPage_FlightPlanA(); break;
+        default: break;
     }
 }
 
@@ -283,11 +285,11 @@ void CAirbusMCDU::printScratchPad()
 {
     if (m_sError.isEmpty() == false)
     {
-        printAt(QPoint(0, MCDU_H - 1), m_sError, A320_Color_White, true);
+        printAt(QPoint(0, MCDU_SCREEN_HEIGHT - 1), m_sError, A320_Color_White, true);
     }
     else
     {
-        printAt(QPoint(0, MCDU_H - 1), m_sScratchPad, A320_Color_White, true);
+        printAt(QPoint(0, MCDU_SCREEN_HEIGHT - 1), m_sScratchPad, A320_Color_White, true);
     }
 }
 
@@ -342,11 +344,11 @@ void CAirbusMCDU::printPage_InitA()
     QString sFromTo = QString("%1/%2").arg(sFM_ICAOFrom).arg(sFM_ICAOTo);
 
     // Left data
-    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : FORMAT_COMPANY_ROUTE, A320_Color_Blue);
-    printData(2, true, sFM_FlightNumber.isEmpty() == false ? sFM_FlightNumber : FORMAT_COMPANY_ROUTE, A320_Color_Blue);
+    printData(0, true, sFM_CompanyRoute.isEmpty() == false ? sFM_CompanyRoute : MCDU_FORMAT_COMPANY_ROUTE, A320_Color_Blue);
+    printData(2, true, sFM_FlightNumber.isEmpty() == false ? sFM_FlightNumber : MCDU_FORMAT_COMPANY_ROUTE, A320_Color_Blue);
 
     // Right data
-    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : FORMAT_ICAO_FROM_TO, A320_Color_Blue);
+    printData(0, false, sFM_ICAOFrom.isEmpty() == false ? sFromTo : MCDU_FORMAT_ICAO_FROM_TO, A320_Color_Blue);
     printData(1, false, "REQUEST*");
     printData(2, false, "ALIGN IRS>");
     printData(4, false, "WIND>");
@@ -369,14 +371,14 @@ void CAirbusMCDU::handleKey_InitA(EMCDUKey eKey)
         case mk1R:
             if (m_sScratchPad.isEmpty() == false)
             {
-                if (respectsFormat(m_sScratchPad, FORMAT_ICAO_FROM_TO))
+                if (respectsFormat(m_sScratchPad, MCDU_FORMAT_ICAO_FROM_TO))
                 {
                     sendData(mdsICAOFromTo, m_sScratchPad);
                     m_sScratchPad.clear();
                 }
                 else
                 {
-                    m_sError = ERROR_BAD_FORMAT;
+                    m_sError = MCDU_ERROR_BAD_FORMAT;
                 }
             }
             break;
@@ -423,15 +425,15 @@ void CAirbusMCDU::printPage_FlightPlanA()
     CAirbusFlightPlan* pFG_FlightPlan_ptr = GETDATA_POINTER(adFG_FlightPlan_ptr, CAirbusFlightPlan);
 
     printLeftTitle(" FROM");
-    printLabel(0, true, TEXT_FPLN_HEADER);
-    printLabel(5, true, TEXT_FPLN_FOOTER);
+    printLabel(0, true, MCDU_TEXT_FPLN_HEADER);
+    printLabel(5, true, MCDU_TEXT_FPLN_FOOTER);
 
     if (pFG_FlightPlan_ptr != nullptr)
     {
-        int iFirstWaypoint = m_iSubPage * FPLN_WAYP_PER_PAGE;
+        int iFirstWaypoint = m_iSubPage * MCDU_FPLN_WAYP_PER_PAGE;
         int iLine = 0;
 
-        for (int index = 0; index < FPLN_WAYP_PER_PAGE; index++, iLine++)
+        for (int index = 0; index < MCDU_FPLN_WAYP_PER_PAGE; index++, iLine++)
         {
             int iWaypIndex = iFirstWaypoint + index;
 
@@ -465,7 +467,7 @@ void CAirbusMCDU::handleKey_FlightPlanA(EMCDUKey eKey)
         }
 
         int iTotalCount = pFG_FlightPlan_ptr->waypoints().count();
-        int iTotalPages = iTotalCount % FPLN_WAYP_PER_PAGE == 0 ? iTotalCount / FPLN_WAYP_PER_PAGE : (iTotalCount / FPLN_WAYP_PER_PAGE) + 1;
+        int iTotalPages = iTotalCount % MCDU_FPLN_WAYP_PER_PAGE == 0 ? iTotalCount / MCDU_FPLN_WAYP_PER_PAGE : (iTotalCount / MCDU_FPLN_WAYP_PER_PAGE) + 1;
 
         if (m_iSubPage > iTotalPages - 1) m_iSubPage = iTotalPages - 1;
         if (m_iSubPage < 0) m_iSubPage = 0;

@@ -87,3 +87,21 @@ void CAirport::loadParameters(const QString& sBaseFile, CXMLNode xAirport)
         m_mRadios[eType] = xRadio.attributes()[ParamName_Frequency].toDouble();
     }
 }
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirport::dump(QTextStream& stream, int iIdent)
+{
+    dumpIdent(stream, iIdent, QString("[CAirport]"));
+    dumpIdent(stream, iIdent, QString("Radios : %1").arg(m_vRunways.count()));
+    dumpIdent(stream, iIdent, QString("Runways :"));
+
+    dumpOpenBlock(stream, iIdent); iIdent++;
+    foreach (CRunway* pRunway, m_vRunways)
+    {
+        pRunway->dump(stream, iIdent);
+    }
+    iIdent--; dumpCloseBlock(stream, iIdent);
+
+    CNavaidComponent::dump(stream, iIdent);
+}

@@ -5,8 +5,9 @@
 #include "CXMLNode.h"
 
 // Quick3D
-#include "CGeoloc.h"
 #include "CQ3DConstants.h"
+#include "CGeoloc.h"
+#include "CDumpable.h"
 
 // Application
 #include "Components_Generic_Global.h"
@@ -14,7 +15,7 @@
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidComponent
+class COMPONENTS_GENERIC_EXPORT CNavaidComponent : public CDumpable
 {
 public:
 
@@ -43,7 +44,7 @@ public:
     CGeoloc geoloc() const;
 
     //-------------------------------------------------------------------------------------------------
-    // Control methods
+    // Overridden methods
     //-------------------------------------------------------------------------------------------------
 
     //!
@@ -51,6 +52,9 @@ public:
 
     //! Loads this object's parameters
     virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent);
+
+    //! Dumps contents to a stream
+    virtual void dump(QTextStream& stream, int iIdent) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Properties

@@ -76,3 +76,14 @@ void CNavaid::loadParameters(const QString& sBaseFile, CXMLNode xNavaid)
             m_eILSType = ilstCat3;
     }
 }
+
+//-------------------------------------------------------------------------------------------------
+
+void CNavaid::dump(QTextStream& stream, int iIdent)
+{
+    dumpIdent(stream, iIdent, QString("[CNavaid]"));
+    dumpIdent(stream, iIdent, QString("Type : %1").arg(m_eType));
+    dumpIdent(stream, iIdent, QString("Frequency : %1").arg(m_dFrequency_MHz));
+
+    CNavaidComponent::dump(stream, iIdent);
+}

@@ -105,6 +105,8 @@ void CAirbusELAC::work(double dDeltaTime)
         m_vStick.X = GETDATA_DOUBLE(adStick_CAPT_x);
         m_vStick.Y = GETDATA_DOUBLE(adStick_CAPT_y);
 
+        Q_UNUSED(bFCU_AutoPilot2_Engaged);
+
         //-----------------------------------------------------------------------------
 
         if (m_vStick.X == 0.0 && m_vStickPrevious.X != 0.0)

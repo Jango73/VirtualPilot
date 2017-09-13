@@ -59,20 +59,20 @@ enum EMCDUKey
 
 //-------------------------------------------------------------------------------------------------
 
-#define CHAR_PH                 '\219'
+#define CHAR_PH                         '\219'
 
-#define MCDU_W                  24
-#define MCDU_H                  14
-#define FPLN_WAYP_PER_PAGE      5
+#define MCDU_SCREEN_WIDTH               24
+#define MCDU_SCREEN_HEIGHT              14
+#define MCDU_FPLN_WAYP_PER_PAGE         5
 
-#define FORMAT_COMPANY_ROUTE    "__________"
-#define FORMAT_ICAO_FROM_TO     "____/____"
+#define MCDU_FORMAT_COMPANY_ROUTE       "__________"
+#define MCDU_FORMAT_ICAO_FROM_TO        "____/____"
 
-#define TEXT_FPLN_DISCONTINUITY " F-PLN DISCONTINUITY"
-#define TEXT_FPLN_HEADER        "          UTC  SPD/ALT  "
-#define TEXT_FPLN_FOOTER        " DEST     UTC  DIST EFOB"
+#define MCDU_TEXT_FPLN_DISCONTINUITY    " F-PLN DISCONTINUITY"
+#define MCDU_TEXT_FPLN_HEADER           "          UTC  SPD/ALT  "
+#define MCDU_TEXT_FPLN_FOOTER           " DEST     UTC  DIST EFOB"
 
-#define ERROR_BAD_FORMAT        "BAD FORMAT"
+#define MCDU_ERROR_BAD_FORMAT           "BAD FORMAT"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -209,7 +209,7 @@ protected:
 
     EMCDUPage                   m_ePage;
     int                         m_iSubPage;
-    MCDUChar                    m_aScreen[MCDU_W][MCDU_H];
+    MCDUChar                    m_aScreen[MCDU_SCREEN_WIDTH][MCDU_SCREEN_HEIGHT];
     QString                     m_sScratchPad;
     QString                     m_sError;
     QMap<QString, EMCDUKey>     m_mEventToKey;

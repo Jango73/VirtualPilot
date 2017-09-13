@@ -86,24 +86,7 @@ void CNavaidDatabase::dump(QTextStream& stream, int iIdent)
     dumpOpenBlock(stream, iIdent); iIdent++;
     foreach (CNavaidComponent* pNavaidComponent, m_vNavaids)
     {
-        dumpIdent(stream, iIdent, QString("[CNavaid]"));
-        dumpIdent(stream, iIdent, QString("ID : %1").arg(pNavaidComponent->ID()));
-
-        CAirport* pAirport = dynamic_cast<CAirport*>(pNavaidComponent);
-        if (pAirport != nullptr)
-        {
-            dumpIdent(stream, iIdent, QString("[CAirport]"));
-            dumpIdent(stream, iIdent, QString("Runways : %1").arg(pAirport->runways().count()));
-            dumpIdent(stream, iIdent, QString("Radios : %1").arg(pAirport->radios().count()));
-        }
-
-        CNavaid* pNavaid = dynamic_cast<CNavaid*>(pNavaidComponent);
-        if (pNavaid != nullptr)
-        {
-            dumpIdent(stream, iIdent, QString("[CNavaid]"));
-            dumpIdent(stream, iIdent, QString("Type : %1").arg(pNavaid->type()));
-            dumpIdent(stream, iIdent, QString("Frequency : %1").arg(pNavaid->frequency_MHz()));
-        }
+        pNavaidComponent->dump(stream, iIdent);
     }
     iIdent--; dumpCloseBlock(stream, iIdent);
 

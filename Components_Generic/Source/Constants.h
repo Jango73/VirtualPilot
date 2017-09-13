@@ -8,6 +8,7 @@
 #define ClassName_CNavaidDatabase           "CNavaidDatabase"
 #define ClassName_CNavaidComponent          "CNavaidComponent"
 #define ClassName_CAirport                  "CAirport"
+#define ClassName_CRunway                   "CRunway"
 #define ClassName_CNavaid                   "CNavaid"
 
 //-------------------------------------------------------------------------------------------------

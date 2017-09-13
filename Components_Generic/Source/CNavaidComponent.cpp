@@ -46,3 +46,15 @@ void CNavaidComponent::loadParameters(const QString& sBaseFile, CXMLNode xCompon
                   xGeoloc.attributes()[ParamName_Altitude].toDouble()
                   );
 }
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Dumps this component to \a stream using the indentation value in \a iIdent.
+*/
+void CNavaidComponent::dump(QTextStream& stream, int iIdent)
+{
+    dumpIdent(stream, iIdent, QString("[CNavaidComponent]"));
+    dumpIdent(stream, iIdent, QString("ID : %1").arg(m_sID));
+    dumpIdent(stream, iIdent, QString("Geoloc : %1").arg(m_gGeoloc.toString()));
+}
