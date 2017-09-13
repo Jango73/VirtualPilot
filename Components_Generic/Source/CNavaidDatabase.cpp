@@ -61,7 +61,7 @@ void CNavaidDatabase::loadFromFile(const QString& sFileName)
         CAirport* pNewAiport = new CAirport();
         pNewAiport->loadParameters(sFileName, xAirport);
         m_vNavaids << pNewAiport;
-        append(pNewAiport->geoloc(), pNewAiport);
+        append(pNewAiport);
     }
 
     // Load navaids
@@ -72,7 +72,7 @@ void CNavaidDatabase::loadFromFile(const QString& sFileName)
         CNavaid* pNavaid = new CNavaid();
         pNavaid->loadParameters(sFileName, xNavaid);
         m_vNavaids << pNavaid;
-        append(pNavaid->geoloc(), pNavaid);
+        append(pNavaid);
     }
 }
 
@@ -80,15 +80,15 @@ void CNavaidDatabase::loadFromFile(const QString& sFileName)
 
 void CNavaidDatabase::dump(QTextStream& stream, int iIdent)
 {
-    dumpIdent(stream, iIdent, QString("[CNavaidDatabase]"));
-    dumpIdent(stream, iIdent, QString("Navaids :"));
+    CComponent::dumpIdent(stream, iIdent, QString("[CNavaidDatabase]"));
+    CComponent::dumpIdent(stream, iIdent, QString("Navaids :"));
 
-    dumpOpenBlock(stream, iIdent); iIdent++;
+    CComponent::dumpOpenBlock(stream, iIdent); iIdent++;
     foreach (CNavaidComponent* pNavaidComponent, m_vNavaids)
     {
         pNavaidComponent->dump(stream, iIdent);
     }
-    iIdent--; dumpCloseBlock(stream, iIdent);
+    iIdent--; CComponent::dumpCloseBlock(stream, iIdent);
 
     CComponent::dump(stream, iIdent);
 }

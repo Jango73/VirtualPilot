@@ -13,7 +13,7 @@
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidDatabase : public CComponent, public CGeoTree<CNavaidComponent*>
+class COMPONENTS_GENERIC_EXPORT CNavaidDatabase : public CComponent, public CGeoTree
 {
 public:
 

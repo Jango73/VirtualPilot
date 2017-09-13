@@ -6,7 +6,7 @@
 
 // Quick3D
 #include "CQ3DConstants.h"
-#include "CGeoloc.h"
+#include "CGeolocalized.h"
 #include "CDumpable.h"
 
 // Application
@@ -15,7 +15,7 @@
 
 //-------------------------------------------------------------------------------------------------
 
-class COMPONENTS_GENERIC_EXPORT CNavaidComponent : public CDumpable
+class COMPONENTS_GENERIC_EXPORT CNavaidComponent : public CGeolocalized, public CDumpable
 {
 public:
 
@@ -40,9 +40,6 @@ public:
     //!
     QString ID() const;
 
-    //!
-    CGeoloc geoloc() const;
-
     //-------------------------------------------------------------------------------------------------
     // Overridden methods
     //-------------------------------------------------------------------------------------------------
@@ -63,5 +60,4 @@ public:
 protected:
 
     QString m_sID;
-    CGeoloc m_gGeoloc;
 };

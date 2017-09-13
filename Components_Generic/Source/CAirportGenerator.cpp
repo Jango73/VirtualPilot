@@ -77,9 +77,9 @@ void CAirportGenerator::generate(QSP<CWorldChunk> pChunk)
         {
             CGeoloc gPlayerPosition = vPlayerComponents[0]->geoloc();
 
-            QVector<CNavaidComponent*> pNavaids = pNavaidDatabase->query(gPlayerPosition, 50000.0);
+            QVector<CGeolocalized*> pNavaids = pNavaidDatabase->query(gPlayerPosition, 50000.0);
 
-            foreach (CNavaidComponent* pNavaid, pNavaids)
+            foreach (CGeolocalized* pNavaid, pNavaids)
             {
                 CAirport* pAirport = dynamic_cast<CAirport*>(pNavaid);
 
