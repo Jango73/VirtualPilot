@@ -34,6 +34,7 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     , m_pMap(nullptr)
     , m_tTimer(this)
     , m_FPS(100)
+    , m_dMapScale(1.0)
     , m_bProcessEvents(true)
     , m_bRun(true)
     , m_bRealTime(false)
@@ -44,7 +45,7 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
 
     ui.setupUi(this);
 
-    ui.mapView->setScene(new QGraphicsScene());
+    ui.mapView->setScene(new QGraphicsScene(ui.mapView));
 
     m_sPathVehicles = QCoreApplication::applicationDirPath() + "/Vehicles";
 
@@ -55,7 +56,7 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     m_pView->setScene(m_pScene);
     m_pScene->setShaderQuality(0.8);
 
-    // Gestion des évènements
+    // Event handling
     connect(&m_tTimer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
     connect(ui.actionLoad_scene, SIGNAL(triggered()), this, SLOT(onLoadSceneClicked()));
@@ -73,6 +74,11 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     connect(ui.m_chkBoundsOnly, SIGNAL(clicked()), this, SLOT(onBoundsOnlyClicked()));
     connect(ui.m_chkNormalsOnly, SIGNAL(clicked()), this, SLOT(onNormalsOnlyClicked()));
     connect(ui.m_chkOverlook, SIGNAL(clicked()), this, SLOT(onOverlookClicked()));
+
+    connect(ui.m_btMapZoomIn, SIGNAL(clicked()), this, SLOT(onMapZoomInClicked()));
+    connect(ui.m_btMapZoomOut, SIGNAL(clicked()), this, SLOT(onMapZoomOutClicked()));
+    connect(ui.m_btMapZoomInFast, SIGNAL(clicked()), this, SLOT(onMapZoomInFastClicked()));
+    connect(ui.m_btMapZoomOutFast, SIGNAL(clicked()), this, SLOT(onMapZoomOutFastClicked()));
 
     loadScene(QCoreApplication::applicationDirPath() + "/" + sSceneFileName);
 
@@ -118,7 +124,7 @@ void VirtualPilot::loadScene(QString sFileName)
     m_pScene->viewports()[0]->setEnabled(true);
 
     //-----------------------------------------------
-    // Chargement des composants
+    // Load components
 
     LOG_DEBUG("VirtualPilot::VirtualPilot() : loading components...");
 
@@ -186,6 +192,8 @@ void VirtualPilot::loadVehicle(QString sFileName)
 
 void VirtualPilot::showMap()
 {
+    m_gMapCenter = CGeoloc(48.998321, 2.601997, 0.0);
+
     foreach (QSP<CComponent> pComponent, m_pScene->components())
     {
         QSP<CWorldTerrain> pTerrain = QSP_CAST(CWorldTerrain, pComponent);
@@ -197,9 +205,13 @@ void VirtualPilot::showMap()
 
             m_pMap = new CWorldTerrainMap(m_pScene);
             m_pMap->setTerrain(pTerrain);
+            m_pMap->setCenter(m_gMapCenter);
+            m_pMap->setScale(m_dMapScale);
             m_pMap->updateImage();
             ui.mapView->scene()->clear();
-            ui.mapView->scene()->addItem(new QGraphicsPixmapItem(QPixmap::fromImage(m_pMap->image())));
+            QGraphicsPixmapItem* pItem = new QGraphicsPixmapItem(QPixmap::fromImage(m_pMap->image()));
+            pItem->setScale(6.0);
+            ui.mapView->scene()->addItem(pItem);
 
             break;
         }
@@ -295,7 +307,7 @@ void VirtualPilot::onTimer()
                 .arg(QString::number(Math::Angles::toDeg(ViewRotation.Y), 'f', 2))
                 .arg(QString::number(Math::Angles::toDeg(ViewRotation.Z), 'f', 2))
 
-                .arg(QString::number(dSpeedMS * 1.9438444924406046, 'f', 1))
+                .arg(QString::number(dSpeedMS * FAC_MS_TO_KNOTS, 'f', 1))
 
                 .arg(QString::number(ControledVelocity.X, 'f', 2))
                 .arg(QString::number(ControledVelocity.Y, 'f', 2))
@@ -435,4 +447,36 @@ void VirtualPilot::onNormalsOnlyClicked()
 void VirtualPilot::onOverlookClicked()
 {
     m_pScene->setOverlookScene(ui.m_chkOverlook->checkState() == Qt::Checked);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onMapZoomInClicked()
+{
+    m_dMapScale = Angles::clipDouble(m_dMapScale + 0.5, 0.5, 10000.0);
+    showMap();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onMapZoomOutClicked()
+{
+    m_dMapScale = Angles::clipDouble(m_dMapScale - 0.5, 0.5, 10000.0);
+    showMap();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onMapZoomInFastClicked()
+{
+    m_dMapScale = Angles::clipDouble(m_dMapScale * 5.0, 0.5, 10000.0);
+    showMap();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::onMapZoomOutFastClicked()
+{
+    m_dMapScale = Angles::clipDouble(m_dMapScale / 5.0, 0.5, 10000.0);
+    showMap();
 }

@@ -27,7 +27,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabMain">
        <attribute name="title">
@@ -457,6 +457,38 @@
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QGraphicsView" name="mapView"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QPushButton" name="m_btMapZoomInFast">
+            <property name="text">
+             <string>Zoom ++</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_btMapZoomIn">
+            <property name="text">
+             <string>Zoom +</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_btMapZoomOut">
+            <property name="text">
+             <string>Zoom -</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_btMapZoomOutFast">
+            <property name="text">
+             <string>Zoom --</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

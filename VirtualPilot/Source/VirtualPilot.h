@@ -90,6 +90,11 @@ private slots:
     void onNormalsOnlyClicked();
     void onOverlookClicked();
 
+    void onMapZoomInClicked();
+    void onMapZoomOutClicked();
+    void onMapZoomInFastClicked();
+    void onMapZoomOutFastClicked();
+
     //-------------------------------------------------------------------------------------------------
     // Properties
     //-------------------------------------------------------------------------------------------------
@@ -104,6 +109,8 @@ protected:
     CAverager<double>               m_FPS;
     QDateTime                       m_tPreviousTime;
     QString                         m_sPathVehicles;
+    CGeoloc                         m_gMapCenter;
+    double                          m_dMapScale;
     bool                            m_bProcessEvents;
     bool                            m_bRun;
     bool                            m_bRealTime;
