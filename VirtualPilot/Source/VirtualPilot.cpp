@@ -44,6 +44,8 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
 
     ui.setupUi(this);
 
+    ui.mapView->setScene(new QGraphicsScene());
+
     m_sPathVehicles = QCoreApplication::applicationDirPath() + "/Vehicles";
 
     CComponentFactory::getInstance()->registerCoreComponents();
@@ -188,13 +190,14 @@ void VirtualPilot::showMap()
     {
         QSP<CWorldTerrain> pTerrain = QSP_CAST(CWorldTerrain, pComponent);
 
-        if (pTerrain != nullptr)
+        if (pTerrain != nullptr && pTerrain->heights() != nullptr)
         {
             if (m_pMap != nullptr)
                 delete m_pMap;
 
             m_pMap = new CWorldTerrainMap(m_pScene);
             m_pMap->setTerrain(pTerrain);
+            m_pMap->updateImage();
             ui.mapView->scene()->clear();
             ui.mapView->scene()->addItem(new QGraphicsPixmapItem(QPixmap::fromImage(m_pMap->image())));
 
