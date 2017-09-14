@@ -46,7 +46,7 @@ public:
     //-------------------------------------------------------------------------------------------------
 
     //-------------------------------------------------------------------------------------------------
-    // Inherited methods
+    // Overridden methods
     //-------------------------------------------------------------------------------------------------
 
     //!
@@ -56,7 +56,11 @@ public:
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //!
-    virtual void updateTexture(CTexture* pTexture, double dDeltaTime);
+    virtual void updateTexture(CTexture* pTexture, double dDeltaTime) Q_DECL_OVERRIDE;
+
+    //-------------------------------------------------------------------------------------------------
+    // Protected control methods
+    //-------------------------------------------------------------------------------------------------
 
     //!
     void updateTexture_PFD(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
@@ -114,10 +118,6 @@ public:
 
     //!
     void drawHydraulicPage(QPainter* pPainter, CTexture* pTexture, double dDeltaTime);
-
-    //-------------------------------------------------------------------------------------------------
-    // Control methods
-    //-------------------------------------------------------------------------------------------------
 
     //-------------------------------------------------------------------------------------------------
     // Properties
