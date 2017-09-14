@@ -31,6 +31,7 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent)
 VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
 #endif
+    , m_pMap(nullptr)
     , m_tTimer(this)
     , m_FPS(100)
     , m_bProcessEvents(true)
@@ -125,6 +126,7 @@ void VirtualPilot::loadScene(QString sFileName)
 
     //-----------------------------------------------
 
+    showMap();
     onResize();
 }
 
@@ -174,6 +176,29 @@ void VirtualPilot::loadVehicle(QString sFileName)
             LOG_ERROR("VirtualPilot::loadVehicle() : camera not found");
 
             m_pScene->viewports()[0]->setCamera(QSP<CCamera>());
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void VirtualPilot::showMap()
+{
+    foreach (QSP<CComponent> pComponent, m_pScene->components())
+    {
+        QSP<CWorldTerrain> pTerrain = QSP_CAST(CWorldTerrain, pComponent);
+
+        if (pTerrain != nullptr)
+        {
+            if (m_pMap != nullptr)
+                delete m_pMap;
+
+            m_pMap = new CWorldTerrainMap(m_pScene);
+            m_pMap->setTerrain(pTerrain);
+            ui.mapView->scene()->clear();
+            ui.mapView->scene()->addItem(new QGraphicsPixmapItem(QPixmap::fromImage(m_pMap->image())));
+
+            break;
         }
     }
 }
@@ -256,7 +281,7 @@ void VirtualPilot::onTimer()
         QString sInfo = QString(
                     "FPS %1 - LLA (%2, %3, %4) Rotation (%5, %6, %7) Kts %8 \n"
                     "Physics Vel (%9, %10, %11) Torque (%12, %13, %14) \n"
-                    "Drawn : meshes %15 polys %16 chunks %17 (Existing: components %18, chunks %19, terrains %20) \n"
+                    "Drawn : meshes %15 polys %16 chunks %17 (Existing: components %18, chunks %19, terrains %20, bmi %21) \n"
                     )
                 .arg((int) m_FPS.getAverage())
                 .arg(QString::number(ViewGeoloc.Latitude, 'f', 6))
@@ -282,6 +307,7 @@ void VirtualPilot::onTimer()
                 .arg(CComponent::getNumComponents())
                 .arg(CComponent::componentCounter()[ClassName_CWorldChunk])
                 .arg(CComponent::componentCounter()[ClassName_CTerrain])
+                .arg(CComponent::componentCounter()[ClassName_CBoundedMeshInstances])
                 ;
 
         ui.m_lInfo->setText(sInfo);

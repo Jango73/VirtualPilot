@@ -63,7 +63,7 @@ copydest = $$PWD/../bin
 
 QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
 
-# Copy Quick3D to Binary
+# Copy Quick3D to bin
 copyfile = $$PWD/../Quick3D/Quick3D/bin/*.dll
 copydest = $$PWD/../bin
 

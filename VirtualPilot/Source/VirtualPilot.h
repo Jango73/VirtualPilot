@@ -16,6 +16,7 @@
 #include "CComponent.h"
 #include "CView.h"
 #include "CWorldTerrain.h"
+#include "CWorldTerrainMap.h"
 
 class VirtualPilot : public QMainWindow
 {
@@ -49,6 +50,9 @@ public:
 
     //!
     void loadVehicle(QString sFileName);
+
+    //!
+    void showMap();
 
     //-------------------------------------------------------------------------------------------------
     // Protected methods
@@ -95,6 +99,7 @@ protected:
     Ui::VirtualPilotClass           ui;
     CGLWidgetScene*                 m_pScene;
     CView*                          m_pView;
+    CWorldTerrainMap*               m_pMap;
     QTimer                          m_tTimer;
     CAverager<double>               m_FPS;
     QDateTime                       m_tPreviousTime;

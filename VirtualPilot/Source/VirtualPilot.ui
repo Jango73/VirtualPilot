@@ -25,423 +25,444 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMaximumSize</enum>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>1</number>
       </property>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetMaximumSize</enum>
-        </property>
+      <widget class="QWidget" name="tabMain">
+       <attribute name="title">
+        <string>Main</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="m_lInfo">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>60</height>
-           </size>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
           </property>
-          <property name="text">
-           <string>Info</string>
-          </property>
-         </widget>
+          <item>
+           <widget class="QLabel" name="m_lInfo">
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Info</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="Render1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20000</width>
+              <height>20000</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QFrame" name="Render1">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMinimumSize</enum>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>20000</width>
-            <height>20000</height>
-           </size>
-          </property>
-         </widget>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Time of day</string>
+            </property>
+            <widget class="QSlider" name="m_sTime">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>150</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="maximum">
+              <number>24</number>
+             </property>
+             <property name="pageStep">
+              <number>4</number>
+             </property>
+             <property name="value">
+              <number>12</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Wind</string>
+            </property>
+            <widget class="QSlider" name="m_sWindLevel">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>150</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="value">
+              <number>50</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Fog</string>
+            </property>
+            <widget class="QSlider" name="m_sFogLevel">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>150</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Shader quality</string>
+            </property>
+            <widget class="QSlider" name="m_sShaderQuality">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>150</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="value">
+              <number>50</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Terrain resolution</string>
+            </property>
+            <widget class="QSlider" name="m_sTerrainRes">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>150</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="maximum">
+              <number>81</number>
+             </property>
+             <property name="value">
+              <number>31</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_8">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>120</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Misc</string>
+            </property>
+            <widget class="QCheckBox" name="m_chkRain">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>40</y>
+               <width>51</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Rain</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="m_chkDebug">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>90</x>
+               <y>20</y>
+               <width>71</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Debug</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="m_chkDepth">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>60</y>
+               <width>91</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>View depth</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="m_chkBoundsOnly">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>90</x>
+               <y>40</y>
+               <width>81</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Bounds only</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="m_chkIR">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>20</y>
+               <width>101</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>IR</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="m_chkNormalsOnly">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>90</x>
+               <y>60</y>
+               <width>81</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Normals only</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="m_chkOverlook">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>80</y>
+               <width>91</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Overlook</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_10">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Overlook FOV</string>
+            </property>
+            <widget class="QSlider" name="m_sOverlookFOV">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>150</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>120</number>
+             </property>
+             <property name="value">
+              <number>90</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
        </layout>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMinimumSize</enum>
-      </property>
-      <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Time of day</string>
-        </property>
-        <widget class="QSlider" name="m_sTime">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>20</y>
-           <width>150</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="maximum">
-          <number>24</number>
-         </property>
-         <property name="pageStep">
-          <number>4</number>
-         </property>
-         <property name="value">
-          <number>12</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_4">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Wind</string>
-        </property>
-        <widget class="QSlider" name="m_sWindLevel">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>20</y>
-           <width>150</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="value">
-          <number>50</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Fog</string>
-        </property>
-        <widget class="QSlider" name="m_sFogLevel">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>20</y>
-           <width>150</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Shader quality</string>
-        </property>
-        <widget class="QSlider" name="m_sShaderQuality">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>20</y>
-           <width>150</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="value">
-          <number>50</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_9">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Terrain resolution</string>
-        </property>
-        <widget class="QSlider" name="m_sTerrainRes">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>20</y>
-           <width>150</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="maximum">
-          <number>81</number>
-         </property>
-         <property name="value">
-          <number>31</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_8">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>120</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Misc</string>
-        </property>
-        <widget class="QCheckBox" name="m_chkRain">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>51</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>Rain</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="m_chkDebug">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>20</y>
-           <width>71</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>Debug</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="m_chkDepth">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>60</y>
-           <width>91</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>View depth</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="m_chkBoundsOnly">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>40</y>
-           <width>81</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>Bounds only</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="m_chkIR">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>101</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>IR</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="m_chkNormalsOnly">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>60</y>
-           <width>81</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>Normals only</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="m_chkOverlook">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>80</y>
-           <width>91</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="text">
-          <string>Overlook</string>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_10">
-        <property name="minimumSize">
-         <size>
-          <width>180</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Overlook FOV</string>
-        </property>
-        <widget class="QSlider" name="m_sOverlookFOV">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>20</y>
-           <width>150</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>120</number>
-         </property>
-         <property name="value">
-          <number>90</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
+      </widget>
+      <widget class="QWidget" name="tabMap">
+       <attribute name="title">
+        <string>Map</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QGraphicsView" name="mapView"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -451,7 +472,7 @@
      <x>0</x>
      <y>0</y>
      <width>1119</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
