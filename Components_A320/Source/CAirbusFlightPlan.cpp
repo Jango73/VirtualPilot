@@ -22,14 +22,12 @@ CAirbusFlightPlan::CAirbusFlightPlan()
     , m_sICAOFrom("LFPG")
     , m_sICAOTo("EBBR")
 {
-    LOG_DEBUG("CAirbusFlightPlan::CAirbusFlightPlan()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusFlightPlan::~CAirbusFlightPlan()
 {
-    LOG_DEBUG("CAirbusFlightPlan::~CAirbusFlightPlan()");
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -25,14 +25,12 @@ CComponent* CAirbusStaticPort::instantiator(C3DScene* pScene)
 CAirbusStaticPort::CAirbusStaticPort(C3DScene* pScene)
     : CComponent(pScene)
 {
-    LOG_DEBUG("CAirbusStaticPort::CAirbusStaticPort()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusStaticPort::~CAirbusStaticPort()
 {
-    LOG_DEBUG("CAirbusStaticPort::~CAirbusStaticPort()");
 }
 
 //-------------------------------------------------------------------------------------------------

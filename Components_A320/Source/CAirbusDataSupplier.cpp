@@ -12,14 +12,12 @@
 
 CAirbusDataSupplier::CAirbusDataSupplier()
 {
-    LOG_DEBUG("CAirbusDataSupplier::CAirbusDataSupplier()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusDataSupplier::~CAirbusDataSupplier()
 {
-    LOG_DEBUG("CAirbusDataSupplier::~CAirbusDataSupplier()");
 }
 
 //-------------------------------------------------------------------------------------------------

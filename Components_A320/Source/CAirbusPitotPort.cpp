@@ -22,14 +22,12 @@ CComponent* CAirbusPitotPort::instantiator(C3DScene* pScene)
 CAirbusPitotPort::CAirbusPitotPort(C3DScene* pScene)
     : CComponent(pScene)
 {
-    LOG_DEBUG("CAirbusPitotPort::CAirbusPitotPort()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusPitotPort::~CAirbusPitotPort()
 {
-    LOG_DEBUG("CAirbusPitotPort::~CAirbusPitotPort()");
 }
 
 //-------------------------------------------------------------------------------------------------

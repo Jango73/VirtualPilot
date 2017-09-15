@@ -30,8 +30,6 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
     , m_iSubPage(0)
     , m_iLastHeight(0)
 {
-    LOG_DEBUG("CAirbusMCDU::CAirbusMCDU()");
-
     fillTables();
 }
 
@@ -39,7 +37,6 @@ CAirbusMCDU::CAirbusMCDU(C3DScene* pScene)
 
 CAirbusMCDU::~CAirbusMCDU()
 {
-    LOG_DEBUG("CAirbusMCDU::~CAirbusMCDU()");
 }
 
 //-------------------------------------------------------------------------------------------------

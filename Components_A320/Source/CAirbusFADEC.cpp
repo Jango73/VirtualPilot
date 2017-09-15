@@ -26,14 +26,12 @@ CComponent* CAirbusFADEC::instantiator(C3DScene* pScene)
 CAirbusFADEC::CAirbusFADEC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
 {
-    LOG_DEBUG("CAirbusFADEC::CAirbusFADEC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusFADEC::~CAirbusFADEC()
 {
-    LOG_DEBUG("CAirbusFADEC::~CAirbusFADEC()");
 }
 
 //-------------------------------------------------------------------------------------------------

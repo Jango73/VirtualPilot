@@ -22,14 +22,12 @@ CComponent* CAirbusFWC::instantiator(C3DScene* pScene)
 CAirbusFWC::CAirbusFWC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
 {
-    LOG_DEBUG("CAirbusFWC::CAirbusFWC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusFWC::~CAirbusFWC()
 {
-    LOG_DEBUG("CAirbusFWC::~CAirbusFWC()");
 }
 
 //-------------------------------------------------------------------------------------------------

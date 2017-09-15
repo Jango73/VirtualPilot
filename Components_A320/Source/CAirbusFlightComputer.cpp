@@ -25,8 +25,6 @@ CAirbusFlightComputer::CAirbusFlightComputer(C3DScene* pScene)
     : CElectricalConsumer(pScene)
     , m_iUnitIndex(0)
 {
-    LOG_DEBUG("CAirbusFlightComputer::CAirbusFlightComputer()");
-
     m_tCurrent.m_eType = ctDC;
     m_tCurrent.m_dVoltage = 12.0;
     m_tCurrent.m_dAmperage = 1.0;
@@ -37,7 +35,6 @@ CAirbusFlightComputer::CAirbusFlightComputer(C3DScene* pScene)
 
 CAirbusFlightComputer::~CAirbusFlightComputer()
 {
-    LOG_DEBUG("CAirbusFlightComputer::~CAirbusFlightComputer()");
 }
 
 //-------------------------------------------------------------------------------------------------

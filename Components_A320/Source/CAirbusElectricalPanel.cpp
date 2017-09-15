@@ -24,14 +24,12 @@ CAirbusElectricalPanel::CAirbusElectricalPanel(C3DScene* pScene)
     , m_bGenerator1_Online(false)
     , m_bGenerator2_Online(false)
 {
-    LOG_DEBUG("CAirbusElectricalPanel::CAirbusElectricalPanel()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusElectricalPanel::~CAirbusElectricalPanel()
 {
-    LOG_DEBUG("CAirbusElectricalPanel::~CAirbusElectricalPanel()");
 }
 
 //-------------------------------------------------------------------------------------------------

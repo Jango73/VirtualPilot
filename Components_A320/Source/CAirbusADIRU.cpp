@@ -25,14 +25,12 @@ CAirbusADIRU::CAirbusADIRU(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_dPreviousIndicatedAirSpeed_ms(0.0)
 {
-    LOG_DEBUG("CAirbusADIRU::CAirbusADIRU()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusADIRU::~CAirbusADIRU()
 {
-    LOG_DEBUG("CAirbusADIRU::~CAirbusADIRU()");
 }
 
 //-------------------------------------------------------------------------------------------------

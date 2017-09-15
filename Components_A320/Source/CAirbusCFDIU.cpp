@@ -27,14 +27,12 @@ CComponent* CAirbusCFDIU::instantiator(C3DScene* pScene)
 CAirbusCFDIU::CAirbusCFDIU(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
 {
-    LOG_DEBUG("CAirbusCFDIU::CAirbusCFDIU()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusCFDIU::~CAirbusCFDIU()
 {
-    LOG_DEBUG("CAirbusCFDIU::~CAirbusCFDIU()");
 }
 
 //-------------------------------------------------------------------------------------------------

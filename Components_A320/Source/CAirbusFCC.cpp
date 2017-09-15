@@ -23,14 +23,12 @@ CAirbusFCC::CAirbusFCC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_eFlightLaw(flNormal)
 {
-    LOG_DEBUG("CAirbusFCC::CAirbusFCC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusFCC::~CAirbusFCC()
 {
-    LOG_DEBUG("CAirbusFCC::~CAirbusFCC()");
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -11,12 +11,10 @@ using namespace Math;
 
 CAirbusComponent::CAirbusComponent()
 {
-    LOG_DEBUG("CAirbusComponent::CAirbusComponent()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusComponent::~CAirbusComponent()
 {
-    LOG_DEBUG("CAirbusComponent::~CAirbusComponent()");
 }

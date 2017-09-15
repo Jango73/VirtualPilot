@@ -30,14 +30,12 @@ CAirbusFCU::CAirbusFCU(C3DScene* pScene)
     , m_dSelectedAltitude_m(10000.0 * FAC_FEET_TO_METERS)
     , m_dSelectedVelocity_ms(200.0 * FAC_KNOTS_TO_MS)
 {
-    LOG_DEBUG("CAirbusFCU::CAirbusFCU()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusFCU::~CAirbusFCU()
 {
-    LOG_DEBUG("CAirbusFCU::~CAirbusFCU()");
 }
 
 //-------------------------------------------------------------------------------------------------

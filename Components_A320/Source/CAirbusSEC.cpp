@@ -22,14 +22,12 @@ CComponent* CAirbusSEC::instantiator(C3DScene* pScene)
 CAirbusSEC::CAirbusSEC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
 {
-    LOG_DEBUG("CAirbusSEC::CAirbusSEC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusSEC::~CAirbusSEC()
 {
-    LOG_DEBUG("CAirbusSEC::~CAirbusSEC()");
 }
 
 //-------------------------------------------------------------------------------------------------

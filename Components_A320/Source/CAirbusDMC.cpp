@@ -28,8 +28,6 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
     , m_iLastHeight(0)
 {
-    LOG_DEBUG("CAirbusDMC::CAirbusDMC()");
-
     m_rVelocityBar = QRectF(0.00, 0.20, 0.20, 0.60);
     m_rArtificialHorizon = QRectF(0.25, 0.20, 0.45, 0.60);
     m_rAltitudeBar = QRectF(0.75, 0.20, 0.25, 0.60);
@@ -102,7 +100,6 @@ CAirbusDMC::CAirbusDMC(C3DScene* pScene)
 
 CAirbusDMC::~CAirbusDMC()
 {
-    LOG_DEBUG("CAirbusDMC::~CAirbusDMC()");
 }
 
 //-------------------------------------------------------------------------------------------------

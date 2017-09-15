@@ -37,8 +37,6 @@ CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
     , m_dCommandedAirspeed_ms(0.0)
     , m_dCommandedAcceleration_ms(0.0)
 {
-    LOG_DEBUG("CAirbusFMGC::CAirbusFMGC()");
-
     loadFlightPlan();
 
     m_tLastUpdate = QDateTime::currentDateTime();
@@ -48,7 +46,6 @@ CAirbusFMGC::CAirbusFMGC(C3DScene* pScene)
 
 CAirbusFMGC::~CAirbusFMGC()
 {
-    LOG_DEBUG("CAirbusFMGC::~CAirbusFMGC()");
 }
 
 //-------------------------------------------------------------------------------------------------

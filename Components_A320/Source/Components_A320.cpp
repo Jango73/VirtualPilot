@@ -1,6 +1,11 @@
 
+// qt-plus
+#include "CLogger.h"
+
+// Quick3D
 #include "CPluginInterface.h"
 
+// Application
 #include "Constants.h"
 
 #include "CAirbusController.h"
@@ -27,6 +32,8 @@ extern "C"
 
 COMPONENTS_A320_EXPORT bool PLUGIN_ENTRY_NAME(CPluginInterface* pInterface)
 {
+    LOG_DEBUG("Registering A320 components");
+
     pInterface->registerComponent(ClassName_CAirbusController, CAirbusController::instantiator);
     pInterface->registerComponent(ClassName_CAirbusStaticPort, CAirbusStaticPort::instantiator);
     pInterface->registerComponent(ClassName_CAirbusPitotPort, CAirbusPitotPort::instantiator);

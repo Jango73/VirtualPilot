@@ -23,14 +23,12 @@ CComponent* CAirbusGearSensor::instantiator(C3DScene* pScene)
 CAirbusGearSensor::CAirbusGearSensor(C3DScene* pScene)
     : CComponent(pScene)
 {
-    LOG_DEBUG("CAirbusGearSensor::CAirbusGearSensor()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusGearSensor::~CAirbusGearSensor()
 {
-    LOG_DEBUG("CAirbusGearSensor::~CAirbusGearSensor()");
 }
 
 //-------------------------------------------------------------------------------------------------

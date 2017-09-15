@@ -24,14 +24,12 @@ CComponent* CAirbusAOASensor::instantiator(C3DScene* pScene)
 CAirbusAOASensor::CAirbusAOASensor(C3DScene* pScene)
     : CComponent(pScene)
 {
-    LOG_DEBUG("CAirbusAOASensor::CAirbusAOASensor()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusAOASensor::~CAirbusAOASensor()
 {
-    LOG_DEBUG("CAirbusAOASensor::~CAirbusAOASensor()");
 }
 
 //-------------------------------------------------------------------------------------------------
