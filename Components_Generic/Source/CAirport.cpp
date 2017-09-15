@@ -13,15 +13,12 @@ using namespace Math;
 
 CAirport::CAirport()
 {
-    LOG_DEBUG("CAirport::CAirport()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirport::~CAirport()
 {
-    LOG_DEBUG("CAirport::~CAirport()");
-
     DELETE_VECTOR_ITEMS(m_vRunways);
 }
 

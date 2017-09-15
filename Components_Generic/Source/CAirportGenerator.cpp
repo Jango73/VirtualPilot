@@ -24,14 +24,12 @@ CComponent* CAirportGenerator::instantiator(C3DScene* pScene)
 CAirportGenerator::CAirportGenerator(C3DScene* pScene)
 : CGeometryGenerator(pScene)
 {
-    LOG_DEBUG("CAirportGenerator::CAirportGenerator()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirportGenerator::~CAirportGenerator()
 {
-    LOG_DEBUG("CAirportGenerator::~CAirportGenerator()");
 }
 
 //-------------------------------------------------------------------------------------------------
