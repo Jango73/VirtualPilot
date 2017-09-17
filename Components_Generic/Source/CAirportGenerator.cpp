@@ -100,6 +100,8 @@ void CAirportGenerator::generate(QSP<CWorldChunk> pChunk)
 
 void CAirportGenerator::placeRunway(QSP<CWorldChunk> pChunk, const QString& sID, CGeoloc gPosition, Math::CVector3 vRotation, Math::CVector3 vSize)
 {
+    LOG_METHOD_DEBUG("");
+
     CBox* pBox = new CBox(m_pScene);
     CMeshInstance* pMeshInstance = new CMeshInstance(QSP<CMesh>(pBox));
 
@@ -113,7 +115,10 @@ void CAirportGenerator::placeRunway(QSP<CWorldChunk> pChunk, const QString& sID,
 
     if (pMeshInstance != nullptr)
     {
-        pMeshInstance->setGeoloc(gPosition);
+        CGeoloc gNewGeoloc = gPosition;
+        gNewGeoloc.Altitude = pChunk->getHeightAt(gPosition);
+
+        pMeshInstance->setGeoloc(gNewGeoloc);
         pMeshInstance->setRotation(vRotation);
         pMeshInstance->computeWorldTransform();
 

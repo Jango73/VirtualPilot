@@ -39,8 +39,6 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     , m_bRun(true)
     , m_bRealTime(false)
 {
-    LOG_DEBUG("VirtualPilot::VirtualPilot()");
-
     // CConsoleBoard::getInstance()->start();
 
     ui.setupUi(this);
@@ -93,8 +91,6 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
 
 VirtualPilot::~VirtualPilot()
 {
-    LOG_DEBUG("VirtualPilot::~VirtualPilot()");
-
     CComponentFactory::killInstance();
 }
 
