@@ -2,15 +2,17 @@
 <Component Name="AirbusA320" Class="CAircraft">
     <Geoloc Latitude="48.998321" Longitude="2.601997" Altitude="0.0"/>
     <Rotation x="0.0" y="90.0" z="0.0"/>
+    <Physics MassKG="50000.0" Friction="0.1" Drag="0.0001" AngularDrag="0.75"/>
+    <CenterOfMass x="0.0" y="0.0" z="4.0"/>
+
     <Mesh Name="A320.q3d"/>
+
     <DynamicTexture Name="DynTex_PFD_CAPT" Updater=".DMC_1"/>
     <DynamicTexture Name="DynTex_ND_CAPT" Updater=".DMC_1"/>
     <DynamicTexture Name="DynTex_EWD" Updater=".DMC_3"/>
     <DynamicTexture Name="DynTex_SD" Updater=".DMC_3"/>
     <DynamicTexture Name="DynTex_MCDU_CAPT" Updater=".MCDU_1"/>
     <DynamicTexture Name="DynTex_MCDU_FO" Updater=".MCDU_2"/>
-    <Physics MassKG="50000.0" Friction="0.1" Drag="0.0001" AngularDrag="0.75"/>
-    <CenterOfMass x="0.0" y="0.0" z="4.0"/>
 
     <EFISWindow Name="FlatMCDU1" Class="CAirbusFlatMCDU"
         MCDU=".MCDU_1"
