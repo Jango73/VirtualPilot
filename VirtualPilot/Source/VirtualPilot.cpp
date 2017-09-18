@@ -3,6 +3,7 @@
 #include <QFileDialog>
 
 // qt-plus
+#include "CSingletonPool.h"
 #include "CLogger.h"
 
 // Quick3D
@@ -39,7 +40,7 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
     , m_bRun(true)
     , m_bRealTime(false)
 {
-    LOG_DEBUG("VirtualPilot::VirtualPilot()");
+    CSingletonPool::init();
 
     // CConsoleBoard::getInstance()->start();
 
@@ -93,8 +94,6 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
 
 VirtualPilot::~VirtualPilot()
 {
-    LOG_DEBUG("VirtualPilot::~VirtualPilot()");
-
     CComponentFactory::killInstance();
 }
 
@@ -294,21 +293,19 @@ void VirtualPilot::onTimer()
         }
 
         QString sInfo = QString(
-                    "FPS %1 - LLA (%2, %3, %4) Rotation (%5, %6, %7) Kts %8 \n"
-                    "Physics Vel (%9, %10, %11) Torque (%12, %13, %14) \n"
-                    "Drawn : meshes %15 polys %16 chunks %17 (Existing: components %18, chunks %19, terrains %20, bmi %21) \n"
+                    "FPS %1 - LLA (%2, %3, %4) Rotation (%5, %6, %7) Kts %8 Physics Vel (%9, %10, %11) Torque (%12, %13, %14) \n"
+                    "Render : meshes %15 polys %16 chunks %17 \n"
+                    "Components %18, chunks %19, terrains %20, bmi %21 \n"
+                    "Allocated bytes : %22 \n"
                     )
                 .arg((int) m_FPS.getAverage())
                 .arg(QString::number(ViewGeoloc.Latitude, 'f', 6))
                 .arg(QString::number(ViewGeoloc.Longitude, 'f', 6))
                 .arg(QString::number(ViewGeoloc.Altitude, 'f', 1))
-
                 .arg(QString::number(Math::Angles::toDeg(ViewRotation.X), 'f', 2))
                 .arg(QString::number(Math::Angles::toDeg(ViewRotation.Y), 'f', 2))
                 .arg(QString::number(Math::Angles::toDeg(ViewRotation.Z), 'f', 2))
-
                 .arg(QString::number(dSpeedMS * FAC_MS_TO_KNOTS, 'f', 1))
-
                 .arg(QString::number(ControledVelocity.X, 'f', 2))
                 .arg(QString::number(ControledVelocity.Y, 'f', 2))
                 .arg(QString::number(ControledVelocity.Z, 'f', 2))
@@ -319,10 +316,13 @@ void VirtualPilot::onTimer()
                 .arg(m_pScene->m_tStatistics.m_iNumMeshesDrawn)
                 .arg(m_pScene->m_tStatistics.m_iNumPolysDrawn)
                 .arg(m_pScene->m_tStatistics.m_iNumChunksDrawn)
+
                 .arg(CComponent::getNumComponents())
                 .arg(CComponent::componentCounter()[ClassName_CWorldChunk])
                 .arg(CComponent::componentCounter()[ClassName_CTerrain])
                 .arg(CComponent::componentCounter()[ClassName_CBoundedMeshInstances])
+
+                .arg(CMemoryMonitor::getInstance()->allocatedBytes())
                 ;
 
         ui.m_lInfo->setText(sInfo);
