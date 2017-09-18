@@ -36,12 +36,17 @@ Makefile*
 *.qmlproject.user.*
 
 # Project specific
-Quick3D/help
-Quick3DTest/debug/Logs
-Quick3DTest/debug/Tiles
 *.log
 *.exe
 *.blend1
+*.stash
 *.0
 *.1
-*.stash
+*.2
+*.3
+*.4
+*.5
+*.6
+*.7
+*.8
+*.9
