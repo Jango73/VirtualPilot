@@ -106,7 +106,6 @@ protected:
     CView*                          m_pView;
     CWorldTerrainMap*               m_pMap;
     QTimer                          m_tTimer;
-    CAverager<double>               m_FPS;
     QDateTime                       m_tPreviousTime;
     QString                         m_sPathVehicles;
     CGeoloc                         m_gMapCenter;
