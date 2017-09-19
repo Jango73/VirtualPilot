@@ -52,21 +52,21 @@ CAirbusFMGC::~CAirbusFMGC()
 
 void CAirbusFMGC::loadFlightPlan()
 {
-    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(19.2, 10.8, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(49.2, 2.8, 0.0), 0.0);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(19.4, 10.8, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(49.4, 2.8, 0.0), 0.0);
     m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(19.5, 10.9, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(49.5, 2.9, 0.0), 0.0);
     m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(19.5, 11.0, 0.0), 0.0);
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(19.6, 11.2, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(49.5, 3.0, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(49.6, 3.2, 0.0), 0.0);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(19.6, 12.0, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(49.6, 4.0, 0.0), 0.0);
     m_tFlightPlan.lastWaypoint().setSelectedAltitude_m(2500.0 * FAC_FEET_TO_METERS);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(19.6, 12.1, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(49.6, 4.1, 0.0), 0.0);
 }
 
 //-------------------------------------------------------------------------------------------------

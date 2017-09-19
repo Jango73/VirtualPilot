@@ -5,11 +5,11 @@
 #include "CElectricalConsumer.h"
 
 // Application
-#include "components_a320_global.h"
+#include "Components_Generic_Global.h"
 
 //-------------------------------------------------------------------------------------------------
 
 extern "C"
 {
-COMPONENTS_A320_EXPORT bool PLUGIN_ENTRY_NAME(CPluginInterface*);
+COMPONENTS_GENERIC_EXPORT bool PLUGIN_ENTRY_NAME(CPluginInterface*);
 }

@@ -3,7 +3,7 @@
 #include "CPluginInterface.h"
 
 // Application
-#include "Components_Generic_Global.h"
+#include "Components_Generic.h"
 #include "Constants.h"
 #include "CAirportGenerator.h"
 #include "CNavaidDatabase.h"
