@@ -114,7 +114,7 @@ void VirtualPilot::readPreferences()
 
 void VirtualPilot::loadScene(QString sFileName)
 {
-    LOG_DEBUG("VirtualPilot::VirtualPilot() : instanciating scene...");
+    LOG_METHOD_DEBUG("Instanciating scene...");
 
     m_pScene->clear();
 
@@ -124,7 +124,7 @@ void VirtualPilot::loadScene(QString sFileName)
     //-----------------------------------------------
     // Load components
 
-    LOG_DEBUG("VirtualPilot::VirtualPilot() : loading components...");
+    LOG_METHOD_DEBUG("Loading components...");
 
     QVector<QSP<CComponent> > vComponents = CComponentLoader::getInstance()->load(sFileName, m_pScene);
 
@@ -140,7 +140,7 @@ void VirtualPilot::loadScene(QString sFileName)
 
 void VirtualPilot::loadVehicle(QString sFileName)
 {
-    LOG_DEBUG("VirtualPilot::loadVehicle() : loading component...");
+    LOG_METHOD_DEBUG("Loading component...");
 
     CGeoloc playerGeoloc;
     CVector3 playerRotation;
@@ -157,7 +157,7 @@ void VirtualPilot::loadVehicle(QString sFileName)
             playerRotation = vComponents[0]->rotation();
         }
 
-        LOG_DEBUG("VirtualPilot::loadVehicle() : adding component to scene...");
+        LOG_METHOD_DEBUG("Adding component to scene...");
 
         m_pScene->deleteComponentsByTag(TagName_Player);
         m_pScene->addComponent(pComponent);

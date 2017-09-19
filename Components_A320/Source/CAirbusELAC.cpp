@@ -30,14 +30,12 @@ CAirbusELAC::CAirbusELAC(C3DScene* pScene)
     , m_pidPitch(1.0, 0.0, 0.001)
     , m_pidRoll(1.0, 0.0, 0.001)
 {
-    LOG_DEBUG("CAirbusELAC::CAirbusELAC()");
 }
 
 //-------------------------------------------------------------------------------------------------
 
 CAirbusELAC::~CAirbusELAC()
 {
-    LOG_DEBUG("CAirbusELAC::~CAirbusELAC()");
 }
 
 //-------------------------------------------------------------------------------------------------
