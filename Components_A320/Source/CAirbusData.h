@@ -100,6 +100,7 @@ enum EAirbusData
     adFG_CommandedPitchVelocity_ds,
     adFG_CommandedThrust_norm,
     adFG_FlightPlan_ptr,
+    adFG_Navaids_ptr,
 
     adFM_CompanyRoute,
     adFM_FlightNumber,

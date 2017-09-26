@@ -25,6 +25,12 @@ CONFIG(debug, debug|release) {
 
 # Libraries
 CONFIG(debug, debug|release) {
+    LIBS += -L$$PWD/../bin/Plugins/ -lComponents_Genericd
+} else {
+    LIBS += -L$$PWD/../bin/Plugins/ -lComponents_Generic
+}
+
+CONFIG(debug, debug|release) {
     LIBS += -L$$PWD/../Quick3D/Quick3D/bin/ -lQuick3Dd
 } else {
     LIBS += -L$$PWD/../Quick3D/Quick3D/bin/ -lQuick3D

@@ -21,6 +21,7 @@
 #define ParamName_ID                    "ID"
 #define ParamName_ILSType               "ILSType"
 #define ParamName_Navaid                "Navaid"
+#define ParamName_NavaidInput           "NavaidInput"
 #define ParamName_Radio                 "Radio"
 #define ParamName_Runway                "Runway"
 

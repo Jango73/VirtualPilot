@@ -10,6 +10,7 @@
 
 // Application
 #include "CAirbusDMC.h"
+#include "../../Components_Generic/Source/CNavaidDatabase.h"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -26,6 +27,7 @@ CComponent* CAirbusDMC::instantiator(C3DScene* pScene)
 
 CAirbusDMC::CAirbusDMC(C3DScene* pScene)
     : CAirbusFlightComputer(pScene)
+    , m_tNavaidsRefreshTime(QDateTime::currentDateTime())
     , m_iLastHeight(0)
 {
     m_rVelocityBar = QRectF(0.00, 0.20, 0.20, 0.60);
@@ -107,6 +109,25 @@ CAirbusDMC::~CAirbusDMC()
 void CAirbusDMC::update(double dDeltaTime)
 {
     CAirbusFlightComputer::update(dDeltaTime);
+
+    QDateTime tNow = QDateTime::currentDateTime();
+
+    if (m_tNavaidsRefreshTime.secsTo(tNow) > 5)
+    {
+        m_tNavaidsRefreshTime = tNow;
+
+        CNavaidDatabase* pFG_Navaids_ptr = GETDATA_POINTER(adFG_Navaids_ptr, CNavaidDatabase);
+
+        if (pFG_Navaids_ptr != nullptr)
+        {
+            double dGeoLoc_Latitude_deg = GETDATA_DOUBLE(adGeoLoc_Latitude_deg);
+            double dGeoLoc_Longitude_deg = GETDATA_DOUBLE(adGeoLoc_Longitude_deg);
+
+            CGeoloc gPosition(dGeoLoc_Latitude_deg, dGeoLoc_Longitude_deg, 0.0);
+
+            m_vNavaids = pFG_Navaids_ptr->query(gPosition, 20000.0);
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------

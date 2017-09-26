@@ -12,6 +12,7 @@
 #include "Constants.h"
 #include "CAirbusFlightComputer.h"
 #include "CAirbusFlightPlan.h"
+#include "../../Components_Generic/Source/CNavaidDatabase.h"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -90,6 +91,9 @@ public:
     void drawCompass(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, bool bArc);
 
     //!
+    void drawNavaid(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CNavaid* pNavaid, const QRectF& rect);
+
+    //!
     void drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CWaypoint& wWaypoint, const QRectF& rect, bool bIsFlight);
 
     //!
@@ -124,6 +128,9 @@ public:
     //-------------------------------------------------------------------------------------------------
 
 protected:
+
+    QVector<CGeolocalized*>     m_vNavaids;
+    QDateTime                   m_tNavaidsRefreshTime;
 
     int                         m_iLastHeight;
 

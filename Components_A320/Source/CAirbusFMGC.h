@@ -4,11 +4,15 @@
 // qt-plus
 #include "CPIDController.h"
 
+// Quick3D
+#include "CComponentReference.h"
+
 // Application
 #include "components_a320_global.h"
 #include "CAirbusFlightComputer.h"
 #include "CAirbusFlightPlan.h"
 #include "Constants.h"
+#include "../../Components_Generic/Source/CNavaidDatabase.h"
 
 //-------------------------------------------------------------------------------------------------
 // Forward declarations
@@ -61,10 +65,19 @@ public:
     //!
     virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CAirbusFMGC; }
 
-    //!
+    //! Loads this object's parameters
+    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent) Q_DECL_OVERRIDE;
+
+    //! Solves the links of this object
+    virtual void solveLinks(C3DScene* pScene) Q_DECL_OVERRIDE;
+
+    //! Deletes this object's links
+    virtual void clearLinks(C3DScene* pScene) Q_DECL_OVERRIDE;
+
+    //! Updates this object
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
 
-    //!
+    //! Does computer work
     virtual void work(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
@@ -95,33 +108,32 @@ public:
 
 protected:
 
-    EAirbusFlightPhase      m_eFlightPhase;
-    EAirbusLateralMode      m_eLateralMode;
-    EAirbusVerticalMode     m_eVerticalMode;
-    CAirbusFlightPlan       m_tFlightPlan;
-    double                  m_dDeltaTime;
-    double                  m_dPreviousAircraftVerticalSpeed_ms;
+    CComponentReference<CNavaidDatabase>    m_rNavaids;                         // Reference to navaid database
 
-    // Commandes latérales
-    double                  m_dCommandedHeading_deg;        // Commande de cap en degrés
-    double                  m_dCommandedRoll_deg;           // Commande de roulis en degrés
-    double                  m_dCommandedRollVelocity_ds;
+    EAirbusFlightPhase                      m_eFlightPhase;                     // Current flight phase
+    EAirbusLateralMode                      m_eLateralMode;                     // Current lateral mode
+    EAirbusVerticalMode                     m_eVerticalMode;                    // Current vertical mode
+    CAirbusFlightPlan                       m_tFlightPlan;                      // Primary flight plan
+    QDateTime                               m_tLastUpdate;                      // Last time of update
+    double                                  m_dDeltaTime;
+    double                                  m_dPreviousAircraftVerticalSpeed_ms;
 
-    // Commandes verticales
-    double                  m_dCommandedVerticalSpeed_ms;
-    double                  m_dCommandedAltitude_m;
-    double                  m_dCommandedPitch_deg;
-    double                  m_dCommandedPitchVelocity_ds;
+    // Lateral commands
+    double                                  m_dCommandedHeading_deg;            // Heading command in degrees
+    double                                  m_dCommandedRoll_deg;               // Roll command in degrees
+    double                                  m_dCommandedRollVelocity_ds;        // Roll velocity command in degrees per second
 
-    CPIDController          m_pidVerticalSpeed;
+    // Vertical commands
+    double                                  m_dCommandedVerticalSpeed_ms;       // Vertical speed command in meters per second
+    double                                  m_dCommandedAltitude_m;             // Altitude command in meters
+    double                                  m_dCommandedPitch_deg;              // Pitch command in degrees
+    double                                  m_dCommandedPitchVelocity_ds;       // Pitch velocity command in degrees per second
+    CPIDController                          m_pidVerticalSpeed;                 // Vertical speed controller
 
-    // Commandes de poussée
-    double                  m_dCommandedAirspeed_ms;
-    double                  m_dCommandedAcceleration_ms;
-    double                  m_dCommandedThrust_norm;
-
-    CPIDController          m_pidAcceleration;
-    CPIDController          m_pidDeceleration;
-
-    QDateTime               m_tLastUpdate;
+    // Thrust commands
+    double                                  m_dCommandedAirspeed_ms;            // Airspeed command in meters per second
+    double                                  m_dCommandedAcceleration_ms;        // Acceleration command in meters per second
+    double                                  m_dCommandedThrust_norm;            // Thrust command normalized
+    CPIDController                          m_pidAcceleration;                  // Acceleration controller
+    CPIDController                          m_pidDeceleration;                  // Deceleration controller
 };

@@ -490,6 +490,7 @@
     <Component Name="FMGC_1" Class="CAirbusFMGC">
         <General UnitIndex="0"/>
         <PowerInput Name=".CONT_FMGC_1"/>
+        <NavaidInput Name="Navaids"/>
         <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_1"/>
         <DataInput Name=".FCC"/>
@@ -505,6 +506,7 @@
     <Component Name="FMGC_2" Class="CAirbusFMGC">
         <General UnitIndex="1"/>
         <PowerInput Name=".CONT_FMGC_2"/>
+        <NavaidInput Name="Navaids"/>
         <DataInput Name=".GEAR_SENSOR"/>
         <DataInput Name=".ADIRU_2"/>
         <DataInput Name=".FCC"/>

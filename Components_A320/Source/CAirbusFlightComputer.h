@@ -55,14 +55,14 @@ public:
     //! Deletes this object's links
     virtual void clearLinks(C3DScene* pScene) Q_DECL_OVERRIDE;
 
-    //!
+    //! Updates this object
     virtual void update(double dDeltaTime) Q_DECL_OVERRIDE;
 
     //-------------------------------------------------------------------------------------------------
     // Control methods
     //-------------------------------------------------------------------------------------------------
 
-    //!
+    //! Does computer work
     virtual void work(double dDeltaTime);
 
     //-------------------------------------------------------------------------------------------------

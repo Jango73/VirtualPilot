@@ -8,6 +8,7 @@
 
 // Application
 #include "CAirbusFMGC.h"
+#include "../../Components_Generic/Source/Constants.h"
 
 using namespace Math;
 
@@ -50,23 +51,31 @@ CAirbusFMGC::~CAirbusFMGC()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusFMGC::loadFlightPlan()
+void CAirbusFMGC::loadParameters(const QString& sBaseFile, CXMLNode xNode)
 {
-    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(49.2, 2.8, 0.0), 0.0);
+    CAirbusFlightComputer::loadParameters(sBaseFile, xNode);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(49.4, 2.8, 0.0), 0.0);
-    m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
+    CXMLNode xNavaidInput = xNode.getNodeByTagName(ParamName_NavaidInput);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(49.5, 2.9, 0.0), 0.0);
-    m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
+    m_rNavaids.setName(xNavaidInput.attributes()[ParamName_Name]);
+}
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(49.5, 3.0, 0.0), 0.0);
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(49.6, 3.2, 0.0), 0.0);
+//-------------------------------------------------------------------------------------------------
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(49.6, 4.0, 0.0), 0.0);
-    m_tFlightPlan.lastWaypoint().setSelectedAltitude_m(2500.0 * FAC_FEET_TO_METERS);
+void CAirbusFMGC::solveLinks(C3DScene* pScene)
+{
+    CAirbusFlightComputer::solveLinks(pScene);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(49.6, 4.1, 0.0), 0.0);
+    m_rNavaids.solve(pScene, QSP<CComponent>(this));
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void CAirbusFMGC::clearLinks(C3DScene* pScene)
+{
+    CAirbusFlightComputer::clearLinks(pScene);
+
+    m_rNavaids.clear();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -98,6 +107,27 @@ void CAirbusFMGC::work(double dDeltaTime)
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusFMGC::loadFlightPlan()
+{
+    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(49.2, 2.8, 0.0), 0.0);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(49.4, 2.8, 0.0), 0.0);
+    m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(49.5, 2.9, 0.0), 0.0);
+    m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(49.5, 3.0, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(49.6, 3.2, 0.0), 0.0);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(49.6, 4.0, 0.0), 0.0);
+    m_tFlightPlan.lastWaypoint().setSelectedAltitude_m(2500.0 * FAC_FEET_TO_METERS);
+
+    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(49.6, 4.1, 0.0), 0.0);
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusFMGC::work_FM(double dDeltaTime)
 {
     // Data processing from MCDU
@@ -108,6 +138,7 @@ void CAirbusFMGC::work_FM(double dDeltaTime)
 
     // Send flight plan
     pushData(CAirbusData(m_sName, adFG_FlightPlan_ptr, (quint64) &m_tFlightPlan, false));
+    pushData(CAirbusData(m_sName, adFG_Navaids_ptr, (quint64) m_rNavaids.component().data(), false));
     pushData(CAirbusData(m_sName, adFM_CompanyRoute, m_tFlightPlan.companyRoute(), false));
     pushData(CAirbusData(m_sName, adFM_FlightNumber, m_tFlightPlan.flightNumber(), false));
     pushData(CAirbusData(m_sName, adFM_ICAOFrom, m_tFlightPlan.ICAOFrom(), false));

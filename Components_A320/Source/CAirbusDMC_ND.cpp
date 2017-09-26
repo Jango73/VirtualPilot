@@ -105,17 +105,40 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
     pPainter->translate(rWholePart.center());
 
+    // CGeoloc gAircraftGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
+    CGeoloc gAircraftGeoloc(dGeoLoc_Latitude_deg, dGeoLoc_Longitude_deg, 0.0);
+    CMatrix4 mAircraftHeading = CMatrix4::makeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
+
+    // Navaids
+    if (m_vNavaids.count() > 0)
+    {
+        foreach (CGeolocalized* pGeolocalized, m_vNavaids)
+        {
+            CNavaid* pNavaid = dynamic_cast<CNavaid*>(pGeolocalized);
+
+            if (pNavaid != nullptr)
+            {
+                CVector3 vCurrentPosition = pNavaid->geoloc().toVector3(gAircraftGeoloc);
+                vCurrentPosition = mAircraftHeading * vCurrentPosition;
+                vCurrentPosition.Z *= -1.0;
+                vCurrentPosition *= dRangeFactor;
+
+                QRectF wpt(QPointF(vCurrentPosition.X - W30, vCurrentPosition.Z - W30), QSizeF(W30 * 2, W30 * 2));
+
+                drawNavaid(pPainter, pTexture, dDeltaTime, pNavaid, wpt);
+            }
+        }
+    }
+
     // Flight plan
     if (pFG_FlightPlan_ptr != nullptr)
     {
-        CMatrix4 mHeading = CMatrix4::makeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
-        CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
         CVector3 vPreviousPosition;
 
         for (int iIndex = 0; iIndex < pFG_FlightPlan_ptr->waypoints().count(); iIndex++)
         {
-            CVector3 vCurrentPosition = pFG_FlightPlan_ptr->waypoints()[iIndex].geoloc().toVector3(gGeoloc);
-            vCurrentPosition = mHeading * vCurrentPosition;
+            CVector3 vCurrentPosition = pFG_FlightPlan_ptr->waypoints()[iIndex].geoloc().toVector3(gAircraftGeoloc);
+            vCurrentPosition = mAircraftHeading * vCurrentPosition;
             vCurrentPosition.Z *= -1.0;
             vCurrentPosition *= dRangeFactor;
 
@@ -231,8 +254,19 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
 //-------------------------------------------------------------------------------------------------
 
+void CAirbusDMC::drawNavaid(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CNavaid* pNavaid, const QRectF& rect)
+{
+    switch (pNavaid->type())
+    {
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void CAirbusDMC::drawWaypoint(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CWaypoint& wWaypoint, const QRectF& rect, bool bIsFlight)
 {
+    Q_UNUSED(pTexture);
+
     double dX1 = rect.left();
     double dY1 = rect.top();
     double dX2 = rect.right();
