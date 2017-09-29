@@ -109,21 +109,21 @@ void CAirbusFMGC::work(double dDeltaTime)
 
 void CAirbusFMGC::loadFlightPlan()
 {
-    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(49.2, 2.8, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtAirport, "WP1", CGeoloc(49.0, 2.6, 0.0), 0.0);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(49.4, 2.8, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP2", CGeoloc(49.2, 2.6, 0.0), 0.0);
     m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(49.5, 2.9, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP3", CGeoloc(49.3, 2.7, 0.0), 0.0);
     m_tFlightPlan.lastWaypoint().setMinimumAltitude_m(3000.0 * FAC_FEET_TO_METERS);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(49.5, 3.0, 0.0), 0.0);
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(49.6, 3.2, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP4", CGeoloc(49.3, 2.8, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP5", CGeoloc(49.5, 3.0, 0.0), 0.0);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(49.6, 4.0, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtFix, "WP6", CGeoloc(49.5, 3.8, 0.0), 0.0);
     m_tFlightPlan.lastWaypoint().setSelectedAltitude_m(2500.0 * FAC_FEET_TO_METERS);
 
-    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(49.6, 4.1, 0.0), 0.0);
+    m_tFlightPlan.waypoints() << CWaypoint(wtRunway, "WP7", CGeoloc(49.5, 3.9, 0.0), 0.0);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ void CAirbusFMGC::work_FG(double dDeltaTime)
 
     Q_UNUSED(dGeoLoc_TrueTrack_deg);
 
-    CGeoloc gGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
+    CGeoloc gGeoloc(dGeoLoc_Latitude_deg, dGeoLoc_Longitude_deg, 0.0);
 
     // Compute auto heading
 

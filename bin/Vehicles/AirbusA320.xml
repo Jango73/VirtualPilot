@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Component Name="AirbusA320" Class="CAircraft">
     <Geoloc Latitude="48.998321" Longitude="2.601997" Altitude="0.0"/>
-    <Rotation x="0.0" y="90.0" z="0.0"/>
+    <Rotation x="0.0" y="-100.0" z="0.0"/>
     <Physics MassKG="50000.0" Friction="0.1" Drag="0.0001" AngularDrag="0.75"/>
     <CenterOfMass x="0.0" y="0.0" z="4.0"/>
 
