@@ -259,6 +259,12 @@ void CAirbusDMC::drawNavaid(QPainter* pPainter, CTexture* pTexture, double dDelt
 
     switch (pNavaid->type())
     {
+        case ntNDB:
+            pPainter->setPen(m_pWhiteThin);
+            pPainter->drawLine(QPointF(rect.center().x(), rect.top()), QPointF(rect.right(), rect.bottom()));
+            pPainter->drawLine(QPointF(rect.right(), rect.bottom()), QPointF(rect.left(), rect.bottom()));
+            pPainter->drawLine(QPointF(rect.left(), rect.bottom()), QPointF(rect.center().x(), rect.top()));
+            break;
         case ntVOR:
             pPainter->setPen(m_pWhiteThin);
             pPainter->drawLine(QPointF(rect.center().x(), rect.top()), QPointF(rect.center().x(), rect.bottom()));

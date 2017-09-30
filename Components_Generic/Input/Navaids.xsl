@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet
+	version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:navaid="http://navaid.com/GPX/NAVAID/1/0"
+	>
 	<xsl:template match="/">
 		<xsl:for-each select="gpx/wpt">
 			<xsl:text>&#xa;</xsl:text>
@@ -19,8 +23,8 @@
 						<xsl:attribute name="Type">VOR-TAC</xsl:attribute>
 					</xsl:when>
 				</xsl:choose>
-				<xsl:attribute name="Frequency"><xsl:value-of select="extensions/frequencies/frequency/@frequency"/></xsl:attribute>
-				<xsl:attribute name="Name"><xsl:value-of select="extensions/name"/></xsl:attribute>
+				<xsl:attribute name="Frequency"><xsl:value-of select="extensions/navaid:frequencies/navaid:frequency/@frequency"/></xsl:attribute>
+				<xsl:attribute name="Name"><xsl:value-of select="extensions/navaid:name"/></xsl:attribute>
 				<xsl:attribute name="MagVar"><xsl:value-of select="magvar"/></xsl:attribute>
 				<Geoloc>
 					<xsl:attribute name="Latitude"><xsl:value-of select="@lat"/></xsl:attribute>
