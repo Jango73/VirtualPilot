@@ -48,7 +48,7 @@ public:
     virtual QString getClassName() const { return ClassName_CNavaidComponent; }
 
     //! Loads this object's parameters
-    virtual void loadParameters(const QString& sBaseFile, CXMLNode xComponent);
+    virtual void loadParameters(const QString& sBaseFile, const CXMLNode& xComponent);
 
     //! Dumps contents to a stream
     virtual void dump(QTextStream& stream, int iIdent) Q_DECL_OVERRIDE;

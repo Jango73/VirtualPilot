@@ -39,7 +39,7 @@ CAirbusFlightComputer::~CAirbusFlightComputer()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusFlightComputer::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CAirbusFlightComputer::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     CElectricalConsumer::loadParameters(sBaseFile, xComponent);
     CAirbusDataSupplier::loadParameters(sBaseFile, xComponent);

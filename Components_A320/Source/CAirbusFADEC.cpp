@@ -36,7 +36,7 @@ CAirbusFADEC::~CAirbusFADEC()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusFADEC::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CAirbusFADEC::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     CAirbusFlightComputer::loadParameters(sBaseFile, xComponent);
 

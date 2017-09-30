@@ -33,7 +33,7 @@ Math::CVector3 CRunway::rotation() const
 
 //-------------------------------------------------------------------------------------------------
 
-void CRunway::loadParameters(const QString& sBaseFile, CXMLNode xRunway)
+void CRunway::loadParameters(const QString& sBaseFile, const CXMLNode& xRunway)
 {
     CNavaidComponent::loadParameters(sBaseFile, xRunway);
 

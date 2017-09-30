@@ -27,7 +27,7 @@ QString CNavaidComponent::ID() const
 
 //-------------------------------------------------------------------------------------------------
 
-void CNavaidComponent::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CNavaidComponent::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     m_sID = xComponent.attributes()[ParamName_ID];
 

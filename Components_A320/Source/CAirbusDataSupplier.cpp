@@ -44,7 +44,7 @@ bool CAirbusDataSupplier::dataValid(EAirbusData eID)
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusDataSupplier::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CAirbusDataSupplier::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     QVector<CXMLNode> vInputsNodes = xComponent.getNodesByTagName("DataInput");
 

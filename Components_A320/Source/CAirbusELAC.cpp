@@ -40,7 +40,7 @@ CAirbusELAC::~CAirbusELAC()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusELAC::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CAirbusELAC::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     CAirbusFlightComputer::loadParameters(sBaseFile, xComponent);
 

@@ -32,7 +32,7 @@ CNavaidDatabase::~CNavaidDatabase()
 
 //-------------------------------------------------------------------------------------------------
 
-void CNavaidDatabase::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CNavaidDatabase::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     CComponent::loadParameters(sBaseFile, xComponent);
 

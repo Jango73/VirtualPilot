@@ -52,7 +52,7 @@ const QMap<ERadioType, double>& CAirport::radios() const
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirport::loadParameters(const QString& sBaseFile, CXMLNode xAirport)
+void CAirport::loadParameters(const QString& sBaseFile, const CXMLNode& xAirport)
 {
     CNavaidComponent::loadParameters(sBaseFile, xAirport);
 

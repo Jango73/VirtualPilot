@@ -32,7 +32,7 @@ CAirbusController::~CAirbusController()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusController::loadParameters(const QString& sBaseFile, CXMLNode xNode)
+void CAirbusController::loadParameters(const QString& sBaseFile, const CXMLNode& xNode)
 {
     CAircraftController::loadParameters(sBaseFile, xNode);
 

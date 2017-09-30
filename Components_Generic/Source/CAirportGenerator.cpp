@@ -34,7 +34,7 @@ CAirportGenerator::~CAirportGenerator()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirportGenerator::loadParameters(const QString& sBaseFile, CXMLNode xParameters, CXMLNode xFunctions)
+void CAirportGenerator::loadParameters(const QString& sBaseFile, const CXMLNode& xParameters, CXMLNode xFunctions)
 {
     CGeometryGenerator::loadParameters(sBaseFile, xParameters, xFunctions);
 

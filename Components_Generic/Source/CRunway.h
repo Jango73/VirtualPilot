@@ -49,7 +49,7 @@ public:
     virtual QString getClassName() const Q_DECL_OVERRIDE { return ClassName_CRunway; }
 
     //! Loads this object's parameters
-    virtual void loadParameters(const QString& sBaseFile, CXMLNode xRunway) Q_DECL_OVERRIDE;
+    virtual void loadParameters(const QString& sBaseFile, const CXMLNode& xRunway) Q_DECL_OVERRIDE;
 
     //! Dumps contents to a stream
     virtual void dump(QTextStream& stream, int iIdent) Q_DECL_OVERRIDE;

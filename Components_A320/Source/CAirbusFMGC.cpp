@@ -51,7 +51,7 @@ CAirbusFMGC::~CAirbusFMGC()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusFMGC::loadParameters(const QString& sBaseFile, CXMLNode xNode)
+void CAirbusFMGC::loadParameters(const QString& sBaseFile, const CXMLNode& xNode)
 {
     CAirbusFlightComputer::loadParameters(sBaseFile, xNode);
 

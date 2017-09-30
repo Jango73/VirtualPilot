@@ -37,7 +37,7 @@ CAirbusCFDIU::~CAirbusCFDIU()
 
 //-------------------------------------------------------------------------------------------------
 
-void CAirbusCFDIU::loadParameters(const QString& sBaseFile, CXMLNode xComponent)
+void CAirbusCFDIU::loadParameters(const QString& sBaseFile, const CXMLNode& xComponent)
 {
     CAirbusFlightComputer::loadParameters(sBaseFile, xComponent);
 

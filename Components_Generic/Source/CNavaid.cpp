@@ -43,7 +43,7 @@ EILSType CNavaid::ILSType() const
 
 //-------------------------------------------------------------------------------------------------
 
-void CNavaid::loadParameters(const QString& sBaseFile, CXMLNode xNavaid)
+void CNavaid::loadParameters(const QString& sBaseFile, const CXMLNode& xNavaid)
 {
     CNavaidComponent::loadParameters(sBaseFile, xNavaid);
 
