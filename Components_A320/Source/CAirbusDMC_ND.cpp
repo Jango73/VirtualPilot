@@ -105,7 +105,6 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
     pPainter->translate(rWholePart.center());
 
-    // CGeoloc gAircraftGeoloc(Angles::toRad(dGeoLoc_Latitude_deg), Angles::toRad(dGeoLoc_Longitude_deg), 0.0);
     CGeoloc gAircraftGeoloc(dGeoLoc_Latitude_deg, dGeoLoc_Longitude_deg, 0.0);
     CMatrix4 mAircraftHeading = CMatrix4::makeRotation(CVector3(0.0, Angles::toRad(-dGeoLoc_TrueHeading_deg), 0.0));
 
@@ -256,8 +255,20 @@ void CAirbusDMC::drawCompass(QPainter* pPainter, CTexture* pTexture, double dDel
 
 void CAirbusDMC::drawNavaid(QPainter* pPainter, CTexture* pTexture, double dDeltaTime, const CNavaid* pNavaid, const QRectF& rect)
 {
+    double W6 = rect.width() / 6.0;
+
     switch (pNavaid->type())
     {
+        case ntVOR:
+            pPainter->setPen(m_pWhiteThin);
+            pPainter->drawLine(QPointF(rect.center().x(), rect.top()), QPointF(rect.center().x(), rect.bottom()));
+            pPainter->drawLine(QPointF(rect.left(), rect.center().y()), QPointF(rect.right(), rect.center().y()));
+        case ntVORDME:
+        case ntVORTAC:
+            pPainter->setPen(m_pWhiteThin);
+            QRectF circleRect = rect.adjusted(W6, W6, -W6, -W6);
+            pPainter->drawArc(circleRect, 0, 360 * 16);
+            break;
     }
 }
 
