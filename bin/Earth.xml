@@ -36,7 +36,7 @@
                     </Function>
                     <Function Name="Continents_Large">
                         <Value Type="Turbulence" InputScale="0.000001" MinClamp="-1.0" MaxClamp="1.0" OutputScale="1500.0">
-                            <Offset x="0.0" y="0.5" z="0.0"/>
+                            <Offset x="0.0" y="50.0" z="0.0"/>
                         </Value>
                     </Function>
                     <Function Name="Continents_Medium">
