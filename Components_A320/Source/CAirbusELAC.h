@@ -90,4 +90,6 @@ protected:
     Math::CVector2					m_vStick;
     Math::CVector2					m_vStickPrevious;
     Math::CVector3					m_vCommandedAttitude;
+
+    double                          m_dMaxRoll_deg;
 };

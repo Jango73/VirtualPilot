@@ -74,11 +74,11 @@ void CAirbusFlightComputer::update(double dDeltaTime)
 {
     CElectricalConsumer::update(dDeltaTime);
 
-    LOG_VALUE(QString("%1 (P/S)").arg(m_sName),
-              QString("%1 %2")
-              .arg(QString::number(m_bPowered))
-              .arg(QString::number(m_dStatus, 'f', 2))
-              );
+//    LOG_VALUE(QString("%1 (P/S)").arg(m_sName),
+//              QString("%1 %2")
+//              .arg(QString::number(m_bPowered))
+//              .arg(QString::number(m_dStatus, 'f', 2))
+//              );
 
     if (m_bPowered)
     {
