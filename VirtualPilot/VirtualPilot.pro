@@ -8,6 +8,8 @@ QT += core gui network opengl xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+# CONFIG += console
+
 TARGET = VirtualPilot
 TEMPLATE = app
 INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
