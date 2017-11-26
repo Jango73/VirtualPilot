@@ -3,10 +3,6 @@
 This is a project I started using my 3D engine. I wanted to make a simple flight sim and model the Airbus A320.
 It is a work in progress, there is much left to do.
 
-## Building
-
-Please see the Building page for instructions and comments.
-
 ## Things it does
 
 * Basic flight dynamics (not real aerodynamics but something that looks like it)
