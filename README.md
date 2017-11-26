@@ -59,3 +59,9 @@ The procedure here should be the same as above, but has not been tested yet.
 
 **Q**. **Why can't I build using shadow build?**  
 **A**. The project has dependencies on submodules, i.e quick3d and qt-plus. When those are finished building, the resulting library (.dll or .so) is copied to the bin folder of VirtualPilot. This copy does not work with shadow build, I did not take the time to understand why and fix it yet. But it is just a matter of using the correct paths...
+
+**Q**. **Why do my changes to some file in qt-plus or Quick3d don't show up at runtime?**  
+**A**. The library was probably not copied to the **bin** folder of Virtual Pilot after build.  
+The **qt-plus** and **Quick3d** libraries are copied when **Components_Generic** is done building.
+Until I fix the project for all dependencies to copy correctly all the time, you may do the following:  
+When making a change in **qt-plus** or **Quick3D**, open any .cpp file in **Components_Generic**. Add a space anywhere, remove it, save the file (this forces a build of the module). Compile **Components_Generic**, the **qt-plus** and **Quick3D** libraries will be copied to the **bin** folder.
