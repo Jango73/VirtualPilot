@@ -5,18 +5,42 @@ It is a work in progress, there is much left to do.
 
 ## Building
 
-Open .pro file in Qt Creator and build **without** shadow build option.
+Please see the Building page for instructions and comments.
 
 ## Things it does
 
 * Basic flight dynamics (not real aerodynamics but something that looks like it)
-* Load procedural terrain
+* Load procedural terrain (and possibly real world terrain if the tiles are present)
+* Load a navaid database (only US navaids for now)
 * Load an A320 with 3D cockpit
     * Electrical system
-    * FMGC
-    * PFD, ND and MCDU displays
-    * Basic flight plan (some test waypoints)
+    * FMGC (Flight Management and Guidance Computer)
+    * PFD (Primary Flight Display)
+    * ND (Navigation Display)
+    * SD (System Display)
+    * MCDU (Multifunction Control and Display Unit)
+    * Basic flight plan (some hard-coded test waypoints)
     * Fly-by-wire
+
+## Things to work on
+
+* Feature fixes in Quick3D (see its own repository for details)
+* Airport generation => work in progress
+* Navaid database => work in progress
+    * Usage of a binary format, plain text XML is way too slow on load
+* Concerning the A320
+    * Finish the 3D cockpit (and eventually the whole aircraft for outside views)
+    * Finish the FMGC and MCDU
+    * Create all SD pages
+    * Load a flight plan file (why not .fms, the X-Plane format)
+    * Finish the ELAC (Elevator and Aileron Computer)
+    * Finish the FAC (Flight Augmentation Computer)
+    * Finish the normal flight law
+    * Create the alternate flight laws
+    * Create the hydraulic system
+    * Create the pneumatic system
+    * Create the CFIDU (Centralized Fault Display Interface Unit)
+    * The list never ends...
 
 ## Building on Windows, using QtCreator 4.X and Qt 5.X
 
