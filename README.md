@@ -41,10 +41,11 @@ It is a work in progress, there is much left to do.
 ## Building on Windows, using QtCreator 4.X and Qt 5.X
 
 1. Open the VirtualPilot.pro in QtCreator
-2. Go to the projects tab
-3. Uncheck Shadow Build (it is always checked by default when opening a new Qt project)
-4. In the Build Steps group, click the Details
-5. In Make arguments, type -jX where X is a number that depends on the number of cores you want to use for build (usually 6 or 8)
+2. Click the projects tab
+3. Uncheck Shadow Build (it is checked by default when opening a new Qt project)
+4. In the Build Steps group, click the Details button
+5. In Make arguments, type -jX where X is an integer that specifies the number of build threads you want to use (usually from 4 to 8)
+    * Example: -j6 will use 6 threads for building
 6. Compile the whole project
 
 ## Building on Linux, using QtCreator 4.X and Qt 5.X
