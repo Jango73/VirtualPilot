@@ -58,13 +58,23 @@ SOURCES += \
     Source/CNavaid.cpp
 
 # Copy qt-plus to bin
-copyfile = $$PWD/../Quick3D/qt-plus/bin/*.dll
-copydest = $$PWD/../bin
+win32 {
+    copyfile = $$PWD/../Quick3D/qt-plus/bin/*.dll
+    copydest = $$PWD/../bin
+} else {
+    copyfile = $$PWD/../Quick3D/qt-plus/bin/*.so
+    copydest = $$PWD/../bin
+}
 
 QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
 
 # Copy Quick3D to bin
-copyfile = $$PWD/../Quick3D/Quick3D/bin/*.dll
-copydest = $$PWD/../bin
+win32 {
+    copyfile = $$PWD/../Quick3D/Quick3D/bin/*.dll
+    copydest = $$PWD/../bin
+} else {
+    copyfile = $$PWD/../Quick3D/Quick3D/bin/*.so
+    copydest = $$PWD/../bin
+}
 
 QMAKE_PRE_LINK += $$QMAKE_COPY $$quote($$shell_path($$copyfile)) $$quote($$shell_path($$copydest)) $$escape_expand(\\n\\t)
