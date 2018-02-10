@@ -56,6 +56,18 @@
         <Controller Class="CStandardController"/>
     </Component>
 
+    <!-- GEARS -->
+
+    <Component Name="NoseGear" Class="CWheel">
+        <Position x="0.0" y="-3.3" z="11.9"/>
+    </Component>
+    <Component Name="LeftGear" Class="CWheel">
+        <Position x="-3.5" y="-3.3" z="-0.3"/>
+    </Component>
+    <Component Name="RightGear" Class="CWheel">
+        <Position x="3.5" y="-3.3" z="-0.3"/>
+    </Component>
+
     <!-- CONTROL SURFACES -->
 
     <Component Name="Wing1" Class="CWing">
