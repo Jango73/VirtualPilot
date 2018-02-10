@@ -1,7 +1,7 @@
 
 #pragma once
 
-// QT
+// Qt
 #include <QtGlobal>
 
 #if QT_VERSION >= 0x050000
@@ -17,6 +17,17 @@
 #include "CView.h"
 #include "CWorldTerrain.h"
 #include "CWorldTerrainMap.h"
+
+//-------------------------------------------------------------------------------------------------
+// OS defines
+
+#ifdef WIN32
+    #define GENERIC_PLUGIN  "Components_Generic.dll"
+#else
+    #define GENERIC_PLUGIN  "libComponents_Generic.so"
+#endif
+
+//-------------------------------------------------------------------------------------------------
 
 class VirtualPilot : public QMainWindow
 {

@@ -50,7 +50,7 @@ VirtualPilot::VirtualPilot(QString sSceneFileName, QWidget *parent, Qt::WFlags f
 
     m_sPathVehicles = QCoreApplication::applicationDirPath() + "/Vehicles";
 
-    CPluginLoader::getInstance()->loadPlugin(CPluginLoader::getInstance()->pluginPath() + "/Components_Generic.dll");
+    CPluginLoader::getInstance()->loadPlugin(CPluginLoader::getInstance()->pluginPath() + "/" + GENERIC_PLUGIN);
     CComponentFactory::getInstance()->registerCoreComponents();
 
     m_pView = new CView(ui.Render1);
