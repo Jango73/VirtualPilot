@@ -12,9 +12,20 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = VirtualPilot
 TEMPLATE = app
-INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
+
 INCLUDEPATH += $$PWD/../Quick3D/qt-plus/source/cpp
 INCLUDEPATH += $$PWD/../Quick3D/qt-plus/source/cpp/Web
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Animation
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Base
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Components
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Input
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Math
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Mesh
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Render
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Terrain
+INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Utils
+
 DEPENDPATH += $$PWD/../Quick3D/Quick3D
 DESTDIR = ../bin
 

@@ -77,8 +77,8 @@ void CNavaidDatabase::loadFromFile(const QString& sFileName)
 
 void CNavaidDatabase::dump(QTextStream& stream, int iIdent)
 {
-    CComponent::dumpIdent(stream, iIdent, QString("[CNavaidDatabase]"));
-    CComponent::dumpIdent(stream, iIdent, QString("Navaids :"));
+    CComponent::dumpIndented(stream, iIdent, QString("[CNavaidDatabase]"));
+    CComponent::dumpIndented(stream, iIdent, QString("Navaids :"));
 
     CComponent::dumpOpenBlock(stream, iIdent); iIdent++;
     foreach (CNavaidComponent* pNavaidComponent, m_vNavaids)

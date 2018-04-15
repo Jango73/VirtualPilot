@@ -47,9 +47,9 @@ void CRunway::loadParameters(const QString& sBaseFile, const CXMLNode& xRunway)
 
 void CRunway::dump(QTextStream& stream, int iIdent)
 {
-    dumpIdent(stream, iIdent, QString("[CRunway]"));
-    dumpIdent(stream, iIdent, QString("Size : %1").arg(m_vSize.toString()));
-    dumpIdent(stream, iIdent, QString("Rotation : %1").arg(m_vRotation.toString()));
+    dumpIndented(stream, iIdent, QString("[CRunway]"));
+    dumpIndented(stream, iIdent, QString("Size : %1").arg(m_vSize.toString()));
+    dumpIndented(stream, iIdent, QString("Rotation : %1").arg(m_vRotation.toString()));
 
     CNavaidComponent::dump(stream, iIdent);
 }

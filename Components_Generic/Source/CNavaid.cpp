@@ -81,9 +81,9 @@ void CNavaid::loadParameters(const QString& sBaseFile, const CXMLNode& xNavaid)
 
 void CNavaid::dump(QTextStream& stream, int iIdent)
 {
-    dumpIdent(stream, iIdent, QString("[CNavaid]"));
-    dumpIdent(stream, iIdent, QString("Type : %1").arg(m_eType));
-    dumpIdent(stream, iIdent, QString("Frequency : %1").arg(m_dFrequency_MHz));
+    dumpIndented(stream, iIdent, QString("[CNavaid]"));
+    dumpIndented(stream, iIdent, QString("Type : %1").arg(m_eType));
+    dumpIndented(stream, iIdent, QString("Frequency : %1").arg(m_dFrequency_MHz));
 
     CNavaidComponent::dump(stream, iIdent);
 }

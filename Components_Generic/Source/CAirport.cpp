@@ -89,9 +89,9 @@ void CAirport::loadParameters(const QString& sBaseFile, const CXMLNode& xAirport
 
 void CAirport::dump(QTextStream& stream, int iIdent)
 {
-    dumpIdent(stream, iIdent, QString("[CAirport]"));
-    dumpIdent(stream, iIdent, QString("Radios : %1").arg(m_vRunways.count()));
-    dumpIdent(stream, iIdent, QString("Runways :"));
+    dumpIndented(stream, iIdent, QString("[CAirport]"));
+    dumpIndented(stream, iIdent, QString("Radios : %1").arg(m_vRunways.count()));
+    dumpIndented(stream, iIdent, QString("Runways :"));
 
     dumpOpenBlock(stream, iIdent); iIdent++;
     foreach (CRunway* pRunway, m_vRunways)

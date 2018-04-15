@@ -47,7 +47,7 @@ void CNavaidComponent::loadParameters(const QString& sBaseFile, const CXMLNode& 
 */
 void CNavaidComponent::dump(QTextStream& stream, int iIdent)
 {
-    dumpIdent(stream, iIdent, QString("[CNavaidComponent]"));
-    dumpIdent(stream, iIdent, QString("ID : %1").arg(m_sID));
-    dumpIdent(stream, iIdent, QString("Geoloc : %1").arg(geoloc().toString()));
+    dumpIndented(stream, iIdent, QString("[CNavaidComponent]"));
+    dumpIndented(stream, iIdent, QString("ID : %1").arg(m_sID));
+    dumpIndented(stream, iIdent, QString("Geoloc : %1").arg(geoloc().toString()));
 }
