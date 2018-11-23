@@ -1,17 +1,37 @@
-# C++ objects and libs
-
+# Compiled Object files
 *.slo
 *.lo
 *.o
-*.a
-*.la
-*.lai
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
 *.so
-*.dll
+*.so.1
+*.so.1.0
+*.so.1.0.0
 *.dylib
+*.dll
 
-# Qt-es
+# Fortran module files
+*.mod
+*.smod
 
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Qt
 /.qmake.cache
 /.qmake.stash
 *.pro.user
@@ -20,26 +40,22 @@
 *.qbs.user.*
 *.moc
 moc_*.cpp
+moc_*.h
 qrc_*.cpp
 ui_*.h
-Makefile*
 *build-*
-*.Debug
-*.Release
 
-# QtCreator
+# Make
+Makefile
+Makefile*
+Makefile.*
 
-*.autosave
-
-#QtCtreator Qml
-*.qmlproject.user
-*.qmlproject.user.*
-
-# Project specific
-*.log
-*.exe
-*.blend1
+# Git
+*.directory
 *.stash
+
+# Log
+*.log
 *.0
 *.1
 *.2
@@ -50,3 +66,22 @@ Makefile*
 *.7
 *.8
 *.9
+
+# Blender
+*.blend1
+
+# Project specific
+/bin/*.xml
+/bin/*.qml
+/help
+/moc
+/obj
+/_trash
+/debug/*
+/release/*
+*.Debug
+*.Release
+*.output
+*.dot
+*.user
+*.bak
