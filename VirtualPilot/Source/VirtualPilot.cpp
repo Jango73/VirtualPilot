@@ -102,7 +102,7 @@ VirtualPilot::~VirtualPilot()
 
 void VirtualPilot::readPreferences()
 {
-    CXMLNode xVehicle = CPreferencesManager::getInstance()->getPreferences().getNodeByTagName("Vehicle");
+    CXMLNode xVehicle = CPreferencesManager::getInstance()->preferences().getNodeByTagName("Vehicle");
 
     if (xVehicle.attributes()["Default"].isEmpty() == false)
     {
