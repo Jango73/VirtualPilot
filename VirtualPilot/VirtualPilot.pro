@@ -27,14 +27,18 @@ INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Terrain
 INCLUDEPATH += $$PWD/../Quick3D/Quick3D/Source/Utils
 
 DEPENDPATH += $$PWD/../Quick3D/Quick3D
-DESTDIR = ../bin
 
-# C++ Flags
+DESTDIR = ../bin
+OBJECTS_DIR = $$PWD/obj
+MOC_DIR = $$PWD/moc
+RCC_DIR = $$PWD/rcc
+UI_DIR = $$PWD/ui
+MAKEFILE = $$PWD/make
+
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CXXFLAGS += -Wno-reorder
 
-# Libraries
 CONFIG(debug, debug|release) {
     LIBS += -L$$PWD/../Quick3D/Quick3D/bin/ -lQuick3Dd
 } else {
@@ -47,7 +51,6 @@ CONFIG(debug, debug|release) {
     LIBS += -L$$PWD/../Quick3D/qt-plus/bin/ -lqt-plus
 }
 
-# Code
 SOURCES += \
     Source/VirtualPilot.cpp \
     Source/main.cpp
