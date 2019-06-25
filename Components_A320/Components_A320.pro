@@ -28,7 +28,6 @@ OBJECTS_DIR = $$PWD/obj
 MOC_DIR = $$PWD/moc
 RCC_DIR = $$PWD/rcc
 UI_DIR = $$PWD/ui
-MAKEFILE = $$PWD/make
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
@@ -36,18 +35,10 @@ QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CXXFLAGS += -Wno-reorder
 
 # Target
-CONFIG(debug, debug|release) {
-    TARGET = Components_A320d
-} else {
-    TARGET = Components_A320
-}
+TARGET = Components_A320
 
 # Libraries
-CONFIG(debug, debug|release) {
-    LIBS += -L$$PWD/../bin/Plugins/ -lComponents_Genericd
-} else {
-    LIBS += -L$$PWD/../bin/Plugins/ -lComponents_Generic
-}
+LIBS += -L$$PWD/../bin/Plugins/ -lComponents_Generic
 
 CONFIG(debug, debug|release) {
     LIBS += -L$$PWD/../Quick3D/Quick3D/bin/ -lQuick3Dd

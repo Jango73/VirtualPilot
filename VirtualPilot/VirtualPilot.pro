@@ -33,7 +33,6 @@ OBJECTS_DIR = $$PWD/obj
 MOC_DIR = $$PWD/moc
 RCC_DIR = $$PWD/rcc
 UI_DIR = $$PWD/ui
-MAKEFILE = $$PWD/make
 
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 QMAKE_CXXFLAGS += -Wno-unused-parameter

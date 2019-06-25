@@ -28,7 +28,6 @@ OBJECTS_DIR = $$PWD/obj
 MOC_DIR = $$PWD/moc
 RCC_DIR = $$PWD/rcc
 UI_DIR = $$PWD/ui
-MAKEFILE = $$PWD/make
 
 # C++ Flags
 QMAKE_CXXFLAGS += -Wno-invalid-offsetof
@@ -36,11 +35,7 @@ QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CXXFLAGS += -Wno-reorder
 
 # Target
-CONFIG(debug, debug|release) {
-    TARGET = Components_Genericd
-} else {
-    TARGET = Components_Generic
-}
+TARGET = Components_Generic
 
 # Libraries
 CONFIG(debug, debug|release) {

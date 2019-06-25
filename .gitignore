@@ -49,6 +49,7 @@ ui_*.h
 Makefile
 Makefile*
 Makefile.*
+make
 
 # Git
 *.directory
