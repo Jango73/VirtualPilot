@@ -72,9 +72,6 @@ make
 *.blend1
 
 # Project specific
-/bin/VirtualPilot
-/bin/*.xml
-/bin/*.qml
 /help
 /moc
 /obj
