@@ -98,3 +98,30 @@ the commit message: lines follow each other directly.
 ## Documentation
 - Build setup of the engine: `README.md`, `quick3d/doc/`
   (`Quick3D.qdocconf`, `Quick3DScene.xsd`), `qt-plus/README.md`
+
+## Common Build Commands
+- Dependencies: `./scripts/linux/deps.sh` (submodules + apt/dnf/pacman packages;
+  needs `sudo`, which prompts for a password here)
+- Build (shadow, like `galman`): `./scripts/linux/build.sh [--debug|--release]`
+  (`cmake -S . -B build-<debug|release> -G Ninja`, then `cmake --build`).
+  Builds `qt-plus`, then `Quick3D` (engine libraries from the `Quick3D`
+  submodule; `quick3dtest` is not built here), then
+  `Components_Generic`, `Components_A320`, then `VirtualPilot`.
+- Clean: `./scripts/linux/clean.sh [--debug|--release|--all]`
+- Run the app: `./scripts/linux/run.sh [--debug|--release] [-- <args>]`
+  (logs to `tmp/run.log`), or directly
+  `build-<debug|release>/VirtualPilot/VirtualPilot[d] [--scene <file>]`.
+- Local CI check (same steps as the GitHub workflow):
+  `./scripts/linux/ci-local.sh` (build + `--help` smoke check).
+
+## Tool Execution Policy
+- `tmp/` at the repo root is the folder for temporary/scratch files. It is
+  gitignored; scripts must create it (`mkdir -p`) if missing.
+- Never write scratch/generated artifacts into the repo without asking;
+  keep the tree clean (`build-debug/`, `build-release/`, `tmp/` are gitignored).
+- `sudo` prompts for a password on this machine: never assume elevation works;
+  ask the user to run installs themselves or explicitly approve.
+- Run builds sequentially, not in parallel.
+
+## Debug output
+- Engine logging goes through `CLogger` (qt-plus).

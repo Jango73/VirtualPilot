@@ -334,7 +334,7 @@ void CAirbusController::keyReleaseEvent(QKeyEvent *event)
 
 void CAirbusController::wheelEvent(QWheelEvent *event)
 {
-    double dDelta = (double) event->delta() * -0.1;
+    double dDelta = (double) event->angleDelta().y() * -0.1;
 
     if (m_rLookTarget.component() && m_rLookTarget.component()->isCamera())
     {

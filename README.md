@@ -38,7 +38,29 @@ It is a work in progress, there is much left to do.
     * Create the CFIDU (Centralized Fault Display Interface Unit)
     * The list never ends...
 
-## Building on Windows, using QtCreator 4.X and Qt 5.X
+## Building
+
+Linux reference build is CMake + Qt6 (shadow builds, like `galman`):
+
+```
+./scripts/linux/deps.sh      # submodules + packages, needs sudo
+./scripts/linux/build.sh     # --debug or --release
+./scripts/linux/run.sh -- --scene Earth.xml
+```
+
+Binaries land in `build-debug/` / `build-release/`
+(`VirtualPilot/VirtualPilot[d]`, plugins in `VirtualPilot/Plugins/`,
+runtime data from `bin/` mirrored next to the executable).
+The legacy `.pro` files are kept for QtCreator users.
+
+## Running checks
+
+Run the local CI (same steps as the GitHub workflow):
+```
+./scripts/linux/ci-local.sh
+```
+
+## Building on QtCreator (legacy .pro files, Windows)
 
 1. Open the VirtualPilot.pro in QtCreator
 2. Click the projects tab
@@ -48,11 +70,11 @@ It is a work in progress, there is much left to do.
     * Example: -j6 will use 6 threads for building
 6. Compile the whole project
 
-## Building on Linux, using QtCreator 4.X and Qt 5.X
+## FAQ (legacy .pro builds only)
 
-The procedure here should be the same as above, but has not been tested yet.
-
-## FAQ
+The entries below describe the old `.pro` workflow. The CMake build uses
+shadow builds by default: libraries resolve through the build RPATH and
+`bin/` data plus `Plugins/` are placed next to the executable at build time.
 
 **Q**. **Why can't I build using shadow build?**  
 **A**. The project has dependencies on submodules, i.e quick3d and qt-plus. When those are finished building, the resulting library (.dll or .so) is copied to the bin folder of VirtualPilot. This copy does not work with shadow build, I did not take the time to understand why and fix it yet. But it is just a matter of using the correct paths...

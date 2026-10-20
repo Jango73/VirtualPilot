@@ -72,6 +72,10 @@ make
 *.blend1
 
 # Project specific
+/tmp/
+/build/
+/build-debug/
+/build-release/
 /help
 /moc
 /obj

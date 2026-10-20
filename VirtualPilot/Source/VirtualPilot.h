@@ -24,7 +24,11 @@
 #ifdef WIN32
     #define GENERIC_PLUGIN  "Components_Generic.dll"
 #else
-    #define GENERIC_PLUGIN  "libComponents_Generic.so"
+    #ifdef VIRTUALPILOT_DEBUG_BUILD
+        #define GENERIC_PLUGIN  "libComponents_Genericd.so"
+    #else
+        #define GENERIC_PLUGIN  "libComponents_Generic.so"
+    #endif
 #endif
 
 //-------------------------------------------------------------------------------------------------
