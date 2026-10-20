@@ -9,6 +9,7 @@
 #include "Constants.h"
 
 #include "CAirbusController.h"
+#include "CCFM56Engine.h"
 #include "CAirbusStaticPort.h"
 #include "CAirbusPitotPort.h"
 #include "CAirbusAOASensor.h"
@@ -35,6 +36,7 @@ COMPONENTS_A320_EXPORT bool PLUGIN_ENTRY_NAME(CPluginInterface* pInterface)
     LOG_DEBUG("Registering A320 components");
 
     pInterface->registerComponent(ClassName_CAirbusController, CAirbusController::instantiator);
+    pInterface->registerComponent(ClassName_CCFM56Engine, CCFM56Engine::instantiator);
     pInterface->registerComponent(ClassName_CAirbusStaticPort, CAirbusStaticPort::instantiator);
     pInterface->registerComponent(ClassName_CAirbusPitotPort, CAirbusPitotPort::instantiator);
     pInterface->registerComponent(ClassName_CAirbusAOASensor, CAirbusAOASensor::instantiator);

@@ -5,6 +5,7 @@
 // Component class names
 
 #define ClassName_CAirbusController         "CAirbusController"
+#define ClassName_CCFM56Engine              "CCFM56Engine"
 #define ClassName_CAirbusStaticPort         "CAirbusStaticPort"
 #define ClassName_CAirbusPitotPort          "CAirbusPitotPort"
 #define ClassName_CAirbusAOASensor          "CAirbusAOASensor"

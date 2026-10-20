@@ -4,6 +4,7 @@ add_library(Components_A320 SHARED
     Source/CAirbusGearSensor.cpp
     Source/CAirbusComponent.cpp
     Source/CAirbusController.cpp
+    Source/CCFM56Engine.cpp
     Source/CAirbusData.cpp
     Source/CAirbusDataSupplier.cpp
     Source/CAirbusCFDIU.cpp
@@ -32,6 +33,7 @@ add_library(Components_A320 SHARED
     Source/CAirbusGearSensor.h
     Source/CAirbusComponent.h
     Source/CAirbusController.h
+    Source/CCFM56Engine.h
     Source/CAirbusData.h
     Source/CAirbusDataSupplier.h
     Source/CAirbusCFDIU.h

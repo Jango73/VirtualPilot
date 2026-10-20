@@ -96,13 +96,13 @@
 
     <!-- POWER PLANT -->
 
-    <Component Name="Engine1" Class="CJetEngine">
+    <Component Name="Engine1" Class="CCFM56Engine">
         <Position x="5.6" y="-2.1" z="1.9"/>
         <Rotation x="0.0" y="0.0" z="0.0"/>
         <Physics MassKG="3000.0"/>
         <Thrust MaxThrustKG="5000.0"/>
     </Component>
-    <Component Name="Engine2" Class="CJetEngine">
+    <Component Name="Engine2" Class="CCFM56Engine">
         <Position x="-5.6" y="-2.1" z="1.9"/>
         <Rotation x="0.0" y="0.0" z="0.0"/>
         <Physics MassKG="3000.0"/>
