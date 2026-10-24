@@ -1,6 +1,5 @@
 #!/bin/bash
-# Local mirror of the GitHub CI build: builds the project in release mode
-# and runs a headless smoke check (--help exits before opening the GUI).
+# Local mirror of the GitHub CI build: builds the project and runs its checks.
 # Run this before pushing, it catches failures here instead of burning CI runs.
 set -euo pipefail
 
@@ -75,7 +74,7 @@ if [ ! -f "${BINARY}" ]; then
 fi
 
 mkdir -p "$(dirname "${LOG_FILE}")"
-echo "[ci-local] Running smoke check (logging to ${LOG_FILE})..."
+echo "[ci-local] Running checks (logging to ${LOG_FILE})..."
 QT_QPA_PLATFORM=offscreen \
   "${BINARY}" --help 2>&1 | tee "${LOG_FILE}"
 
